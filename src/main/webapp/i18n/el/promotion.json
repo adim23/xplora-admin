@@ -1,0 +1,30 @@
+{
+  "xploraAdminApp": {
+    "promotion": {
+      "home": {
+        "title": "Promotions",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Δημιουργήστε ένα νέο Promotion",
+        "createOrEditLabel": "Δημιουργήστε η επεξεργαστείτε ένα Promotion",
+        "notFound": "No Promotions found"
+      },
+      "created": "Ένα νέο Promotion έχει δημιουργηθεί με αναγνωριστικό {{ param }}",
+      "updated": "Ένα Promotion έχει ενημερωθεί με αναγνωριστικό {{ param }}",
+      "deleted": "Ένα Promotion έχει διαγραφτεί με αναγνωριστικό {{ param }}",
+      "delete": {
+        "question": "Είστε βέβαιοι όταν θέλετε να διαγράψετε το ακόλουθο Promotion {{ id }};"
+      },
+      "detail": {
+        "title": "Promotion"
+      },
+      "id": "ID",
+      "code": "Code",
+      "discount": "Discount",
+      "fromDate": "From Date",
+      "toDate": "To Date",
+      "enabled": "Enabled",
+      "title": "Title",
+      "tour": "Tour"
+    }
+  }
+}

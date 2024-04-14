@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity Content.
+    -->
+    <changeSet id="20240414122203-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="language_id"
+                                 baseTableName="content"
+                                 constraintName="fk_content__language_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="language"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="created_by_id"
+                                 baseTableName="content"
+                                 constraintName="fk_content__created_by_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="destination_id"
+                                 baseTableName="content"
+                                 constraintName="fk_content__destination_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="destination"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="tour_extra_info_id"
+                                 baseTableName="content"
+                                 constraintName="fk_content__tour_extra_info_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tour"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="tour_id"
+                                 baseTableName="content"
+                                 constraintName="fk_content__tour_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tour"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="tour_category_id"
+                                 baseTableName="content"
+                                 constraintName="fk_content__tour_category_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tour_category"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="place_id"
+                                 baseTableName="content"
+                                 constraintName="fk_content__place_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="place"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="place_category_id"
+                                 baseTableName="content"
+                                 constraintName="fk_content__place_category_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="place_category"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="tour_extra_category_id"
+                                 baseTableName="content"
+                                 constraintName="fk_content__tour_extra_category_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tour_extra_category"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="tour_extra_id"
+                                 baseTableName="content"
+                                 constraintName="fk_content__tour_extra_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tour_extra"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="menu_id"
+                                 baseTableName="content"
+                                 constraintName="fk_content__menu_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="menu"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="web_page_id"
+                                 baseTableName="content"
+                                 constraintName="fk_content__web_page_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="web_page"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="tag_id"
+                                 baseTableName="content"
+                                 constraintName="fk_content__tag_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tag"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="tour_step_id"
+                                 baseTableName="content"
+                                 constraintName="fk_content__tour_step_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tour_step"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="promotion_id"
+                                 baseTableName="content"
+                                 constraintName="fk_content__promotion_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="promotion"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="image_file_id"
+                                 baseTableName="content"
+                                 constraintName="fk_content__image_file_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="image_file"
+                                 />
+    </changeSet>
+</databaseChangeLog>

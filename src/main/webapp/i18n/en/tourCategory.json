@@ -1,0 +1,36 @@
+{
+  "xploraAdminApp": {
+    "tourCategory": {
+      "home": {
+        "title": "Tour Categories",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Tour Category",
+        "createOrEditLabel": "Create or edit a Tour Category",
+        "notFound": "No Tour Categories found"
+      },
+      "created": "A new Tour Category is created with identifier {{ param }}",
+      "updated": "A Tour Category is updated with identifier {{ param }}",
+      "deleted": "A Tour Category is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Tour Category {{ id }}?"
+      },
+      "detail": {
+        "title": "Tour Category"
+      },
+      "id": "ID",
+      "code": "Code",
+      "icon": "Icon",
+      "enabled": "Enabled",
+      "createdDate": "Created Date",
+      "defaultImage": "Default Image",
+      "defaultImageData": "Default Image Data",
+      "children": "Children",
+      "images": "Images",
+      "menus": "Menus",
+      "contents": "Contents",
+      "createdBy": "Created By",
+      "parent": "Parent",
+      "tour": "Tour"
+    }
+  }
+}

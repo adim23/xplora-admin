@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity Place.
+    -->
+    <changeSet id="20240414122147-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="created_by_id"
+                                 baseTableName="place"
+                                 constraintName="fk_place__created_by_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="place_id"
+                                 baseTableName="rel_place__tags"
+                                 constraintName="fk_rel_place__tags__place_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="place"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="tags_id"
+                                 baseTableName="rel_place__tags"
+                                 constraintName="fk_rel_place__tags__tags_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tag"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="place_id"
+                                 baseTableName="rel_place__category"
+                                 constraintName="fk_rel_place__category__place_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="place"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="category_id"
+                                 baseTableName="rel_place__category"
+                                 constraintName="fk_rel_place__category__category_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="place_category"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="destination_id"
+                                 baseTableName="place"
+                                 constraintName="fk_place__destination_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="destination"
+                                 />
+    </changeSet>
+</databaseChangeLog>

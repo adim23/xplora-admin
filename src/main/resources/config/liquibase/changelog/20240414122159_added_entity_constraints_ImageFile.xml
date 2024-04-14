@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity ImageFile.
+    -->
+    <changeSet id="20240414122159-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="created_by_id"
+                                 baseTableName="image_file"
+                                 constraintName="fk_image_file__created_by_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="destination_id"
+                                 baseTableName="image_file"
+                                 constraintName="fk_image_file__destination_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="destination"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="tour_id"
+                                 baseTableName="image_file"
+                                 constraintName="fk_image_file__tour_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tour"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="tour_category_id"
+                                 baseTableName="image_file"
+                                 constraintName="fk_image_file__tour_category_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tour_category"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="place_id"
+                                 baseTableName="image_file"
+                                 constraintName="fk_image_file__place_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="place"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="place_category_id"
+                                 baseTableName="image_file"
+                                 constraintName="fk_image_file__place_category_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="place_category"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="vehicle_id"
+                                 baseTableName="image_file"
+                                 constraintName="fk_image_file__vehicle_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="vehicle"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="driver_id"
+                                 baseTableName="image_file"
+                                 constraintName="fk_image_file__driver_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="driver"
+                                 />
+    </changeSet>
+</databaseChangeLog>

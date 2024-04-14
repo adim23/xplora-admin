@@ -1,0 +1,34 @@
+{
+  "xploraAdminApp": {
+    "tourExtraCategory": {
+      "home": {
+        "title": "Tour Extra Categories",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Tour Extra Category",
+        "createOrEditLabel": "Create or edit a Tour Extra Category",
+        "notFound": "No Tour Extra Categories found"
+      },
+      "created": "A new Tour Extra Category is created with identifier {{ param }}",
+      "updated": "A Tour Extra Category is updated with identifier {{ param }}",
+      "deleted": "A Tour Extra Category is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Tour Extra Category {{ id }}?"
+      },
+      "detail": {
+        "title": "Tour Extra Category"
+      },
+      "id": "ID",
+      "code": "Code",
+      "icon": "Icon",
+      "defaultImage": "Default Image",
+      "defaultImageData": "Default Image Data",
+      "enabled": "Enabled",
+      "shopCategoryId": "Shop Category Id",
+      "shopUrl": "Shop Url",
+      "createdDate": "Created Date",
+      "contents": "Contents",
+      "createdBy": "Created By",
+      "extra": "Extra"
+    }
+  }
+}

@@ -1,0 +1,287 @@
+
+entity Destination { 
+	code String required
+    createdDate LocalDate
+    defaultImage String
+    defaultImageData ImageBlob
+}
+
+entity PlaceCategory {
+	code String required
+    icon String
+    enabled Boolean
+    createdDate LocalDate
+    defaultImage String
+    defaultImageData ImageBlob
+}
+
+entity Place {
+	code String required
+    destinationSight Boolean required
+    longitude String
+    latitude String
+    createdDate LocalDate
+    defaultImage String
+    defaultImageData ImageBlob
+}
+
+entity TourCategory {
+	code String required
+    icon String
+    enabled Boolean
+    createdDate LocalDate
+    defaultImage String
+    defaultImageData ImageBlob
+}
+
+enum TourMode {
+  TOUR (Tour), 
+  ACTIVITY(Activity), 
+  EVENT (Event),
+  OTHER (Other)
+}
+
+entity Tour {
+	code String required
+    mode TourMode required
+    duration Integer required
+    petFriendly Boolean required 
+    kidsAllowed Boolean required
+    availableFromDate LocalDate
+    availableToDate LocalDate
+    enabled Boolean required 
+    initialPrice Double
+    price Double
+    badge String
+    rating Integer
+    widgetId String
+    externalId String
+    createdDate LocalDate
+    defaultImage String
+    defaultImageData ImageBlob
+}
+
+entity TourStep {
+	code String required
+    stepOrder Integer required
+    waitTime Integer  required // minutes
+    driveTime Integer  required // minutes
+    createdDate LocalDate
+}
+
+entity Promotion {
+	code String required
+    discount Double
+    fromDate LocalDate
+    toDate LocalDate
+    enabled Boolean
+}
+
+entity TourSchedule {
+	code String required
+	startDatetime LocalDate required
+    noPassengers Integer
+    noKids Integer
+    noPets Integer
+    createdDate LocalDate
+}
+
+entity TourExtraCategory {
+	code String required
+    icon String
+    defaultImage String
+    defaultImageData ImageBlob
+    enabled Boolean
+    shopCategoryId String
+    shopUrl String
+    createdDate LocalDate
+}
+
+entity TourExtra {
+	code String required
+    enabled Boolean
+    price Double
+    shopProductId String
+    shopUrl String
+    createdDate LocalDate
+    defaultImage String
+    defaultImageData ImageBlob
+}
+
+entity Driver {
+	name String required
+    hiredAt LocalDate
+    age Integer
+	email String
+	mobile String
+    createdDate LocalDate
+    defaultImage String
+    defaultImageData ImageBlob
+}
+
+entity Vehicle {
+	plate String required
+    type String required
+    capacity Integer required
+    color String
+    createdDate LocalDate
+    defaultImage String
+    defaultImageData ImageBlob
+}
+
+entity Booking {
+	bookDatetime LocalDate required
+    noPersons Integer
+    noKids Integer
+    noPets Integer
+    total Double
+    paymentType String
+    valid Boolean
+    cancelledAt LocalDate
+    remoteData TextBlob
+    remoteId String
+    createdDate LocalDate
+}
+
+entity Passenger {
+	name String
+	email String
+	mobile String
+    age Integer
+	gender String
+    nationality String
+    createdDate Instant
+}
+
+entity ImageFile {
+	code String required
+    title String
+    alt String
+	filename String
+    data ImageBlob
+    createdDate LocalDate
+}
+
+entity WebPage {
+	code String required
+    uriPath String
+    enabled Boolean
+    publishDate LocalDate
+    createdDate LocalDate
+}
+
+entity Menu {
+	code String required
+    uri String
+    createdDate LocalDate
+    icon String
+    enabled Boolean
+    defaultImage String
+    defaultImageData ImageBlob
+}
+
+entity Language {
+	code String required
+    createdDate LocalDate
+    icon String
+    defaultImage String
+    defaultImageData ImageBlob
+}
+
+entity Content {
+	code String required
+    title String 
+    shortDescription TextBlob
+    data TextBlob
+    meta TextBlob
+    createdDate LocalDate
+}
+
+entity Tag {
+	code String required
+}
+
+// defining multiple OneToMany relationships with comments
+relationship OneToMany {
+    Destination{tours(code)} to Tour{destination(code)}
+    Destination{places(code)} to Place{destination(code)}
+    Destination{images(code)} to ImageFile{destination(code)}
+    Tour{steps(code)} to TourStep{tour(code) required}
+    Tour{images(code)} to ImageFile{tour(code)}
+    TourCategory{children(code)} to TourCategory{parent(code)}
+    TourCategory{images(code)} to ImageFile{tourCategory(code)}
+    Place to TourStep{place(code) required}
+    Place{images(code)} to ImageFile{place(code)}
+    PlaceCategory{images(code)} to ImageFile{placeCategory(code)}
+    Vehicle{images(code)} to ImageFile{vehicle(plate)}
+    Driver{images(code)} to ImageFile{driver(name)}
+    TourSchedule{bookings} to Booking{schedule(code)}
+    Passenger{bookings} to Booking{passenger(name)}
+    WebPage{menus(code)} to Menu{page(code)}
+    Menu{children(code)} to Menu{parent(code)}
+    TourCategory{menus(code)} to Menu{tourCategory(code)}
+    Destination{contents(code)} to Content{destination(code)}
+    Tour{extraInfo(code)} to Content{tourExtraInfo(code)}
+    Tour{contents(code)} to Content{tour(code)}
+    TourCategory{contents(code)} to Content{tourCategory(code)}
+    Place{contents(code)} to Content{place(code)}
+    PlaceCategory{contents(code)} to Content{placeCategory(code)}
+    TourExtraCategory{contents(code)} to Content{tourExtraCategory(code)}
+    TourExtra{contents(code)} to Content{tourExtra(code)}
+    Menu{names(code)} to Content{menu(code)}
+    WebPage{contents(code)} to Content{webPage(code)}
+    Tag{names(code)} to Content{tag(code)}
+    TourStep{info(code)} to Content{tourStep(code)}
+    Promotion{title(code)} to Content{promotion(code)}
+    ImageFile{captions(code)} to Content{imageFile(code)}
+}
+
+relationship OneToOne {
+    Content{language(code) required} to Language 
+}
+
+relationship ManyToMany {
+    Tour{tourExtra(code)} to TourExtra{tours(code)}
+    Tour{tags(code)} to Tag
+    TourExtra{tags(code)} to Tag
+    Place{tags(code)} to Tag
+    WebPage{tags(code)} to Tag
+    Tour{promotions(code)} to Promotion{tour(code)}
+    Tour{category(code)} to TourCategory{tour(code)}
+    Place{category(code)} to PlaceCategory{place(code)}
+    TourExtra{category(code)} to TourExtraCategory{extra(code)}
+}
+
+relationship ManyToOne {
+    Destination{createdBy(login)} to User with builtInEntity
+    TourExtra{createdBy(login)} to User with builtInEntity
+    WebPage{createdBy(login)} to User with builtInEntity
+    Place{createdBy(login)} to User with builtInEntity
+    Tour{createdBy(login)} to User with builtInEntity
+    TourSchedule{createdBy(login)} to User with builtInEntity
+    TourStep{createdBy(login)} to User with builtInEntity
+    PlaceCategory{createdBy(login)} to User with builtInEntity
+    TourCategory{createdBy(login)} to User with builtInEntity
+    TourExtraCategory{createdBy(login)} to User with builtInEntity
+    Content{createdBy(login)} to User with builtInEntity
+    Menu{createdBy(login)} to User with builtInEntity
+    Language{createdBy(login)} to User with builtInEntity
+    ImageFile{createdBy(login)} to User with builtInEntity
+    TourSchedule{tour(code) required} to Tour
+    TourSchedule{vehicle(plate)} to Vehicle
+    TourSchedule{driver(name)} to Driver
+    Tour{meetingPoint(code)} to Place
+    Tour{finishPoint(code)} to Place
+}
+
+// Set pagination options
+paginate all with pagination
+
+// Use Data Transfer Objects (DTO)
+dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl 
+
+// Set an angular suffix
+// angularSuffix * with mySuffix

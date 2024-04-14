@@ -1,0 +1,32 @@
+{
+  "xploraAdminApp": {
+    "webPage": {
+      "home": {
+        "title": "Web Pages",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Web Page",
+        "createOrEditLabel": "Create or edit a Web Page",
+        "notFound": "No Web Pages found"
+      },
+      "created": "A new Web Page is created with identifier {{ param }}",
+      "updated": "A Web Page is updated with identifier {{ param }}",
+      "deleted": "A Web Page is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Web Page {{ id }}?"
+      },
+      "detail": {
+        "title": "Web Page"
+      },
+      "id": "ID",
+      "code": "Code",
+      "uriPath": "Uri Path",
+      "enabled": "Enabled",
+      "publishDate": "Publish Date",
+      "createdDate": "Created Date",
+      "menus": "Menus",
+      "contents": "Contents",
+      "createdBy": "Created By",
+      "tags": "Tags"
+    }
+  }
+}

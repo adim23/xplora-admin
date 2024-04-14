@@ -1,0 +1,11 @@
+id;book_datetime;no_persons;no_kids;no_pets;total;payment_type;valid;cancelled_at;remote_data;remote_id;created_date
+1;2024-04-13;16405;9093;2692;17927.66;cause grubby and;true;2024-04-14;../fake-data/blob/hipster.txt;yuck times willfully;2024-04-13
+2;2024-04-14;10565;11846;29468;10344.63;whose unwilling;false;2024-04-13;../fake-data/blob/hipster.txt;around;2024-04-13
+3;2024-04-14;22965;25510;25692;7473.88;forenenst;true;2024-04-13;../fake-data/blob/hipster.txt;pillow;2024-04-13
+4;2024-04-14;9198;2757;7118;13323.94;solitaire sans now;false;2024-04-13;../fake-data/blob/hipster.txt;whereas;2024-04-14
+5;2024-04-13;1171;7494;15326;12579.17;vainly;false;2024-04-13;../fake-data/blob/hipster.txt;wordy amongst er;2024-04-14
+6;2024-04-14;13758;25282;5986;23304.27;playful satisfy;true;2024-04-14;../fake-data/blob/hipster.txt;psst unlike as;2024-04-13
+7;2024-04-14;12447;20366;28943;20254.32;ally recent so;true;2024-04-14;../fake-data/blob/hipster.txt;thankfully plum;2024-04-14
+8;2024-04-14;9010;3657;12250;12497.82;barring between;false;2024-04-13;../fake-data/blob/hipster.txt;eek onto bacterium;2024-04-13
+9;2024-04-14;19036;24200;1636;1368.62;limited rigidly;true;2024-04-14;../fake-data/blob/hipster.txt;stall with;2024-04-13
+10;2024-04-13;6185;26205;20604;178.5;phooey circuit;false;2024-04-14;../fake-data/blob/hipster.txt;rarely;2024-04-13

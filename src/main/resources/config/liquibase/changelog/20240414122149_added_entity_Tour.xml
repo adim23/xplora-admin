@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <!--
+        Added the entity Tour.
+    -->
+    <changeSet id="20240414122149-1" author="jhipster">
+        <createTable tableName="tour">
+            <column name="id" type="bigint" autoIncrement="true" startWith="1500">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="code" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="mode" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="duration" type="integer">
+                <constraints nullable="false" />
+            </column>
+            <column name="pet_friendly" type="boolean">
+                <constraints nullable="false" />
+            </column>
+            <column name="kids_allowed" type="boolean">
+                <constraints nullable="false" />
+            </column>
+            <column name="available_from_date" type="date">
+                <constraints nullable="true" />
+            </column>
+            <column name="available_to_date" type="date">
+                <constraints nullable="true" />
+            </column>
+            <column name="enabled" type="boolean">
+                <constraints nullable="false" />
+            </column>
+            <column name="initial_price" type="double">
+                <constraints nullable="true" />
+            </column>
+            <column name="price" type="double">
+                <constraints nullable="true" />
+            </column>
+            <column name="badge" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="rating" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="widget_id" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="external_id" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="created_date" type="date">
+                <constraints nullable="true" />
+            </column>
+            <column name="default_image" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="default_image_data" type="${blobType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="default_image_data_content_type" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="created_by_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="meeting_point_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="finish_point_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="destination_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
+        </createTable>
+    </changeSet>
+
+    <changeSet id="20240414122149-1-relations" author="jhipster">
+
+        <createTable tableName="rel_tour__tour_extra">
+            <column name="tour_extra_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tour_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="tour_id, tour_extra_id" tableName="rel_tour__tour_extra"/>
+
+        <createTable tableName="rel_tour__tags">
+            <column name="tags_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tour_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="tour_id, tags_id" tableName="rel_tour__tags"/>
+
+        <createTable tableName="rel_tour__promotions">
+            <column name="promotions_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tour_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="tour_id, promotions_id" tableName="rel_tour__promotions"/>
+
+        <createTable tableName="rel_tour__category">
+            <column name="category_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tour_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="tour_id, category_id" tableName="rel_tour__category"/>
+    </changeSet>
+
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
+
+    <!--
+        Load sample data generated with Faker.js
+        - This data can be easily edited using a CSV editor (or even MS Excel) and
+          is located in the 'src/main/resources/config/liquibase/fake-data' directory
+        - By default this data is applied when running with the JHipster 'dev' profile.
+          This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
+          Spring Boot configuration key.
+    -->
+    <changeSet id="20240414122149-1-data" author="jhipster" context="faker">
+        <loadData
+                  file="config/liquibase/fake-data/tour.csv"
+                  separator=";"
+                  tableName="tour"
+                  usePreparedStatements="true">
+            <column name="id" type="numeric"/>
+            <column name="code" type="string"/>
+            <column name="mode" type="string"/>
+            <column name="duration" type="numeric"/>
+            <column name="pet_friendly" type="boolean"/>
+            <column name="kids_allowed" type="boolean"/>
+            <column name="available_from_date" type="date"/>
+            <column name="available_to_date" type="date"/>
+            <column name="enabled" type="boolean"/>
+            <column name="initial_price" type="numeric"/>
+            <column name="price" type="numeric"/>
+            <column name="badge" type="string"/>
+            <column name="rating" type="numeric"/>
+            <column name="widget_id" type="string"/>
+            <column name="external_id" type="string"/>
+            <column name="created_date" type="date"/>
+            <column name="default_image" type="string"/>
+            <column name="default_image_data" type="blob"/>
+            <column name="default_image_data_content_type" type="string"/>
+            <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

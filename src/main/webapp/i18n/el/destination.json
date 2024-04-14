@@ -1,0 +1,32 @@
+{
+  "xploraAdminApp": {
+    "destination": {
+      "home": {
+        "title": "Destinations",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Δημιουργήστε ένα νέο Destination",
+        "createOrEditLabel": "Δημιουργήστε η επεξεργαστείτε ένα Destination",
+        "notFound": "No Destinations found"
+      },
+      "created": "Ένα νέο Destination έχει δημιουργηθεί με αναγνωριστικό {{ param }}",
+      "updated": "Ένα Destination έχει ενημερωθεί με αναγνωριστικό {{ param }}",
+      "deleted": "Ένα Destination έχει διαγραφτεί με αναγνωριστικό {{ param }}",
+      "delete": {
+        "question": "Είστε βέβαιοι όταν θέλετε να διαγράψετε το ακόλουθο Destination {{ id }};"
+      },
+      "detail": {
+        "title": "Destination"
+      },
+      "id": "ID",
+      "code": "Code",
+      "createdDate": "Created Date",
+      "defaultImage": "Default Image",
+      "defaultImageData": "Default Image Data",
+      "tours": "Tours",
+      "places": "Places",
+      "images": "Images",
+      "contents": "Contents",
+      "createdBy": "Created By"
+    }
+  }
+}

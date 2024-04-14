@@ -1,0 +1,33 @@
+{
+  "xploraAdminApp": {
+    "placeCategory": {
+      "home": {
+        "title": "Place Categories",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Δημιουργήστε ένα νέο Place Category",
+        "createOrEditLabel": "Δημιουργήστε η επεξεργαστείτε ένα Place Category",
+        "notFound": "No Place Categories found"
+      },
+      "created": "Ένα νέο Place Category έχει δημιουργηθεί με αναγνωριστικό {{ param }}",
+      "updated": "Ένα Place Category έχει ενημερωθεί με αναγνωριστικό {{ param }}",
+      "deleted": "Ένα Place Category έχει διαγραφτεί με αναγνωριστικό {{ param }}",
+      "delete": {
+        "question": "Είστε βέβαιοι όταν θέλετε να διαγράψετε το ακόλουθο Place Category {{ id }};"
+      },
+      "detail": {
+        "title": "Place Category"
+      },
+      "id": "ID",
+      "code": "Code",
+      "icon": "Icon",
+      "enabled": "Enabled",
+      "createdDate": "Created Date",
+      "defaultImage": "Default Image",
+      "defaultImageData": "Default Image Data",
+      "images": "Images",
+      "contents": "Contents",
+      "createdBy": "Created By",
+      "place": "Place"
+    }
+  }
+}

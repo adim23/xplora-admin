@@ -1,0 +1,34 @@
+{
+  "xploraAdminApp": {
+    "tourExtraCategory": {
+      "home": {
+        "title": "Tour Extra Categories",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Δημιουργήστε ένα νέο Tour Extra Category",
+        "createOrEditLabel": "Δημιουργήστε η επεξεργαστείτε ένα Tour Extra Category",
+        "notFound": "No Tour Extra Categories found"
+      },
+      "created": "Ένα νέο Tour Extra Category έχει δημιουργηθεί με αναγνωριστικό {{ param }}",
+      "updated": "Ένα Tour Extra Category έχει ενημερωθεί με αναγνωριστικό {{ param }}",
+      "deleted": "Ένα Tour Extra Category έχει διαγραφτεί με αναγνωριστικό {{ param }}",
+      "delete": {
+        "question": "Είστε βέβαιοι όταν θέλετε να διαγράψετε το ακόλουθο Tour Extra Category {{ id }};"
+      },
+      "detail": {
+        "title": "Tour Extra Category"
+      },
+      "id": "ID",
+      "code": "Code",
+      "icon": "Icon",
+      "defaultImage": "Default Image",
+      "defaultImageData": "Default Image Data",
+      "enabled": "Enabled",
+      "shopCategoryId": "Shop Category Id",
+      "shopUrl": "Shop Url",
+      "createdDate": "Created Date",
+      "contents": "Contents",
+      "createdBy": "Created By",
+      "extra": "Extra"
+    }
+  }
+}

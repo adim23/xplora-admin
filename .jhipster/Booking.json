@@ -1,0 +1,77 @@
+{
+  "annotations": {
+    "changelogDate": "20240414122157"
+  },
+  "applications": "*",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "bookDatetime",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "noPersons",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "noKids",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "noPets",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "total",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "paymentType",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "valid",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "cancelledAt",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "remoteData",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    },
+    {
+      "fieldName": "remoteId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "name": "Booking",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityField": "code",
+      "otherEntityName": "tourSchedule",
+      "otherEntityRelationshipName": "bookings",
+      "relationshipName": "schedule",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "passenger",
+      "otherEntityRelationshipName": "bookings",
+      "relationshipName": "passenger",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

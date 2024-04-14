@@ -1,0 +1,37 @@
+{
+  "xploraAdminApp": {
+    "place": {
+      "home": {
+        "title": "Places",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Δημιουργήστε ένα νέο Place",
+        "createOrEditLabel": "Δημιουργήστε η επεξεργαστείτε ένα Place",
+        "notFound": "No Places found"
+      },
+      "created": "Ένα νέο Place έχει δημιουργηθεί με αναγνωριστικό {{ param }}",
+      "updated": "Ένα Place έχει ενημερωθεί με αναγνωριστικό {{ param }}",
+      "deleted": "Ένα Place έχει διαγραφτεί με αναγνωριστικό {{ param }}",
+      "delete": {
+        "question": "Είστε βέβαιοι όταν θέλετε να διαγράψετε το ακόλουθο Place {{ id }};"
+      },
+      "detail": {
+        "title": "Place"
+      },
+      "id": "ID",
+      "code": "Code",
+      "destinationSight": "Destination Sight",
+      "longitude": "Longitude",
+      "latitude": "Latitude",
+      "createdDate": "Created Date",
+      "defaultImage": "Default Image",
+      "defaultImageData": "Default Image Data",
+      "tourStep": "Tour Step",
+      "images": "Images",
+      "contents": "Contents",
+      "createdBy": "Created By",
+      "tags": "Tags",
+      "category": "Category",
+      "destination": "Destination"
+    }
+  }
+}

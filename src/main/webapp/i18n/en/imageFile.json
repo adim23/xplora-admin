@@ -1,0 +1,38 @@
+{
+  "xploraAdminApp": {
+    "imageFile": {
+      "home": {
+        "title": "Image Files",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Image File",
+        "createOrEditLabel": "Create or edit a Image File",
+        "notFound": "No Image Files found"
+      },
+      "created": "A new Image File is created with identifier {{ param }}",
+      "updated": "A Image File is updated with identifier {{ param }}",
+      "deleted": "A Image File is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Image File {{ id }}?"
+      },
+      "detail": {
+        "title": "Image File"
+      },
+      "id": "ID",
+      "code": "Code",
+      "title": "Title",
+      "alt": "Alt",
+      "filename": "Filename",
+      "data": "Data",
+      "createdDate": "Created Date",
+      "captions": "Captions",
+      "createdBy": "Created By",
+      "destination": "Destination",
+      "tour": "Tour",
+      "tourCategory": "Tour Category",
+      "place": "Place",
+      "placeCategory": "Place Category",
+      "vehicle": "Vehicle",
+      "driver": "Driver"
+    }
+  }
+}

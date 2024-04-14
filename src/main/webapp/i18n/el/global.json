@@ -7,7 +7,27 @@
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "Entities",
-        "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
+        "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)",
+        "destination": "Destination",
+        "placeCategory": "Place Category",
+        "place": "Place",
+        "tourCategory": "Tour Category",
+        "tour": "Tour",
+        "tourStep": "Tour Step",
+        "promotion": "Promotion",
+        "tourSchedule": "Tour Schedule",
+        "tourExtraCategory": "Tour Extra Category",
+        "tourExtra": "Tour Extra",
+        "driver": "Driver",
+        "vehicle": "Vehicle",
+        "booking": "Booking",
+        "passenger": "Passenger",
+        "imageFile": "Image File",
+        "webPage": "Web Page",
+        "menu": "Menu",
+        "language": "Language",
+        "content": "Content",
+        "tag": "Tag"
       },
       "account": {
         "main": "Λογαριασμός",

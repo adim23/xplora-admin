@@ -1,0 +1,45 @@
+{
+  "xploraAdminApp": {
+    "content": {
+      "home": {
+        "title": "Contents",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Δημιουργήστε ένα νέο Content",
+        "createOrEditLabel": "Δημιουργήστε η επεξεργαστείτε ένα Content",
+        "notFound": "No Contents found"
+      },
+      "created": "Ένα νέο Content έχει δημιουργηθεί με αναγνωριστικό {{ param }}",
+      "updated": "Ένα Content έχει ενημερωθεί με αναγνωριστικό {{ param }}",
+      "deleted": "Ένα Content έχει διαγραφτεί με αναγνωριστικό {{ param }}",
+      "delete": {
+        "question": "Είστε βέβαιοι όταν θέλετε να διαγράψετε το ακόλουθο Content {{ id }};"
+      },
+      "detail": {
+        "title": "Content"
+      },
+      "id": "ID",
+      "code": "Code",
+      "title": "Title",
+      "shortDescription": "Short Description",
+      "data": "Data",
+      "meta": "Meta",
+      "createdDate": "Created Date",
+      "language": "Language",
+      "createdBy": "Created By",
+      "destination": "Destination",
+      "tourExtraInfo": "Tour Extra Info",
+      "tour": "Tour",
+      "tourCategory": "Tour Category",
+      "place": "Place",
+      "placeCategory": "Place Category",
+      "tourExtraCategory": "Tour Extra Category",
+      "tourExtra": "Tour Extra",
+      "menu": "Menu",
+      "webPage": "Web Page",
+      "tag": "Tag",
+      "tourStep": "Tour Step",
+      "promotion": "Promotion",
+      "imageFile": "Image File"
+    }
+  }
+}

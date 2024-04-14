@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity Tour.
+    -->
+    <changeSet id="20240414122149-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="created_by_id"
+                                 baseTableName="tour"
+                                 constraintName="fk_tour__created_by_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="meeting_point_id"
+                                 baseTableName="tour"
+                                 constraintName="fk_tour__meeting_point_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="place"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="finish_point_id"
+                                 baseTableName="tour"
+                                 constraintName="fk_tour__finish_point_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="place"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="tour_id"
+                                 baseTableName="rel_tour__tour_extra"
+                                 constraintName="fk_rel_tour__tour_extra__tour_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tour"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="tour_extra_id"
+                                 baseTableName="rel_tour__tour_extra"
+                                 constraintName="fk_rel_tour__tour_extra__tour_extra_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tour_extra"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="tour_id"
+                                 baseTableName="rel_tour__tags"
+                                 constraintName="fk_rel_tour__tags__tour_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tour"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="tags_id"
+                                 baseTableName="rel_tour__tags"
+                                 constraintName="fk_rel_tour__tags__tags_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tag"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="tour_id"
+                                 baseTableName="rel_tour__promotions"
+                                 constraintName="fk_rel_tour__promotions__tour_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tour"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="promotions_id"
+                                 baseTableName="rel_tour__promotions"
+                                 constraintName="fk_rel_tour__promotions__promotions_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="promotion"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="tour_id"
+                                 baseTableName="rel_tour__category"
+                                 constraintName="fk_rel_tour__category__tour_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tour"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="category_id"
+                                 baseTableName="rel_tour__category"
+                                 constraintName="fk_rel_tour__category__category_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tour_category"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="destination_id"
+                                 baseTableName="tour"
+                                 constraintName="fk_tour__destination_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="destination"
+                                 />
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,36 @@
+{
+  "xploraAdminApp": {
+    "menu": {
+      "home": {
+        "title": "Menus",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Δημιουργήστε ένα νέο Menu",
+        "createOrEditLabel": "Δημιουργήστε η επεξεργαστείτε ένα Menu",
+        "notFound": "No Menus found"
+      },
+      "created": "Ένα νέο Menu έχει δημιουργηθεί με αναγνωριστικό {{ param }}",
+      "updated": "Ένα Menu έχει ενημερωθεί με αναγνωριστικό {{ param }}",
+      "deleted": "Ένα Menu έχει διαγραφτεί με αναγνωριστικό {{ param }}",
+      "delete": {
+        "question": "Είστε βέβαιοι όταν θέλετε να διαγράψετε το ακόλουθο Menu {{ id }};"
+      },
+      "detail": {
+        "title": "Menu"
+      },
+      "id": "ID",
+      "code": "Code",
+      "uri": "Uri",
+      "createdDate": "Created Date",
+      "icon": "Icon",
+      "enabled": "Enabled",
+      "defaultImage": "Default Image",
+      "defaultImageData": "Default Image Data",
+      "children": "Children",
+      "names": "Names",
+      "createdBy": "Created By",
+      "page": "Page",
+      "parent": "Parent",
+      "tourCategory": "Tour Category"
+    }
+  }
+}

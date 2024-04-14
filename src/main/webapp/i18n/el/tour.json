@@ -1,0 +1,52 @@
+{
+  "xploraAdminApp": {
+    "tour": {
+      "home": {
+        "title": "Tours",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Δημιουργήστε ένα νέο Tour",
+        "createOrEditLabel": "Δημιουργήστε η επεξεργαστείτε ένα Tour",
+        "notFound": "No Tours found"
+      },
+      "created": "Ένα νέο Tour έχει δημιουργηθεί με αναγνωριστικό {{ param }}",
+      "updated": "Ένα Tour έχει ενημερωθεί με αναγνωριστικό {{ param }}",
+      "deleted": "Ένα Tour έχει διαγραφτεί με αναγνωριστικό {{ param }}",
+      "delete": {
+        "question": "Είστε βέβαιοι όταν θέλετε να διαγράψετε το ακόλουθο Tour {{ id }};"
+      },
+      "detail": {
+        "title": "Tour"
+      },
+      "id": "ID",
+      "code": "Code",
+      "mode": "Mode",
+      "duration": "Duration",
+      "petFriendly": "Pet Friendly",
+      "kidsAllowed": "Kids Allowed",
+      "availableFromDate": "Available From Date",
+      "availableToDate": "Available To Date",
+      "enabled": "Enabled",
+      "initialPrice": "Initial Price",
+      "price": "Price",
+      "badge": "Badge",
+      "rating": "Rating",
+      "widgetId": "Widget Id",
+      "externalId": "External Id",
+      "createdDate": "Created Date",
+      "defaultImage": "Default Image",
+      "defaultImageData": "Default Image Data",
+      "steps": "Steps",
+      "images": "Images",
+      "extraInfo": "Extra Info",
+      "contents": "Contents",
+      "createdBy": "Created By",
+      "meetingPoint": "Meeting Point",
+      "finishPoint": "Finish Point",
+      "tourExtra": "Tour Extra",
+      "tags": "Tags",
+      "promotions": "Promotions",
+      "category": "Category",
+      "destination": "Destination"
+    }
+  }
+}

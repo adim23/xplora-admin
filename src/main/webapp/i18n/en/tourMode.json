@@ -1,0 +1,11 @@
+{
+  "xploraAdminApp": {
+    "TourMode": {
+      "null": "",
+      "TOUR": "Tour",
+      "ACTIVITY": "Activity",
+      "EVENT": "Event",
+      "OTHER": "Other"
+    }
+  }
+}

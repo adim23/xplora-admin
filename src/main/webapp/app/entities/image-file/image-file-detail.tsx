@@ -102,6 +102,14 @@ export const ImageFileDetail = () => {
           </dt>
           <dd>{imageFileEntity.tourCategory ? imageFileEntity.tourCategory.code : ''}</dd>
           <dt>
+            <Translate contentKey="xploraAdminApp.imageFile.tourExtra">TourExtra</Translate>
+          </dt>
+          <dd>{imageFileEntity.tourExtra ? imageFileEntity.tourExtra.code : ''}</dd>
+          <dt>
+            <Translate contentKey="xploraAdminApp.imageFile.tourExtraCategory">Tour Extra Category</Translate>
+          </dt>
+          <dd>{imageFileEntity.tourCategoryExtra ? imageFileEntity.tourExtraCategory.code : ''}</dd>
+          <dt>
             <Translate contentKey="xploraAdminApp.imageFile.place">Place</Translate>
           </dt>
           <dd>{imageFileEntity.place ? imageFileEntity.place.code : ''}</dd>

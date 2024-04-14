@@ -16,6 +16,10 @@ import { ITour } from 'app/shared/model/tour.model';
 import { getEntities as getTours } from 'app/entities/tour/tour.reducer';
 import { ITourCategory } from 'app/shared/model/tour-category.model';
 import { getEntities as getTourCategories } from 'app/entities/tour-category/tour-category.reducer';
+import { ITourExtra } from 'app/shared/model/tour-extra.model';
+import { getEntities as getTourExtras } from 'app/entities/tour-extra/tour-extra.reducer';
+import { ITourExtraCategory } from 'app/shared/model/tour-extra-category.model';
+import { getEntities as getTourExtraCategories } from 'app/entities/tour-extra-category/tour-extra-category.reducer';
 import { IPlace } from 'app/shared/model/place.model';
 import { getEntities as getPlaces } from 'app/entities/place/place.reducer';
 import { IPlaceCategory } from 'app/shared/model/place-category.model';
@@ -39,6 +43,8 @@ export const ImageFileUpdate = () => {
   const destinations = useAppSelector(state => state.destination.entities);
   const tours = useAppSelector(state => state.tour.entities);
   const tourCategories = useAppSelector(state => state.tourCategory.entities);
+  const tourExtras = useAppSelector(state => state.tourExtra.entities);
+  const tourExtraCategories = useAppSelector(state => state.tourExtraCategory.entities);
   const places = useAppSelector(state => state.place.entities);
   const placeCategories = useAppSelector(state => state.placeCategory.entities);
   const vehicles = useAppSelector(state => state.vehicle.entities);
@@ -63,6 +69,8 @@ export const ImageFileUpdate = () => {
     dispatch(getDestinations({}));
     dispatch(getTours({}));
     dispatch(getTourCategories({}));
+    dispatch(getTourExtras({}));
+    dispatch(getTourExtraCategories({}));
     dispatch(getPlaces({}));
     dispatch(getPlaceCategories({}));
     dispatch(getVehicles({}));
@@ -88,6 +96,8 @@ export const ImageFileUpdate = () => {
       destination: destinations.find(it => it.id.toString() === values.destination?.toString()),
       tour: tours.find(it => it.id.toString() === values.tour?.toString()),
       tourCategory: tourCategories.find(it => it.id.toString() === values.tourCategory?.toString()),
+      tourExtra: tourExtras.find(it => it.id.toString() === values.tourExtra?.toString()),
+      tourExtraCategory: tourExtraCategories.find(it => it.id.toString() === values.tourExtraCategory?.toString()),
       place: places.find(it => it.id.toString() === values.place?.toString()),
       placeCategory: placeCategories.find(it => it.id.toString() === values.placeCategory?.toString()),
       vehicle: vehicles.find(it => it.id.toString() === values.vehicle?.toString()),
@@ -110,6 +120,8 @@ export const ImageFileUpdate = () => {
           destination: imageFileEntity?.destination?.id,
           tour: imageFileEntity?.tour?.id,
           tourCategory: imageFileEntity?.tourCategory?.id,
+          tourExtra: imageFileEntity?.tourExtra?.id,
+          tourExtraCategory: imageFileEntity?.tourExtraCategory?.id,
           place: imageFileEntity?.place?.id,
           placeCategory: imageFileEntity?.placeCategory?.id,
           vehicle: imageFileEntity?.vehicle?.id,
@@ -239,6 +251,38 @@ export const ImageFileUpdate = () => {
                 <option value="" key="0" />
                 {tourCategories
                   ? tourCategories.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.code}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="image-file-tourExtra"
+                name="tourExtra"
+                data-cy="tourExtra"
+                label={translate('xploraAdminApp.imageFile.tourExtra')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {tourExtras
+                  ? tourExtras.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.code}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="image-file-tourExtraCategory"
+                name="tourExtraCategory"
+                data-cy="tourExtraCategory"
+                label={translate('xploraAdminApp.imageFile.tourExtraCategory')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {tourExtraCategories
+                  ? tourExtraCategories.map(otherEntity => (
                       <option value={otherEntity.id} key={otherEntity.id}>
                         {otherEntity.code}
                       </option>

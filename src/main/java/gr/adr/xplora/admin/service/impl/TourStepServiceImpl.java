@@ -1,10 +1,14 @@
 package gr.adr.xplora.admin.service.impl;
 
 import gr.adr.xplora.admin.domain.TourStep;
+import gr.adr.xplora.admin.domain.User;
 import gr.adr.xplora.admin.repository.TourStepRepository;
+import gr.adr.xplora.admin.repository.UserRepository;
+import gr.adr.xplora.admin.security.SecurityUtils;
 import gr.adr.xplora.admin.service.TourStepService;
 import gr.adr.xplora.admin.service.dto.TourStepDTO;
 import gr.adr.xplora.admin.service.mapper.TourStepMapper;
+import java.time.LocalDate;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,11 +27,12 @@ public class TourStepServiceImpl implements TourStepService {
     private final Logger log = LoggerFactory.getLogger(TourStepServiceImpl.class);
 
     private final TourStepRepository tourStepRepository;
-
+    private final UserRepository userRepository;
     private final TourStepMapper tourStepMapper;
 
-    public TourStepServiceImpl(TourStepRepository tourStepRepository, TourStepMapper tourStepMapper) {
+    public TourStepServiceImpl(TourStepRepository tourStepRepository, TourStepMapper tourStepMapper, UserRepository userRepository) {
         this.tourStepRepository = tourStepRepository;
+        this.userRepository = userRepository;
         this.tourStepMapper = tourStepMapper;
     }
 
@@ -35,6 +40,15 @@ public class TourStepServiceImpl implements TourStepService {
     public TourStepDTO save(TourStepDTO tourStepDTO) {
         log.debug("Request to save TourStep : {}", tourStepDTO);
         TourStep tourStep = tourStepMapper.toEntity(tourStepDTO);
+        if (tourStep.getCreatedDate() == null) {
+            tourStep.setCreatedDate(LocalDate.now());
+        }
+        if (tourStep.getCreatedBy() == null) {
+            Optional<User> user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin().orElse(""));
+            if (user.isPresent()) {
+                tourStep.setCreatedBy(user.orElse(null));
+            }
+        }
         tourStep = tourStepRepository.save(tourStep);
         return tourStepMapper.toDto(tourStep);
     }

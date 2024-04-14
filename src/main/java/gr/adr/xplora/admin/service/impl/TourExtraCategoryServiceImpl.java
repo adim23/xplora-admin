@@ -1,10 +1,14 @@
 package gr.adr.xplora.admin.service.impl;
 
 import gr.adr.xplora.admin.domain.TourExtraCategory;
+import gr.adr.xplora.admin.domain.User;
 import gr.adr.xplora.admin.repository.TourExtraCategoryRepository;
+import gr.adr.xplora.admin.repository.UserRepository;
+import gr.adr.xplora.admin.security.SecurityUtils;
 import gr.adr.xplora.admin.service.TourExtraCategoryService;
 import gr.adr.xplora.admin.service.dto.TourExtraCategoryDTO;
 import gr.adr.xplora.admin.service.mapper.TourExtraCategoryMapper;
+import java.time.LocalDate;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,14 +27,16 @@ public class TourExtraCategoryServiceImpl implements TourExtraCategoryService {
     private final Logger log = LoggerFactory.getLogger(TourExtraCategoryServiceImpl.class);
 
     private final TourExtraCategoryRepository tourExtraCategoryRepository;
-
+    private final UserRepository userRepository;
     private final TourExtraCategoryMapper tourExtraCategoryMapper;
 
     public TourExtraCategoryServiceImpl(
         TourExtraCategoryRepository tourExtraCategoryRepository,
-        TourExtraCategoryMapper tourExtraCategoryMapper
+        TourExtraCategoryMapper tourExtraCategoryMapper,
+        UserRepository userRepository
     ) {
         this.tourExtraCategoryRepository = tourExtraCategoryRepository;
+        this.userRepository = userRepository;
         this.tourExtraCategoryMapper = tourExtraCategoryMapper;
     }
 
@@ -38,6 +44,15 @@ public class TourExtraCategoryServiceImpl implements TourExtraCategoryService {
     public TourExtraCategoryDTO save(TourExtraCategoryDTO tourExtraCategoryDTO) {
         log.debug("Request to save TourExtraCategory : {}", tourExtraCategoryDTO);
         TourExtraCategory tourExtraCategory = tourExtraCategoryMapper.toEntity(tourExtraCategoryDTO);
+        if (tourExtraCategory.getCreatedDate() == null) {
+            tourExtraCategory.setCreatedDate(LocalDate.now());
+        }
+        if (tourExtraCategory.getCreatedBy() == null) {
+            Optional<User> user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin().orElse(""));
+            if (user.isPresent()) {
+                tourExtraCategory.setCreatedBy(user.orElse(null));
+            }
+        }
         tourExtraCategory = tourExtraCategoryRepository.save(tourExtraCategory);
         return tourExtraCategoryMapper.toDto(tourExtraCategory);
     }

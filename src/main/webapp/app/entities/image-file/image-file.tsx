@@ -151,6 +151,13 @@ export const ImageFile = () => {
                   <Translate contentKey="xploraAdminApp.imageFile.tourCategory">Tour Category</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th>
+                  <Translate contentKey="xploraAdminApp.imageFile.tourExtra">Tour Extra</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="xploraAdminApp.imageFile.tourExtraCategory">Tour Extra Category</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
                   <Translate contentKey="xploraAdminApp.imageFile.place">Place</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th>
@@ -203,6 +210,14 @@ export const ImageFile = () => {
                   <td>
                     {imageFile.tourCategory ? (
                       <Link to={`/tour-category/${imageFile.tourCategory.id}`}>{imageFile.tourCategory.code}</Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>{imageFile.tourExtra ? <Link to={`/tour-extra/${imageFile.tourExtra.id}`}>{imageFile.tourExtra.code}</Link> : ''}</td>
+                  <td>
+                    {imageFile.tourExtraCategory ? (
+                      <Link to={`/tour-extra-category/${imageFile.tourExtraCategory.id}`}>{imageFile.tourExtraCategory.code}</Link>
                     ) : (
                       ''
                     )}

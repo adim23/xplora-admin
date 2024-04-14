@@ -1,10 +1,14 @@
 package gr.adr.xplora.admin.service.impl;
 
+import gr.adr.xplora.admin.domain.User;
 import gr.adr.xplora.admin.domain.Vehicle;
+import gr.adr.xplora.admin.repository.UserRepository;
 import gr.adr.xplora.admin.repository.VehicleRepository;
+import gr.adr.xplora.admin.security.SecurityUtils;
 import gr.adr.xplora.admin.service.VehicleService;
 import gr.adr.xplora.admin.service.dto.VehicleDTO;
 import gr.adr.xplora.admin.service.mapper.VehicleMapper;
+import java.time.LocalDate;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +27,6 @@ public class VehicleServiceImpl implements VehicleService {
     private final Logger log = LoggerFactory.getLogger(VehicleServiceImpl.class);
 
     private final VehicleRepository vehicleRepository;
-
     private final VehicleMapper vehicleMapper;
 
     public VehicleServiceImpl(VehicleRepository vehicleRepository, VehicleMapper vehicleMapper) {
@@ -35,6 +38,9 @@ public class VehicleServiceImpl implements VehicleService {
     public VehicleDTO save(VehicleDTO vehicleDTO) {
         log.debug("Request to save Vehicle : {}", vehicleDTO);
         Vehicle vehicle = vehicleMapper.toEntity(vehicleDTO);
+        if (vehicle.getCreatedDate() == null) {
+            vehicle.setCreatedDate(LocalDate.now());
+        }
         vehicle = vehicleRepository.save(vehicle);
         return vehicleMapper.toDto(vehicle);
     }

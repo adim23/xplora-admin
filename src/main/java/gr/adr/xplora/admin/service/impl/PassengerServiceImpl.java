@@ -1,10 +1,14 @@
 package gr.adr.xplora.admin.service.impl;
 
 import gr.adr.xplora.admin.domain.Passenger;
+import gr.adr.xplora.admin.domain.User;
 import gr.adr.xplora.admin.repository.PassengerRepository;
+import gr.adr.xplora.admin.repository.UserRepository;
+import gr.adr.xplora.admin.security.SecurityUtils;
 import gr.adr.xplora.admin.service.PassengerService;
 import gr.adr.xplora.admin.service.dto.PassengerDTO;
 import gr.adr.xplora.admin.service.mapper.PassengerMapper;
+import java.time.LocalDate;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +27,6 @@ public class PassengerServiceImpl implements PassengerService {
     private final Logger log = LoggerFactory.getLogger(PassengerServiceImpl.class);
 
     private final PassengerRepository passengerRepository;
-
     private final PassengerMapper passengerMapper;
 
     public PassengerServiceImpl(PassengerRepository passengerRepository, PassengerMapper passengerMapper) {

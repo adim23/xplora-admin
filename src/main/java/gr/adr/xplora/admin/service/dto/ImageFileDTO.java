@@ -4,6 +4,7 @@ import jakarta.persistence.Lob;
 import jakarta.validation.constraints.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.Objects;
 
 /**
@@ -37,6 +38,10 @@ public class ImageFileDTO implements Serializable {
     private TourDTO tour;
 
     private TourCategoryDTO tourCategory;
+
+    private TourExtraDTO tourExtra;
+
+    private TourExtraCategoryDTO tourExtraCategory;
 
     private PlaceDTO place;
 
@@ -142,6 +147,22 @@ public class ImageFileDTO implements Serializable {
         this.tourCategory = tourCategory;
     }
 
+    public TourExtraDTO getTourExtra() {
+        return tourExtra;
+    }
+
+    public void setTourExtra(TourExtraDTO tourExtra) {
+        this.tourExtra = tourExtra;
+    }
+
+    public TourExtraCategoryDTO getTourExtraCategory() {
+        return tourExtraCategory;
+    }
+
+    public void setTourExtraCategory(TourExtraCategoryDTO tourExtraCategory) {
+        this.tourExtraCategory = tourExtraCategory;
+    }
+
     public PlaceDTO getPlace() {
         return place;
     }
@@ -204,7 +225,7 @@ public class ImageFileDTO implements Serializable {
             ", title='" + getTitle() + "'" +
             ", alt='" + getAlt() + "'" +
             ", filename='" + getFilename() + "'" +
-            ", data='" + getData() + "'" +
+            ", data='" + Arrays.toString(getData()) + "'" +
             ", createdDate='" + getCreatedDate() + "'" +
             ", createdBy=" + getCreatedBy() +
             ", destination=" + getDestination() +

@@ -1,10 +1,14 @@
 package gr.adr.xplora.admin.service.impl;
 
 import gr.adr.xplora.admin.domain.TourExtra;
+import gr.adr.xplora.admin.domain.User;
 import gr.adr.xplora.admin.repository.TourExtraRepository;
+import gr.adr.xplora.admin.repository.UserRepository;
+import gr.adr.xplora.admin.security.SecurityUtils;
 import gr.adr.xplora.admin.service.TourExtraService;
 import gr.adr.xplora.admin.service.dto.TourExtraDTO;
 import gr.adr.xplora.admin.service.mapper.TourExtraMapper;
+import java.time.LocalDate;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,11 +27,12 @@ public class TourExtraServiceImpl implements TourExtraService {
     private final Logger log = LoggerFactory.getLogger(TourExtraServiceImpl.class);
 
     private final TourExtraRepository tourExtraRepository;
-
+    private final UserRepository userRepository;
     private final TourExtraMapper tourExtraMapper;
 
-    public TourExtraServiceImpl(TourExtraRepository tourExtraRepository, TourExtraMapper tourExtraMapper) {
+    public TourExtraServiceImpl(TourExtraRepository tourExtraRepository, TourExtraMapper tourExtraMapper, UserRepository userRepository) {
         this.tourExtraRepository = tourExtraRepository;
+        this.userRepository = userRepository;
         this.tourExtraMapper = tourExtraMapper;
     }
 
@@ -35,6 +40,15 @@ public class TourExtraServiceImpl implements TourExtraService {
     public TourExtraDTO save(TourExtraDTO tourExtraDTO) {
         log.debug("Request to save TourExtra : {}", tourExtraDTO);
         TourExtra tourExtra = tourExtraMapper.toEntity(tourExtraDTO);
+        if (tourExtra.getCreatedDate() == null) {
+            tourExtra.setCreatedDate(LocalDate.now());
+        }
+        if (tourExtra.getCreatedBy() == null) {
+            Optional<User> user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin().orElse(""));
+            if (user.isPresent()) {
+                tourExtra.setCreatedBy(user.orElse(null));
+            }
+        }
         tourExtra = tourExtraRepository.save(tourExtra);
         return tourExtraMapper.toDto(tourExtra);
     }

@@ -144,7 +144,19 @@ public class Content implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(
-        value = { "captions", "createdBy", "destination", "tour", "tourCategory", "place", "placeCategory", "vehicle", "driver" },
+        value = {
+            "captions",
+            "createdBy",
+            "destination",
+            "tour",
+            "tourCategory",
+            "place",
+            "placeCategory",
+            "vehicle",
+            "driver",
+            "tourExtra",
+            "tourExtraCategory",
+        },
         allowSetters = true
     )
     private ImageFile imageFile;

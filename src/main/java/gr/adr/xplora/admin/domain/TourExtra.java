@@ -80,6 +80,26 @@ public class TourExtra implements Serializable {
     )
     private Set<Content> contents = new HashSet<>();
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tourExtra")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(
+        value = {
+            "captions",
+            "createdBy",
+            "destination",
+            "tour",
+            "tourCategory",
+            "place",
+            "placeCategory",
+            "vehicle",
+            "driver",
+            "tourExtra",
+            "tourExtraCategory",
+        },
+        allowSetters = true
+    )
+    private Set<ImageFile> images = new HashSet<>();
+
     @ManyToOne(fetch = FetchType.LAZY)
     private User createdBy;
 

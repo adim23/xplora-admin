@@ -57,7 +57,19 @@ public class Vehicle implements Serializable {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "vehicle")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(
-        value = { "captions", "createdBy", "destination", "tour", "tourCategory", "place", "placeCategory", "vehicle", "driver" },
+        value = {
+            "captions",
+            "createdBy",
+            "destination",
+            "tour",
+            "tourCategory",
+            "place",
+            "placeCategory",
+            "vehicle",
+            "driver",
+            "tourExtra",
+            "tourExtraCategory",
+        },
         allowSetters = true
     )
     private Set<ImageFile> images = new HashSet<>();

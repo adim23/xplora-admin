@@ -197,6 +197,30 @@ export const TourUpdate = () => {
                 type="checkbox"
               />
               <ValidatedField
+                label={translate('xploraAdminApp.tour.accessibility')}
+                id="tour-accessibility"
+                name="accessibility"
+                data-cy="accessibility"
+                check
+                type="checkbox"
+              />
+              <ValidatedField
+                label={translate('xploraAdminApp.tour.audioGuide')}
+                id="tour-audioGuide"
+                name="audioGuide"
+                data-cy="audioGuide"
+                check
+                type="checkbox"
+              />
+              <ValidatedField
+                label={translate('xploraAdminApp.tour.tourGuide')}
+                id="tour-tourGuide"
+                name="tourGuide"
+                data-cy="tourGuide"
+                check
+                type="checkbox"
+              />
+              <ValidatedField
                 label={translate('xploraAdminApp.tour.availableFromDate')}
                 id="tour-availableFromDate"
                 name="availableFromDate"
@@ -228,6 +252,7 @@ export const TourUpdate = () => {
               <ValidatedField label={translate('xploraAdminApp.tour.price')} id="tour-price" name="price" data-cy="price" type="text" />
               <ValidatedField label={translate('xploraAdminApp.tour.badge')} id="tour-badge" name="badge" data-cy="badge" type="text" />
               <ValidatedField label={translate('xploraAdminApp.tour.rating')} id="tour-rating" name="rating" data-cy="rating" type="text" />
+              <ValidatedField label={translate('xploraAdminApp.tour.icon')} id="tour-icon" name="icon" data-cy="icon" type="text" />
               <ValidatedField
                 label={translate('xploraAdminApp.tour.widgetId')}
                 id="tour-widgetId"

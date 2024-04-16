@@ -86,8 +86,27 @@ public class Tour implements Serializable {
     @Column(name = "default_image_data")
     private byte[] defaultImageData;
 
+    @Lob
+    @Column(name = "css_style")
+    private String cssStyle;
+
     @Column(name = "default_image_data_content_type")
     private String defaultImageDataContentType;
+
+    @NotNull
+    @Column(name = "audio_guide", nullable = false)
+    private Boolean audioGuide;
+
+    @NotNull
+    @Column(name = "tour_guide", nullable = false)
+    private Boolean tourGuide;
+
+    @NotNull
+    @Column(name = "accessibility", nullable = false)
+    private Boolean accessibility;
+
+    @Column(name = "icon")
+    private String icon;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "tour")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -222,7 +241,6 @@ public class Tour implements Serializable {
     private Destination destination;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
-
     public Long getId() {
         return this.id;
     }
@@ -468,6 +486,14 @@ public class Tour implements Serializable {
 
     public void setDefaultImageDataContentType(String defaultImageDataContentType) {
         this.defaultImageDataContentType = defaultImageDataContentType;
+    }
+
+    public String getCssStyle() {
+        return cssStyle;
+    }
+
+    public void setCssStyle(String cssStyle) {
+        this.cssStyle = cssStyle;
     }
 
     public Set<TourStep> getSteps() {
@@ -738,8 +764,39 @@ public class Tour implements Serializable {
         return this;
     }
 
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
+    public Boolean getAudioGuide() {
+        return audioGuide;
+    }
 
+    public void setAudioGuide(Boolean audioGuide) {
+        this.audioGuide = audioGuide;
+    }
+
+    public Boolean getTourGuide() {
+        return tourGuide;
+    }
+
+    public void setTourGuide(Boolean tourGuide) {
+        this.tourGuide = tourGuide;
+    }
+
+    public Boolean getAccessibility() {
+        return accessibility;
+    }
+
+    public void setAccessibility(Boolean accessibility) {
+        this.accessibility = accessibility;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -760,26 +817,29 @@ public class Tour implements Serializable {
     // prettier-ignore
     @Override
     public String toString() {
-        return "Tour{" +
-            "id=" + getId() +
-            ", code='" + getCode() + "'" +
-            ", mode='" + getMode() + "'" +
-            ", duration=" + getDuration() +
-            ", petFriendly='" + getPetFriendly() + "'" +
-            ", kidsAllowed='" + getKidsAllowed() + "'" +
-            ", availableFromDate='" + getAvailableFromDate() + "'" +
-            ", availableToDate='" + getAvailableToDate() + "'" +
-            ", enabled='" + getEnabled() + "'" +
-            ", initialPrice=" + getInitialPrice() +
-            ", price=" + getPrice() +
-            ", badge='" + getBadge() + "'" +
-            ", rating=" + getRating() +
-            ", widgetId='" + getWidgetId() + "'" +
-            ", externalId='" + getExternalId() + "'" +
-            ", createdDate='" + getCreatedDate() + "'" +
-            ", defaultImage='" + getDefaultImage() + "'" +
-            ", defaultImageData='" + getDefaultImageData() + "'" +
-            ", defaultImageDataContentType='" + getDefaultImageDataContentType() + "'" +
-            "}";
+        return "Tour{"
+                + "id=" + getId()
+                + ", code='" + getCode() + "'"
+                + ", mode='" + getMode() + "'"
+                + ", duration=" + getDuration()
+                + ", petFriendly='" + getPetFriendly() + "'"
+                + ", kidsAllowed='" + getKidsAllowed() + "'"
+                + ", availableFromDate='" + getAvailableFromDate() + "'"
+                + ", availableToDate='" + getAvailableToDate() + "'"
+                + ", enabled='" + getEnabled() + "'"
+                + ", initialPrice=" + getInitialPrice()
+                + ", price=" + getPrice()
+                + ", badge='" + getBadge() + "'"
+                + ", rating=" + getRating()
+                + ", widgetId='" + getWidgetId() + "'"
+                + ", externalId='" + getExternalId() + "'"
+                + ", createdDate='" + getCreatedDate() + "'"
+                + ", defaultImage='" + getDefaultImage() + "'"
+                + ", defaultImageDataContentType='" + getDefaultImageDataContentType() + "'"
+                + ", accessibility='" + getAccessibility() + "'"
+                + ", audioGuide='" + getAudioGuide() + "'"
+                + ", tourGuide='" + getTourGuide() + "'"
+                + ", icon='" + getIcon() + "'"
+                + "}";
     }
 }

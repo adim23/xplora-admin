@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import org.hibernate.annotations.Cache;
@@ -42,6 +43,10 @@ public class Destination implements Serializable {
 
     @Column(name = "default_image_data_content_type")
     private String defaultImageDataContentType;
+
+    @Lob
+    @Column(name = "css_style")
+    private String cssStyle;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "destination")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -337,6 +342,14 @@ public class Destination implements Serializable {
         return this;
     }
 
+    public String getCssStyle() {
+        return cssStyle;
+    }
+
+    public void setCssStyle(String cssStyle) {
+        this.cssStyle = cssStyle;
+    }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -364,7 +377,7 @@ public class Destination implements Serializable {
             ", code='" + getCode() + "'" +
             ", createdDate='" + getCreatedDate() + "'" +
             ", defaultImage='" + getDefaultImage() + "'" +
-            ", defaultImageData='" + getDefaultImageData() + "'" +
+            ", defaultImageData='" + Arrays.toString(getDefaultImageData()) + "'" +
             ", defaultImageDataContentType='" + getDefaultImageDataContentType() + "'" +
             "}";
     }

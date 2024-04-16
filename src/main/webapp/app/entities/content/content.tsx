@@ -126,14 +126,6 @@ export const Content = () => {
                   <Translate contentKey="xploraAdminApp.content.shortDescription">Short Description</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('shortDescription')} />
                 </th>
-                <th className="hand" onClick={sort('data')}>
-                  <Translate contentKey="xploraAdminApp.content.data">Data</Translate>{' '}
-                  <FontAwesomeIcon icon={getSortIconByFieldName('data')} />
-                </th>
-                <th className="hand" onClick={sort('meta')}>
-                  <Translate contentKey="xploraAdminApp.content.meta">Meta</Translate>{' '}
-                  <FontAwesomeIcon icon={getSortIconByFieldName('meta')} />
-                </th>
                 <th className="hand" onClick={sort('createdDate')}>
                   <Translate contentKey="xploraAdminApp.content.createdDate">Created Date</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('createdDate')} />
@@ -201,8 +193,6 @@ export const Content = () => {
                   <td>{content.code}</td>
                   <td>{content.title}</td>
                   <td>{content.shortDescription}</td>
-                  <td>{content.data}</td>
-                  <td>{content.meta}</td>
                   <td>
                     {content.createdDate ? <TextFormat type="date" value={content.createdDate} format={APP_LOCAL_DATE_FORMAT} /> : null}
                   </td>

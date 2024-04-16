@@ -95,6 +95,7 @@ public class LanguageServiceImpl implements LanguageService {
      *  Get all the languages where Content is {@code null}.
      *  @return the list of entities.
      */
+    /*
     @Transactional(readOnly = true)
     public List<LanguageDTO> findAllWhereContentIsNull() {
         log.debug("Request to get all languages where Content is null");
@@ -103,7 +104,7 @@ public class LanguageServiceImpl implements LanguageService {
             .map(languageMapper::toDto)
             .collect(Collectors.toCollection(LinkedList::new));
     }
-
+*/
     @Override
     @Transactional(readOnly = true)
     public Optional<LanguageDTO> findOne(Long id) {

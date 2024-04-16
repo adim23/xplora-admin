@@ -28,6 +28,10 @@ export interface ITour {
   defaultImage?: string | null;
   defaultImageDataContentType?: string | null;
   defaultImageData?: string | null;
+  accessibility?: boolean;
+  audioGuide?: boolean;
+  tourGuide?: boolean;
+  icon?: string | null;
   createdBy?: IUser | null;
   meetingPoint?: IPlace | null;
   finishPoint?: IPlace | null;

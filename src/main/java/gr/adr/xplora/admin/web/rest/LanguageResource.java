@@ -150,11 +150,11 @@ public class LanguageResource {
         @RequestParam(name = "filter", required = false) String filter,
         @RequestParam(name = "eagerload", required = false, defaultValue = "true") boolean eagerload
     ) {
-        if ("content-is-null".equals(filter)) {
+        /*        if ("content-is-null".equals(filter)) {
             log.debug("REST request to get all Languages where content is null");
             return new ResponseEntity<>(languageService.findAllWhereContentIsNull(), HttpStatus.OK);
         }
-        log.debug("REST request to get a page of Languages");
+*/log.debug("REST request to get a page of Languages");
         Page<LanguageDTO> page;
         if (eagerload) {
             page = languageService.findAllWithEagerRelationships(pageable);

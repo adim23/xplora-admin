@@ -63,6 +63,24 @@ export const TourDetail = () => {
           </dt>
           <dd>{tourEntity.kidsAllowed ? 'true' : 'false'}</dd>
           <dt>
+            <span id="accessibility">
+              <Translate contentKey="xploraAdminApp.tour.accessibility">Accessibility</Translate>
+            </span>
+          </dt>
+          <dd>{tourEntity.accessibility ? 'true' : 'false'}</dd>
+          <dt>
+            <span id="audioGuide">
+              <Translate contentKey="xploraAdminApp.tour.audioGuide">Audio Guide</Translate>
+            </span>
+          </dt>
+          <dd>{tourEntity.audioGuide ? 'true' : 'false'}</dd>
+          <dt>
+            <span id="tourGuide">
+              <Translate contentKey="xploraAdminApp.tour.tourGuide">Tour Guide</Translate>
+            </span>
+          </dt>
+          <dd>{tourEntity.tourGuide ? 'true' : 'false'}</dd>
+          <dt>
             <span id="availableFromDate">
               <Translate contentKey="xploraAdminApp.tour.availableFromDate">Available From Date</Translate>
             </span>
@@ -106,6 +124,12 @@ export const TourDetail = () => {
             </span>
           </dt>
           <dd>{tourEntity.badge}</dd>
+          <dt>
+            <span id="icon">
+              <Translate contentKey="xploraAdminApp.tour.icon">Icon</Translate>
+            </span>
+          </dt>
+          <dd>{tourEntity.icon}</dd>
           <dt>
             <span id="rating">
               <Translate contentKey="xploraAdminApp.tour.rating">Rating</Translate>

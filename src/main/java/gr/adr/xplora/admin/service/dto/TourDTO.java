@@ -60,6 +60,14 @@ public class TourDTO implements Serializable {
 
     private String defaultImageDataContentType;
 
+    private Boolean audioGuide;
+
+    private Boolean tourGuide;
+
+    private Boolean accessibility;
+
+    private String icon;
+
     private UserDTO createdBy;
 
     private PlaceDTO meetingPoint;
@@ -292,6 +300,38 @@ public class TourDTO implements Serializable {
         this.destination = destination;
     }
 
+    public Boolean getAudioGuide() {
+        return audioGuide;
+    }
+
+    public void setAudioGuide(Boolean audioGuide) {
+        this.audioGuide = audioGuide;
+    }
+
+    public Boolean getTourGuide() {
+        return tourGuide;
+    }
+
+    public void setTourGuide(Boolean tourGuide) {
+        this.tourGuide = tourGuide;
+    }
+
+    public Boolean getAccessibility() {
+        return accessibility;
+    }
+
+    public void setAccessibility(Boolean accessibility) {
+        this.accessibility = accessibility;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -316,33 +356,36 @@ public class TourDTO implements Serializable {
     // prettier-ignore
     @Override
     public String toString() {
-        return "TourDTO{" +
-            "id=" + getId() +
-            ", code='" + getCode() + "'" +
-            ", mode='" + getMode() + "'" +
-            ", duration=" + getDuration() +
-            ", petFriendly='" + getPetFriendly() + "'" +
-            ", kidsAllowed='" + getKidsAllowed() + "'" +
-            ", availableFromDate='" + getAvailableFromDate() + "'" +
-            ", availableToDate='" + getAvailableToDate() + "'" +
-            ", enabled='" + getEnabled() + "'" +
-            ", initialPrice=" + getInitialPrice() +
-            ", price=" + getPrice() +
-            ", badge='" + getBadge() + "'" +
-            ", rating=" + getRating() +
-            ", widgetId='" + getWidgetId() + "'" +
-            ", externalId='" + getExternalId() + "'" +
-            ", createdDate='" + getCreatedDate() + "'" +
-            ", defaultImage='" + getDefaultImage() + "'" +
-            ", defaultImageData='" + getDefaultImageData() + "'" +
-            ", createdBy=" + getCreatedBy() +
-            ", meetingPoint=" + getMeetingPoint() +
-            ", finishPoint=" + getFinishPoint() +
-            ", tourExtras=" + getTourExtras() +
-            ", tags=" + getTags() +
-            ", promotions=" + getPromotions() +
-            ", categories=" + getCategories() +
-            ", destination=" + getDestination() +
-            "}";
+        return "TourDTO{"
+                + "id=" + getId()
+                + ", code='" + getCode() + "'"
+                + ", mode='" + getMode() + "'"
+                + ", duration=" + getDuration()
+                + ", petFriendly='" + getPetFriendly() + "'"
+                + ", kidsAllowed='" + getKidsAllowed() + "'"
+                + ", availableFromDate='" + getAvailableFromDate() + "'"
+                + ", availableToDate='" + getAvailableToDate() + "'"
+                + ", enabled='" + getEnabled() + "'"
+                + ", initialPrice=" + getInitialPrice()
+                + ", price=" + getPrice()
+                + ", badge='" + getBadge() + "'"
+                + ", rating=" + getRating()
+                + ", widgetId='" + getWidgetId() + "'"
+                + ", externalId='" + getExternalId() + "'"
+                + ", createdDate='" + getCreatedDate() + "'"
+                + ", defaultImage='" + getDefaultImage() + "'"
+                + ", accessibility='" + getAccessibility() + "'"
+                + ", audioGuide='" + getAudioGuide() + "'"
+                + ", tourGuide='" + getTourGuide() + "'"
+                + ", icon='" + getIcon() + "'"
+                + ", createdBy=" + getCreatedBy()
+                + ", meetingPoint=" + getMeetingPoint()
+                + ", finishPoint=" + getFinishPoint()
+                + ", tourExtras=" + getTourExtras()
+                + ", tags=" + getTags()
+                + ", promotions=" + getPromotions()
+                + ", categories=" + getCategories()
+                + ", destination=" + getDestination()
+                + "}";
     }
 }

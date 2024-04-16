@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Arrays;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -46,30 +47,6 @@ public class Language implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private User createdBy;
-
-    @JsonIgnoreProperties(
-        value = {
-            "language",
-            "createdBy",
-            "destination",
-            "tourExtraInfo",
-            "tour",
-            "tourCategory",
-            "place",
-            "placeCategory",
-            "tourExtraCategory",
-            "tourExtra",
-            "menu",
-            "webPage",
-            "tag",
-            "tourStep",
-            "promotion",
-            "imageFile",
-        },
-        allowSetters = true
-    )
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "language")
-    private Content content;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -177,25 +154,6 @@ public class Language implements Serializable {
         return this;
     }
 
-    public Content getContent() {
-        return this.content;
-    }
-
-    public void setContent(Content content) {
-        if (this.content != null) {
-            this.content.setLanguage(null);
-        }
-        if (content != null) {
-            content.setLanguage(this);
-        }
-        this.content = content;
-    }
-
-    public Language content(Content content) {
-        this.setContent(content);
-        return this;
-    }
-
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -224,7 +182,7 @@ public class Language implements Serializable {
             ", createdDate='" + getCreatedDate() + "'" +
             ", icon='" + getIcon() + "'" +
             ", defaultImage='" + getDefaultImage() + "'" +
-            ", defaultImageData='" + getDefaultImageData() + "'" +
+            ", defaultImageData='" + Arrays.toString(getDefaultImageData()) + "'" +
             ", defaultImageDataContentType='" + getDefaultImageDataContentType() + "'" +
             "}";
     }

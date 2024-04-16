@@ -83,6 +83,7 @@ public class TourServiceImpl implements TourService {
         return tourRepository.findAll(pageable).map(tourMapper::toDto);
     }
 
+    @Override
     public Page<TourDTO> findAllWithEagerRelationships(Pageable pageable) {
         return tourRepository.findAllWithEagerRelationships(pageable).map(tourMapper::toDto);
     }

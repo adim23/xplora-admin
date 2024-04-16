@@ -24,16 +24,5 @@ class LanguageTest {
     }
 
     @Test
-    void contentTest() throws Exception {
-        Language language = getLanguageRandomSampleGenerator();
-        Content contentBack = getContentRandomSampleGenerator();
-
-        language.setContent(contentBack);
-        assertThat(language.getContent()).isEqualTo(contentBack);
-        assertThat(contentBack.getLanguage()).isEqualTo(language);
-
-        language.content(null);
-        assertThat(language.getContent()).isNull();
-        assertThat(contentBack.getLanguage()).isNull();
-    }
+    void contentTest() throws Exception {}
 }

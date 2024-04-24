@@ -1,6 +1,7 @@
 package gr.adr.xplora.admin.domain;
 
 import static gr.adr.xplora.admin.domain.ContentTestSamples.*;
+import static gr.adr.xplora.admin.domain.DestinationTestSamples.*;
 import static gr.adr.xplora.admin.domain.MenuTestSamples.*;
 import static gr.adr.xplora.admin.domain.MenuTestSamples.*;
 import static gr.adr.xplora.admin.domain.TourCategoryTestSamples.*;
@@ -106,5 +107,17 @@ class MenuTest {
 
         menu.tourCategory(null);
         assertThat(menu.getTourCategory()).isNull();
+    }
+
+    @Test
+    void destinationTest() throws Exception {
+        Menu menu = getMenuRandomSampleGenerator();
+        Destination destinationBack = getDestinationRandomSampleGenerator();
+
+        menu.setDestination(destinationBack);
+        assertThat(menu.getDestination()).isEqualTo(destinationBack);
+
+        menu.destination(null);
+        assertThat(menu.getDestination()).isNull();
     }
 }

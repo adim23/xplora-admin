@@ -17,13 +17,12 @@ public class MenuDTO implements Serializable {
     @NotNull
     private String code;
 
-    private String uri;
-
-    private LocalDate createdDate;
+    @NotNull
+    private Boolean enabled;
 
     private String icon;
 
-    private Boolean enabled;
+    private String uri;
 
     private String defaultImage;
 
@@ -32,6 +31,8 @@ public class MenuDTO implements Serializable {
 
     private String defaultImageDataContentType;
 
+    private LocalDate createdDate;
+
     private UserDTO createdBy;
 
     private WebPageDTO page;
@@ -39,6 +40,8 @@ public class MenuDTO implements Serializable {
     private MenuDTO parent;
 
     private TourCategoryDTO tourCategory;
+
+    private DestinationDTO destination;
 
     public Long getId() {
         return id;
@@ -56,20 +59,12 @@ public class MenuDTO implements Serializable {
         this.code = code;
     }
 
-    public String getUri() {
-        return uri;
+    public Boolean getEnabled() {
+        return enabled;
     }
 
-    public void setUri(String uri) {
-        this.uri = uri;
-    }
-
-    public LocalDate getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(LocalDate createdDate) {
-        this.createdDate = createdDate;
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 
     public String getIcon() {
@@ -80,12 +75,12 @@ public class MenuDTO implements Serializable {
         this.icon = icon;
     }
 
-    public Boolean getEnabled() {
-        return enabled;
+    public String getUri() {
+        return uri;
     }
 
-    public void setEnabled(Boolean enabled) {
-        this.enabled = enabled;
+    public void setUri(String uri) {
+        this.uri = uri;
     }
 
     public String getDefaultImage() {
@@ -110,6 +105,14 @@ public class MenuDTO implements Serializable {
 
     public void setDefaultImageDataContentType(String defaultImageDataContentType) {
         this.defaultImageDataContentType = defaultImageDataContentType;
+    }
+
+    public LocalDate getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(LocalDate createdDate) {
+        this.createdDate = createdDate;
     }
 
     public UserDTO getCreatedBy() {
@@ -144,6 +147,14 @@ public class MenuDTO implements Serializable {
         this.tourCategory = tourCategory;
     }
 
+    public DestinationDTO getDestination() {
+        return destination;
+    }
+
+    public void setDestination(DestinationDTO destination) {
+        this.destination = destination;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -171,16 +182,17 @@ public class MenuDTO implements Serializable {
         return "MenuDTO{" +
             "id=" + getId() +
             ", code='" + getCode() + "'" +
-            ", uri='" + getUri() + "'" +
-            ", createdDate='" + getCreatedDate() + "'" +
-            ", icon='" + getIcon() + "'" +
             ", enabled='" + getEnabled() + "'" +
+            ", icon='" + getIcon() + "'" +
+            ", uri='" + getUri() + "'" +
             ", defaultImage='" + getDefaultImage() + "'" +
             ", defaultImageData='" + getDefaultImageData() + "'" +
+            ", createdDate='" + getCreatedDate() + "'" +
             ", createdBy=" + getCreatedBy() +
             ", page=" + getPage() +
             ", parent=" + getParent() +
             ", tourCategory=" + getTourCategory() +
+            ", destination=" + getDestination() +
             "}";
     }
 }

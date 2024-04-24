@@ -19,10 +19,10 @@
       },
       "id": "ID",
       "code": "Code",
+      "enabled": "Enabled",
       "discount": "Discount",
       "fromDate": "From Date",
       "toDate": "To Date",
-      "enabled": "Enabled",
       "title": "Title",
       "tour": "Tour"
     }

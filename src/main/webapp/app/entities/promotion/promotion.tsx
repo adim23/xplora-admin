@@ -118,6 +118,10 @@ export const Promotion = () => {
                   <Translate contentKey="xploraAdminApp.promotion.code">Code</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('code')} />
                 </th>
+                <th className="hand" onClick={sort('enabled')}>
+                  <Translate contentKey="xploraAdminApp.promotion.enabled">Enabled</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('enabled')} />
+                </th>
                 <th className="hand" onClick={sort('discount')}>
                   <Translate contentKey="xploraAdminApp.promotion.discount">Discount</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('discount')} />
@@ -129,10 +133,6 @@ export const Promotion = () => {
                 <th className="hand" onClick={sort('toDate')}>
                   <Translate contentKey="xploraAdminApp.promotion.toDate">To Date</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('toDate')} />
-                </th>
-                <th className="hand" onClick={sort('enabled')}>
-                  <Translate contentKey="xploraAdminApp.promotion.enabled">Enabled</Translate>{' '}
-                  <FontAwesomeIcon icon={getSortIconByFieldName('enabled')} />
                 </th>
                 <th />
               </tr>
@@ -146,12 +146,12 @@ export const Promotion = () => {
                     </Button>
                   </td>
                   <td>{promotion.code}</td>
+                  <td>{promotion.enabled ? 'true' : 'false'}</td>
                   <td>{promotion.discount}</td>
                   <td>
                     {promotion.fromDate ? <TextFormat type="date" value={promotion.fromDate} format={APP_LOCAL_DATE_FORMAT} /> : null}
                   </td>
                   <td>{promotion.toDate ? <TextFormat type="date" value={promotion.toDate} format={APP_LOCAL_DATE_FORMAT} /> : null}</td>
-                  <td>{promotion.enabled ? 'true' : 'false'}</td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`/promotion/${promotion.id}`} color="info" size="sm" data-cy="entityDetailsButton">

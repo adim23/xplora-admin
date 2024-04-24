@@ -4,7 +4,6 @@ import jakarta.persistence.Lob;
 import jakarta.validation.constraints.*;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.Objects;
 
 /**
@@ -39,13 +38,13 @@ public class ImageFileDTO implements Serializable {
 
     private TourCategoryDTO tourCategory;
 
-    private TourExtraDTO tourExtra;
-
-    private TourExtraCategoryDTO tourExtraCategory;
-
     private PlaceDTO place;
 
     private PlaceCategoryDTO placeCategory;
+
+    private TourExtraCategoryDTO tourExtraCategory;
+
+    private TourExtraDTO tourExtra;
 
     private VehicleDTO vehicle;
 
@@ -147,22 +146,6 @@ public class ImageFileDTO implements Serializable {
         this.tourCategory = tourCategory;
     }
 
-    public TourExtraDTO getTourExtra() {
-        return tourExtra;
-    }
-
-    public void setTourExtra(TourExtraDTO tourExtra) {
-        this.tourExtra = tourExtra;
-    }
-
-    public TourExtraCategoryDTO getTourExtraCategory() {
-        return tourExtraCategory;
-    }
-
-    public void setTourExtraCategory(TourExtraCategoryDTO tourExtraCategory) {
-        this.tourExtraCategory = tourExtraCategory;
-    }
-
     public PlaceDTO getPlace() {
         return place;
     }
@@ -177,6 +160,22 @@ public class ImageFileDTO implements Serializable {
 
     public void setPlaceCategory(PlaceCategoryDTO placeCategory) {
         this.placeCategory = placeCategory;
+    }
+
+    public TourExtraCategoryDTO getTourExtraCategory() {
+        return tourExtraCategory;
+    }
+
+    public void setTourExtraCategory(TourExtraCategoryDTO tourExtraCategory) {
+        this.tourExtraCategory = tourExtraCategory;
+    }
+
+    public TourExtraDTO getTourExtra() {
+        return tourExtra;
+    }
+
+    public void setTourExtra(TourExtraDTO tourExtra) {
+        this.tourExtra = tourExtra;
     }
 
     public VehicleDTO getVehicle() {
@@ -225,7 +224,7 @@ public class ImageFileDTO implements Serializable {
             ", title='" + getTitle() + "'" +
             ", alt='" + getAlt() + "'" +
             ", filename='" + getFilename() + "'" +
-            ", data='" + Arrays.toString(getData()) + "'" +
+            ", data='" + getData() + "'" +
             ", createdDate='" + getCreatedDate() + "'" +
             ", createdBy=" + getCreatedBy() +
             ", destination=" + getDestination() +
@@ -233,6 +232,8 @@ public class ImageFileDTO implements Serializable {
             ", tourCategory=" + getTourCategory() +
             ", place=" + getPlace() +
             ", placeCategory=" + getPlaceCategory() +
+            ", tourExtraCategory=" + getTourExtraCategory() +
+            ", tourExtra=" + getTourExtra() +
             ", vehicle=" + getVehicle() +
             ", driver=" + getDriver() +
             "}";

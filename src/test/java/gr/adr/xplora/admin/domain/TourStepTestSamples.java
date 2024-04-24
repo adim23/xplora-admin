@@ -12,17 +12,18 @@ public class TourStepTestSamples {
     private static final AtomicInteger intCount = new AtomicInteger(random.nextInt() + (2 * Short.MAX_VALUE));
 
     public static TourStep getTourStepSample1() {
-        return new TourStep().id(1L).code("code1").stepOrder(1).waitTime(1).driveTime(1);
+        return new TourStep().id(1L).code("code1").icon("icon1").stepOrder(1).waitTime(1).driveTime(1);
     }
 
     public static TourStep getTourStepSample2() {
-        return new TourStep().id(2L).code("code2").stepOrder(2).waitTime(2).driveTime(2);
+        return new TourStep().id(2L).code("code2").icon("icon2").stepOrder(2).waitTime(2).driveTime(2);
     }
 
     public static TourStep getTourStepRandomSampleGenerator() {
         return new TourStep()
             .id(longCount.incrementAndGet())
             .code(UUID.randomUUID().toString())
+            .icon(UUID.randomUUID().toString())
             .stepOrder(intCount.incrementAndGet())
             .waitTime(intCount.incrementAndGet())
             .driveTime(intCount.incrementAndGet());

@@ -36,8 +36,6 @@ public class Tag implements Serializable {
             "language",
             "createdBy",
             "destination",
-            "tourExtraInfo",
-            "tour",
             "tourCategory",
             "place",
             "placeCategory",
@@ -66,10 +64,9 @@ public class Tag implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(
         value = {
+            "content",
             "steps",
             "images",
-            "extraInfos",
-            "contents",
             "createdBy",
             "meetingPoint",
             "finishPoint",
@@ -78,6 +75,7 @@ public class Tag implements Serializable {
             "promotions",
             "categories",
             "destination",
+            "defaultCategory",
         },
         allowSetters = true
     )
@@ -85,7 +83,7 @@ public class Tag implements Serializable {
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "tags")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "contents", "createdBy", "tags", "categories", "tours" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "images", "contents", "createdBy", "tags", "categories", "tours" }, allowSetters = true)
     private Set<TourExtra> tourExtras = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "tags")

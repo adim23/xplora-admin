@@ -67,6 +67,9 @@ export const TourExtraUpdate = () => {
     if (values.price !== undefined && typeof values.price !== 'number') {
       values.price = Number(values.price);
     }
+    if (values.offer !== undefined && typeof values.offer !== 'number') {
+      values.offer = Number(values.offer);
+    }
 
     const entity = {
       ...tourExtraEntity,
@@ -139,10 +142,24 @@ export const TourExtraUpdate = () => {
                 type="checkbox"
               />
               <ValidatedField
+                label={translate('xploraAdminApp.tourExtra.icon')}
+                id="tour-extra-icon"
+                name="icon"
+                data-cy="icon"
+                type="text"
+              />
+              <ValidatedField
                 label={translate('xploraAdminApp.tourExtra.price')}
                 id="tour-extra-price"
                 name="price"
                 data-cy="price"
+                type="text"
+              />
+              <ValidatedField
+                label={translate('xploraAdminApp.tourExtra.offer')}
+                id="tour-extra-offer"
+                name="offer"
+                data-cy="offer"
                 type="text"
               />
               <ValidatedField

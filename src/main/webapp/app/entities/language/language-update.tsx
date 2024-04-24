@@ -109,13 +109,6 @@ export const LanguageUpdate = () => {
                   required: { value: true, message: translate('entity.validation.required') },
                 }}
               />
-              <ValidatedField
-                label={translate('xploraAdminApp.language.createdDate')}
-                id="language-createdDate"
-                name="createdDate"
-                data-cy="createdDate"
-                type="date"
-              />
               <ValidatedField label={translate('xploraAdminApp.language.icon')} id="language-icon" name="icon" data-cy="icon" type="text" />
               <ValidatedField
                 label={translate('xploraAdminApp.language.defaultImage')}
@@ -131,6 +124,13 @@ export const LanguageUpdate = () => {
                 data-cy="defaultImageData"
                 isImage
                 accept="image/*"
+              />
+              <ValidatedField
+                label={translate('xploraAdminApp.language.createdDate')}
+                id="language-createdDate"
+                name="createdDate"
+                data-cy="createdDate"
+                type="date"
               />
               <ValidatedField
                 id="language-createdBy"

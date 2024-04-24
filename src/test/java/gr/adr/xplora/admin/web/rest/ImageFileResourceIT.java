@@ -367,7 +367,7 @@ class ImageFileResourceIT {
         ImageFile partialUpdatedImageFile = new ImageFile();
         partialUpdatedImageFile.setId(imageFile.getId());
 
-        partialUpdatedImageFile.title(UPDATED_TITLE).filename(UPDATED_FILENAME).createdDate(UPDATED_CREATED_DATE);
+        partialUpdatedImageFile.code(UPDATED_CODE).title(UPDATED_TITLE).filename(UPDATED_FILENAME);
 
         restImageFileMockMvc
             .perform(

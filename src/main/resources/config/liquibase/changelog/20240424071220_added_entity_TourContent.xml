@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <!--
+        Added the entity TourContent.
+    -->
+    <changeSet id="20240424071220-1" author="jhipster">
+        <createTable tableName="tour_content">
+            <column name="id" type="bigint" autoIncrement="true" startWith="1500">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="code" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="title" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="short_description" type="${clobType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="data" type="${clobType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="meta" type="${clobType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="cancellation" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="activity_path" type="${clobType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="at_a_glance" type="${clobType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="in_detail" type="${clobType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="what_is_included" type="${clobType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="you_can_add" type="${clobType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="important_information" type="${clobType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="extra_info" type="${clobType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="created_date" type="date">
+                <constraints nullable="true" />
+            </column>
+            <column name="language_id" type="bigint">
+                <constraints nullable="false" unique="true" uniqueConstraintName="ux_tour_content__language_id" />
+            </column>
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
+        </createTable>
+    </changeSet>
+
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
+
+    <!--
+        Load sample data generated with Faker.js
+        - This data can be easily edited using a CSV editor (or even MS Excel) and
+          is located in the 'src/main/resources/config/liquibase/fake-data' directory
+        - By default this data is applied when running with the JHipster 'dev' profile.
+          This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
+          Spring Boot configuration key.
+    -->
+    <changeSet id="20240424071220-1-data" author="jhipster" context="faker">
+        <loadData
+                  file="config/liquibase/fake-data/tour_content.csv"
+                  separator=";"
+                  tableName="tour_content"
+                  usePreparedStatements="true">
+            <column name="id" type="numeric"/>
+            <column name="code" type="string"/>
+            <column name="title" type="string"/>
+            <column name="short_description" type="clob"/>
+            <column name="data" type="clob"/>
+            <column name="meta" type="clob"/>
+            <column name="cancellation" type="string"/>
+            <column name="activity_path" type="clob"/>
+            <column name="at_a_glance" type="clob"/>
+            <column name="in_detail" type="clob"/>
+            <column name="what_is_included" type="clob"/>
+            <column name="you_can_add" type="clob"/>
+            <column name="important_information" type="clob"/>
+            <column name="extra_info" type="clob"/>
+            <column name="created_date" type="date"/>
+            <column name="language_id" type="numeric"/>
+            <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

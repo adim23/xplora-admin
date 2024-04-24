@@ -48,6 +48,12 @@ class PlaceResourceIT {
     private static final String DEFAULT_CODE = "AAAAAAAAAA";
     private static final String UPDATED_CODE = "BBBBBBBBBB";
 
+    private static final Boolean DEFAULT_ENABLED = false;
+    private static final Boolean UPDATED_ENABLED = true;
+
+    private static final String DEFAULT_ICON = "AAAAAAAAAA";
+    private static final String UPDATED_ICON = "BBBBBBBBBB";
+
     private static final Boolean DEFAULT_DESTINATION_SIGHT = false;
     private static final Boolean UPDATED_DESTINATION_SIGHT = true;
 
@@ -106,6 +112,8 @@ class PlaceResourceIT {
     public static Place createEntity(EntityManager em) {
         Place place = new Place()
             .code(DEFAULT_CODE)
+            .enabled(DEFAULT_ENABLED)
+            .icon(DEFAULT_ICON)
             .destinationSight(DEFAULT_DESTINATION_SIGHT)
             .longitude(DEFAULT_LONGITUDE)
             .latitude(DEFAULT_LATITUDE)
@@ -125,6 +133,8 @@ class PlaceResourceIT {
     public static Place createUpdatedEntity(EntityManager em) {
         Place place = new Place()
             .code(UPDATED_CODE)
+            .enabled(UPDATED_ENABLED)
+            .icon(UPDATED_ICON)
             .destinationSight(UPDATED_DESTINATION_SIGHT)
             .longitude(UPDATED_LONGITUDE)
             .latitude(UPDATED_LATITUDE)
@@ -199,6 +209,23 @@ class PlaceResourceIT {
 
     @Test
     @Transactional
+    void checkEnabledIsRequired() throws Exception {
+        long databaseSizeBeforeTest = getRepositoryCount();
+        // set the field null
+        place.setEnabled(null);
+
+        // Create the Place, which fails.
+        PlaceDTO placeDTO = placeMapper.toDto(place);
+
+        restPlaceMockMvc
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsBytes(placeDTO)))
+            .andExpect(status().isBadRequest());
+
+        assertSameRepositoryCount(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     void checkDestinationSightIsRequired() throws Exception {
         long databaseSizeBeforeTest = getRepositoryCount();
         // set the field null
@@ -227,6 +254,8 @@ class PlaceResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(place.getId().intValue())))
             .andExpect(jsonPath("$.[*].code").value(hasItem(DEFAULT_CODE)))
+            .andExpect(jsonPath("$.[*].enabled").value(hasItem(DEFAULT_ENABLED.booleanValue())))
+            .andExpect(jsonPath("$.[*].icon").value(hasItem(DEFAULT_ICON)))
             .andExpect(jsonPath("$.[*].destinationSight").value(hasItem(DEFAULT_DESTINATION_SIGHT.booleanValue())))
             .andExpect(jsonPath("$.[*].longitude").value(hasItem(DEFAULT_LONGITUDE)))
             .andExpect(jsonPath("$.[*].latitude").value(hasItem(DEFAULT_LATITUDE)))
@@ -266,6 +295,8 @@ class PlaceResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(place.getId().intValue()))
             .andExpect(jsonPath("$.code").value(DEFAULT_CODE))
+            .andExpect(jsonPath("$.enabled").value(DEFAULT_ENABLED.booleanValue()))
+            .andExpect(jsonPath("$.icon").value(DEFAULT_ICON))
             .andExpect(jsonPath("$.destinationSight").value(DEFAULT_DESTINATION_SIGHT.booleanValue()))
             .andExpect(jsonPath("$.longitude").value(DEFAULT_LONGITUDE))
             .andExpect(jsonPath("$.latitude").value(DEFAULT_LATITUDE))
@@ -296,6 +327,8 @@ class PlaceResourceIT {
         em.detach(updatedPlace);
         updatedPlace
             .code(UPDATED_CODE)
+            .enabled(UPDATED_ENABLED)
+            .icon(UPDATED_ICON)
             .destinationSight(UPDATED_DESTINATION_SIGHT)
             .longitude(UPDATED_LONGITUDE)
             .latitude(UPDATED_LATITUDE)
@@ -388,7 +421,13 @@ class PlaceResourceIT {
         Place partialUpdatedPlace = new Place();
         partialUpdatedPlace.setId(place.getId());
 
-        partialUpdatedPlace.code(UPDATED_CODE).createdDate(UPDATED_CREATED_DATE);
+        partialUpdatedPlace
+            .enabled(UPDATED_ENABLED)
+            .destinationSight(UPDATED_DESTINATION_SIGHT)
+            .latitude(UPDATED_LATITUDE)
+            .createdDate(UPDATED_CREATED_DATE)
+            .defaultImageData(UPDATED_DEFAULT_IMAGE_DATA)
+            .defaultImageDataContentType(UPDATED_DEFAULT_IMAGE_DATA_CONTENT_TYPE);
 
         restPlaceMockMvc
             .perform(
@@ -418,6 +457,8 @@ class PlaceResourceIT {
 
         partialUpdatedPlace
             .code(UPDATED_CODE)
+            .enabled(UPDATED_ENABLED)
+            .icon(UPDATED_ICON)
             .destinationSight(UPDATED_DESTINATION_SIGHT)
             .longitude(UPDATED_LONGITUDE)
             .latitude(UPDATED_LATITUDE)

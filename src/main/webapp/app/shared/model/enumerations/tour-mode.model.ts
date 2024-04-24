@@ -1,9 +1,17 @@
 export enum TourMode {
-  TOUR = 'Tour',
+  BUS = 'Bus',
 
-  ACTIVITY = 'Activity',
+  BOAT = 'Boat',
 
-  EVENT = 'Event',
+  FEET = 'Feet',
+
+  CAR = 'Car',
+
+  MOTO = 'Moto',
+
+  MOTOBUS = 'Motobus',
+
+  BICYCLE = 'Bicycle',
 
   OTHER = 'Other',
 }

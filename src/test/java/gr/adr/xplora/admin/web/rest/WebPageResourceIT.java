@@ -47,11 +47,11 @@ class WebPageResourceIT {
     private static final String DEFAULT_CODE = "AAAAAAAAAA";
     private static final String UPDATED_CODE = "BBBBBBBBBB";
 
-    private static final String DEFAULT_URI_PATH = "AAAAAAAAAA";
-    private static final String UPDATED_URI_PATH = "BBBBBBBBBB";
-
     private static final Boolean DEFAULT_ENABLED = false;
     private static final Boolean UPDATED_ENABLED = true;
+
+    private static final String DEFAULT_URI_PATH = "AAAAAAAAAA";
+    private static final String UPDATED_URI_PATH = "BBBBBBBBBB";
 
     private static final LocalDate DEFAULT_PUBLISH_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_PUBLISH_DATE = LocalDate.now(ZoneId.systemDefault());
@@ -97,8 +97,8 @@ class WebPageResourceIT {
     public static WebPage createEntity(EntityManager em) {
         WebPage webPage = new WebPage()
             .code(DEFAULT_CODE)
-            .uriPath(DEFAULT_URI_PATH)
             .enabled(DEFAULT_ENABLED)
+            .uriPath(DEFAULT_URI_PATH)
             .publishDate(DEFAULT_PUBLISH_DATE)
             .createdDate(DEFAULT_CREATED_DATE);
         return webPage;
@@ -113,8 +113,8 @@ class WebPageResourceIT {
     public static WebPage createUpdatedEntity(EntityManager em) {
         WebPage webPage = new WebPage()
             .code(UPDATED_CODE)
-            .uriPath(UPDATED_URI_PATH)
             .enabled(UPDATED_ENABLED)
+            .uriPath(UPDATED_URI_PATH)
             .publishDate(UPDATED_PUBLISH_DATE)
             .createdDate(UPDATED_CREATED_DATE);
         return webPage;
@@ -184,6 +184,23 @@ class WebPageResourceIT {
 
     @Test
     @Transactional
+    void checkEnabledIsRequired() throws Exception {
+        long databaseSizeBeforeTest = getRepositoryCount();
+        // set the field null
+        webPage.setEnabled(null);
+
+        // Create the WebPage, which fails.
+        WebPageDTO webPageDTO = webPageMapper.toDto(webPage);
+
+        restWebPageMockMvc
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsBytes(webPageDTO)))
+            .andExpect(status().isBadRequest());
+
+        assertSameRepositoryCount(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     void getAllWebPages() throws Exception {
         // Initialize the database
         webPageRepository.saveAndFlush(webPage);
@@ -195,8 +212,8 @@ class WebPageResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(webPage.getId().intValue())))
             .andExpect(jsonPath("$.[*].code").value(hasItem(DEFAULT_CODE)))
-            .andExpect(jsonPath("$.[*].uriPath").value(hasItem(DEFAULT_URI_PATH)))
             .andExpect(jsonPath("$.[*].enabled").value(hasItem(DEFAULT_ENABLED.booleanValue())))
+            .andExpect(jsonPath("$.[*].uriPath").value(hasItem(DEFAULT_URI_PATH)))
             .andExpect(jsonPath("$.[*].publishDate").value(hasItem(DEFAULT_PUBLISH_DATE.toString())))
             .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())));
     }
@@ -231,8 +248,8 @@ class WebPageResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(webPage.getId().intValue()))
             .andExpect(jsonPath("$.code").value(DEFAULT_CODE))
-            .andExpect(jsonPath("$.uriPath").value(DEFAULT_URI_PATH))
             .andExpect(jsonPath("$.enabled").value(DEFAULT_ENABLED.booleanValue()))
+            .andExpect(jsonPath("$.uriPath").value(DEFAULT_URI_PATH))
             .andExpect(jsonPath("$.publishDate").value(DEFAULT_PUBLISH_DATE.toString()))
             .andExpect(jsonPath("$.createdDate").value(DEFAULT_CREATED_DATE.toString()));
     }
@@ -258,8 +275,8 @@ class WebPageResourceIT {
         em.detach(updatedWebPage);
         updatedWebPage
             .code(UPDATED_CODE)
-            .uriPath(UPDATED_URI_PATH)
             .enabled(UPDATED_ENABLED)
+            .uriPath(UPDATED_URI_PATH)
             .publishDate(UPDATED_PUBLISH_DATE)
             .createdDate(UPDATED_CREATED_DATE);
         WebPageDTO webPageDTO = webPageMapper.toDto(updatedWebPage);
@@ -347,7 +364,7 @@ class WebPageResourceIT {
         WebPage partialUpdatedWebPage = new WebPage();
         partialUpdatedWebPage.setId(webPage.getId());
 
-        partialUpdatedWebPage.enabled(UPDATED_ENABLED).createdDate(UPDATED_CREATED_DATE);
+        partialUpdatedWebPage.publishDate(UPDATED_PUBLISH_DATE).createdDate(UPDATED_CREATED_DATE);
 
         restWebPageMockMvc
             .perform(
@@ -377,8 +394,8 @@ class WebPageResourceIT {
 
         partialUpdatedWebPage
             .code(UPDATED_CODE)
-            .uriPath(UPDATED_URI_PATH)
             .enabled(UPDATED_ENABLED)
+            .uriPath(UPDATED_URI_PATH)
             .publishDate(UPDATED_PUBLISH_DATE)
             .createdDate(UPDATED_CREATED_DATE);
 

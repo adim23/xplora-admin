@@ -15,6 +15,7 @@ import { getEntities as getTours } from 'app/entities/tour/tour.reducer';
 import { IPlace } from 'app/shared/model/place.model';
 import { getEntities as getPlaces } from 'app/entities/place/place.reducer';
 import { ITourStep } from 'app/shared/model/tour-step.model';
+import { DurationMeasure } from 'app/shared/model/enumerations/duration-measure.model';
 import { getEntity, updateEntity, createEntity, reset } from './tour-step.reducer';
 
 export const TourStepUpdate = () => {
@@ -32,6 +33,7 @@ export const TourStepUpdate = () => {
   const loading = useAppSelector(state => state.tourStep.loading);
   const updating = useAppSelector(state => state.tourStep.updating);
   const updateSuccess = useAppSelector(state => state.tourStep.updateSuccess);
+  const durationMeasureValues = Object.keys(DurationMeasure);
 
   const handleClose = () => {
     navigate('/tour-step' + location.search);
@@ -89,6 +91,8 @@ export const TourStepUpdate = () => {
     isNew
       ? {}
       : {
+          waitTimeMeasure: 'MINUTES',
+          driveTimeMeasure: 'MINUTES',
           ...tourStepEntity,
           createdBy: tourStepEntity?.createdBy?.id,
           tour: tourStepEntity?.tour?.id,
@@ -131,6 +135,21 @@ export const TourStepUpdate = () => {
                 }}
               />
               <ValidatedField
+                label={translate('xploraAdminApp.tourStep.enabled')}
+                id="tour-step-enabled"
+                name="enabled"
+                data-cy="enabled"
+                check
+                type="checkbox"
+              />
+              <ValidatedField
+                label={translate('xploraAdminApp.tourStep.icon')}
+                id="tour-step-icon"
+                name="icon"
+                data-cy="icon"
+                type="text"
+              />
+              <ValidatedField
                 label={translate('xploraAdminApp.tourStep.stepOrder')}
                 id="tour-step-stepOrder"
                 name="stepOrder"
@@ -153,6 +172,19 @@ export const TourStepUpdate = () => {
                 }}
               />
               <ValidatedField
+                label={translate('xploraAdminApp.tourStep.waitTimeMeasure')}
+                id="tour-step-waitTimeMeasure"
+                name="waitTimeMeasure"
+                data-cy="waitTimeMeasure"
+                type="select"
+              >
+                {durationMeasureValues.map(durationMeasure => (
+                  <option value={durationMeasure} key={durationMeasure}>
+                    {translate('xploraAdminApp.DurationMeasure.' + durationMeasure)}
+                  </option>
+                ))}
+              </ValidatedField>
+              <ValidatedField
                 label={translate('xploraAdminApp.tourStep.driveTime')}
                 id="tour-step-driveTime"
                 name="driveTime"
@@ -163,6 +195,19 @@ export const TourStepUpdate = () => {
                   validate: v => isNumber(v) || translate('entity.validation.number'),
                 }}
               />
+              <ValidatedField
+                label={translate('xploraAdminApp.tourStep.driveTimeMeasure')}
+                id="tour-step-driveTimeMeasure"
+                name="driveTimeMeasure"
+                data-cy="driveTimeMeasure"
+                type="select"
+              >
+                {durationMeasureValues.map(durationMeasure => (
+                  <option value={durationMeasure} key={durationMeasure}>
+                    {translate('xploraAdminApp.DurationMeasure.' + durationMeasure)}
+                  </option>
+                ))}
+              </ValidatedField>
               <ValidatedField
                 label={translate('xploraAdminApp.tourStep.createdDate')}
                 id="tour-step-createdDate"

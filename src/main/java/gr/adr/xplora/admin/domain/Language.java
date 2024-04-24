@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Arrays;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -29,9 +28,6 @@ public class Language implements Serializable {
     @Column(name = "code", nullable = false)
     private String code;
 
-    @Column(name = "created_date")
-    private LocalDate createdDate;
-
     @Column(name = "icon")
     private String icon;
 
@@ -45,8 +41,41 @@ public class Language implements Serializable {
     @Column(name = "default_image_data_content_type")
     private String defaultImageDataContentType;
 
+    @Column(name = "created_date")
+    private LocalDate createdDate;
+
     @ManyToOne(fetch = FetchType.LAZY)
     private User createdBy;
+
+    @JsonIgnoreProperties(
+        value = {
+            "language",
+            "createdBy",
+            "destination",
+            "tourCategory",
+            "place",
+            "placeCategory",
+            "tourExtraCategory",
+            "tourExtra",
+            "menu",
+            "webPage",
+            "tag",
+            "tourStep",
+            "promotion",
+            "imageFile",
+        },
+        allowSetters = true
+    )
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "language")
+    private Content content;
+
+    @JsonIgnoreProperties(value = { "language", "tour" }, allowSetters = true)
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "language")
+    private TourContent tourContent;
+
+    @JsonIgnoreProperties(value = { "language" }, allowSetters = true)
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "language")
+    private Prompt prompt;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -74,19 +103,6 @@ public class Language implements Serializable {
 
     public void setCode(String code) {
         this.code = code;
-    }
-
-    public LocalDate getCreatedDate() {
-        return this.createdDate;
-    }
-
-    public Language createdDate(LocalDate createdDate) {
-        this.setCreatedDate(createdDate);
-        return this;
-    }
-
-    public void setCreatedDate(LocalDate createdDate) {
-        this.createdDate = createdDate;
     }
 
     public String getIcon() {
@@ -141,6 +157,19 @@ public class Language implements Serializable {
         this.defaultImageDataContentType = defaultImageDataContentType;
     }
 
+    public LocalDate getCreatedDate() {
+        return this.createdDate;
+    }
+
+    public Language createdDate(LocalDate createdDate) {
+        this.setCreatedDate(createdDate);
+        return this;
+    }
+
+    public void setCreatedDate(LocalDate createdDate) {
+        this.createdDate = createdDate;
+    }
+
     public User getCreatedBy() {
         return this.createdBy;
     }
@@ -151,6 +180,63 @@ public class Language implements Serializable {
 
     public Language createdBy(User user) {
         this.setCreatedBy(user);
+        return this;
+    }
+
+    public Content getContent() {
+        return this.content;
+    }
+
+    public void setContent(Content content) {
+        if (this.content != null) {
+            this.content.setLanguage(null);
+        }
+        if (content != null) {
+            content.setLanguage(this);
+        }
+        this.content = content;
+    }
+
+    public Language content(Content content) {
+        this.setContent(content);
+        return this;
+    }
+
+    public TourContent getTourContent() {
+        return this.tourContent;
+    }
+
+    public void setTourContent(TourContent tourContent) {
+        if (this.tourContent != null) {
+            this.tourContent.setLanguage(null);
+        }
+        if (tourContent != null) {
+            tourContent.setLanguage(this);
+        }
+        this.tourContent = tourContent;
+    }
+
+    public Language tourContent(TourContent tourContent) {
+        this.setTourContent(tourContent);
+        return this;
+    }
+
+    public Prompt getPrompt() {
+        return this.prompt;
+    }
+
+    public void setPrompt(Prompt prompt) {
+        if (this.prompt != null) {
+            this.prompt.setLanguage(null);
+        }
+        if (prompt != null) {
+            prompt.setLanguage(this);
+        }
+        this.prompt = prompt;
+    }
+
+    public Language prompt(Prompt prompt) {
+        this.setPrompt(prompt);
         return this;
     }
 
@@ -179,11 +265,11 @@ public class Language implements Serializable {
         return "Language{" +
             "id=" + getId() +
             ", code='" + getCode() + "'" +
-            ", createdDate='" + getCreatedDate() + "'" +
             ", icon='" + getIcon() + "'" +
             ", defaultImage='" + getDefaultImage() + "'" +
-            ", defaultImageData='" + Arrays.toString(getDefaultImageData()) + "'" +
+            ", defaultImageData='" + getDefaultImageData() + "'" +
             ", defaultImageDataContentType='" + getDefaultImageDataContentType() + "'" +
+            ", createdDate='" + getCreatedDate() + "'" +
             "}";
     }
 }

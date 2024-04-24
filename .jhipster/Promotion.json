@@ -11,6 +11,10 @@
       "fieldValidateRules": ["required"]
     },
     {
+      "fieldName": "enabled",
+      "fieldType": "Boolean"
+    },
+    {
       "fieldName": "discount",
       "fieldType": "Double"
     },
@@ -21,10 +25,6 @@
     {
       "fieldName": "toDate",
       "fieldType": "LocalDate"
-    },
-    {
-      "fieldName": "enabled",
-      "fieldType": "Boolean"
     }
   ],
   "name": "Promotion",

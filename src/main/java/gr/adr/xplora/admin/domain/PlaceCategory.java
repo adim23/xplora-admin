@@ -30,11 +30,12 @@ public class PlaceCategory implements Serializable {
     @Column(name = "code", nullable = false)
     private String code;
 
+    @NotNull
+    @Column(name = "enabled", nullable = false)
+    private Boolean enabled;
+
     @Column(name = "icon")
     private String icon;
-
-    @Column(name = "enabled")
-    private Boolean enabled;
 
     @Column(name = "created_date")
     private LocalDate createdDate;
@@ -60,10 +61,10 @@ public class PlaceCategory implements Serializable {
             "tourCategory",
             "place",
             "placeCategory",
+            "tourExtraCategory",
+            "tourExtra",
             "vehicle",
             "driver",
-            "tourExtra",
-            "tourExtraCategory",
         },
         allowSetters = true
     )
@@ -76,8 +77,6 @@ public class PlaceCategory implements Serializable {
             "language",
             "createdBy",
             "destination",
-            "tourExtraInfo",
-            "tour",
             "tourCategory",
             "place",
             "placeCategory",
@@ -133,19 +132,6 @@ public class PlaceCategory implements Serializable {
         this.code = code;
     }
 
-    public String getIcon() {
-        return this.icon;
-    }
-
-    public PlaceCategory icon(String icon) {
-        this.setIcon(icon);
-        return this;
-    }
-
-    public void setIcon(String icon) {
-        this.icon = icon;
-    }
-
     public Boolean getEnabled() {
         return this.enabled;
     }
@@ -157,6 +143,19 @@ public class PlaceCategory implements Serializable {
 
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public String getIcon() {
+        return this.icon;
+    }
+
+    public PlaceCategory icon(String icon) {
+        this.setIcon(icon);
+        return this;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 
     public LocalDate getCreatedDate() {
@@ -342,8 +341,8 @@ public class PlaceCategory implements Serializable {
         return "PlaceCategory{" +
             "id=" + getId() +
             ", code='" + getCode() + "'" +
-            ", icon='" + getIcon() + "'" +
             ", enabled='" + getEnabled() + "'" +
+            ", icon='" + getIcon() + "'" +
             ", createdDate='" + getCreatedDate() + "'" +
             ", defaultImage='" + getDefaultImage() + "'" +
             ", defaultImageData='" + getDefaultImageData() + "'" +

@@ -1,14 +1,10 @@
 package gr.adr.xplora.admin.service.impl;
 
 import gr.adr.xplora.admin.domain.PlaceCategory;
-import gr.adr.xplora.admin.domain.User;
 import gr.adr.xplora.admin.repository.PlaceCategoryRepository;
-import gr.adr.xplora.admin.repository.UserRepository;
-import gr.adr.xplora.admin.security.SecurityUtils;
 import gr.adr.xplora.admin.service.PlaceCategoryService;
 import gr.adr.xplora.admin.service.dto.PlaceCategoryDTO;
 import gr.adr.xplora.admin.service.mapper.PlaceCategoryMapper;
-import java.time.LocalDate;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,16 +23,11 @@ public class PlaceCategoryServiceImpl implements PlaceCategoryService {
     private final Logger log = LoggerFactory.getLogger(PlaceCategoryServiceImpl.class);
 
     private final PlaceCategoryRepository placeCategoryRepository;
-    private final UserRepository userRepository;
+
     private final PlaceCategoryMapper placeCategoryMapper;
 
-    public PlaceCategoryServiceImpl(
-        PlaceCategoryRepository placeCategoryRepository,
-        PlaceCategoryMapper placeCategoryMapper,
-        UserRepository userRepository
-    ) {
+    public PlaceCategoryServiceImpl(PlaceCategoryRepository placeCategoryRepository, PlaceCategoryMapper placeCategoryMapper) {
         this.placeCategoryRepository = placeCategoryRepository;
-        this.userRepository = userRepository;
         this.placeCategoryMapper = placeCategoryMapper;
     }
 
@@ -44,15 +35,6 @@ public class PlaceCategoryServiceImpl implements PlaceCategoryService {
     public PlaceCategoryDTO save(PlaceCategoryDTO placeCategoryDTO) {
         log.debug("Request to save PlaceCategory : {}", placeCategoryDTO);
         PlaceCategory placeCategory = placeCategoryMapper.toEntity(placeCategoryDTO);
-        if (placeCategory.getCreatedDate() == null) {
-            placeCategory.setCreatedDate(LocalDate.now());
-        }
-        if (placeCategory.getCreatedBy() == null) {
-            Optional<User> user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin().orElse(""));
-            if (user.isPresent()) {
-                placeCategory.setCreatedBy(user.orElse(null));
-            }
-        }
         placeCategory = placeCategoryRepository.save(placeCategory);
         return placeCategoryMapper.toDto(placeCategory);
     }

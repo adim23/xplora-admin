@@ -48,10 +48,10 @@ public class PromotionAsserts {
         assertThat(expected)
             .as("Verify Promotion relevant properties")
             .satisfies(e -> assertThat(e.getCode()).as("check code").isEqualTo(actual.getCode()))
+            .satisfies(e -> assertThat(e.getEnabled()).as("check enabled").isEqualTo(actual.getEnabled()))
             .satisfies(e -> assertThat(e.getDiscount()).as("check discount").isEqualTo(actual.getDiscount()))
             .satisfies(e -> assertThat(e.getFromDate()).as("check fromDate").isEqualTo(actual.getFromDate()))
-            .satisfies(e -> assertThat(e.getToDate()).as("check toDate").isEqualTo(actual.getToDate()))
-            .satisfies(e -> assertThat(e.getEnabled()).as("check enabled").isEqualTo(actual.getEnabled()));
+            .satisfies(e -> assertThat(e.getToDate()).as("check toDate").isEqualTo(actual.getToDate()));
     }
 
     /**

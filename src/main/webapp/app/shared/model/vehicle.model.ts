@@ -3,6 +3,7 @@ import dayjs from 'dayjs';
 export interface IVehicle {
   id?: number;
   plate?: string;
+  enabled?: boolean;
   type?: string;
   capacity?: number;
   color?: string | null;
@@ -12,4 +13,6 @@ export interface IVehicle {
   defaultImageData?: string | null;
 }
 
-export const defaultValue: Readonly<IVehicle> = {};
+export const defaultValue: Readonly<IVehicle> = {
+  enabled: false,
+};

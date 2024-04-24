@@ -1,14 +1,10 @@
 package gr.adr.xplora.admin.service.impl;
 
 import gr.adr.xplora.admin.domain.Destination;
-import gr.adr.xplora.admin.domain.User;
 import gr.adr.xplora.admin.repository.DestinationRepository;
-import gr.adr.xplora.admin.repository.UserRepository;
-import gr.adr.xplora.admin.security.SecurityUtils;
 import gr.adr.xplora.admin.service.DestinationService;
 import gr.adr.xplora.admin.service.dto.DestinationDTO;
 import gr.adr.xplora.admin.service.mapper.DestinationMapper;
-import java.time.LocalDate;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,8 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * Service Implementation for managing
- * {@link gr.adr.xplora.admin.domain.Destination}.
+ * Service Implementation for managing {@link gr.adr.xplora.admin.domain.Destination}.
  */
 @Service
 @Transactional
@@ -28,16 +23,11 @@ public class DestinationServiceImpl implements DestinationService {
     private final Logger log = LoggerFactory.getLogger(DestinationServiceImpl.class);
 
     private final DestinationRepository destinationRepository;
-    private final UserRepository userRepository;
+
     private final DestinationMapper destinationMapper;
 
-    public DestinationServiceImpl(
-        DestinationRepository destinationRepository,
-        DestinationMapper destinationMapper,
-        UserRepository userRepository
-    ) {
+    public DestinationServiceImpl(DestinationRepository destinationRepository, DestinationMapper destinationMapper) {
         this.destinationRepository = destinationRepository;
-        this.userRepository = userRepository;
         this.destinationMapper = destinationMapper;
     }
 
@@ -45,15 +35,6 @@ public class DestinationServiceImpl implements DestinationService {
     public DestinationDTO save(DestinationDTO destinationDTO) {
         log.debug("Request to save Destination : {}", destinationDTO);
         Destination destination = destinationMapper.toEntity(destinationDTO);
-        if (destination.getCreatedDate() == null) {
-            destination.setCreatedDate(LocalDate.now());
-        }
-        if (destination.getCreatedBy() == null) {
-            Optional<User> user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin().orElse(""));
-            if (user.isPresent()) {
-                destination.setCreatedBy(user.orElse(null));
-            }
-        }
         destination = destinationRepository.save(destination);
         return destinationMapper.toDto(destination);
     }

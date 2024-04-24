@@ -33,18 +33,18 @@ public interface TourRepository extends TourRepositoryWithBagRelationships, JpaR
     }
 
     @Query(
-        value = "select tour from Tour tour left join fetch tour.createdBy left join fetch tour.meetingPoint left join fetch tour.finishPoint left join fetch tour.destination",
+        value = "select tour from Tour tour left join fetch tour.content left join fetch tour.createdBy left join fetch tour.meetingPoint left join fetch tour.finishPoint left join fetch tour.destination left join fetch tour.defaultCategory",
         countQuery = "select count(tour) from Tour tour"
     )
     Page<Tour> findAllWithToOneRelationships(Pageable pageable);
 
     @Query(
-        "select tour from Tour tour left join fetch tour.createdBy left join fetch tour.meetingPoint left join fetch tour.finishPoint left join fetch tour.destination"
+        "select tour from Tour tour left join fetch tour.content left join fetch tour.createdBy left join fetch tour.meetingPoint left join fetch tour.finishPoint left join fetch tour.destination left join fetch tour.defaultCategory"
     )
     List<Tour> findAllWithToOneRelationships();
 
     @Query(
-        "select tour from Tour tour left join fetch tour.createdBy left join fetch tour.meetingPoint left join fetch tour.finishPoint left join fetch tour.destination where tour.id =:id"
+        "select tour from Tour tour left join fetch tour.content left join fetch tour.createdBy left join fetch tour.meetingPoint left join fetch tour.finishPoint left join fetch tour.destination left join fetch tour.defaultCategory where tour.id =:id"
     )
     Optional<Tour> findOneWithToOneRelationships(@Param("id") Long id);
 }

@@ -30,6 +30,9 @@ public class Promotion implements Serializable {
     @Column(name = "code", nullable = false)
     private String code;
 
+    @Column(name = "enabled")
+    private Boolean enabled;
+
     @Column(name = "discount")
     private Double discount;
 
@@ -39,9 +42,6 @@ public class Promotion implements Serializable {
     @Column(name = "to_date")
     private LocalDate toDate;
 
-    @Column(name = "enabled")
-    private Boolean enabled;
-
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "promotion")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(
@@ -49,8 +49,6 @@ public class Promotion implements Serializable {
             "language",
             "createdBy",
             "destination",
-            "tourExtraInfo",
-            "tour",
             "tourCategory",
             "place",
             "placeCategory",
@@ -71,10 +69,9 @@ public class Promotion implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(
         value = {
+            "content",
             "steps",
             "images",
-            "extraInfos",
-            "contents",
             "createdBy",
             "meetingPoint",
             "finishPoint",
@@ -83,6 +80,7 @@ public class Promotion implements Serializable {
             "promotions",
             "categories",
             "destination",
+            "defaultCategory",
         },
         allowSetters = true
     )
@@ -114,6 +112,19 @@ public class Promotion implements Serializable {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public Boolean getEnabled() {
+        return this.enabled;
+    }
+
+    public Promotion enabled(Boolean enabled) {
+        this.setEnabled(enabled);
+        return this;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 
     public Double getDiscount() {
@@ -153,19 +164,6 @@ public class Promotion implements Serializable {
 
     public void setToDate(LocalDate toDate) {
         this.toDate = toDate;
-    }
-
-    public Boolean getEnabled() {
-        return this.enabled;
-    }
-
-    public Promotion enabled(Boolean enabled) {
-        this.setEnabled(enabled);
-        return this;
-    }
-
-    public void setEnabled(Boolean enabled) {
-        this.enabled = enabled;
     }
 
     public Set<Content> getTitles() {
@@ -255,10 +253,10 @@ public class Promotion implements Serializable {
         return "Promotion{" +
             "id=" + getId() +
             ", code='" + getCode() + "'" +
+            ", enabled='" + getEnabled() + "'" +
             ", discount=" + getDiscount() +
             ", fromDate='" + getFromDate() + "'" +
             ", toDate='" + getToDate() + "'" +
-            ", enabled='" + getEnabled() + "'" +
             "}";
     }
 }

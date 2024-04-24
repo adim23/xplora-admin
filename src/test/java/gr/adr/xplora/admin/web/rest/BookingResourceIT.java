@@ -398,8 +398,9 @@ class BookingResourceIT {
         partialUpdatedBooking
             .noPersons(UPDATED_NO_PERSONS)
             .noKids(UPDATED_NO_KIDS)
-            .total(UPDATED_TOTAL)
-            .paymentType(UPDATED_PAYMENT_TYPE)
+            .noPets(UPDATED_NO_PETS)
+            .valid(UPDATED_VALID)
+            .cancelledAt(UPDATED_CANCELLED_AT)
             .remoteId(UPDATED_REMOTE_ID);
 
         restBookingMockMvc

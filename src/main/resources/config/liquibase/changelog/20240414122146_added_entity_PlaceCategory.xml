@@ -17,10 +17,10 @@
             <column name="code" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
-            <column name="icon" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
             <column name="enabled" type="boolean">
+                <constraints nullable="false" />
+            </column>
+            <column name="icon" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="created_date" type="date">
@@ -60,8 +60,8 @@
                   usePreparedStatements="true">
             <column name="id" type="numeric"/>
             <column name="code" type="string"/>
-            <column name="icon" type="string"/>
             <column name="enabled" type="boolean"/>
+            <column name="icon" type="string"/>
             <column name="created_date" type="date"/>
             <column name="default_image" type="string"/>
             <column name="default_image_data" type="blob"/>

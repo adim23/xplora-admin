@@ -17,6 +17,9 @@ public class DriverDTO implements Serializable {
     @NotNull
     private String name;
 
+    @NotNull
+    private Boolean enabled;
+
     private LocalDate hiredAt;
 
     private Integer age;
@@ -48,6 +51,14 @@ public class DriverDTO implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 
     public LocalDate getHiredAt() {
@@ -141,6 +152,7 @@ public class DriverDTO implements Serializable {
         return "DriverDTO{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
+            ", enabled='" + getEnabled() + "'" +
             ", hiredAt='" + getHiredAt() + "'" +
             ", age=" + getAge() +
             ", email='" + getEmail() + "'" +

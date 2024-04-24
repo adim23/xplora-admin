@@ -30,11 +30,18 @@ public class TourExtra implements Serializable {
     @Column(name = "code", nullable = false)
     private String code;
 
-    @Column(name = "enabled")
+    @NotNull
+    @Column(name = "enabled", nullable = false)
     private Boolean enabled;
+
+    @Column(name = "icon")
+    private String icon;
 
     @Column(name = "price")
     private Double price;
+
+    @Column(name = "offer")
+    private Double offer;
 
     @Column(name = "shop_product_id")
     private String shopProductId;
@@ -59,11 +66,29 @@ public class TourExtra implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(
         value = {
+            "captions",
+            "createdBy",
+            "destination",
+            "tour",
+            "tourCategory",
+            "place",
+            "placeCategory",
+            "tourExtraCategory",
+            "tourExtra",
+            "vehicle",
+            "driver",
+        },
+        allowSetters = true
+    )
+    private Set<ImageFile> images = new HashSet<>();
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tourExtra")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(
+        value = {
             "language",
             "createdBy",
             "destination",
-            "tourExtraInfo",
-            "tour",
             "tourCategory",
             "place",
             "placeCategory",
@@ -79,26 +104,6 @@ public class TourExtra implements Serializable {
         allowSetters = true
     )
     private Set<Content> contents = new HashSet<>();
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tourExtra")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(
-        value = {
-            "captions",
-            "createdBy",
-            "destination",
-            "tour",
-            "tourCategory",
-            "place",
-            "placeCategory",
-            "vehicle",
-            "driver",
-            "tourExtra",
-            "tourExtraCategory",
-        },
-        allowSetters = true
-    )
-    private Set<ImageFile> images = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     private User createdBy;
@@ -120,17 +125,16 @@ public class TourExtra implements Serializable {
         inverseJoinColumns = @JoinColumn(name = "category_id")
     )
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "contents", "createdBy", "extras" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "images", "contents", "createdBy", "extras" }, allowSetters = true)
     private Set<TourExtraCategory> categories = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "tourExtras")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(
         value = {
+            "content",
             "steps",
             "images",
-            "extraInfos",
-            "contents",
             "createdBy",
             "meetingPoint",
             "finishPoint",
@@ -139,6 +143,7 @@ public class TourExtra implements Serializable {
             "promotions",
             "categories",
             "destination",
+            "defaultCategory",
         },
         allowSetters = true
     )
@@ -185,6 +190,19 @@ public class TourExtra implements Serializable {
         this.enabled = enabled;
     }
 
+    public String getIcon() {
+        return this.icon;
+    }
+
+    public TourExtra icon(String icon) {
+        this.setIcon(icon);
+        return this;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
     public Double getPrice() {
         return this.price;
     }
@@ -196,6 +214,19 @@ public class TourExtra implements Serializable {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public Double getOffer() {
+        return this.offer;
+    }
+
+    public TourExtra offer(Double offer) {
+        this.setOffer(offer);
+        return this;
+    }
+
+    public void setOffer(Double offer) {
+        this.offer = offer;
     }
 
     public String getShopProductId() {
@@ -274,6 +305,37 @@ public class TourExtra implements Serializable {
 
     public void setDefaultImageDataContentType(String defaultImageDataContentType) {
         this.defaultImageDataContentType = defaultImageDataContentType;
+    }
+
+    public Set<ImageFile> getImages() {
+        return this.images;
+    }
+
+    public void setImages(Set<ImageFile> imageFiles) {
+        if (this.images != null) {
+            this.images.forEach(i -> i.setTourExtra(null));
+        }
+        if (imageFiles != null) {
+            imageFiles.forEach(i -> i.setTourExtra(this));
+        }
+        this.images = imageFiles;
+    }
+
+    public TourExtra images(Set<ImageFile> imageFiles) {
+        this.setImages(imageFiles);
+        return this;
+    }
+
+    public TourExtra addImages(ImageFile imageFile) {
+        this.images.add(imageFile);
+        imageFile.setTourExtra(this);
+        return this;
+    }
+
+    public TourExtra removeImages(ImageFile imageFile) {
+        this.images.remove(imageFile);
+        imageFile.setTourExtra(null);
+        return this;
     }
 
     public Set<Content> getContents() {
@@ -423,7 +485,9 @@ public class TourExtra implements Serializable {
             "id=" + getId() +
             ", code='" + getCode() + "'" +
             ", enabled='" + getEnabled() + "'" +
+            ", icon='" + getIcon() + "'" +
             ", price=" + getPrice() +
+            ", offer=" + getOffer() +
             ", shopProductId='" + getShopProductId() + "'" +
             ", shopUrl='" + getShopUrl() + "'" +
             ", createdDate='" + getCreatedDate() + "'" +

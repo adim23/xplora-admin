@@ -1,14 +1,10 @@
 package gr.adr.xplora.admin.service.impl;
 
 import gr.adr.xplora.admin.domain.Language;
-import gr.adr.xplora.admin.domain.User;
 import gr.adr.xplora.admin.repository.LanguageRepository;
-import gr.adr.xplora.admin.repository.UserRepository;
-import gr.adr.xplora.admin.security.SecurityUtils;
 import gr.adr.xplora.admin.service.LanguageService;
 import gr.adr.xplora.admin.service.dto.LanguageDTO;
 import gr.adr.xplora.admin.service.mapper.LanguageMapper;
-import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -31,12 +27,11 @@ public class LanguageServiceImpl implements LanguageService {
     private final Logger log = LoggerFactory.getLogger(LanguageServiceImpl.class);
 
     private final LanguageRepository languageRepository;
-    private final UserRepository userRepository;
+
     private final LanguageMapper languageMapper;
 
-    public LanguageServiceImpl(LanguageRepository languageRepository, LanguageMapper languageMapper, UserRepository userRepository) {
+    public LanguageServiceImpl(LanguageRepository languageRepository, LanguageMapper languageMapper) {
         this.languageRepository = languageRepository;
-        this.userRepository = userRepository;
         this.languageMapper = languageMapper;
     }
 
@@ -44,15 +39,6 @@ public class LanguageServiceImpl implements LanguageService {
     public LanguageDTO save(LanguageDTO languageDTO) {
         log.debug("Request to save Language : {}", languageDTO);
         Language language = languageMapper.toEntity(languageDTO);
-        if (language.getCreatedDate() == null) {
-            language.setCreatedDate(LocalDate.now());
-        }
-        if (language.getCreatedBy() == null) {
-            Optional<User> user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin().orElse(""));
-            if (user.isPresent()) {
-                language.setCreatedBy(user.orElse(null));
-            }
-        }
         language = languageRepository.save(language);
         return languageMapper.toDto(language);
     }
@@ -95,7 +81,6 @@ public class LanguageServiceImpl implements LanguageService {
      *  Get all the languages where Content is {@code null}.
      *  @return the list of entities.
      */
-    /*
     @Transactional(readOnly = true)
     public List<LanguageDTO> findAllWhereContentIsNull() {
         log.debug("Request to get all languages where Content is null");
@@ -104,7 +89,33 @@ public class LanguageServiceImpl implements LanguageService {
             .map(languageMapper::toDto)
             .collect(Collectors.toCollection(LinkedList::new));
     }
-*/
+
+    /**
+     *  Get all the languages where TourContent is {@code null}.
+     *  @return the list of entities.
+     */
+    @Transactional(readOnly = true)
+    public List<LanguageDTO> findAllWhereTourContentIsNull() {
+        log.debug("Request to get all languages where TourContent is null");
+        return StreamSupport.stream(languageRepository.findAll().spliterator(), false)
+            .filter(language -> language.getTourContent() == null)
+            .map(languageMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
+    }
+
+    /**
+     *  Get all the languages where Prompt is {@code null}.
+     *  @return the list of entities.
+     */
+    @Transactional(readOnly = true)
+    public List<LanguageDTO> findAllWherePromptIsNull() {
+        log.debug("Request to get all languages where Prompt is null");
+        return StreamSupport.stream(languageRepository.findAll().spliterator(), false)
+            .filter(language -> language.getPrompt() == null)
+            .map(languageMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
+    }
+
     @Override
     @Transactional(readOnly = true)
     public Optional<LanguageDTO> findOne(Long id) {

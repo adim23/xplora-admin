@@ -118,10 +118,6 @@ export const Language = () => {
                   <Translate contentKey="xploraAdminApp.language.code">Code</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('code')} />
                 </th>
-                <th className="hand" onClick={sort('createdDate')}>
-                  <Translate contentKey="xploraAdminApp.language.createdDate">Created Date</Translate>{' '}
-                  <FontAwesomeIcon icon={getSortIconByFieldName('createdDate')} />
-                </th>
                 <th className="hand" onClick={sort('icon')}>
                   <Translate contentKey="xploraAdminApp.language.icon">Icon</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('icon')} />
@@ -133,6 +129,10 @@ export const Language = () => {
                 <th className="hand" onClick={sort('defaultImageData')}>
                   <Translate contentKey="xploraAdminApp.language.defaultImageData">Default Image Data</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('defaultImageData')} />
+                </th>
+                <th className="hand" onClick={sort('createdDate')}>
+                  <Translate contentKey="xploraAdminApp.language.createdDate">Created Date</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('createdDate')} />
                 </th>
                 <th>
                   <Translate contentKey="xploraAdminApp.language.createdBy">Created By</Translate> <FontAwesomeIcon icon="sort" />
@@ -149,9 +149,6 @@ export const Language = () => {
                     </Button>
                   </td>
                   <td>{language.code}</td>
-                  <td>
-                    {language.createdDate ? <TextFormat type="date" value={language.createdDate} format={APP_LOCAL_DATE_FORMAT} /> : null}
-                  </td>
                   <td>{language.icon}</td>
                   <td>{language.defaultImage}</td>
                   <td>
@@ -171,6 +168,9 @@ export const Language = () => {
                         </span>
                       </div>
                     ) : null}
+                  </td>
+                  <td>
+                    {language.createdDate ? <TextFormat type="date" value={language.createdDate} format={APP_LOCAL_DATE_FORMAT} /> : null}
                   </td>
                   <td>{language.createdBy ? language.createdBy.login : ''}</td>
                   <td className="text-end">

@@ -118,6 +118,14 @@ export const Place = () => {
                   <Translate contentKey="xploraAdminApp.place.code">Code</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('code')} />
                 </th>
+                <th className="hand" onClick={sort('enabled')}>
+                  <Translate contentKey="xploraAdminApp.place.enabled">Enabled</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('enabled')} />
+                </th>
+                <th className="hand" onClick={sort('icon')}>
+                  <Translate contentKey="xploraAdminApp.place.icon">Icon</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('icon')} />
+                </th>
                 <th className="hand" onClick={sort('destinationSight')}>
                   <Translate contentKey="xploraAdminApp.place.destinationSight">Destination Sight</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('destinationSight')} />
@@ -160,6 +168,8 @@ export const Place = () => {
                     </Button>
                   </td>
                   <td>{place.code}</td>
+                  <td>{place.enabled ? 'true' : 'false'}</td>
+                  <td>{place.icon}</td>
                   <td>{place.destinationSight ? 'true' : 'false'}</td>
                   <td>{place.longitude}</td>
                   <td>{place.latitude}</td>

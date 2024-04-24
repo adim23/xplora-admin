@@ -11,6 +11,15 @@
       "fieldValidateRules": ["required"]
     },
     {
+      "fieldName": "enabled",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "icon",
+      "fieldType": "String"
+    },
+    {
       "fieldName": "stepOrder",
       "fieldType": "Integer",
       "fieldValidateRules": ["required"]
@@ -21,9 +30,21 @@
       "fieldValidateRules": ["required"]
     },
     {
+      "fieldName": "waitTimeMeasure",
+      "fieldType": "DurationMeasure",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "MINUTES (Minutes),HOURS (Hours),DAYS (Days)"
+    },
+    {
       "fieldName": "driveTime",
       "fieldType": "Integer",
       "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "driveTimeMeasure",
+      "fieldType": "DurationMeasure",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "MINUTES (Minutes),HOURS (Hours),DAYS (Days)"
     },
     {
       "fieldName": "createdDate",

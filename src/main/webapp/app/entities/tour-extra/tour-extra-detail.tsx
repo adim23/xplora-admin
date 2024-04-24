@@ -45,11 +45,23 @@ export const TourExtraDetail = () => {
           </dt>
           <dd>{tourExtraEntity.enabled ? 'true' : 'false'}</dd>
           <dt>
+            <span id="icon">
+              <Translate contentKey="xploraAdminApp.tourExtra.icon">Icon</Translate>
+            </span>
+          </dt>
+          <dd>{tourExtraEntity.icon}</dd>
+          <dt>
             <span id="price">
               <Translate contentKey="xploraAdminApp.tourExtra.price">Price</Translate>
             </span>
           </dt>
           <dd>{tourExtraEntity.price}</dd>
+          <dt>
+            <span id="offer">
+              <Translate contentKey="xploraAdminApp.tourExtra.offer">Offer</Translate>
+            </span>
+          </dt>
+          <dd>{tourExtraEntity.offer}</dd>
           <dt>
             <span id="shopProductId">
               <Translate contentKey="xploraAdminApp.tourExtra.shopProductId">Shop Product Id</Translate>

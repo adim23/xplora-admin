@@ -13,6 +13,8 @@ import gr.adr.xplora.admin.IntegrationTest;
 import gr.adr.xplora.admin.domain.Place;
 import gr.adr.xplora.admin.domain.Tour;
 import gr.adr.xplora.admin.domain.TourStep;
+import gr.adr.xplora.admin.domain.enumeration.DurationMeasure;
+import gr.adr.xplora.admin.domain.enumeration.DurationMeasure;
 import gr.adr.xplora.admin.repository.TourStepRepository;
 import gr.adr.xplora.admin.service.TourStepService;
 import gr.adr.xplora.admin.service.dto.TourStepDTO;
@@ -49,14 +51,26 @@ class TourStepResourceIT {
     private static final String DEFAULT_CODE = "AAAAAAAAAA";
     private static final String UPDATED_CODE = "BBBBBBBBBB";
 
+    private static final Boolean DEFAULT_ENABLED = false;
+    private static final Boolean UPDATED_ENABLED = true;
+
+    private static final String DEFAULT_ICON = "AAAAAAAAAA";
+    private static final String UPDATED_ICON = "BBBBBBBBBB";
+
     private static final Integer DEFAULT_STEP_ORDER = 1;
     private static final Integer UPDATED_STEP_ORDER = 2;
 
     private static final Integer DEFAULT_WAIT_TIME = 1;
     private static final Integer UPDATED_WAIT_TIME = 2;
 
+    private static final DurationMeasure DEFAULT_WAIT_TIME_MEASURE = DurationMeasure.MINUTES;
+    private static final DurationMeasure UPDATED_WAIT_TIME_MEASURE = DurationMeasure.HOURS;
+
     private static final Integer DEFAULT_DRIVE_TIME = 1;
     private static final Integer UPDATED_DRIVE_TIME = 2;
+
+    private static final DurationMeasure DEFAULT_DRIVE_TIME_MEASURE = DurationMeasure.MINUTES;
+    private static final DurationMeasure UPDATED_DRIVE_TIME_MEASURE = DurationMeasure.HOURS;
 
     private static final LocalDate DEFAULT_CREATED_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_CREATED_DATE = LocalDate.now(ZoneId.systemDefault());
@@ -99,9 +113,13 @@ class TourStepResourceIT {
     public static TourStep createEntity(EntityManager em) {
         TourStep tourStep = new TourStep()
             .code(DEFAULT_CODE)
+            .enabled(DEFAULT_ENABLED)
+            .icon(DEFAULT_ICON)
             .stepOrder(DEFAULT_STEP_ORDER)
             .waitTime(DEFAULT_WAIT_TIME)
+            .waitTimeMeasure(DEFAULT_WAIT_TIME_MEASURE)
             .driveTime(DEFAULT_DRIVE_TIME)
+            .driveTimeMeasure(DEFAULT_DRIVE_TIME_MEASURE)
             .createdDate(DEFAULT_CREATED_DATE);
         // Add required entity
         Tour tour;
@@ -135,9 +153,13 @@ class TourStepResourceIT {
     public static TourStep createUpdatedEntity(EntityManager em) {
         TourStep tourStep = new TourStep()
             .code(UPDATED_CODE)
+            .enabled(UPDATED_ENABLED)
+            .icon(UPDATED_ICON)
             .stepOrder(UPDATED_STEP_ORDER)
             .waitTime(UPDATED_WAIT_TIME)
+            .waitTimeMeasure(UPDATED_WAIT_TIME_MEASURE)
             .driveTime(UPDATED_DRIVE_TIME)
+            .driveTimeMeasure(UPDATED_DRIVE_TIME_MEASURE)
             .createdDate(UPDATED_CREATED_DATE);
         // Add required entity
         Tour tour;
@@ -226,6 +248,23 @@ class TourStepResourceIT {
 
     @Test
     @Transactional
+    void checkEnabledIsRequired() throws Exception {
+        long databaseSizeBeforeTest = getRepositoryCount();
+        // set the field null
+        tourStep.setEnabled(null);
+
+        // Create the TourStep, which fails.
+        TourStepDTO tourStepDTO = tourStepMapper.toDto(tourStep);
+
+        restTourStepMockMvc
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsBytes(tourStepDTO)))
+            .andExpect(status().isBadRequest());
+
+        assertSameRepositoryCount(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     void checkStepOrderIsRequired() throws Exception {
         long databaseSizeBeforeTest = getRepositoryCount();
         // set the field null
@@ -260,10 +299,44 @@ class TourStepResourceIT {
 
     @Test
     @Transactional
+    void checkWaitTimeMeasureIsRequired() throws Exception {
+        long databaseSizeBeforeTest = getRepositoryCount();
+        // set the field null
+        tourStep.setWaitTimeMeasure(null);
+
+        // Create the TourStep, which fails.
+        TourStepDTO tourStepDTO = tourStepMapper.toDto(tourStep);
+
+        restTourStepMockMvc
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsBytes(tourStepDTO)))
+            .andExpect(status().isBadRequest());
+
+        assertSameRepositoryCount(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     void checkDriveTimeIsRequired() throws Exception {
         long databaseSizeBeforeTest = getRepositoryCount();
         // set the field null
         tourStep.setDriveTime(null);
+
+        // Create the TourStep, which fails.
+        TourStepDTO tourStepDTO = tourStepMapper.toDto(tourStep);
+
+        restTourStepMockMvc
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsBytes(tourStepDTO)))
+            .andExpect(status().isBadRequest());
+
+        assertSameRepositoryCount(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    void checkDriveTimeMeasureIsRequired() throws Exception {
+        long databaseSizeBeforeTest = getRepositoryCount();
+        // set the field null
+        tourStep.setDriveTimeMeasure(null);
 
         // Create the TourStep, which fails.
         TourStepDTO tourStepDTO = tourStepMapper.toDto(tourStep);
@@ -288,9 +361,13 @@ class TourStepResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(tourStep.getId().intValue())))
             .andExpect(jsonPath("$.[*].code").value(hasItem(DEFAULT_CODE)))
+            .andExpect(jsonPath("$.[*].enabled").value(hasItem(DEFAULT_ENABLED.booleanValue())))
+            .andExpect(jsonPath("$.[*].icon").value(hasItem(DEFAULT_ICON)))
             .andExpect(jsonPath("$.[*].stepOrder").value(hasItem(DEFAULT_STEP_ORDER)))
             .andExpect(jsonPath("$.[*].waitTime").value(hasItem(DEFAULT_WAIT_TIME)))
+            .andExpect(jsonPath("$.[*].waitTimeMeasure").value(hasItem(DEFAULT_WAIT_TIME_MEASURE.toString())))
             .andExpect(jsonPath("$.[*].driveTime").value(hasItem(DEFAULT_DRIVE_TIME)))
+            .andExpect(jsonPath("$.[*].driveTimeMeasure").value(hasItem(DEFAULT_DRIVE_TIME_MEASURE.toString())))
             .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())));
     }
 
@@ -324,9 +401,13 @@ class TourStepResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(tourStep.getId().intValue()))
             .andExpect(jsonPath("$.code").value(DEFAULT_CODE))
+            .andExpect(jsonPath("$.enabled").value(DEFAULT_ENABLED.booleanValue()))
+            .andExpect(jsonPath("$.icon").value(DEFAULT_ICON))
             .andExpect(jsonPath("$.stepOrder").value(DEFAULT_STEP_ORDER))
             .andExpect(jsonPath("$.waitTime").value(DEFAULT_WAIT_TIME))
+            .andExpect(jsonPath("$.waitTimeMeasure").value(DEFAULT_WAIT_TIME_MEASURE.toString()))
             .andExpect(jsonPath("$.driveTime").value(DEFAULT_DRIVE_TIME))
+            .andExpect(jsonPath("$.driveTimeMeasure").value(DEFAULT_DRIVE_TIME_MEASURE.toString()))
             .andExpect(jsonPath("$.createdDate").value(DEFAULT_CREATED_DATE.toString()));
     }
 
@@ -351,9 +432,13 @@ class TourStepResourceIT {
         em.detach(updatedTourStep);
         updatedTourStep
             .code(UPDATED_CODE)
+            .enabled(UPDATED_ENABLED)
+            .icon(UPDATED_ICON)
             .stepOrder(UPDATED_STEP_ORDER)
             .waitTime(UPDATED_WAIT_TIME)
+            .waitTimeMeasure(UPDATED_WAIT_TIME_MEASURE)
             .driveTime(UPDATED_DRIVE_TIME)
+            .driveTimeMeasure(UPDATED_DRIVE_TIME_MEASURE)
             .createdDate(UPDATED_CREATED_DATE);
         TourStepDTO tourStepDTO = tourStepMapper.toDto(updatedTourStep);
 
@@ -444,7 +529,12 @@ class TourStepResourceIT {
         TourStep partialUpdatedTourStep = new TourStep();
         partialUpdatedTourStep.setId(tourStep.getId());
 
-        partialUpdatedTourStep.code(UPDATED_CODE).waitTime(UPDATED_WAIT_TIME).createdDate(UPDATED_CREATED_DATE);
+        partialUpdatedTourStep
+            .code(UPDATED_CODE)
+            .enabled(UPDATED_ENABLED)
+            .icon(UPDATED_ICON)
+            .driveTime(UPDATED_DRIVE_TIME)
+            .createdDate(UPDATED_CREATED_DATE);
 
         restTourStepMockMvc
             .perform(
@@ -474,9 +564,13 @@ class TourStepResourceIT {
 
         partialUpdatedTourStep
             .code(UPDATED_CODE)
+            .enabled(UPDATED_ENABLED)
+            .icon(UPDATED_ICON)
             .stepOrder(UPDATED_STEP_ORDER)
             .waitTime(UPDATED_WAIT_TIME)
+            .waitTimeMeasure(UPDATED_WAIT_TIME_MEASURE)
             .driveTime(UPDATED_DRIVE_TIME)
+            .driveTimeMeasure(UPDATED_DRIVE_TIME_MEASURE)
             .createdDate(UPDATED_CREATED_DATE);
 
         restTourStepMockMvc

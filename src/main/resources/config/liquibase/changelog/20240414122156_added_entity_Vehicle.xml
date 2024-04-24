@@ -17,6 +17,9 @@
             <column name="plate" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
+            <column name="enabled" type="boolean">
+                <constraints nullable="false" />
+            </column>
             <column name="type" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
@@ -60,6 +63,7 @@
                   usePreparedStatements="true">
             <column name="id" type="numeric"/>
             <column name="plate" type="string"/>
+            <column name="enabled" type="boolean"/>
             <column name="type" type="string"/>
             <column name="capacity" type="numeric"/>
             <column name="color" type="string"/>

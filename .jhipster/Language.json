@@ -11,10 +11,6 @@
       "fieldValidateRules": ["required"]
     },
     {
-      "fieldName": "createdDate",
-      "fieldType": "LocalDate"
-    },
-    {
       "fieldName": "icon",
       "fieldType": "String"
     },
@@ -26,6 +22,10 @@
       "fieldName": "defaultImageData",
       "fieldType": "byte[]",
       "fieldTypeBlobContent": "image"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "LocalDate"
     }
   ],
   "name": "Language",

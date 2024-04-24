@@ -70,6 +70,8 @@ public class ImageFileAsserts {
             .satisfies(e -> assertThat(e.getTourCategory()).as("check tourCategory").isEqualTo(actual.getTourCategory()))
             .satisfies(e -> assertThat(e.getPlace()).as("check place").isEqualTo(actual.getPlace()))
             .satisfies(e -> assertThat(e.getPlaceCategory()).as("check placeCategory").isEqualTo(actual.getPlaceCategory()))
+            .satisfies(e -> assertThat(e.getTourExtraCategory()).as("check tourExtraCategory").isEqualTo(actual.getTourExtraCategory()))
+            .satisfies(e -> assertThat(e.getTourExtra()).as("check tourExtra").isEqualTo(actual.getTourExtra()))
             .satisfies(e -> assertThat(e.getVehicle()).as("check vehicle").isEqualTo(actual.getVehicle()))
             .satisfies(e -> assertThat(e.getDriver()).as("check driver").isEqualTo(actual.getDriver()));
     }

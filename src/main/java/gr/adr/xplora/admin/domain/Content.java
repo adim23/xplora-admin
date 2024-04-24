@@ -46,7 +46,7 @@ public class Content implements Serializable {
     @Column(name = "created_date")
     private LocalDate createdDate;
 
-    @JsonIgnoreProperties(value = { "createdBy", "content" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "createdBy", "content", "tourContent", "prompt" }, allowSetters = true)
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @NotNull
     @JoinColumn(unique = true)
@@ -56,51 +56,14 @@ public class Content implements Serializable {
     private User createdBy;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "tours", "places", "images", "contents", "createdBy" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "tours", "places", "images", "menus", "contents", "createdBy" }, allowSetters = true)
     private Destination destination;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(
-        value = {
-            "steps",
-            "images",
-            "extraInfos",
-            "contents",
-            "createdBy",
-            "meetingPoint",
-            "finishPoint",
-            "tourExtras",
-            "tags",
-            "promotions",
-            "categories",
-            "destination",
-        },
+        value = { "defaultTours", "children", "images", "menus", "contents", "createdBy", "parent", "tours" },
         allowSetters = true
     )
-    private Tour tourExtraInfo;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(
-        value = {
-            "steps",
-            "images",
-            "extraInfos",
-            "contents",
-            "createdBy",
-            "meetingPoint",
-            "finishPoint",
-            "tourExtras",
-            "tags",
-            "promotions",
-            "categories",
-            "destination",
-        },
-        allowSetters = true
-    )
-    private Tour tour;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "children", "images", "menus", "contents", "createdBy", "parent", "tours" }, allowSetters = true)
     private TourCategory tourCategory;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -115,15 +78,18 @@ public class Content implements Serializable {
     private PlaceCategory placeCategory;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "contents", "createdBy", "extras" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "images", "contents", "createdBy", "extras" }, allowSetters = true)
     private TourExtraCategory tourExtraCategory;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "contents", "createdBy", "tags", "categories", "tours" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "images", "contents", "createdBy", "tags", "categories", "tours" }, allowSetters = true)
     private TourExtra tourExtra;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "children", "names", "createdBy", "page", "parent", "tourCategory" }, allowSetters = true)
+    @JsonIgnoreProperties(
+        value = { "children", "names", "createdBy", "page", "parent", "tourCategory", "destination" },
+        allowSetters = true
+    )
     private Menu menu;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -152,10 +118,10 @@ public class Content implements Serializable {
             "tourCategory",
             "place",
             "placeCategory",
+            "tourExtraCategory",
+            "tourExtra",
             "vehicle",
             "driver",
-            "tourExtra",
-            "tourExtraCategory",
         },
         allowSetters = true
     )
@@ -290,32 +256,6 @@ public class Content implements Serializable {
 
     public Content destination(Destination destination) {
         this.setDestination(destination);
-        return this;
-    }
-
-    public Tour getTourExtraInfo() {
-        return this.tourExtraInfo;
-    }
-
-    public void setTourExtraInfo(Tour tour) {
-        this.tourExtraInfo = tour;
-    }
-
-    public Content tourExtraInfo(Tour tour) {
-        this.setTourExtraInfo(tour);
-        return this;
-    }
-
-    public Tour getTour() {
-        return this.tour;
-    }
-
-    public void setTour(Tour tour) {
-        this.tour = tour;
-    }
-
-    public Content tour(Tour tour) {
-        this.setTour(tour);
         return this;
     }
 

@@ -1,0 +1,26 @@
+{
+  "xploraAdminApp": {
+    "prompt": {
+      "home": {
+        "title": "Prompts",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Δημιουργήστε ένα νέο Prompt",
+        "createOrEditLabel": "Δημιουργήστε η επεξεργαστείτε ένα Prompt",
+        "notFound": "No Prompts found"
+      },
+      "created": "Ένα νέο Prompt έχει δημιουργηθεί με αναγνωριστικό {{ param }}",
+      "updated": "Ένα Prompt έχει ενημερωθεί με αναγνωριστικό {{ param }}",
+      "deleted": "Ένα Prompt έχει διαγραφτεί με αναγνωριστικό {{ param }}",
+      "delete": {
+        "question": "Είστε βέβαιοι όταν θέλετε να διαγράψετε το ακόλουθο Prompt {{ id }};"
+      },
+      "detail": {
+        "title": "Prompt"
+      },
+      "id": "ID",
+      "key": "Key",
+      "value": "Value",
+      "language": "Language"
+    }
+  }
+}

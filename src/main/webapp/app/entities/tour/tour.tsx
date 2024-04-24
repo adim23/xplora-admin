@@ -8,6 +8,7 @@ import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
 import { ASC, DESC, ITEMS_PER_PAGE, SORT } from 'app/shared/util/pagination.constants';
 import { overridePaginationStateWithQueryParams } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
+import { DurationFormat } from 'app/shared/DurationFormat';
 
 import { getEntities } from './tour.reducer';
 
@@ -118,13 +119,29 @@ export const Tour = () => {
                   <Translate contentKey="xploraAdminApp.tour.code">Code</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('code')} />
                 </th>
+                <th className="hand" onClick={sort('enabled')}>
+                  <Translate contentKey="xploraAdminApp.tour.enabled">Enabled</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('enabled')} />
+                </th>
+                <th className="hand" onClick={sort('kind')}>
+                  <Translate contentKey="xploraAdminApp.tour.kind">Kind</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('kind')} />
+                </th>
                 <th className="hand" onClick={sort('mode')}>
                   <Translate contentKey="xploraAdminApp.tour.mode">Mode</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('mode')} />
                 </th>
+                <th className="hand" onClick={sort('icon')}>
+                  <Translate contentKey="xploraAdminApp.tour.icon">Icon</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('icon')} />
+                </th>
                 <th className="hand" onClick={sort('duration')}>
                   <Translate contentKey="xploraAdminApp.tour.duration">Duration</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('duration')} />
+                </th>
+                <th className="hand" onClick={sort('durationMeasure')}>
+                  <Translate contentKey="xploraAdminApp.tour.durationMeasure">Duration Measure</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('durationMeasure')} />
                 </th>
                 <th className="hand" onClick={sort('petFriendly')}>
                   <Translate contentKey="xploraAdminApp.tour.petFriendly">Pet Friendly</Translate>{' '}
@@ -134,6 +151,10 @@ export const Tour = () => {
                   <Translate contentKey="xploraAdminApp.tour.kidsAllowed">Kids Allowed</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('kidsAllowed')} />
                 </th>
+                <th className="hand" onClick={sort('smoking')}>
+                  <Translate contentKey="xploraAdminApp.tour.smoking">Smoking</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('smoking')} />
+                </th>
                 <th className="hand" onClick={sort('availableFromDate')}>
                   <Translate contentKey="xploraAdminApp.tour.availableFromDate">Available From Date</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('availableFromDate')} />
@@ -141,10 +162,6 @@ export const Tour = () => {
                 <th className="hand" onClick={sort('availableToDate')}>
                   <Translate contentKey="xploraAdminApp.tour.availableToDate">Available To Date</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('availableToDate')} />
-                </th>
-                <th className="hand" onClick={sort('enabled')}>
-                  <Translate contentKey="xploraAdminApp.tour.enabled">Enabled</Translate>{' '}
-                  <FontAwesomeIcon icon={getSortIconByFieldName('enabled')} />
                 </th>
                 <th className="hand" onClick={sort('initialPrice')}>
                   <Translate contentKey="xploraAdminApp.tour.initialPrice">Initial Price</Translate>{' '}
@@ -182,6 +199,44 @@ export const Tour = () => {
                   <Translate contentKey="xploraAdminApp.tour.defaultImageData">Default Image Data</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('defaultImageData')} />
                 </th>
+                <th className="hand" onClick={sort('accessibility')}>
+                  <Translate contentKey="xploraAdminApp.tour.accessibility">Accessibility</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('accessibility')} />
+                </th>
+                <th className="hand" onClick={sort('audioGuide')}>
+                  <Translate contentKey="xploraAdminApp.tour.audioGuide">Audio Guide</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('audioGuide')} />
+                </th>
+                <th className="hand" onClick={sort('tourGuide')}>
+                  <Translate contentKey="xploraAdminApp.tour.tourGuide">Tour Guide</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('tourGuide')} />
+                </th>
+                <th className="hand" onClick={sort('cssStyle')}>
+                  <Translate contentKey="xploraAdminApp.tour.cssStyle">Css Style</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('cssStyle')} />
+                </th>
+                <th className="hand" onClick={sort('departure')}>
+                  <Translate contentKey="xploraAdminApp.tour.departure">Departure</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('departure')} />
+                </th>
+                <th className="hand" onClick={sort('returnTime')}>
+                  <Translate contentKey="xploraAdminApp.tour.returnTime">Return Time</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('returnTime')} />
+                </th>
+                <th className="hand" onClick={sort('testIn')}>
+                  <Translate contentKey="xploraAdminApp.tour.testIn">Test In</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('testIn')} />
+                </th>
+                <th className="hand" onClick={sort('testZ')}>
+                  <Translate contentKey="xploraAdminApp.tour.testZ">Test Z</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('testZ')} />
+                </th>
+                <th className="hand" onClick={sort('dur')}>
+                  <Translate contentKey="xploraAdminApp.tour.dur">Dur</Translate> <FontAwesomeIcon icon={getSortIconByFieldName('dur')} />
+                </th>
+                <th>
+                  <Translate contentKey="xploraAdminApp.tour.content">Content</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
                 <th>
                   <Translate contentKey="xploraAdminApp.tour.createdBy">Created By</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
@@ -193,6 +248,9 @@ export const Tour = () => {
                 </th>
                 <th>
                   <Translate contentKey="xploraAdminApp.tour.destination">Destination</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="xploraAdminApp.tour.defaultCategory">Default Category</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
               </tr>
@@ -206,12 +264,21 @@ export const Tour = () => {
                     </Button>
                   </td>
                   <td>{tour.code}</td>
+                  <td>{tour.enabled ? 'true' : 'false'}</td>
+                  <td>
+                    <Translate contentKey={`xploraAdminApp.TourKind.${tour.kind}`} />
+                  </td>
                   <td>
                     <Translate contentKey={`xploraAdminApp.TourMode.${tour.mode}`} />
                   </td>
+                  <td>{tour.icon}</td>
                   <td>{tour.duration}</td>
+                  <td>
+                    <Translate contentKey={`xploraAdminApp.DurationMeasure.${tour.durationMeasure}`} />
+                  </td>
                   <td>{tour.petFriendly ? 'true' : 'false'}</td>
                   <td>{tour.kidsAllowed ? 'true' : 'false'}</td>
+                  <td>{tour.smoking ? 'true' : 'false'}</td>
                   <td>
                     {tour.availableFromDate ? (
                       <TextFormat type="date" value={tour.availableFromDate} format={APP_LOCAL_DATE_FORMAT} />
@@ -220,7 +287,6 @@ export const Tour = () => {
                   <td>
                     {tour.availableToDate ? <TextFormat type="date" value={tour.availableToDate} format={APP_LOCAL_DATE_FORMAT} /> : null}
                   </td>
-                  <td>{tour.enabled ? 'true' : 'false'}</td>
                   <td>{tour.initialPrice}</td>
                   <td>{tour.price}</td>
                   <td>{tour.badge}</td>
@@ -247,10 +313,23 @@ export const Tour = () => {
                       </div>
                     ) : null}
                   </td>
+                  <td>{tour.accessibility ? 'true' : 'false'}</td>
+                  <td>{tour.audioGuide ? 'true' : 'false'}</td>
+                  <td>{tour.tourGuide ? 'true' : 'false'}</td>
+                  <td>{tour.cssStyle}</td>
+                  <td>{tour.departure ? <TextFormat type="date" value={tour.departure} format={APP_LOCAL_DATE_FORMAT} /> : null}</td>
+                  <td>{tour.returnTime ? <TextFormat type="date" value={tour.returnTime} format={APP_LOCAL_DATE_FORMAT} /> : null}</td>
+                  <td>{tour.testIn ? <TextFormat type="date" value={tour.testIn} format={APP_DATE_FORMAT} /> : null}</td>
+                  <td>{tour.testZ ? <TextFormat type="date" value={tour.testZ} format={APP_DATE_FORMAT} /> : null}</td>
+                  <td>{tour.dur ? <DurationFormat value={tour.dur} /> : null}</td>
+                  <td>{tour.content ? <Link to={`/tour-content/${tour.content.id}`}>{tour.content.code}</Link> : ''}</td>
                   <td>{tour.createdBy ? tour.createdBy.login : ''}</td>
                   <td>{tour.meetingPoint ? <Link to={`/place/${tour.meetingPoint.id}`}>{tour.meetingPoint.code}</Link> : ''}</td>
                   <td>{tour.finishPoint ? <Link to={`/place/${tour.finishPoint.id}`}>{tour.finishPoint.code}</Link> : ''}</td>
                   <td>{tour.destination ? <Link to={`/destination/${tour.destination.id}`}>{tour.destination.code}</Link> : ''}</td>
+                  <td>
+                    {tour.defaultCategory ? <Link to={`/tour-category/${tour.defaultCategory.id}`}>{tour.defaultCategory.code}</Link> : ''}
+                  </td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`/tour/${tour.id}`} color="info" size="sm" data-cy="entityDetailsButton">

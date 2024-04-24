@@ -5,7 +5,6 @@ import gr.adr.xplora.admin.repository.DriverRepository;
 import gr.adr.xplora.admin.service.DriverService;
 import gr.adr.xplora.admin.service.dto.DriverDTO;
 import gr.adr.xplora.admin.service.mapper.DriverMapper;
-import java.time.LocalDate;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,9 +35,6 @@ public class DriverServiceImpl implements DriverService {
     public DriverDTO save(DriverDTO driverDTO) {
         log.debug("Request to save Driver : {}", driverDTO);
         Driver driver = driverMapper.toEntity(driverDTO);
-        if (driver.getCreatedDate() == null) {
-            driver.setCreatedDate(LocalDate.now());
-        }
         driver = driverRepository.save(driver);
         return driverMapper.toDto(driver);
     }

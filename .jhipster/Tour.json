@@ -11,15 +11,35 @@
       "fieldValidateRules": ["required"]
     },
     {
-      "fieldName": "mode",
-      "fieldType": "TourMode",
+      "fieldName": "enabled",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "kind",
+      "fieldType": "TourKind",
       "fieldValidateRules": ["required"],
       "fieldValues": "TOUR (Tour),ACTIVITY (Activity),EVENT (Event),OTHER (Other)"
+    },
+    {
+      "fieldName": "mode",
+      "fieldType": "TourMode",
+      "fieldValues": "BUS (Bus),BOAT (Boat),FEET (Feet),CAR (Car),MOTO (Moto),MOTOBUS (Motobus),BICYCLE (Bicycle),OTHER (Other)"
+    },
+    {
+      "fieldName": "icon",
+      "fieldType": "String"
     },
     {
       "fieldName": "duration",
       "fieldType": "Integer",
       "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "durationMeasure",
+      "fieldType": "DurationMeasure",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "MINUTES (Minutes),HOURS (Hours),DAYS (Days)"
     },
     {
       "fieldName": "petFriendly",
@@ -32,17 +52,17 @@
       "fieldValidateRules": ["required"]
     },
     {
+      "fieldName": "smoking",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
       "fieldName": "availableFromDate",
       "fieldType": "LocalDate"
     },
     {
       "fieldName": "availableToDate",
       "fieldType": "LocalDate"
-    },
-    {
-      "fieldName": "enabled",
-      "fieldType": "Boolean",
-      "fieldValidateRules": ["required"]
     },
     {
       "fieldName": "initialPrice",
@@ -80,11 +100,55 @@
       "fieldName": "defaultImageData",
       "fieldType": "byte[]",
       "fieldTypeBlobContent": "image"
+    },
+    {
+      "fieldName": "accessibility",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "audioGuide",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "tourGuide",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "cssStyle",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    },
+    {
+      "fieldName": "departure",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "returnTime",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "testIn",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "testZ",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "dur",
+      "fieldType": "Duration"
     }
   ],
   "name": "Tour",
   "pagination": "pagination",
   "relationships": [
+    {
+      "otherEntityField": "code",
+      "otherEntityName": "tourContent",
+      "relationshipName": "content",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
     {
       "otherEntityField": "code",
       "otherEntityName": "tourStep",
@@ -98,22 +162,6 @@
       "otherEntityName": "imageFile",
       "otherEntityRelationshipName": "tour",
       "relationshipName": "images",
-      "relationshipSide": "left",
-      "relationshipType": "one-to-many"
-    },
-    {
-      "otherEntityField": "code",
-      "otherEntityName": "content",
-      "otherEntityRelationshipName": "tourExtraInfo",
-      "relationshipName": "extraInfo",
-      "relationshipSide": "left",
-      "relationshipType": "one-to-many"
-    },
-    {
-      "otherEntityField": "code",
-      "otherEntityName": "content",
-      "otherEntityRelationshipName": "tour",
-      "relationshipName": "contents",
       "relationshipSide": "left",
       "relationshipType": "one-to-many"
     },
@@ -175,6 +223,14 @@
       "otherEntityName": "destination",
       "otherEntityRelationshipName": "tours",
       "relationshipName": "destination",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "code",
+      "otherEntityName": "tourCategory",
+      "otherEntityRelationshipName": "defaultTours",
+      "relationshipName": "defaultCategory",
       "relationshipSide": "right",
       "relationshipType": "many-to-one"
     }

@@ -151,17 +151,17 @@ export const ImageFile = () => {
                   <Translate contentKey="xploraAdminApp.imageFile.tourCategory">Tour Category</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th>
-                  <Translate contentKey="xploraAdminApp.imageFile.tourExtra">Tour Extra</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="xploraAdminApp.imageFile.place">Place</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="xploraAdminApp.imageFile.placeCategory">Place Category</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th>
                   <Translate contentKey="xploraAdminApp.imageFile.tourExtraCategory">Tour Extra Category</Translate>{' '}
                   <FontAwesomeIcon icon="sort" />
                 </th>
                 <th>
-                  <Translate contentKey="xploraAdminApp.imageFile.place">Place</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
-                <th>
-                  <Translate contentKey="xploraAdminApp.imageFile.placeCategory">Place Category</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="xploraAdminApp.imageFile.tourExtra">Tour Extra</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th>
                   <Translate contentKey="xploraAdminApp.imageFile.vehicle">Vehicle</Translate> <FontAwesomeIcon icon="sort" />
@@ -214,14 +214,6 @@ export const ImageFile = () => {
                       ''
                     )}
                   </td>
-                  <td>{imageFile.tourExtra ? <Link to={`/tour-extra/${imageFile.tourExtra.id}`}>{imageFile.tourExtra.code}</Link> : ''}</td>
-                  <td>
-                    {imageFile.tourExtraCategory ? (
-                      <Link to={`/tour-extra-category/${imageFile.tourExtraCategory.id}`}>{imageFile.tourExtraCategory.code}</Link>
-                    ) : (
-                      ''
-                    )}
-                  </td>
                   <td>{imageFile.place ? <Link to={`/place/${imageFile.place.id}`}>{imageFile.place.code}</Link> : ''}</td>
                   <td>
                     {imageFile.placeCategory ? (
@@ -230,6 +222,14 @@ export const ImageFile = () => {
                       ''
                     )}
                   </td>
+                  <td>
+                    {imageFile.tourExtraCategory ? (
+                      <Link to={`/tour-extra-category/${imageFile.tourExtraCategory.id}`}>{imageFile.tourExtraCategory.code}</Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td>{imageFile.tourExtra ? <Link to={`/tour-extra/${imageFile.tourExtra.id}`}>{imageFile.tourExtra.code}</Link> : ''}</td>
                   <td>{imageFile.vehicle ? <Link to={`/vehicle/${imageFile.vehicle.id}`}>{imageFile.vehicle.plate}</Link> : ''}</td>
                   <td>{imageFile.driver ? <Link to={`/driver/${imageFile.driver.id}`}>{imageFile.driver.name}</Link> : ''}</td>
                   <td className="text-end">

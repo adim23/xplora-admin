@@ -3,6 +3,7 @@ package gr.adr.xplora.admin.domain;
 import static gr.adr.xplora.admin.domain.ContentTestSamples.*;
 import static gr.adr.xplora.admin.domain.DestinationTestSamples.*;
 import static gr.adr.xplora.admin.domain.ImageFileTestSamples.*;
+import static gr.adr.xplora.admin.domain.MenuTestSamples.*;
 import static gr.adr.xplora.admin.domain.PlaceTestSamples.*;
 import static gr.adr.xplora.admin.domain.TourTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -92,6 +93,28 @@ class DestinationTest {
         destination.setImages(new HashSet<>());
         assertThat(destination.getImages()).doesNotContain(imageFileBack);
         assertThat(imageFileBack.getDestination()).isNull();
+    }
+
+    @Test
+    void menusTest() throws Exception {
+        Destination destination = getDestinationRandomSampleGenerator();
+        Menu menuBack = getMenuRandomSampleGenerator();
+
+        destination.addMenus(menuBack);
+        assertThat(destination.getMenus()).containsOnly(menuBack);
+        assertThat(menuBack.getDestination()).isEqualTo(destination);
+
+        destination.removeMenus(menuBack);
+        assertThat(destination.getMenus()).doesNotContain(menuBack);
+        assertThat(menuBack.getDestination()).isNull();
+
+        destination.menus(new HashSet<>(Set.of(menuBack)));
+        assertThat(destination.getMenus()).containsOnly(menuBack);
+        assertThat(menuBack.getDestination()).isEqualTo(destination);
+
+        destination.setMenus(new HashSet<>());
+        assertThat(destination.getMenus()).doesNotContain(menuBack);
+        assertThat(menuBack.getDestination()).isNull();
     }
 
     @Test

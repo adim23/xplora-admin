@@ -48,6 +48,9 @@ class TourExtraCategoryResourceIT {
     private static final String DEFAULT_CODE = "AAAAAAAAAA";
     private static final String UPDATED_CODE = "BBBBBBBBBB";
 
+    private static final Boolean DEFAULT_ENABLED = false;
+    private static final Boolean UPDATED_ENABLED = true;
+
     private static final String DEFAULT_ICON = "AAAAAAAAAA";
     private static final String UPDATED_ICON = "BBBBBBBBBB";
 
@@ -58,9 +61,6 @@ class TourExtraCategoryResourceIT {
     private static final byte[] UPDATED_DEFAULT_IMAGE_DATA = TestUtil.createByteArray(1, "1");
     private static final String DEFAULT_DEFAULT_IMAGE_DATA_CONTENT_TYPE = "image/jpg";
     private static final String UPDATED_DEFAULT_IMAGE_DATA_CONTENT_TYPE = "image/png";
-
-    private static final Boolean DEFAULT_ENABLED = false;
-    private static final Boolean UPDATED_ENABLED = true;
 
     private static final String DEFAULT_SHOP_CATEGORY_ID = "AAAAAAAAAA";
     private static final String UPDATED_SHOP_CATEGORY_ID = "BBBBBBBBBB";
@@ -109,11 +109,11 @@ class TourExtraCategoryResourceIT {
     public static TourExtraCategory createEntity(EntityManager em) {
         TourExtraCategory tourExtraCategory = new TourExtraCategory()
             .code(DEFAULT_CODE)
+            .enabled(DEFAULT_ENABLED)
             .icon(DEFAULT_ICON)
             .defaultImage(DEFAULT_DEFAULT_IMAGE)
             .defaultImageData(DEFAULT_DEFAULT_IMAGE_DATA)
             .defaultImageDataContentType(DEFAULT_DEFAULT_IMAGE_DATA_CONTENT_TYPE)
-            .enabled(DEFAULT_ENABLED)
             .shopCategoryId(DEFAULT_SHOP_CATEGORY_ID)
             .shopUrl(DEFAULT_SHOP_URL)
             .createdDate(DEFAULT_CREATED_DATE);
@@ -129,11 +129,11 @@ class TourExtraCategoryResourceIT {
     public static TourExtraCategory createUpdatedEntity(EntityManager em) {
         TourExtraCategory tourExtraCategory = new TourExtraCategory()
             .code(UPDATED_CODE)
+            .enabled(UPDATED_ENABLED)
             .icon(UPDATED_ICON)
             .defaultImage(UPDATED_DEFAULT_IMAGE)
             .defaultImageData(UPDATED_DEFAULT_IMAGE_DATA)
             .defaultImageDataContentType(UPDATED_DEFAULT_IMAGE_DATA_CONTENT_TYPE)
-            .enabled(UPDATED_ENABLED)
             .shopCategoryId(UPDATED_SHOP_CATEGORY_ID)
             .shopUrl(UPDATED_SHOP_URL)
             .createdDate(UPDATED_CREATED_DATE);
@@ -204,6 +204,23 @@ class TourExtraCategoryResourceIT {
 
     @Test
     @Transactional
+    void checkEnabledIsRequired() throws Exception {
+        long databaseSizeBeforeTest = getRepositoryCount();
+        // set the field null
+        tourExtraCategory.setEnabled(null);
+
+        // Create the TourExtraCategory, which fails.
+        TourExtraCategoryDTO tourExtraCategoryDTO = tourExtraCategoryMapper.toDto(tourExtraCategory);
+
+        restTourExtraCategoryMockMvc
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsBytes(tourExtraCategoryDTO)))
+            .andExpect(status().isBadRequest());
+
+        assertSameRepositoryCount(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     void getAllTourExtraCategories() throws Exception {
         // Initialize the database
         tourExtraCategoryRepository.saveAndFlush(tourExtraCategory);
@@ -215,11 +232,11 @@ class TourExtraCategoryResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(tourExtraCategory.getId().intValue())))
             .andExpect(jsonPath("$.[*].code").value(hasItem(DEFAULT_CODE)))
+            .andExpect(jsonPath("$.[*].enabled").value(hasItem(DEFAULT_ENABLED.booleanValue())))
             .andExpect(jsonPath("$.[*].icon").value(hasItem(DEFAULT_ICON)))
             .andExpect(jsonPath("$.[*].defaultImage").value(hasItem(DEFAULT_DEFAULT_IMAGE)))
             .andExpect(jsonPath("$.[*].defaultImageDataContentType").value(hasItem(DEFAULT_DEFAULT_IMAGE_DATA_CONTENT_TYPE)))
             .andExpect(jsonPath("$.[*].defaultImageData").value(hasItem(Base64.getEncoder().encodeToString(DEFAULT_DEFAULT_IMAGE_DATA))))
-            .andExpect(jsonPath("$.[*].enabled").value(hasItem(DEFAULT_ENABLED.booleanValue())))
             .andExpect(jsonPath("$.[*].shopCategoryId").value(hasItem(DEFAULT_SHOP_CATEGORY_ID)))
             .andExpect(jsonPath("$.[*].shopUrl").value(hasItem(DEFAULT_SHOP_URL)))
             .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())));
@@ -255,11 +272,11 @@ class TourExtraCategoryResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(tourExtraCategory.getId().intValue()))
             .andExpect(jsonPath("$.code").value(DEFAULT_CODE))
+            .andExpect(jsonPath("$.enabled").value(DEFAULT_ENABLED.booleanValue()))
             .andExpect(jsonPath("$.icon").value(DEFAULT_ICON))
             .andExpect(jsonPath("$.defaultImage").value(DEFAULT_DEFAULT_IMAGE))
             .andExpect(jsonPath("$.defaultImageDataContentType").value(DEFAULT_DEFAULT_IMAGE_DATA_CONTENT_TYPE))
             .andExpect(jsonPath("$.defaultImageData").value(Base64.getEncoder().encodeToString(DEFAULT_DEFAULT_IMAGE_DATA)))
-            .andExpect(jsonPath("$.enabled").value(DEFAULT_ENABLED.booleanValue()))
             .andExpect(jsonPath("$.shopCategoryId").value(DEFAULT_SHOP_CATEGORY_ID))
             .andExpect(jsonPath("$.shopUrl").value(DEFAULT_SHOP_URL))
             .andExpect(jsonPath("$.createdDate").value(DEFAULT_CREATED_DATE.toString()));
@@ -286,11 +303,11 @@ class TourExtraCategoryResourceIT {
         em.detach(updatedTourExtraCategory);
         updatedTourExtraCategory
             .code(UPDATED_CODE)
+            .enabled(UPDATED_ENABLED)
             .icon(UPDATED_ICON)
             .defaultImage(UPDATED_DEFAULT_IMAGE)
             .defaultImageData(UPDATED_DEFAULT_IMAGE_DATA)
             .defaultImageDataContentType(UPDATED_DEFAULT_IMAGE_DATA_CONTENT_TYPE)
-            .enabled(UPDATED_ENABLED)
             .shopCategoryId(UPDATED_SHOP_CATEGORY_ID)
             .shopUrl(UPDATED_SHOP_URL)
             .createdDate(UPDATED_CREATED_DATE);
@@ -385,9 +402,8 @@ class TourExtraCategoryResourceIT {
 
         partialUpdatedTourExtraCategory
             .code(UPDATED_CODE)
-            .defaultImage(UPDATED_DEFAULT_IMAGE)
-            .enabled(UPDATED_ENABLED)
-            .createdDate(UPDATED_CREATED_DATE);
+            .defaultImageData(UPDATED_DEFAULT_IMAGE_DATA)
+            .defaultImageDataContentType(UPDATED_DEFAULT_IMAGE_DATA_CONTENT_TYPE);
 
         restTourExtraCategoryMockMvc
             .perform(
@@ -420,11 +436,11 @@ class TourExtraCategoryResourceIT {
 
         partialUpdatedTourExtraCategory
             .code(UPDATED_CODE)
+            .enabled(UPDATED_ENABLED)
             .icon(UPDATED_ICON)
             .defaultImage(UPDATED_DEFAULT_IMAGE)
             .defaultImageData(UPDATED_DEFAULT_IMAGE_DATA)
             .defaultImageDataContentType(UPDATED_DEFAULT_IMAGE_DATA_CONTENT_TYPE)
-            .enabled(UPDATED_ENABLED)
             .shopCategoryId(UPDATED_SHOP_CATEGORY_ID)
             .shopUrl(UPDATED_SHOP_URL)
             .createdDate(UPDATED_CREATED_DATE);

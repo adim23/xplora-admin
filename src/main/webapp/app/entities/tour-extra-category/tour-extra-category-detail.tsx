@@ -39,6 +39,12 @@ export const TourExtraCategoryDetail = () => {
           </dt>
           <dd>{tourExtraCategoryEntity.code}</dd>
           <dt>
+            <span id="enabled">
+              <Translate contentKey="xploraAdminApp.tourExtraCategory.enabled">Enabled</Translate>
+            </span>
+          </dt>
+          <dd>{tourExtraCategoryEntity.enabled ? 'true' : 'false'}</dd>
+          <dt>
             <span id="icon">
               <Translate contentKey="xploraAdminApp.tourExtraCategory.icon">Icon</Translate>
             </span>
@@ -72,12 +78,6 @@ export const TourExtraCategoryDetail = () => {
               </div>
             ) : null}
           </dd>
-          <dt>
-            <span id="enabled">
-              <Translate contentKey="xploraAdminApp.tourExtraCategory.enabled">Enabled</Translate>
-            </span>
-          </dt>
-          <dd>{tourExtraCategoryEntity.enabled ? 'true' : 'false'}</dd>
           <dt>
             <span id="shopCategoryId">
               <Translate contentKey="xploraAdminApp.tourExtraCategory.shopCategoryId">Shop Category Id</Translate>

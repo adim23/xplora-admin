@@ -12,10 +12,19 @@
     },
     {
       "fieldName": "enabled",
-      "fieldType": "Boolean"
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "icon",
+      "fieldType": "String"
     },
     {
       "fieldName": "price",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "offer",
       "fieldType": "Double"
     },
     {
@@ -43,6 +52,14 @@
   "name": "TourExtra",
   "pagination": "pagination",
   "relationships": [
+    {
+      "otherEntityField": "code",
+      "otherEntityName": "imageFile",
+      "otherEntityRelationshipName": "tourExtra",
+      "relationshipName": "images",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
     {
       "otherEntityField": "code",
       "otherEntityName": "content",

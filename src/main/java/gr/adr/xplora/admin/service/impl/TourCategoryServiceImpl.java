@@ -1,14 +1,10 @@
 package gr.adr.xplora.admin.service.impl;
 
 import gr.adr.xplora.admin.domain.TourCategory;
-import gr.adr.xplora.admin.domain.User;
 import gr.adr.xplora.admin.repository.TourCategoryRepository;
-import gr.adr.xplora.admin.repository.UserRepository;
-import gr.adr.xplora.admin.security.SecurityUtils;
 import gr.adr.xplora.admin.service.TourCategoryService;
 import gr.adr.xplora.admin.service.dto.TourCategoryDTO;
 import gr.adr.xplora.admin.service.mapper.TourCategoryMapper;
-import java.time.LocalDate;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,16 +23,11 @@ public class TourCategoryServiceImpl implements TourCategoryService {
     private final Logger log = LoggerFactory.getLogger(TourCategoryServiceImpl.class);
 
     private final TourCategoryRepository tourCategoryRepository;
-    private final UserRepository userRepository;
+
     private final TourCategoryMapper tourCategoryMapper;
 
-    public TourCategoryServiceImpl(
-        TourCategoryRepository tourCategoryRepository,
-        TourCategoryMapper tourCategoryMapper,
-        UserRepository userRepository
-    ) {
+    public TourCategoryServiceImpl(TourCategoryRepository tourCategoryRepository, TourCategoryMapper tourCategoryMapper) {
         this.tourCategoryRepository = tourCategoryRepository;
-        this.userRepository = userRepository;
         this.tourCategoryMapper = tourCategoryMapper;
     }
 
@@ -44,15 +35,6 @@ public class TourCategoryServiceImpl implements TourCategoryService {
     public TourCategoryDTO save(TourCategoryDTO tourCategoryDTO) {
         log.debug("Request to save TourCategory : {}", tourCategoryDTO);
         TourCategory tourCategory = tourCategoryMapper.toEntity(tourCategoryDTO);
-        if (tourCategory.getCreatedDate() == null) {
-            tourCategory.setCreatedDate(LocalDate.now());
-        }
-        if (tourCategory.getCreatedBy() == null) {
-            Optional<User> user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin().orElse(""));
-            if (user.isPresent()) {
-                tourCategory.setCreatedBy(user.orElse(null));
-            }
-        }
         tourCategory = tourCategoryRepository.save(tourCategory);
         return tourCategoryMapper.toDto(tourCategory);
     }

@@ -39,6 +39,9 @@ class DriverResourceIT {
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
 
+    private static final Boolean DEFAULT_ENABLED = false;
+    private static final Boolean UPDATED_ENABLED = true;
+
     private static final LocalDate DEFAULT_HIRED_AT = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_HIRED_AT = LocalDate.now(ZoneId.systemDefault());
 
@@ -94,6 +97,7 @@ class DriverResourceIT {
     public static Driver createEntity(EntityManager em) {
         Driver driver = new Driver()
             .name(DEFAULT_NAME)
+            .enabled(DEFAULT_ENABLED)
             .hiredAt(DEFAULT_HIRED_AT)
             .age(DEFAULT_AGE)
             .email(DEFAULT_EMAIL)
@@ -114,6 +118,7 @@ class DriverResourceIT {
     public static Driver createUpdatedEntity(EntityManager em) {
         Driver driver = new Driver()
             .name(UPDATED_NAME)
+            .enabled(UPDATED_ENABLED)
             .hiredAt(UPDATED_HIRED_AT)
             .age(UPDATED_AGE)
             .email(UPDATED_EMAIL)
@@ -189,6 +194,23 @@ class DriverResourceIT {
 
     @Test
     @Transactional
+    void checkEnabledIsRequired() throws Exception {
+        long databaseSizeBeforeTest = getRepositoryCount();
+        // set the field null
+        driver.setEnabled(null);
+
+        // Create the Driver, which fails.
+        DriverDTO driverDTO = driverMapper.toDto(driver);
+
+        restDriverMockMvc
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsBytes(driverDTO)))
+            .andExpect(status().isBadRequest());
+
+        assertSameRepositoryCount(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     void getAllDrivers() throws Exception {
         // Initialize the database
         driverRepository.saveAndFlush(driver);
@@ -200,6 +222,7 @@ class DriverResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(driver.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
+            .andExpect(jsonPath("$.[*].enabled").value(hasItem(DEFAULT_ENABLED.booleanValue())))
             .andExpect(jsonPath("$.[*].hiredAt").value(hasItem(DEFAULT_HIRED_AT.toString())))
             .andExpect(jsonPath("$.[*].age").value(hasItem(DEFAULT_AGE)))
             .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL)))
@@ -223,6 +246,7 @@ class DriverResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(driver.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
+            .andExpect(jsonPath("$.enabled").value(DEFAULT_ENABLED.booleanValue()))
             .andExpect(jsonPath("$.hiredAt").value(DEFAULT_HIRED_AT.toString()))
             .andExpect(jsonPath("$.age").value(DEFAULT_AGE))
             .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL))
@@ -254,6 +278,7 @@ class DriverResourceIT {
         em.detach(updatedDriver);
         updatedDriver
             .name(UPDATED_NAME)
+            .enabled(UPDATED_ENABLED)
             .hiredAt(UPDATED_HIRED_AT)
             .age(UPDATED_AGE)
             .email(UPDATED_EMAIL)
@@ -347,7 +372,16 @@ class DriverResourceIT {
         Driver partialUpdatedDriver = new Driver();
         partialUpdatedDriver.setId(driver.getId());
 
-        partialUpdatedDriver.name(UPDATED_NAME).defaultImage(UPDATED_DEFAULT_IMAGE);
+        partialUpdatedDriver
+            .name(UPDATED_NAME)
+            .enabled(UPDATED_ENABLED)
+            .age(UPDATED_AGE)
+            .email(UPDATED_EMAIL)
+            .mobile(UPDATED_MOBILE)
+            .createdDate(UPDATED_CREATED_DATE)
+            .defaultImage(UPDATED_DEFAULT_IMAGE)
+            .defaultImageData(UPDATED_DEFAULT_IMAGE_DATA)
+            .defaultImageDataContentType(UPDATED_DEFAULT_IMAGE_DATA_CONTENT_TYPE);
 
         restDriverMockMvc
             .perform(
@@ -377,6 +411,7 @@ class DriverResourceIT {
 
         partialUpdatedDriver
             .name(UPDATED_NAME)
+            .enabled(UPDATED_ENABLED)
             .hiredAt(UPDATED_HIRED_AT)
             .age(UPDATED_AGE)
             .email(UPDATED_EMAIL)

@@ -48,6 +48,8 @@ public class PlaceAsserts {
         assertThat(expected)
             .as("Verify Place relevant properties")
             .satisfies(e -> assertThat(e.getCode()).as("check code").isEqualTo(actual.getCode()))
+            .satisfies(e -> assertThat(e.getEnabled()).as("check enabled").isEqualTo(actual.getEnabled()))
+            .satisfies(e -> assertThat(e.getIcon()).as("check icon").isEqualTo(actual.getIcon()))
             .satisfies(e -> assertThat(e.getDestinationSight()).as("check destinationSight").isEqualTo(actual.getDestinationSight()))
             .satisfies(e -> assertThat(e.getLongitude()).as("check longitude").isEqualTo(actual.getLongitude()))
             .satisfies(e -> assertThat(e.getLatitude()).as("check latitude").isEqualTo(actual.getLatitude()))

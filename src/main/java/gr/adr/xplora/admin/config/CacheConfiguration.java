@@ -119,6 +119,12 @@ public class CacheConfiguration {
             createCache(cm, gr.adr.xplora.admin.domain.Tag.class.getName() + ".tours");
             createCache(cm, gr.adr.xplora.admin.domain.Tag.class.getName() + ".tourExtras");
             createCache(cm, gr.adr.xplora.admin.domain.Tag.class.getName() + ".webPages");
+            createCache(cm, gr.adr.xplora.admin.domain.Destination.class.getName() + ".menus");
+            createCache(cm, gr.adr.xplora.admin.domain.TourCategory.class.getName() + ".defaultTours");
+            createCache(cm, gr.adr.xplora.admin.domain.TourExtraCategory.class.getName() + ".images");
+            createCache(cm, gr.adr.xplora.admin.domain.TourExtra.class.getName() + ".images");
+            createCache(cm, gr.adr.xplora.admin.domain.TourContent.class.getName());
+            createCache(cm, gr.adr.xplora.admin.domain.Prompt.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

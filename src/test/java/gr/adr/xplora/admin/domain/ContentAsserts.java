@@ -66,8 +66,6 @@ public class ContentAsserts {
             .as("Verify Content relationships")
             .satisfies(e -> assertThat(e.getLanguage()).as("check language").isEqualTo(actual.getLanguage()))
             .satisfies(e -> assertThat(e.getDestination()).as("check destination").isEqualTo(actual.getDestination()))
-            .satisfies(e -> assertThat(e.getTourExtraInfo()).as("check tourExtraInfo").isEqualTo(actual.getTourExtraInfo()))
-            .satisfies(e -> assertThat(e.getTour()).as("check tour").isEqualTo(actual.getTour()))
             .satisfies(e -> assertThat(e.getTourCategory()).as("check tourCategory").isEqualTo(actual.getTourCategory()))
             .satisfies(e -> assertThat(e.getPlace()).as("check place").isEqualTo(actual.getPlace()))
             .satisfies(e -> assertThat(e.getPlaceCategory()).as("check placeCategory").isEqualTo(actual.getPlaceCategory()))

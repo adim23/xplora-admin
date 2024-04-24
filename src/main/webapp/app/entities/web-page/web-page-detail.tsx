@@ -39,17 +39,17 @@ export const WebPageDetail = () => {
           </dt>
           <dd>{webPageEntity.code}</dd>
           <dt>
-            <span id="uriPath">
-              <Translate contentKey="xploraAdminApp.webPage.uriPath">Uri Path</Translate>
-            </span>
-          </dt>
-          <dd>{webPageEntity.uriPath}</dd>
-          <dt>
             <span id="enabled">
               <Translate contentKey="xploraAdminApp.webPage.enabled">Enabled</Translate>
             </span>
           </dt>
           <dd>{webPageEntity.enabled ? 'true' : 'false'}</dd>
+          <dt>
+            <span id="uriPath">
+              <Translate contentKey="xploraAdminApp.webPage.uriPath">Uri Path</Translate>
+            </span>
+          </dt>
+          <dd>{webPageEntity.uriPath}</dd>
           <dt>
             <span id="publishDate">
               <Translate contentKey="xploraAdminApp.webPage.publishDate">Publish Date</Translate>

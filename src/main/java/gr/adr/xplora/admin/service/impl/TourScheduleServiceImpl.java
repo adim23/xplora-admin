@@ -1,14 +1,10 @@
 package gr.adr.xplora.admin.service.impl;
 
 import gr.adr.xplora.admin.domain.TourSchedule;
-import gr.adr.xplora.admin.domain.User;
 import gr.adr.xplora.admin.repository.TourScheduleRepository;
-import gr.adr.xplora.admin.repository.UserRepository;
-import gr.adr.xplora.admin.security.SecurityUtils;
 import gr.adr.xplora.admin.service.TourScheduleService;
 import gr.adr.xplora.admin.service.dto.TourScheduleDTO;
 import gr.adr.xplora.admin.service.mapper.TourScheduleMapper;
-import java.time.LocalDate;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,16 +23,11 @@ public class TourScheduleServiceImpl implements TourScheduleService {
     private final Logger log = LoggerFactory.getLogger(TourScheduleServiceImpl.class);
 
     private final TourScheduleRepository tourScheduleRepository;
-    private final UserRepository userRepository;
+
     private final TourScheduleMapper tourScheduleMapper;
 
-    public TourScheduleServiceImpl(
-        TourScheduleRepository tourScheduleRepository,
-        TourScheduleMapper tourScheduleMapper,
-        UserRepository userRepository
-    ) {
+    public TourScheduleServiceImpl(TourScheduleRepository tourScheduleRepository, TourScheduleMapper tourScheduleMapper) {
         this.tourScheduleRepository = tourScheduleRepository;
-        this.userRepository = userRepository;
         this.tourScheduleMapper = tourScheduleMapper;
     }
 
@@ -44,15 +35,6 @@ public class TourScheduleServiceImpl implements TourScheduleService {
     public TourScheduleDTO save(TourScheduleDTO tourScheduleDTO) {
         log.debug("Request to save TourSchedule : {}", tourScheduleDTO);
         TourSchedule tourSchedule = tourScheduleMapper.toEntity(tourScheduleDTO);
-        if (tourSchedule.getCreatedDate() == null) {
-            tourSchedule.setCreatedDate(LocalDate.now());
-        }
-        if (tourSchedule.getCreatedBy() == null) {
-            Optional<User> user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin().orElse(""));
-            if (user.isPresent()) {
-                tourSchedule.setCreatedBy(user.orElse(null));
-            }
-        }
         tourSchedule = tourScheduleRepository.save(tourSchedule);
         return tourScheduleMapper.toDto(tourSchedule);
     }

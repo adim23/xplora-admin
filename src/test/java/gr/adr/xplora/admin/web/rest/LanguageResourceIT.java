@@ -48,9 +48,6 @@ class LanguageResourceIT {
     private static final String DEFAULT_CODE = "AAAAAAAAAA";
     private static final String UPDATED_CODE = "BBBBBBBBBB";
 
-    private static final LocalDate DEFAULT_CREATED_DATE = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_CREATED_DATE = LocalDate.now(ZoneId.systemDefault());
-
     private static final String DEFAULT_ICON = "AAAAAAAAAA";
     private static final String UPDATED_ICON = "BBBBBBBBBB";
 
@@ -61,6 +58,9 @@ class LanguageResourceIT {
     private static final byte[] UPDATED_DEFAULT_IMAGE_DATA = TestUtil.createByteArray(1, "1");
     private static final String DEFAULT_DEFAULT_IMAGE_DATA_CONTENT_TYPE = "image/jpg";
     private static final String UPDATED_DEFAULT_IMAGE_DATA_CONTENT_TYPE = "image/png";
+
+    private static final LocalDate DEFAULT_CREATED_DATE = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_CREATED_DATE = LocalDate.now(ZoneId.systemDefault());
 
     private static final String ENTITY_API_URL = "/api/languages";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -100,11 +100,11 @@ class LanguageResourceIT {
     public static Language createEntity(EntityManager em) {
         Language language = new Language()
             .code(DEFAULT_CODE)
-            .createdDate(DEFAULT_CREATED_DATE)
             .icon(DEFAULT_ICON)
             .defaultImage(DEFAULT_DEFAULT_IMAGE)
             .defaultImageData(DEFAULT_DEFAULT_IMAGE_DATA)
-            .defaultImageDataContentType(DEFAULT_DEFAULT_IMAGE_DATA_CONTENT_TYPE);
+            .defaultImageDataContentType(DEFAULT_DEFAULT_IMAGE_DATA_CONTENT_TYPE)
+            .createdDate(DEFAULT_CREATED_DATE);
         return language;
     }
 
@@ -117,11 +117,11 @@ class LanguageResourceIT {
     public static Language createUpdatedEntity(EntityManager em) {
         Language language = new Language()
             .code(UPDATED_CODE)
-            .createdDate(UPDATED_CREATED_DATE)
             .icon(UPDATED_ICON)
             .defaultImage(UPDATED_DEFAULT_IMAGE)
             .defaultImageData(UPDATED_DEFAULT_IMAGE_DATA)
-            .defaultImageDataContentType(UPDATED_DEFAULT_IMAGE_DATA_CONTENT_TYPE);
+            .defaultImageDataContentType(UPDATED_DEFAULT_IMAGE_DATA_CONTENT_TYPE)
+            .createdDate(UPDATED_CREATED_DATE);
         return language;
     }
 
@@ -200,11 +200,11 @@ class LanguageResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(language.getId().intValue())))
             .andExpect(jsonPath("$.[*].code").value(hasItem(DEFAULT_CODE)))
-            .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
             .andExpect(jsonPath("$.[*].icon").value(hasItem(DEFAULT_ICON)))
             .andExpect(jsonPath("$.[*].defaultImage").value(hasItem(DEFAULT_DEFAULT_IMAGE)))
             .andExpect(jsonPath("$.[*].defaultImageDataContentType").value(hasItem(DEFAULT_DEFAULT_IMAGE_DATA_CONTENT_TYPE)))
-            .andExpect(jsonPath("$.[*].defaultImageData").value(hasItem(Base64.getEncoder().encodeToString(DEFAULT_DEFAULT_IMAGE_DATA))));
+            .andExpect(jsonPath("$.[*].defaultImageData").value(hasItem(Base64.getEncoder().encodeToString(DEFAULT_DEFAULT_IMAGE_DATA))))
+            .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())));
     }
 
     @SuppressWarnings({ "unchecked" })
@@ -237,11 +237,11 @@ class LanguageResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(language.getId().intValue()))
             .andExpect(jsonPath("$.code").value(DEFAULT_CODE))
-            .andExpect(jsonPath("$.createdDate").value(DEFAULT_CREATED_DATE.toString()))
             .andExpect(jsonPath("$.icon").value(DEFAULT_ICON))
             .andExpect(jsonPath("$.defaultImage").value(DEFAULT_DEFAULT_IMAGE))
             .andExpect(jsonPath("$.defaultImageDataContentType").value(DEFAULT_DEFAULT_IMAGE_DATA_CONTENT_TYPE))
-            .andExpect(jsonPath("$.defaultImageData").value(Base64.getEncoder().encodeToString(DEFAULT_DEFAULT_IMAGE_DATA)));
+            .andExpect(jsonPath("$.defaultImageData").value(Base64.getEncoder().encodeToString(DEFAULT_DEFAULT_IMAGE_DATA)))
+            .andExpect(jsonPath("$.createdDate").value(DEFAULT_CREATED_DATE.toString()));
     }
 
     @Test
@@ -265,11 +265,11 @@ class LanguageResourceIT {
         em.detach(updatedLanguage);
         updatedLanguage
             .code(UPDATED_CODE)
-            .createdDate(UPDATED_CREATED_DATE)
             .icon(UPDATED_ICON)
             .defaultImage(UPDATED_DEFAULT_IMAGE)
             .defaultImageData(UPDATED_DEFAULT_IMAGE_DATA)
-            .defaultImageDataContentType(UPDATED_DEFAULT_IMAGE_DATA_CONTENT_TYPE);
+            .defaultImageDataContentType(UPDATED_DEFAULT_IMAGE_DATA_CONTENT_TYPE)
+            .createdDate(UPDATED_CREATED_DATE);
         LanguageDTO languageDTO = languageMapper.toDto(updatedLanguage);
 
         restLanguageMockMvc
@@ -360,7 +360,8 @@ class LanguageResourceIT {
         partialUpdatedLanguage.setId(language.getId());
 
         partialUpdatedLanguage
-            .createdDate(UPDATED_CREATED_DATE)
+            .code(UPDATED_CODE)
+            .defaultImage(UPDATED_DEFAULT_IMAGE)
             .defaultImageData(UPDATED_DEFAULT_IMAGE_DATA)
             .defaultImageDataContentType(UPDATED_DEFAULT_IMAGE_DATA_CONTENT_TYPE);
 
@@ -392,11 +393,11 @@ class LanguageResourceIT {
 
         partialUpdatedLanguage
             .code(UPDATED_CODE)
-            .createdDate(UPDATED_CREATED_DATE)
             .icon(UPDATED_ICON)
             .defaultImage(UPDATED_DEFAULT_IMAGE)
             .defaultImageData(UPDATED_DEFAULT_IMAGE_DATA)
-            .defaultImageDataContentType(UPDATED_DEFAULT_IMAGE_DATA_CONTENT_TYPE);
+            .defaultImageDataContentType(UPDATED_DEFAULT_IMAGE_DATA_CONTENT_TYPE)
+            .createdDate(UPDATED_CREATED_DATE);
 
         restLanguageMockMvc
             .perform(

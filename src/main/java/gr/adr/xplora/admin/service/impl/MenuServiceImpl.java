@@ -1,14 +1,10 @@
 package gr.adr.xplora.admin.service.impl;
 
 import gr.adr.xplora.admin.domain.Menu;
-import gr.adr.xplora.admin.domain.User;
 import gr.adr.xplora.admin.repository.MenuRepository;
-import gr.adr.xplora.admin.repository.UserRepository;
-import gr.adr.xplora.admin.security.SecurityUtils;
 import gr.adr.xplora.admin.service.MenuService;
 import gr.adr.xplora.admin.service.dto.MenuDTO;
 import gr.adr.xplora.admin.service.mapper.MenuMapper;
-import java.time.LocalDate;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,12 +23,11 @@ public class MenuServiceImpl implements MenuService {
     private final Logger log = LoggerFactory.getLogger(MenuServiceImpl.class);
 
     private final MenuRepository menuRepository;
-    private final UserRepository userRepository;
+
     private final MenuMapper menuMapper;
 
-    public MenuServiceImpl(MenuRepository menuRepository, MenuMapper menuMapper, UserRepository userRepository) {
+    public MenuServiceImpl(MenuRepository menuRepository, MenuMapper menuMapper) {
         this.menuRepository = menuRepository;
-        this.userRepository = userRepository;
         this.menuMapper = menuMapper;
     }
 
@@ -40,15 +35,6 @@ public class MenuServiceImpl implements MenuService {
     public MenuDTO save(MenuDTO menuDTO) {
         log.debug("Request to save Menu : {}", menuDTO);
         Menu menu = menuMapper.toEntity(menuDTO);
-        if (menu.getCreatedDate() == null) {
-            menu.setCreatedDate(LocalDate.now());
-        }
-        if (menu.getCreatedBy() == null) {
-            Optional<User> user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin().orElse(""));
-            if (user.isPresent()) {
-                menu.setCreatedBy(user.orElse(null));
-            }
-        }
         menu = menuRepository.save(menu);
         return menuMapper.toDto(menu);
     }

@@ -83,14 +83,6 @@ export const ContentDetail = () => {
           </dt>
           <dd>{contentEntity.destination ? contentEntity.destination.code : ''}</dd>
           <dt>
-            <Translate contentKey="xploraAdminApp.content.tourExtraInfo">Tour Extra Info</Translate>
-          </dt>
-          <dd>{contentEntity.tourExtraInfo ? contentEntity.tourExtraInfo.code : ''}</dd>
-          <dt>
-            <Translate contentKey="xploraAdminApp.content.tour">Tour</Translate>
-          </dt>
-          <dd>{contentEntity.tour ? contentEntity.tour.code : ''}</dd>
-          <dt>
             <Translate contentKey="xploraAdminApp.content.tourCategory">Tour Category</Translate>
           </dt>
           <dd>{contentEntity.tourCategory ? contentEntity.tourCategory.code : ''}</dd>

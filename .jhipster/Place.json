@@ -11,6 +11,15 @@
       "fieldValidateRules": ["required"]
     },
     {
+      "fieldName": "enabled",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "icon",
+      "fieldType": "String"
+    },
+    {
       "fieldName": "destinationSight",
       "fieldType": "Boolean",
       "fieldValidateRules": ["required"]

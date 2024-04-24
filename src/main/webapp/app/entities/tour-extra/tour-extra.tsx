@@ -122,9 +122,17 @@ export const TourExtra = () => {
                   <Translate contentKey="xploraAdminApp.tourExtra.enabled">Enabled</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('enabled')} />
                 </th>
+                <th className="hand" onClick={sort('icon')}>
+                  <Translate contentKey="xploraAdminApp.tourExtra.icon">Icon</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('icon')} />
+                </th>
                 <th className="hand" onClick={sort('price')}>
                   <Translate contentKey="xploraAdminApp.tourExtra.price">Price</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('price')} />
+                </th>
+                <th className="hand" onClick={sort('offer')}>
+                  <Translate contentKey="xploraAdminApp.tourExtra.offer">Offer</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('offer')} />
                 </th>
                 <th className="hand" onClick={sort('shopProductId')}>
                   <Translate contentKey="xploraAdminApp.tourExtra.shopProductId">Shop Product Id</Translate>{' '}
@@ -162,7 +170,9 @@ export const TourExtra = () => {
                   </td>
                   <td>{tourExtra.code}</td>
                   <td>{tourExtra.enabled ? 'true' : 'false'}</td>
+                  <td>{tourExtra.icon}</td>
                   <td>{tourExtra.price}</td>
+                  <td>{tourExtra.offer}</td>
                   <td>{tourExtra.shopProductId}</td>
                   <td>{tourExtra.shopUrl}</td>
                   <td>

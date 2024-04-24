@@ -48,11 +48,11 @@ class TourCategoryResourceIT {
     private static final String DEFAULT_CODE = "AAAAAAAAAA";
     private static final String UPDATED_CODE = "BBBBBBBBBB";
 
-    private static final String DEFAULT_ICON = "AAAAAAAAAA";
-    private static final String UPDATED_ICON = "BBBBBBBBBB";
-
     private static final Boolean DEFAULT_ENABLED = false;
     private static final Boolean UPDATED_ENABLED = true;
+
+    private static final String DEFAULT_ICON = "AAAAAAAAAA";
+    private static final String UPDATED_ICON = "BBBBBBBBBB";
 
     private static final LocalDate DEFAULT_CREATED_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_CREATED_DATE = LocalDate.now(ZoneId.systemDefault());
@@ -103,8 +103,8 @@ class TourCategoryResourceIT {
     public static TourCategory createEntity(EntityManager em) {
         TourCategory tourCategory = new TourCategory()
             .code(DEFAULT_CODE)
-            .icon(DEFAULT_ICON)
             .enabled(DEFAULT_ENABLED)
+            .icon(DEFAULT_ICON)
             .createdDate(DEFAULT_CREATED_DATE)
             .defaultImage(DEFAULT_DEFAULT_IMAGE)
             .defaultImageData(DEFAULT_DEFAULT_IMAGE_DATA)
@@ -121,8 +121,8 @@ class TourCategoryResourceIT {
     public static TourCategory createUpdatedEntity(EntityManager em) {
         TourCategory tourCategory = new TourCategory()
             .code(UPDATED_CODE)
-            .icon(UPDATED_ICON)
             .enabled(UPDATED_ENABLED)
+            .icon(UPDATED_ICON)
             .createdDate(UPDATED_CREATED_DATE)
             .defaultImage(UPDATED_DEFAULT_IMAGE)
             .defaultImageData(UPDATED_DEFAULT_IMAGE_DATA)
@@ -194,6 +194,23 @@ class TourCategoryResourceIT {
 
     @Test
     @Transactional
+    void checkEnabledIsRequired() throws Exception {
+        long databaseSizeBeforeTest = getRepositoryCount();
+        // set the field null
+        tourCategory.setEnabled(null);
+
+        // Create the TourCategory, which fails.
+        TourCategoryDTO tourCategoryDTO = tourCategoryMapper.toDto(tourCategory);
+
+        restTourCategoryMockMvc
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsBytes(tourCategoryDTO)))
+            .andExpect(status().isBadRequest());
+
+        assertSameRepositoryCount(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     void getAllTourCategories() throws Exception {
         // Initialize the database
         tourCategoryRepository.saveAndFlush(tourCategory);
@@ -205,8 +222,8 @@ class TourCategoryResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(tourCategory.getId().intValue())))
             .andExpect(jsonPath("$.[*].code").value(hasItem(DEFAULT_CODE)))
-            .andExpect(jsonPath("$.[*].icon").value(hasItem(DEFAULT_ICON)))
             .andExpect(jsonPath("$.[*].enabled").value(hasItem(DEFAULT_ENABLED.booleanValue())))
+            .andExpect(jsonPath("$.[*].icon").value(hasItem(DEFAULT_ICON)))
             .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
             .andExpect(jsonPath("$.[*].defaultImage").value(hasItem(DEFAULT_DEFAULT_IMAGE)))
             .andExpect(jsonPath("$.[*].defaultImageDataContentType").value(hasItem(DEFAULT_DEFAULT_IMAGE_DATA_CONTENT_TYPE)))
@@ -243,8 +260,8 @@ class TourCategoryResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(tourCategory.getId().intValue()))
             .andExpect(jsonPath("$.code").value(DEFAULT_CODE))
-            .andExpect(jsonPath("$.icon").value(DEFAULT_ICON))
             .andExpect(jsonPath("$.enabled").value(DEFAULT_ENABLED.booleanValue()))
+            .andExpect(jsonPath("$.icon").value(DEFAULT_ICON))
             .andExpect(jsonPath("$.createdDate").value(DEFAULT_CREATED_DATE.toString()))
             .andExpect(jsonPath("$.defaultImage").value(DEFAULT_DEFAULT_IMAGE))
             .andExpect(jsonPath("$.defaultImageDataContentType").value(DEFAULT_DEFAULT_IMAGE_DATA_CONTENT_TYPE))
@@ -272,8 +289,8 @@ class TourCategoryResourceIT {
         em.detach(updatedTourCategory);
         updatedTourCategory
             .code(UPDATED_CODE)
-            .icon(UPDATED_ICON)
             .enabled(UPDATED_ENABLED)
+            .icon(UPDATED_ICON)
             .createdDate(UPDATED_CREATED_DATE)
             .defaultImage(UPDATED_DEFAULT_IMAGE)
             .defaultImageData(UPDATED_DEFAULT_IMAGE_DATA)
@@ -367,7 +384,7 @@ class TourCategoryResourceIT {
         TourCategory partialUpdatedTourCategory = new TourCategory();
         partialUpdatedTourCategory.setId(tourCategory.getId());
 
-        partialUpdatedTourCategory.code(UPDATED_CODE);
+        partialUpdatedTourCategory.code(UPDATED_CODE).enabled(UPDATED_ENABLED).defaultImage(UPDATED_DEFAULT_IMAGE);
 
         restTourCategoryMockMvc
             .perform(
@@ -400,8 +417,8 @@ class TourCategoryResourceIT {
 
         partialUpdatedTourCategory
             .code(UPDATED_CODE)
-            .icon(UPDATED_ICON)
             .enabled(UPDATED_ENABLED)
+            .icon(UPDATED_ICON)
             .createdDate(UPDATED_CREATED_DATE)
             .defaultImage(UPDATED_DEFAULT_IMAGE)
             .defaultImageData(UPDATED_DEFAULT_IMAGE_DATA)

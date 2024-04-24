@@ -119,13 +119,13 @@ export const TourCategory = () => {
                   <Translate contentKey="xploraAdminApp.tourCategory.code">Code</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('code')} />
                 </th>
-                <th className="hand" onClick={sort('icon')}>
-                  <Translate contentKey="xploraAdminApp.tourCategory.icon">Icon</Translate>{' '}
-                  <FontAwesomeIcon icon={getSortIconByFieldName('icon')} />
-                </th>
                 <th className="hand" onClick={sort('enabled')}>
                   <Translate contentKey="xploraAdminApp.tourCategory.enabled">Enabled</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('enabled')} />
+                </th>
+                <th className="hand" onClick={sort('icon')}>
+                  <Translate contentKey="xploraAdminApp.tourCategory.icon">Icon</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('icon')} />
                 </th>
                 <th className="hand" onClick={sort('createdDate')}>
                   <Translate contentKey="xploraAdminApp.tourCategory.createdDate">Created Date</Translate>{' '}
@@ -157,8 +157,8 @@ export const TourCategory = () => {
                     </Button>
                   </td>
                   <td>{tourCategory.code}</td>
-                  <td>{tourCategory.icon}</td>
                   <td>{tourCategory.enabled ? 'true' : 'false'}</td>
+                  <td>{tourCategory.icon}</td>
                   <td>
                     {tourCategory.createdDate ? (
                       <TextFormat type="date" value={tourCategory.createdDate} format={APP_LOCAL_DATE_FORMAT} />

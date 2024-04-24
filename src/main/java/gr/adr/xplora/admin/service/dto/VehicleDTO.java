@@ -18,6 +18,9 @@ public class VehicleDTO implements Serializable {
     private String plate;
 
     @NotNull
+    private Boolean enabled;
+
+    @NotNull
     private String type;
 
     @NotNull
@@ -48,6 +51,14 @@ public class VehicleDTO implements Serializable {
 
     public void setPlate(String plate) {
         this.plate = plate;
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 
     public String getType() {
@@ -133,6 +144,7 @@ public class VehicleDTO implements Serializable {
         return "VehicleDTO{" +
             "id=" + getId() +
             ", plate='" + getPlate() + "'" +
+            ", enabled='" + getEnabled() + "'" +
             ", type='" + getType() + "'" +
             ", capacity=" + getCapacity() +
             ", color='" + getColor() + "'" +

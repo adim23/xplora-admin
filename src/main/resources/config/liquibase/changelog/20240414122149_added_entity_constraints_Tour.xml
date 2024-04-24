@@ -10,6 +10,13 @@
     -->
     <changeSet id="20240414122149-2" author="jhipster">
 
+        <addForeignKeyConstraint baseColumnNames="content_id"
+                                 baseTableName="tour"
+                                 constraintName="fk_tour__content_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tour_content"
+                                 />
+
         <addForeignKeyConstraint baseColumnNames="created_by_id"
                                  baseTableName="tour"
                                  constraintName="fk_tour__created_by_id"
@@ -92,6 +99,13 @@
                                  constraintName="fk_tour__destination_id"
                                  referencedColumnNames="id"
                                  referencedTableName="destination"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="default_category_id"
+                                 baseTableName="tour"
+                                 constraintName="fk_tour__default_category_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tour_category"
                                  />
     </changeSet>
 </databaseChangeLog>

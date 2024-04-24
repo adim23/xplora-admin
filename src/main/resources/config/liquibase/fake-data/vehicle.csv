@@ -1,11 +1,11 @@
-id;plate;type;capacity;color;created_date;default_image;default_image_data;default_image_data_content_type
-1;off occasion however;bustle;2565;turquoise;2024-04-13;phooey;../fake-data/blob/hipster.png;image/png
-2;though toward;shearling cruelly;24851;yellow;2024-04-14;disseminate;../fake-data/blob/hipster.png;image/png
-3;in;acquaintance;28710;cyan;2024-04-14;separately fooey yearningly;../fake-data/blob/hipster.png;image/png
-4;acrylic absent;lest;10228;grey;2024-04-14;become microblog;../fake-data/blob/hipster.png;image/png
-5;ugh upon;gash luminous worse;27934;plum;2024-04-14;couch;../fake-data/blob/hipster.png;image/png
-6;yawningly;tenderly wealthy;1680;orange;2024-04-14;hastily;../fake-data/blob/hipster.png;image/png
-7;positively;bah;28394;blue;2024-04-13;whoa yieldingly pfft;../fake-data/blob/hipster.png;image/png
-8;tritone down dose;encamp meh;29666;blue;2024-04-13;or hm;../fake-data/blob/hipster.png;image/png
-9;yuck;apropos;24150;gold;2024-04-13;delineate poorly;../fake-data/blob/hipster.png;image/png
-10;embroider;loudly;18039;ivory;2024-04-13;the;../fake-data/blob/hipster.png;image/png
+id;plate;enabled;type;capacity;color;created_date;default_image;default_image_data;default_image_data_content_type
+1;off occasion however;true;blah bouncy;316;fuchsia;2024-04-14;though toward;../fake-data/blob/hipster.png;image/png
+2;shearling cruelly;false;above;27605;black;2024-04-14;cartload;../fake-data/blob/hipster.png;image/png
+3;pish;false;tank supposing camera;2604;maroon;2024-04-14;on silently yum;../fake-data/blob/hipster.png;image/png
+4;cup;true;ah via;10188;salmon;2024-04-14;undersell uh-huh dear;../fake-data/blob/hipster.png;image/png
+5;open requite so;false;concerned orderly;24548;green;2024-04-13;worth;../fake-data/blob/hipster.png;image/png
+6;zowie in;false;forage;10420;pink;2024-04-13;knavishly;../fake-data/blob/hipster.png;image/png
+7;pfft nicely inside;true;quirkily;1837;grey;2024-04-13;invent plunge;../fake-data/blob/hipster.png;image/png
+8;yahoo and yuck;true;what;8333;lime;2024-04-13;while attain embroider;../fake-data/blob/hipster.png;image/png
+9;loudly;false;yahoo since room;9937;turquoise;2024-04-13;excepting pish;../fake-data/blob/hipster.png;image/png
+10;bitterly sans;true;yesterday;14697;white;2024-04-13;dollop propane;../fake-data/blob/hipster.png;image/png

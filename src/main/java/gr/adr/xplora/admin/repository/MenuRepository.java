@@ -30,18 +30,18 @@ public interface MenuRepository extends JpaRepository<Menu, Long> {
     }
 
     @Query(
-        value = "select menu from Menu menu left join fetch menu.createdBy left join fetch menu.page left join fetch menu.parent left join fetch menu.tourCategory",
+        value = "select menu from Menu menu left join fetch menu.createdBy left join fetch menu.page left join fetch menu.parent left join fetch menu.tourCategory left join fetch menu.destination",
         countQuery = "select count(menu) from Menu menu"
     )
     Page<Menu> findAllWithToOneRelationships(Pageable pageable);
 
     @Query(
-        "select menu from Menu menu left join fetch menu.createdBy left join fetch menu.page left join fetch menu.parent left join fetch menu.tourCategory"
+        "select menu from Menu menu left join fetch menu.createdBy left join fetch menu.page left join fetch menu.parent left join fetch menu.tourCategory left join fetch menu.destination"
     )
     List<Menu> findAllWithToOneRelationships();
 
     @Query(
-        "select menu from Menu menu left join fetch menu.createdBy left join fetch menu.page left join fetch menu.parent left join fetch menu.tourCategory where menu.id =:id"
+        "select menu from Menu menu left join fetch menu.createdBy left join fetch menu.page left join fetch menu.parent left join fetch menu.tourCategory left join fetch menu.destination where menu.id =:id"
     )
     Optional<Menu> findOneWithToOneRelationships(@Param("id") Long id);
 }

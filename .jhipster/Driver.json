@@ -11,6 +11,11 @@
       "fieldValidateRules": ["required"]
     },
     {
+      "fieldName": "enabled",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
       "fieldName": "hiredAt",
       "fieldType": "LocalDate"
     },

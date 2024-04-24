@@ -17,10 +17,10 @@
             <column name="code" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
-            <column name="uri_path" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
             <column name="enabled" type="boolean">
+                <constraints nullable="false" />
+            </column>
+            <column name="uri_path" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="publish_date" type="date">
@@ -68,8 +68,8 @@
                   usePreparedStatements="true">
             <column name="id" type="numeric"/>
             <column name="code" type="string"/>
-            <column name="uri_path" type="string"/>
             <column name="enabled" type="boolean"/>
+            <column name="uri_path" type="string"/>
             <column name="publish_date" type="date"/>
             <column name="created_date" type="date"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->

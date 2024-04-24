@@ -30,17 +30,15 @@ public class Menu implements Serializable {
     @Column(name = "code", nullable = false)
     private String code;
 
-    @Column(name = "uri")
-    private String uri;
-
-    @Column(name = "created_date")
-    private LocalDate createdDate;
+    @NotNull
+    @Column(name = "enabled", nullable = false)
+    private Boolean enabled;
 
     @Column(name = "icon")
     private String icon;
 
-    @Column(name = "enabled")
-    private Boolean enabled;
+    @Column(name = "uri")
+    private String uri;
 
     @Column(name = "default_image")
     private String defaultImage;
@@ -52,9 +50,15 @@ public class Menu implements Serializable {
     @Column(name = "default_image_data_content_type")
     private String defaultImageDataContentType;
 
+    @Column(name = "created_date")
+    private LocalDate createdDate;
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "parent")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "children", "names", "createdBy", "page", "parent", "tourCategory" }, allowSetters = true)
+    @JsonIgnoreProperties(
+        value = { "children", "names", "createdBy", "page", "parent", "tourCategory", "destination" },
+        allowSetters = true
+    )
     private Set<Menu> children = new HashSet<>();
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "menu")
@@ -64,8 +68,6 @@ public class Menu implements Serializable {
             "language",
             "createdBy",
             "destination",
-            "tourExtraInfo",
-            "tour",
             "tourCategory",
             "place",
             "placeCategory",
@@ -90,12 +92,22 @@ public class Menu implements Serializable {
     private WebPage page;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "children", "names", "createdBy", "page", "parent", "tourCategory" }, allowSetters = true)
+    @JsonIgnoreProperties(
+        value = { "children", "names", "createdBy", "page", "parent", "tourCategory", "destination" },
+        allowSetters = true
+    )
     private Menu parent;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "children", "images", "menus", "contents", "createdBy", "parent", "tours" }, allowSetters = true)
+    @JsonIgnoreProperties(
+        value = { "defaultTours", "children", "images", "menus", "contents", "createdBy", "parent", "tours" },
+        allowSetters = true
+    )
     private TourCategory tourCategory;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "tours", "places", "images", "menus", "contents", "createdBy" }, allowSetters = true)
+    private Destination destination;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -125,30 +137,17 @@ public class Menu implements Serializable {
         this.code = code;
     }
 
-    public String getUri() {
-        return this.uri;
+    public Boolean getEnabled() {
+        return this.enabled;
     }
 
-    public Menu uri(String uri) {
-        this.setUri(uri);
+    public Menu enabled(Boolean enabled) {
+        this.setEnabled(enabled);
         return this;
     }
 
-    public void setUri(String uri) {
-        this.uri = uri;
-    }
-
-    public LocalDate getCreatedDate() {
-        return this.createdDate;
-    }
-
-    public Menu createdDate(LocalDate createdDate) {
-        this.setCreatedDate(createdDate);
-        return this;
-    }
-
-    public void setCreatedDate(LocalDate createdDate) {
-        this.createdDate = createdDate;
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 
     public String getIcon() {
@@ -164,17 +163,17 @@ public class Menu implements Serializable {
         this.icon = icon;
     }
 
-    public Boolean getEnabled() {
-        return this.enabled;
+    public String getUri() {
+        return this.uri;
     }
 
-    public Menu enabled(Boolean enabled) {
-        this.setEnabled(enabled);
+    public Menu uri(String uri) {
+        this.setUri(uri);
         return this;
     }
 
-    public void setEnabled(Boolean enabled) {
-        this.enabled = enabled;
+    public void setUri(String uri) {
+        this.uri = uri;
     }
 
     public String getDefaultImage() {
@@ -214,6 +213,19 @@ public class Menu implements Serializable {
 
     public void setDefaultImageDataContentType(String defaultImageDataContentType) {
         this.defaultImageDataContentType = defaultImageDataContentType;
+    }
+
+    public LocalDate getCreatedDate() {
+        return this.createdDate;
+    }
+
+    public Menu createdDate(LocalDate createdDate) {
+        this.setCreatedDate(createdDate);
+        return this;
+    }
+
+    public void setCreatedDate(LocalDate createdDate) {
+        this.createdDate = createdDate;
     }
 
     public Set<Menu> getChildren() {
@@ -330,6 +342,19 @@ public class Menu implements Serializable {
         return this;
     }
 
+    public Destination getDestination() {
+        return this.destination;
+    }
+
+    public void setDestination(Destination destination) {
+        this.destination = destination;
+    }
+
+    public Menu destination(Destination destination) {
+        this.setDestination(destination);
+        return this;
+    }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -355,13 +380,13 @@ public class Menu implements Serializable {
         return "Menu{" +
             "id=" + getId() +
             ", code='" + getCode() + "'" +
-            ", uri='" + getUri() + "'" +
-            ", createdDate='" + getCreatedDate() + "'" +
-            ", icon='" + getIcon() + "'" +
             ", enabled='" + getEnabled() + "'" +
+            ", icon='" + getIcon() + "'" +
+            ", uri='" + getUri() + "'" +
             ", defaultImage='" + getDefaultImage() + "'" +
             ", defaultImageData='" + getDefaultImageData() + "'" +
             ", defaultImageDataContentType='" + getDefaultImageDataContentType() + "'" +
+            ", createdDate='" + getCreatedDate() + "'" +
             "}";
     }
 }

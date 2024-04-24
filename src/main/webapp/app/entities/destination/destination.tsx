@@ -119,9 +119,9 @@ export const Destination = () => {
                   <Translate contentKey="xploraAdminApp.destination.code">Code</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('code')} />
                 </th>
-                <th className="hand" onClick={sort('createdDate')}>
-                  <Translate contentKey="xploraAdminApp.destination.createdDate">Created Date</Translate>{' '}
-                  <FontAwesomeIcon icon={getSortIconByFieldName('createdDate')} />
+                <th className="hand" onClick={sort('enabled')}>
+                  <Translate contentKey="xploraAdminApp.destination.enabled">Enabled</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('enabled')} />
                 </th>
                 <th className="hand" onClick={sort('defaultImage')}>
                   <Translate contentKey="xploraAdminApp.destination.defaultImage">Default Image</Translate>{' '}
@@ -130,6 +130,14 @@ export const Destination = () => {
                 <th className="hand" onClick={sort('defaultImageData')}>
                   <Translate contentKey="xploraAdminApp.destination.defaultImageData">Default Image Data</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('defaultImageData')} />
+                </th>
+                <th className="hand" onClick={sort('cssStyle')}>
+                  <Translate contentKey="xploraAdminApp.destination.cssStyle">Css Style</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('cssStyle')} />
+                </th>
+                <th className="hand" onClick={sort('createdDate')}>
+                  <Translate contentKey="xploraAdminApp.destination.createdDate">Created Date</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('createdDate')} />
                 </th>
                 <th>
                   <Translate contentKey="xploraAdminApp.destination.createdBy">Created By</Translate> <FontAwesomeIcon icon="sort" />
@@ -146,11 +154,7 @@ export const Destination = () => {
                     </Button>
                   </td>
                   <td>{destination.code}</td>
-                  <td>
-                    {destination.createdDate ? (
-                      <TextFormat type="date" value={destination.createdDate} format={APP_LOCAL_DATE_FORMAT} />
-                    ) : null}
-                  </td>
+                  <td>{destination.enabled ? 'true' : 'false'}</td>
                   <td>{destination.defaultImage}</td>
                   <td>
                     {destination.defaultImageData ? (
@@ -168,6 +172,12 @@ export const Destination = () => {
                           {destination.defaultImageDataContentType}, {byteSize(destination.defaultImageData)}
                         </span>
                       </div>
+                    ) : null}
+                  </td>
+                  <td>{destination.cssStyle}</td>
+                  <td>
+                    {destination.createdDate ? (
+                      <TextFormat type="date" value={destination.createdDate} format={APP_LOCAL_DATE_FORMAT} />
                     ) : null}
                   </td>
                   <td>{destination.createdBy ? destination.createdBy.login : ''}</td>

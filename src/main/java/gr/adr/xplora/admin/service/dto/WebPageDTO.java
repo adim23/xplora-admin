@@ -18,9 +18,10 @@ public class WebPageDTO implements Serializable {
     @NotNull
     private String code;
 
-    private String uriPath;
-
+    @NotNull
     private Boolean enabled;
+
+    private String uriPath;
 
     private LocalDate publishDate;
 
@@ -46,20 +47,20 @@ public class WebPageDTO implements Serializable {
         this.code = code;
     }
 
-    public String getUriPath() {
-        return uriPath;
-    }
-
-    public void setUriPath(String uriPath) {
-        this.uriPath = uriPath;
-    }
-
     public Boolean getEnabled() {
         return enabled;
     }
 
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public String getUriPath() {
+        return uriPath;
+    }
+
+    public void setUriPath(String uriPath) {
+        this.uriPath = uriPath;
     }
 
     public LocalDate getPublishDate() {
@@ -121,8 +122,8 @@ public class WebPageDTO implements Serializable {
         return "WebPageDTO{" +
             "id=" + getId() +
             ", code='" + getCode() + "'" +
-            ", uriPath='" + getUriPath() + "'" +
             ", enabled='" + getEnabled() + "'" +
+            ", uriPath='" + getUriPath() + "'" +
             ", publishDate='" + getPublishDate() + "'" +
             ", createdDate='" + getCreatedDate() + "'" +
             ", createdBy=" + getCreatedBy() +

@@ -31,6 +31,13 @@ public class Place implements Serializable {
     private String code;
 
     @NotNull
+    @Column(name = "enabled", nullable = false)
+    private Boolean enabled;
+
+    @Column(name = "icon")
+    private String icon;
+
+    @NotNull
     @Column(name = "destination_sight", nullable = false)
     private Boolean destinationSight;
 
@@ -69,10 +76,10 @@ public class Place implements Serializable {
             "tourCategory",
             "place",
             "placeCategory",
+            "tourExtraCategory",
+            "tourExtra",
             "vehicle",
             "driver",
-            "tourExtra",
-            "tourExtraCategory",
         },
         allowSetters = true
     )
@@ -85,8 +92,6 @@ public class Place implements Serializable {
             "language",
             "createdBy",
             "destination",
-            "tourExtraInfo",
-            "tour",
             "tourCategory",
             "place",
             "placeCategory",
@@ -123,7 +128,7 @@ public class Place implements Serializable {
     private Set<PlaceCategory> categories = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "tours", "places", "images", "contents", "createdBy" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "tours", "places", "images", "menus", "contents", "createdBy" }, allowSetters = true)
     private Destination destination;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
@@ -152,6 +157,32 @@ public class Place implements Serializable {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public Boolean getEnabled() {
+        return this.enabled;
+    }
+
+    public Place enabled(Boolean enabled) {
+        this.setEnabled(enabled);
+        return this;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public String getIcon() {
+        return this.icon;
+    }
+
+    public Place icon(String icon) {
+        this.setIcon(icon);
+        return this;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 
     public Boolean getDestinationSight() {
@@ -435,6 +466,8 @@ public class Place implements Serializable {
         return "Place{" +
             "id=" + getId() +
             ", code='" + getCode() + "'" +
+            ", enabled='" + getEnabled() + "'" +
+            ", icon='" + getIcon() + "'" +
             ", destinationSight='" + getDestinationSight() + "'" +
             ", longitude='" + getLongitude() + "'" +
             ", latitude='" + getLatitude() + "'" +

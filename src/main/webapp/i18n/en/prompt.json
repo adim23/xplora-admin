@@ -1,0 +1,26 @@
+{
+  "xploraAdminApp": {
+    "prompt": {
+      "home": {
+        "title": "Prompts",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Prompt",
+        "createOrEditLabel": "Create or edit a Prompt",
+        "notFound": "No Prompts found"
+      },
+      "created": "A new Prompt is created with identifier {{ param }}",
+      "updated": "A Prompt is updated with identifier {{ param }}",
+      "deleted": "A Prompt is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Prompt {{ id }}?"
+      },
+      "detail": {
+        "title": "Prompt"
+      },
+      "id": "ID",
+      "key": "Key",
+      "value": "Value",
+      "language": "Language"
+    }
+  }
+}

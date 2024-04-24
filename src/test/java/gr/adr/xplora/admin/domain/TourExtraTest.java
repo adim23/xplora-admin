@@ -1,6 +1,7 @@
 package gr.adr.xplora.admin.domain;
 
 import static gr.adr.xplora.admin.domain.ContentTestSamples.*;
+import static gr.adr.xplora.admin.domain.ImageFileTestSamples.*;
 import static gr.adr.xplora.admin.domain.TagTestSamples.*;
 import static gr.adr.xplora.admin.domain.TourExtraCategoryTestSamples.*;
 import static gr.adr.xplora.admin.domain.TourExtraTestSamples.*;
@@ -26,6 +27,28 @@ class TourExtraTest {
 
         tourExtra2 = getTourExtraSample2();
         assertThat(tourExtra1).isNotEqualTo(tourExtra2);
+    }
+
+    @Test
+    void imagesTest() throws Exception {
+        TourExtra tourExtra = getTourExtraRandomSampleGenerator();
+        ImageFile imageFileBack = getImageFileRandomSampleGenerator();
+
+        tourExtra.addImages(imageFileBack);
+        assertThat(tourExtra.getImages()).containsOnly(imageFileBack);
+        assertThat(imageFileBack.getTourExtra()).isEqualTo(tourExtra);
+
+        tourExtra.removeImages(imageFileBack);
+        assertThat(tourExtra.getImages()).doesNotContain(imageFileBack);
+        assertThat(imageFileBack.getTourExtra()).isNull();
+
+        tourExtra.images(new HashSet<>(Set.of(imageFileBack)));
+        assertThat(tourExtra.getImages()).containsOnly(imageFileBack);
+        assertThat(imageFileBack.getTourExtra()).isEqualTo(tourExtra);
+
+        tourExtra.setImages(new HashSet<>());
+        assertThat(tourExtra.getImages()).doesNotContain(imageFileBack);
+        assertThat(imageFileBack.getTourExtra()).isNull();
     }
 
     @Test

@@ -48,6 +48,7 @@ public class DriverAsserts {
         assertThat(expected)
             .as("Verify Driver relevant properties")
             .satisfies(e -> assertThat(e.getName()).as("check name").isEqualTo(actual.getName()))
+            .satisfies(e -> assertThat(e.getEnabled()).as("check enabled").isEqualTo(actual.getEnabled()))
             .satisfies(e -> assertThat(e.getHiredAt()).as("check hiredAt").isEqualTo(actual.getHiredAt()))
             .satisfies(e -> assertThat(e.getAge()).as("check age").isEqualTo(actual.getAge()))
             .satisfies(e -> assertThat(e.getEmail()).as("check email").isEqualTo(actual.getEmail()))

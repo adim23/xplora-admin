@@ -1,6 +1,7 @@
 package gr.adr.xplora.admin.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import gr.adr.xplora.admin.domain.enumeration.DurationMeasure;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import java.io.Serializable;
@@ -31,6 +32,13 @@ public class TourStep implements Serializable {
     private String code;
 
     @NotNull
+    @Column(name = "enabled", nullable = false)
+    private Boolean enabled;
+
+    @Column(name = "icon")
+    private String icon;
+
+    @NotNull
     @Column(name = "step_order", nullable = false)
     private Integer stepOrder;
 
@@ -39,8 +47,18 @@ public class TourStep implements Serializable {
     private Integer waitTime;
 
     @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(name = "wait_time_measure", nullable = false)
+    private DurationMeasure waitTimeMeasure;
+
+    @NotNull
     @Column(name = "drive_time", nullable = false)
     private Integer driveTime;
+
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(name = "drive_time_measure", nullable = false)
+    private DurationMeasure driveTimeMeasure;
 
     @Column(name = "created_date")
     private LocalDate createdDate;
@@ -52,8 +70,6 @@ public class TourStep implements Serializable {
             "language",
             "createdBy",
             "destination",
-            "tourExtraInfo",
-            "tour",
             "tourCategory",
             "place",
             "placeCategory",
@@ -77,10 +93,9 @@ public class TourStep implements Serializable {
     @NotNull
     @JsonIgnoreProperties(
         value = {
+            "content",
             "steps",
             "images",
-            "extraInfos",
-            "contents",
             "createdBy",
             "meetingPoint",
             "finishPoint",
@@ -89,6 +104,7 @@ public class TourStep implements Serializable {
             "promotions",
             "categories",
             "destination",
+            "defaultCategory",
         },
         allowSetters = true
     )
@@ -130,6 +146,32 @@ public class TourStep implements Serializable {
         this.code = code;
     }
 
+    public Boolean getEnabled() {
+        return this.enabled;
+    }
+
+    public TourStep enabled(Boolean enabled) {
+        this.setEnabled(enabled);
+        return this;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public String getIcon() {
+        return this.icon;
+    }
+
+    public TourStep icon(String icon) {
+        this.setIcon(icon);
+        return this;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
     public Integer getStepOrder() {
         return this.stepOrder;
     }
@@ -156,6 +198,19 @@ public class TourStep implements Serializable {
         this.waitTime = waitTime;
     }
 
+    public DurationMeasure getWaitTimeMeasure() {
+        return this.waitTimeMeasure;
+    }
+
+    public TourStep waitTimeMeasure(DurationMeasure waitTimeMeasure) {
+        this.setWaitTimeMeasure(waitTimeMeasure);
+        return this;
+    }
+
+    public void setWaitTimeMeasure(DurationMeasure waitTimeMeasure) {
+        this.waitTimeMeasure = waitTimeMeasure;
+    }
+
     public Integer getDriveTime() {
         return this.driveTime;
     }
@@ -167,6 +222,19 @@ public class TourStep implements Serializable {
 
     public void setDriveTime(Integer driveTime) {
         this.driveTime = driveTime;
+    }
+
+    public DurationMeasure getDriveTimeMeasure() {
+        return this.driveTimeMeasure;
+    }
+
+    public TourStep driveTimeMeasure(DurationMeasure driveTimeMeasure) {
+        this.setDriveTimeMeasure(driveTimeMeasure);
+        return this;
+    }
+
+    public void setDriveTimeMeasure(DurationMeasure driveTimeMeasure) {
+        this.driveTimeMeasure = driveTimeMeasure;
     }
 
     public LocalDate getCreatedDate() {
@@ -277,9 +345,13 @@ public class TourStep implements Serializable {
         return "TourStep{" +
             "id=" + getId() +
             ", code='" + getCode() + "'" +
+            ", enabled='" + getEnabled() + "'" +
+            ", icon='" + getIcon() + "'" +
             ", stepOrder=" + getStepOrder() +
             ", waitTime=" + getWaitTime() +
+            ", waitTimeMeasure='" + getWaitTimeMeasure() + "'" +
             ", driveTime=" + getDriveTime() +
+            ", driveTimeMeasure='" + getDriveTimeMeasure() + "'" +
             ", createdDate='" + getCreatedDate() + "'" +
             "}";
     }

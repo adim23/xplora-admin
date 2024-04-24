@@ -1,12 +1,12 @@
 package gr.adr.xplora.admin.domain;
 
-import static gr.adr.xplora.admin.domain.ContentTestSamples.*;
 import static gr.adr.xplora.admin.domain.DestinationTestSamples.*;
 import static gr.adr.xplora.admin.domain.ImageFileTestSamples.*;
 import static gr.adr.xplora.admin.domain.PlaceTestSamples.*;
 import static gr.adr.xplora.admin.domain.PromotionTestSamples.*;
 import static gr.adr.xplora.admin.domain.TagTestSamples.*;
 import static gr.adr.xplora.admin.domain.TourCategoryTestSamples.*;
+import static gr.adr.xplora.admin.domain.TourContentTestSamples.*;
 import static gr.adr.xplora.admin.domain.TourExtraTestSamples.*;
 import static gr.adr.xplora.admin.domain.TourStepTestSamples.*;
 import static gr.adr.xplora.admin.domain.TourTestSamples.*;
@@ -31,6 +31,18 @@ class TourTest {
 
         tour2 = getTourSample2();
         assertThat(tour1).isNotEqualTo(tour2);
+    }
+
+    @Test
+    void contentTest() throws Exception {
+        Tour tour = getTourRandomSampleGenerator();
+        TourContent tourContentBack = getTourContentRandomSampleGenerator();
+
+        tour.setContent(tourContentBack);
+        assertThat(tour.getContent()).isEqualTo(tourContentBack);
+
+        tour.content(null);
+        assertThat(tour.getContent()).isNull();
     }
 
     @Test
@@ -75,50 +87,6 @@ class TourTest {
         tour.setImages(new HashSet<>());
         assertThat(tour.getImages()).doesNotContain(imageFileBack);
         assertThat(imageFileBack.getTour()).isNull();
-    }
-
-    @Test
-    void extraInfoTest() throws Exception {
-        Tour tour = getTourRandomSampleGenerator();
-        Content contentBack = getContentRandomSampleGenerator();
-
-        tour.addExtraInfo(contentBack);
-        assertThat(tour.getExtraInfos()).containsOnly(contentBack);
-        assertThat(contentBack.getTourExtraInfo()).isEqualTo(tour);
-
-        tour.removeExtraInfo(contentBack);
-        assertThat(tour.getExtraInfos()).doesNotContain(contentBack);
-        assertThat(contentBack.getTourExtraInfo()).isNull();
-
-        tour.extraInfos(new HashSet<>(Set.of(contentBack)));
-        assertThat(tour.getExtraInfos()).containsOnly(contentBack);
-        assertThat(contentBack.getTourExtraInfo()).isEqualTo(tour);
-
-        tour.setExtraInfos(new HashSet<>());
-        assertThat(tour.getExtraInfos()).doesNotContain(contentBack);
-        assertThat(contentBack.getTourExtraInfo()).isNull();
-    }
-
-    @Test
-    void contentsTest() throws Exception {
-        Tour tour = getTourRandomSampleGenerator();
-        Content contentBack = getContentRandomSampleGenerator();
-
-        tour.addContents(contentBack);
-        assertThat(tour.getContents()).containsOnly(contentBack);
-        assertThat(contentBack.getTour()).isEqualTo(tour);
-
-        tour.removeContents(contentBack);
-        assertThat(tour.getContents()).doesNotContain(contentBack);
-        assertThat(contentBack.getTour()).isNull();
-
-        tour.contents(new HashSet<>(Set.of(contentBack)));
-        assertThat(tour.getContents()).containsOnly(contentBack);
-        assertThat(contentBack.getTour()).isEqualTo(tour);
-
-        tour.setContents(new HashSet<>());
-        assertThat(tour.getContents()).doesNotContain(contentBack);
-        assertThat(contentBack.getTour()).isNull();
     }
 
     @Test
@@ -227,5 +195,17 @@ class TourTest {
 
         tour.destination(null);
         assertThat(tour.getDestination()).isNull();
+    }
+
+    @Test
+    void defaultCategoryTest() throws Exception {
+        Tour tour = getTourRandomSampleGenerator();
+        TourCategory tourCategoryBack = getTourCategoryRandomSampleGenerator();
+
+        tour.setDefaultCategory(tourCategoryBack);
+        assertThat(tour.getDefaultCategory()).isEqualTo(tourCategoryBack);
+
+        tour.defaultCategory(null);
+        assertThat(tour.getDefaultCategory()).isNull();
     }
 }

@@ -110,11 +110,12 @@ export const DestinationUpdate = () => {
                 }}
               />
               <ValidatedField
-                label={translate('xploraAdminApp.destination.createdDate')}
-                id="destination-createdDate"
-                name="createdDate"
-                data-cy="createdDate"
-                type="date"
+                label={translate('xploraAdminApp.destination.enabled')}
+                id="destination-enabled"
+                name="enabled"
+                data-cy="enabled"
+                check
+                type="checkbox"
               />
               <ValidatedField
                 label={translate('xploraAdminApp.destination.defaultImage')}
@@ -130,6 +131,20 @@ export const DestinationUpdate = () => {
                 data-cy="defaultImageData"
                 isImage
                 accept="image/*"
+              />
+              <ValidatedField
+                label={translate('xploraAdminApp.destination.cssStyle')}
+                id="destination-cssStyle"
+                name="cssStyle"
+                data-cy="cssStyle"
+                type="textarea"
+              />
+              <ValidatedField
+                label={translate('xploraAdminApp.destination.createdDate')}
+                id="destination-createdDate"
+                name="createdDate"
+                data-cy="createdDate"
+                type="date"
               />
               <ValidatedField
                 id="destination-createdBy"

@@ -121,19 +121,19 @@ export const TourCategoryUpdate = () => {
                 }}
               />
               <ValidatedField
-                label={translate('xploraAdminApp.tourCategory.icon')}
-                id="tour-category-icon"
-                name="icon"
-                data-cy="icon"
-                type="text"
-              />
-              <ValidatedField
                 label={translate('xploraAdminApp.tourCategory.enabled')}
                 id="tour-category-enabled"
                 name="enabled"
                 data-cy="enabled"
                 check
                 type="checkbox"
+              />
+              <ValidatedField
+                label={translate('xploraAdminApp.tourCategory.icon')}
+                id="tour-category-icon"
+                name="icon"
+                data-cy="icon"
+                type="text"
               />
               <ValidatedField
                 label={translate('xploraAdminApp.tourCategory.createdDate')}

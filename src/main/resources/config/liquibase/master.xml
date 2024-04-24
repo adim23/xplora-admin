@@ -37,6 +37,8 @@
     <include file="config/liquibase/changelog/20240414122202_added_entity_Language.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20240414122203_added_entity_Content.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20240414122204_added_entity_Tag.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240424071220_added_entity_TourContent.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240424071221_added_entity_Prompt.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20240414122145_added_entity_constraints_Destination.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20240414122146_added_entity_constraints_PlaceCategory.xml" relativeToChangelogFile="false"/>
@@ -53,6 +55,8 @@
     <include file="config/liquibase/changelog/20240414122201_added_entity_constraints_Menu.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20240414122202_added_entity_constraints_Language.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20240414122203_added_entity_constraints_Content.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240424071220_added_entity_constraints_TourContent.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240424071221_added_entity_constraints_Prompt.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
 </databaseChangeLog>

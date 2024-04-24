@@ -39,15 +39,11 @@ export const DestinationDetail = () => {
           </dt>
           <dd>{destinationEntity.code}</dd>
           <dt>
-            <span id="createdDate">
-              <Translate contentKey="xploraAdminApp.destination.createdDate">Created Date</Translate>
+            <span id="enabled">
+              <Translate contentKey="xploraAdminApp.destination.enabled">Enabled</Translate>
             </span>
           </dt>
-          <dd>
-            {destinationEntity.createdDate ? (
-              <TextFormat value={destinationEntity.createdDate} type="date" format={APP_LOCAL_DATE_FORMAT} />
-            ) : null}
-          </dd>
+          <dd>{destinationEntity.enabled ? 'true' : 'false'}</dd>
           <dt>
             <span id="defaultImage">
               <Translate contentKey="xploraAdminApp.destination.defaultImage">Default Image</Translate>
@@ -74,6 +70,22 @@ export const DestinationDetail = () => {
                   {destinationEntity.defaultImageDataContentType}, {byteSize(destinationEntity.defaultImageData)}
                 </span>
               </div>
+            ) : null}
+          </dd>
+          <dt>
+            <span id="cssStyle">
+              <Translate contentKey="xploraAdminApp.destination.cssStyle">Css Style</Translate>
+            </span>
+          </dt>
+          <dd>{destinationEntity.cssStyle}</dd>
+          <dt>
+            <span id="createdDate">
+              <Translate contentKey="xploraAdminApp.destination.createdDate">Created Date</Translate>
+            </span>
+          </dt>
+          <dd>
+            {destinationEntity.createdDate ? (
+              <TextFormat value={destinationEntity.createdDate} type="date" format={APP_LOCAL_DATE_FORMAT} />
             ) : null}
           </dd>
           <dt>

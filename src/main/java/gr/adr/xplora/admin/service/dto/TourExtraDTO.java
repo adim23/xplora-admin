@@ -19,9 +19,14 @@ public class TourExtraDTO implements Serializable {
     @NotNull
     private String code;
 
+    @NotNull
     private Boolean enabled;
 
+    private String icon;
+
     private Double price;
+
+    private Double offer;
 
     private String shopProductId;
 
@@ -68,12 +73,28 @@ public class TourExtraDTO implements Serializable {
         this.enabled = enabled;
     }
 
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
     public Double getPrice() {
         return price;
     }
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public Double getOffer() {
+        return offer;
+    }
+
+    public void setOffer(Double offer) {
+        this.offer = offer;
     }
 
     public String getShopProductId() {
@@ -184,7 +205,9 @@ public class TourExtraDTO implements Serializable {
             "id=" + getId() +
             ", code='" + getCode() + "'" +
             ", enabled='" + getEnabled() + "'" +
+            ", icon='" + getIcon() + "'" +
             ", price=" + getPrice() +
+            ", offer=" + getOffer() +
             ", shopProductId='" + getShopProductId() + "'" +
             ", shopUrl='" + getShopUrl() + "'" +
             ", createdDate='" + getCreatedDate() + "'" +

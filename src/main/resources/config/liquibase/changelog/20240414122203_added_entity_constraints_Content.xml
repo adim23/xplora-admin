@@ -31,20 +31,6 @@
                                  referencedTableName="destination"
                                  />
 
-        <addForeignKeyConstraint baseColumnNames="tour_extra_info_id"
-                                 baseTableName="content"
-                                 constraintName="fk_content__tour_extra_info_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="tour"
-                                 />
-
-        <addForeignKeyConstraint baseColumnNames="tour_id"
-                                 baseTableName="content"
-                                 constraintName="fk_content__tour_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="tour"
-                                 />
-
         <addForeignKeyConstraint baseColumnNames="tour_category_id"
                                  baseTableName="content"
                                  constraintName="fk_content__tour_category_id"

@@ -397,12 +397,7 @@ class TourScheduleResourceIT {
         TourSchedule partialUpdatedTourSchedule = new TourSchedule();
         partialUpdatedTourSchedule.setId(tourSchedule.getId());
 
-        partialUpdatedTourSchedule
-            .code(UPDATED_CODE)
-            .startDatetime(UPDATED_START_DATETIME)
-            .noPassengers(UPDATED_NO_PASSENGERS)
-            .noKids(UPDATED_NO_KIDS)
-            .createdDate(UPDATED_CREATED_DATE);
+        partialUpdatedTourSchedule.startDatetime(UPDATED_START_DATETIME).noKids(UPDATED_NO_KIDS).noPets(UPDATED_NO_PETS);
 
         restTourScheduleMockMvc
             .perform(

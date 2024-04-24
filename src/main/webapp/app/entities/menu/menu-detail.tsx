@@ -39,19 +39,11 @@ export const MenuDetail = () => {
           </dt>
           <dd>{menuEntity.code}</dd>
           <dt>
-            <span id="uri">
-              <Translate contentKey="xploraAdminApp.menu.uri">Uri</Translate>
+            <span id="enabled">
+              <Translate contentKey="xploraAdminApp.menu.enabled">Enabled</Translate>
             </span>
           </dt>
-          <dd>{menuEntity.uri}</dd>
-          <dt>
-            <span id="createdDate">
-              <Translate contentKey="xploraAdminApp.menu.createdDate">Created Date</Translate>
-            </span>
-          </dt>
-          <dd>
-            {menuEntity.createdDate ? <TextFormat value={menuEntity.createdDate} type="date" format={APP_LOCAL_DATE_FORMAT} /> : null}
-          </dd>
+          <dd>{menuEntity.enabled ? 'true' : 'false'}</dd>
           <dt>
             <span id="icon">
               <Translate contentKey="xploraAdminApp.menu.icon">Icon</Translate>
@@ -59,11 +51,11 @@ export const MenuDetail = () => {
           </dt>
           <dd>{menuEntity.icon}</dd>
           <dt>
-            <span id="enabled">
-              <Translate contentKey="xploraAdminApp.menu.enabled">Enabled</Translate>
+            <span id="uri">
+              <Translate contentKey="xploraAdminApp.menu.uri">Uri</Translate>
             </span>
           </dt>
-          <dd>{menuEntity.enabled ? 'true' : 'false'}</dd>
+          <dd>{menuEntity.uri}</dd>
           <dt>
             <span id="defaultImage">
               <Translate contentKey="xploraAdminApp.menu.defaultImage">Default Image</Translate>
@@ -93,6 +85,14 @@ export const MenuDetail = () => {
             ) : null}
           </dd>
           <dt>
+            <span id="createdDate">
+              <Translate contentKey="xploraAdminApp.menu.createdDate">Created Date</Translate>
+            </span>
+          </dt>
+          <dd>
+            {menuEntity.createdDate ? <TextFormat value={menuEntity.createdDate} type="date" format={APP_LOCAL_DATE_FORMAT} /> : null}
+          </dd>
+          <dt>
             <Translate contentKey="xploraAdminApp.menu.createdBy">Created By</Translate>
           </dt>
           <dd>{menuEntity.createdBy ? menuEntity.createdBy.login : ''}</dd>
@@ -108,6 +108,10 @@ export const MenuDetail = () => {
             <Translate contentKey="xploraAdminApp.menu.tourCategory">Tour Category</Translate>
           </dt>
           <dd>{menuEntity.tourCategory ? menuEntity.tourCategory.code : ''}</dd>
+          <dt>
+            <Translate contentKey="xploraAdminApp.menu.destination">Destination</Translate>
+          </dt>
+          <dd>{menuEntity.destination ? menuEntity.destination.code : ''}</dd>
         </dl>
         <Button tag={Link} to="/menu" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" />{' '}

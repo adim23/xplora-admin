@@ -116,19 +116,19 @@ export const WebPageUpdate = () => {
                 }}
               />
               <ValidatedField
-                label={translate('xploraAdminApp.webPage.uriPath')}
-                id="web-page-uriPath"
-                name="uriPath"
-                data-cy="uriPath"
-                type="text"
-              />
-              <ValidatedField
                 label={translate('xploraAdminApp.webPage.enabled')}
                 id="web-page-enabled"
                 name="enabled"
                 data-cy="enabled"
                 check
                 type="checkbox"
+              />
+              <ValidatedField
+                label={translate('xploraAdminApp.webPage.uriPath')}
+                id="web-page-uriPath"
+                name="uriPath"
+                data-cy="uriPath"
+                type="text"
               />
               <ValidatedField
                 label={translate('xploraAdminApp.webPage.publishDate')}

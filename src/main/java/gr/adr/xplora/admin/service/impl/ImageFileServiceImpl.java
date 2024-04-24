@@ -1,14 +1,10 @@
 package gr.adr.xplora.admin.service.impl;
 
 import gr.adr.xplora.admin.domain.ImageFile;
-import gr.adr.xplora.admin.domain.User;
 import gr.adr.xplora.admin.repository.ImageFileRepository;
-import gr.adr.xplora.admin.repository.UserRepository;
-import gr.adr.xplora.admin.security.SecurityUtils;
 import gr.adr.xplora.admin.service.ImageFileService;
 import gr.adr.xplora.admin.service.dto.ImageFileDTO;
 import gr.adr.xplora.admin.service.mapper.ImageFileMapper;
-import java.time.LocalDate;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,12 +23,11 @@ public class ImageFileServiceImpl implements ImageFileService {
     private final Logger log = LoggerFactory.getLogger(ImageFileServiceImpl.class);
 
     private final ImageFileRepository imageFileRepository;
-    private final UserRepository userRepository;
+
     private final ImageFileMapper imageFileMapper;
 
-    public ImageFileServiceImpl(ImageFileRepository imageFileRepository, ImageFileMapper imageFileMapper, UserRepository userRepository) {
+    public ImageFileServiceImpl(ImageFileRepository imageFileRepository, ImageFileMapper imageFileMapper) {
         this.imageFileRepository = imageFileRepository;
-        this.userRepository = userRepository;
         this.imageFileMapper = imageFileMapper;
     }
 
@@ -40,15 +35,6 @@ public class ImageFileServiceImpl implements ImageFileService {
     public ImageFileDTO save(ImageFileDTO imageFileDTO) {
         log.debug("Request to save ImageFile : {}", imageFileDTO);
         ImageFile imageFile = imageFileMapper.toEntity(imageFileDTO);
-        if (imageFile.getCreatedDate() == null) {
-            imageFile.setCreatedDate(LocalDate.now());
-        }
-        if (imageFile.getCreatedBy() == null) {
-            Optional<User> user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin().orElse(""));
-            if (user.isPresent()) {
-                imageFile.setCreatedBy(user.orElse(null));
-            }
-        }
         imageFile = imageFileRepository.save(imageFile);
         return imageFileMapper.toDto(imageFile);
     }

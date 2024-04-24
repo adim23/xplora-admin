@@ -48,8 +48,8 @@ public class WebPageAsserts {
         assertThat(expected)
             .as("Verify WebPage relevant properties")
             .satisfies(e -> assertThat(e.getCode()).as("check code").isEqualTo(actual.getCode()))
-            .satisfies(e -> assertThat(e.getUriPath()).as("check uriPath").isEqualTo(actual.getUriPath()))
             .satisfies(e -> assertThat(e.getEnabled()).as("check enabled").isEqualTo(actual.getEnabled()))
+            .satisfies(e -> assertThat(e.getUriPath()).as("check uriPath").isEqualTo(actual.getUriPath()))
             .satisfies(e -> assertThat(e.getPublishDate()).as("check publishDate").isEqualTo(actual.getPublishDate()))
             .satisfies(e -> assertThat(e.getCreatedDate()).as("check createdDate").isEqualTo(actual.getCreatedDate()));
     }

@@ -48,6 +48,7 @@ public class TourExtraCategoryAsserts {
         assertThat(expected)
             .as("Verify TourExtraCategory relevant properties")
             .satisfies(e -> assertThat(e.getCode()).as("check code").isEqualTo(actual.getCode()))
+            .satisfies(e -> assertThat(e.getEnabled()).as("check enabled").isEqualTo(actual.getEnabled()))
             .satisfies(e -> assertThat(e.getIcon()).as("check icon").isEqualTo(actual.getIcon()))
             .satisfies(e -> assertThat(e.getDefaultImage()).as("check defaultImage").isEqualTo(actual.getDefaultImage()))
             .satisfies(e -> assertThat(e.getDefaultImageData()).as("check defaultImageData").isEqualTo(actual.getDefaultImageData()))
@@ -57,7 +58,6 @@ public class TourExtraCategoryAsserts {
                         .as("check defaultImageData contenty type")
                         .isEqualTo(actual.getDefaultImageDataContentType())
             )
-            .satisfies(e -> assertThat(e.getEnabled()).as("check enabled").isEqualTo(actual.getEnabled()))
             .satisfies(e -> assertThat(e.getShopCategoryId()).as("check shopCategoryId").isEqualTo(actual.getShopCategoryId()))
             .satisfies(e -> assertThat(e.getShopUrl()).as("check shopUrl").isEqualTo(actual.getShopUrl()))
             .satisfies(e -> assertThat(e.getCreatedDate()).as("check createdDate").isEqualTo(actual.getCreatedDate()));

@@ -106,6 +106,14 @@ export const DriverUpdate = () => {
                 }}
               />
               <ValidatedField
+                label={translate('xploraAdminApp.driver.enabled')}
+                id="driver-enabled"
+                name="enabled"
+                data-cy="enabled"
+                check
+                type="checkbox"
+              />
+              <ValidatedField
                 label={translate('xploraAdminApp.driver.hiredAt')}
                 id="driver-hiredAt"
                 name="hiredAt"

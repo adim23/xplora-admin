@@ -118,6 +118,10 @@ export const Vehicle = () => {
                   <Translate contentKey="xploraAdminApp.vehicle.plate">Plate</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('plate')} />
                 </th>
+                <th className="hand" onClick={sort('enabled')}>
+                  <Translate contentKey="xploraAdminApp.vehicle.enabled">Enabled</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('enabled')} />
+                </th>
                 <th className="hand" onClick={sort('type')}>
                   <Translate contentKey="xploraAdminApp.vehicle.type">Type</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('type')} />
@@ -154,6 +158,7 @@ export const Vehicle = () => {
                     </Button>
                   </td>
                   <td>{vehicle.plate}</td>
+                  <td>{vehicle.enabled ? 'true' : 'false'}</td>
                   <td>{vehicle.type}</td>
                   <td>{vehicle.capacity}</td>
                   <td>{vehicle.color}</td>

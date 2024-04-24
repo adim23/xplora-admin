@@ -52,6 +52,20 @@
                                  referencedTableName="place_category"
                                  />
 
+        <addForeignKeyConstraint baseColumnNames="tour_extra_category_id"
+                                 baseTableName="image_file"
+                                 constraintName="fk_image_file__tour_extra_category_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tour_extra_category"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="tour_extra_id"
+                                 baseTableName="image_file"
+                                 constraintName="fk_image_file__tour_extra_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tour_extra"
+                                 />
+
         <addForeignKeyConstraint baseColumnNames="vehicle_id"
                                  baseTableName="image_file"
                                  constraintName="fk_image_file__vehicle_id"

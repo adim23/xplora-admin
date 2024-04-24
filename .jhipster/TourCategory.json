@@ -11,12 +11,13 @@
       "fieldValidateRules": ["required"]
     },
     {
-      "fieldName": "icon",
-      "fieldType": "String"
+      "fieldName": "enabled",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
     },
     {
-      "fieldName": "enabled",
-      "fieldType": "Boolean"
+      "fieldName": "icon",
+      "fieldType": "String"
     },
     {
       "fieldName": "createdDate",
@@ -35,6 +36,14 @@
   "name": "TourCategory",
   "pagination": "pagination",
   "relationships": [
+    {
+      "otherEntityField": "code",
+      "otherEntityName": "tour",
+      "otherEntityRelationshipName": "defaultCategory",
+      "relationshipName": "defaultTours",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
     {
       "otherEntityField": "code",
       "otherEntityName": "tourCategory",

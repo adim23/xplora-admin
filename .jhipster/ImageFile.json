@@ -92,6 +92,22 @@
       "relationshipType": "many-to-one"
     },
     {
+      "otherEntityField": "code",
+      "otherEntityName": "tourExtraCategory",
+      "otherEntityRelationshipName": "images",
+      "relationshipName": "tourExtraCategory",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "code",
+      "otherEntityName": "tourExtra",
+      "otherEntityRelationshipName": "images",
+      "relationshipName": "tourExtra",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
       "otherEntityField": "plate",
       "otherEntityName": "vehicle",
       "otherEntityRelationshipName": "images",

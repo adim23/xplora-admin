@@ -30,18 +30,18 @@ public interface ImageFileRepository extends JpaRepository<ImageFile, Long> {
     }
 
     @Query(
-        value = "select imageFile from ImageFile imageFile left join fetch imageFile.createdBy left join fetch imageFile.destination left join fetch imageFile.tour left join fetch imageFile.tourCategory left join fetch imageFile.place left join fetch imageFile.placeCategory left join fetch imageFile.vehicle left join fetch imageFile.driver",
+        value = "select imageFile from ImageFile imageFile left join fetch imageFile.createdBy left join fetch imageFile.destination left join fetch imageFile.tour left join fetch imageFile.tourCategory left join fetch imageFile.place left join fetch imageFile.placeCategory left join fetch imageFile.tourExtraCategory left join fetch imageFile.tourExtra left join fetch imageFile.vehicle left join fetch imageFile.driver",
         countQuery = "select count(imageFile) from ImageFile imageFile"
     )
     Page<ImageFile> findAllWithToOneRelationships(Pageable pageable);
 
     @Query(
-        "select imageFile from ImageFile imageFile left join fetch imageFile.createdBy left join fetch imageFile.destination left join fetch imageFile.tour left join fetch imageFile.tourCategory left join fetch imageFile.place left join fetch imageFile.placeCategory left join fetch imageFile.vehicle left join fetch imageFile.driver"
+        "select imageFile from ImageFile imageFile left join fetch imageFile.createdBy left join fetch imageFile.destination left join fetch imageFile.tour left join fetch imageFile.tourCategory left join fetch imageFile.place left join fetch imageFile.placeCategory left join fetch imageFile.tourExtraCategory left join fetch imageFile.tourExtra left join fetch imageFile.vehicle left join fetch imageFile.driver"
     )
     List<ImageFile> findAllWithToOneRelationships();
 
     @Query(
-        "select imageFile from ImageFile imageFile left join fetch imageFile.createdBy left join fetch imageFile.destination left join fetch imageFile.tour left join fetch imageFile.tourCategory left join fetch imageFile.place left join fetch imageFile.placeCategory left join fetch imageFile.vehicle left join fetch imageFile.driver where imageFile.id =:id"
+        "select imageFile from ImageFile imageFile left join fetch imageFile.createdBy left join fetch imageFile.destination left join fetch imageFile.tour left join fetch imageFile.tourCategory left join fetch imageFile.place left join fetch imageFile.placeCategory left join fetch imageFile.tourExtraCategory left join fetch imageFile.tourExtra left join fetch imageFile.vehicle left join fetch imageFile.driver where imageFile.id =:id"
     )
     Optional<ImageFile> findOneWithToOneRelationships(@Param("id") Long id);
 }

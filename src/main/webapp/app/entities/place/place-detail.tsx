@@ -39,6 +39,18 @@ export const PlaceDetail = () => {
           </dt>
           <dd>{placeEntity.code}</dd>
           <dt>
+            <span id="enabled">
+              <Translate contentKey="xploraAdminApp.place.enabled">Enabled</Translate>
+            </span>
+          </dt>
+          <dd>{placeEntity.enabled ? 'true' : 'false'}</dd>
+          <dt>
+            <span id="icon">
+              <Translate contentKey="xploraAdminApp.place.icon">Icon</Translate>
+            </span>
+          </dt>
+          <dd>{placeEntity.icon}</dd>
+          <dt>
             <span id="destinationSight">
               <Translate contentKey="xploraAdminApp.place.destinationSight">Destination Sight</Translate>
             </span>

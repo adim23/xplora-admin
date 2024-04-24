@@ -119,13 +119,13 @@ export const PlaceCategory = () => {
                   <Translate contentKey="xploraAdminApp.placeCategory.code">Code</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('code')} />
                 </th>
-                <th className="hand" onClick={sort('icon')}>
-                  <Translate contentKey="xploraAdminApp.placeCategory.icon">Icon</Translate>{' '}
-                  <FontAwesomeIcon icon={getSortIconByFieldName('icon')} />
-                </th>
                 <th className="hand" onClick={sort('enabled')}>
                   <Translate contentKey="xploraAdminApp.placeCategory.enabled">Enabled</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('enabled')} />
+                </th>
+                <th className="hand" onClick={sort('icon')}>
+                  <Translate contentKey="xploraAdminApp.placeCategory.icon">Icon</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('icon')} />
                 </th>
                 <th className="hand" onClick={sort('createdDate')}>
                   <Translate contentKey="xploraAdminApp.placeCategory.createdDate">Created Date</Translate>{' '}
@@ -154,8 +154,8 @@ export const PlaceCategory = () => {
                     </Button>
                   </td>
                   <td>{placeCategory.code}</td>
-                  <td>{placeCategory.icon}</td>
                   <td>{placeCategory.enabled ? 'true' : 'false'}</td>
+                  <td>{placeCategory.icon}</td>
                   <td>
                     {placeCategory.createdDate ? (
                       <TextFormat type="date" value={placeCategory.createdDate} format={APP_LOCAL_DATE_FORMAT} />

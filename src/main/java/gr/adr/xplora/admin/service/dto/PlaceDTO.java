@@ -20,6 +20,11 @@ public class PlaceDTO implements Serializable {
     private String code;
 
     @NotNull
+    private Boolean enabled;
+
+    private String icon;
+
+    @NotNull
     private Boolean destinationSight;
 
     private String longitude;
@@ -57,6 +62,22 @@ public class PlaceDTO implements Serializable {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 
     public Boolean getDestinationSight() {
@@ -174,6 +195,8 @@ public class PlaceDTO implements Serializable {
         return "PlaceDTO{" +
             "id=" + getId() +
             ", code='" + getCode() + "'" +
+            ", enabled='" + getEnabled() + "'" +
+            ", icon='" + getIcon() + "'" +
             ", destinationSight='" + getDestinationSight() + "'" +
             ", longitude='" + getLongitude() + "'" +
             ", latitude='" + getLatitude() + "'" +

@@ -48,6 +48,7 @@ public class VehicleAsserts {
         assertThat(expected)
             .as("Verify Vehicle relevant properties")
             .satisfies(e -> assertThat(e.getPlate()).as("check plate").isEqualTo(actual.getPlate()))
+            .satisfies(e -> assertThat(e.getEnabled()).as("check enabled").isEqualTo(actual.getEnabled()))
             .satisfies(e -> assertThat(e.getType()).as("check type").isEqualTo(actual.getType()))
             .satisfies(e -> assertThat(e.getCapacity()).as("check capacity").isEqualTo(actual.getCapacity()))
             .satisfies(e -> assertThat(e.getColor()).as("check color").isEqualTo(actual.getColor()))

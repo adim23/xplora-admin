@@ -128,6 +128,15 @@ export const PlaceUpdate = () => {
                 }}
               />
               <ValidatedField
+                label={translate('xploraAdminApp.place.enabled')}
+                id="place-enabled"
+                name="enabled"
+                data-cy="enabled"
+                check
+                type="checkbox"
+              />
+              <ValidatedField label={translate('xploraAdminApp.place.icon')} id="place-icon" name="icon" data-cy="icon" type="text" />
+              <ValidatedField
                 label={translate('xploraAdminApp.place.destinationSight')}
                 id="place-destinationSight"
                 name="destinationSight"

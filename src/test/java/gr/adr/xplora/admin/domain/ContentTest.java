@@ -13,7 +13,6 @@ import static gr.adr.xplora.admin.domain.TourCategoryTestSamples.*;
 import static gr.adr.xplora.admin.domain.TourExtraCategoryTestSamples.*;
 import static gr.adr.xplora.admin.domain.TourExtraTestSamples.*;
 import static gr.adr.xplora.admin.domain.TourStepTestSamples.*;
-import static gr.adr.xplora.admin.domain.TourTestSamples.*;
 import static gr.adr.xplora.admin.domain.WebPageTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -58,30 +57,6 @@ class ContentTest {
 
         content.destination(null);
         assertThat(content.getDestination()).isNull();
-    }
-
-    @Test
-    void tourExtraInfoTest() throws Exception {
-        Content content = getContentRandomSampleGenerator();
-        Tour tourBack = getTourRandomSampleGenerator();
-
-        content.setTourExtraInfo(tourBack);
-        assertThat(content.getTourExtraInfo()).isEqualTo(tourBack);
-
-        content.tourExtraInfo(null);
-        assertThat(content.getTourExtraInfo()).isNull();
-    }
-
-    @Test
-    void tourTest() throws Exception {
-        Content content = getContentRandomSampleGenerator();
-        Tour tourBack = getTourRandomSampleGenerator();
-
-        content.setTour(tourBack);
-        assertThat(content.getTour()).isEqualTo(tourBack);
-
-        content.tour(null);
-        assertThat(content.getTour()).isNull();
     }
 
     @Test

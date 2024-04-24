@@ -106,6 +106,14 @@ export const VehicleUpdate = () => {
                 }}
               />
               <ValidatedField
+                label={translate('xploraAdminApp.vehicle.enabled')}
+                id="vehicle-enabled"
+                name="enabled"
+                data-cy="enabled"
+                check
+                type="checkbox"
+              />
+              <ValidatedField
                 label={translate('xploraAdminApp.vehicle.type')}
                 id="vehicle-type"
                 name="type"

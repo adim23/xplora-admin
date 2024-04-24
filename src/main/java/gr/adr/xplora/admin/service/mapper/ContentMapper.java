@@ -9,7 +9,6 @@ import gr.adr.xplora.admin.domain.Place;
 import gr.adr.xplora.admin.domain.PlaceCategory;
 import gr.adr.xplora.admin.domain.Promotion;
 import gr.adr.xplora.admin.domain.Tag;
-import gr.adr.xplora.admin.domain.Tour;
 import gr.adr.xplora.admin.domain.TourCategory;
 import gr.adr.xplora.admin.domain.TourExtra;
 import gr.adr.xplora.admin.domain.TourExtraCategory;
@@ -26,7 +25,6 @@ import gr.adr.xplora.admin.service.dto.PlaceDTO;
 import gr.adr.xplora.admin.service.dto.PromotionDTO;
 import gr.adr.xplora.admin.service.dto.TagDTO;
 import gr.adr.xplora.admin.service.dto.TourCategoryDTO;
-import gr.adr.xplora.admin.service.dto.TourDTO;
 import gr.adr.xplora.admin.service.dto.TourExtraCategoryDTO;
 import gr.adr.xplora.admin.service.dto.TourExtraDTO;
 import gr.adr.xplora.admin.service.dto.TourStepDTO;
@@ -42,8 +40,6 @@ public interface ContentMapper extends EntityMapper<ContentDTO, Content> {
     @Mapping(target = "language", source = "language", qualifiedByName = "languageCode")
     @Mapping(target = "createdBy", source = "createdBy", qualifiedByName = "userLogin")
     @Mapping(target = "destination", source = "destination", qualifiedByName = "destinationCode")
-    @Mapping(target = "tourExtraInfo", source = "tourExtraInfo", qualifiedByName = "tourCode")
-    @Mapping(target = "tour", source = "tour", qualifiedByName = "tourCode")
     @Mapping(target = "tourCategory", source = "tourCategory", qualifiedByName = "tourCategoryCode")
     @Mapping(target = "place", source = "place", qualifiedByName = "placeCode")
     @Mapping(target = "placeCategory", source = "placeCategory", qualifiedByName = "placeCategoryCode")
@@ -74,12 +70,6 @@ public interface ContentMapper extends EntityMapper<ContentDTO, Content> {
     @Mapping(target = "id", source = "id")
     @Mapping(target = "code", source = "code")
     DestinationDTO toDtoDestinationCode(Destination destination);
-
-    @Named("tourCode")
-    @BeanMapping(ignoreByDefault = true)
-    @Mapping(target = "id", source = "id")
-    @Mapping(target = "code", source = "code")
-    TourDTO toDtoTourCode(Tour tour);
 
     @Named("tourCategoryCode")
     @BeanMapping(ignoreByDefault = true)

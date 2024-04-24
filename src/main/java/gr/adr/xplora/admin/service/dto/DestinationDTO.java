@@ -17,7 +17,8 @@ public class DestinationDTO implements Serializable {
     @NotNull
     private String code;
 
-    private LocalDate createdDate;
+    @NotNull
+    private Boolean enabled;
 
     private String defaultImage;
 
@@ -25,6 +26,11 @@ public class DestinationDTO implements Serializable {
     private byte[] defaultImageData;
 
     private String defaultImageDataContentType;
+
+    @Lob
+    private String cssStyle;
+
+    private LocalDate createdDate;
 
     private UserDTO createdBy;
 
@@ -44,12 +50,12 @@ public class DestinationDTO implements Serializable {
         this.code = code;
     }
 
-    public LocalDate getCreatedDate() {
-        return createdDate;
+    public Boolean getEnabled() {
+        return enabled;
     }
 
-    public void setCreatedDate(LocalDate createdDate) {
-        this.createdDate = createdDate;
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 
     public String getDefaultImage() {
@@ -74,6 +80,22 @@ public class DestinationDTO implements Serializable {
 
     public void setDefaultImageDataContentType(String defaultImageDataContentType) {
         this.defaultImageDataContentType = defaultImageDataContentType;
+    }
+
+    public String getCssStyle() {
+        return cssStyle;
+    }
+
+    public void setCssStyle(String cssStyle) {
+        this.cssStyle = cssStyle;
+    }
+
+    public LocalDate getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(LocalDate createdDate) {
+        this.createdDate = createdDate;
     }
 
     public UserDTO getCreatedBy() {
@@ -111,9 +133,11 @@ public class DestinationDTO implements Serializable {
         return "DestinationDTO{" +
             "id=" + getId() +
             ", code='" + getCode() + "'" +
-            ", createdDate='" + getCreatedDate() + "'" +
+            ", enabled='" + getEnabled() + "'" +
             ", defaultImage='" + getDefaultImage() + "'" +
             ", defaultImageData='" + getDefaultImageData() + "'" +
+            ", cssStyle='" + getCssStyle() + "'" +
+            ", createdDate='" + getCreatedDate() + "'" +
             ", createdBy=" + getCreatedBy() +
             "}";
     }

@@ -3,6 +3,7 @@ import dayjs from 'dayjs';
 export interface IDriver {
   id?: number;
   name?: string;
+  enabled?: boolean;
   hiredAt?: dayjs.Dayjs | null;
   age?: number | null;
   email?: string | null;
@@ -13,4 +14,6 @@ export interface IDriver {
   defaultImageData?: string | null;
 }
 
-export const defaultValue: Readonly<IDriver> = {};
+export const defaultValue: Readonly<IDriver> = {
+  enabled: false,
+};

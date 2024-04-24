@@ -124,6 +124,10 @@ export const TourExtraCategory = () => {
                   <Translate contentKey="xploraAdminApp.tourExtraCategory.code">Code</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('code')} />
                 </th>
+                <th className="hand" onClick={sort('enabled')}>
+                  <Translate contentKey="xploraAdminApp.tourExtraCategory.enabled">Enabled</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('enabled')} />
+                </th>
                 <th className="hand" onClick={sort('icon')}>
                   <Translate contentKey="xploraAdminApp.tourExtraCategory.icon">Icon</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('icon')} />
@@ -135,10 +139,6 @@ export const TourExtraCategory = () => {
                 <th className="hand" onClick={sort('defaultImageData')}>
                   <Translate contentKey="xploraAdminApp.tourExtraCategory.defaultImageData">Default Image Data</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('defaultImageData')} />
-                </th>
-                <th className="hand" onClick={sort('enabled')}>
-                  <Translate contentKey="xploraAdminApp.tourExtraCategory.enabled">Enabled</Translate>{' '}
-                  <FontAwesomeIcon icon={getSortIconByFieldName('enabled')} />
                 </th>
                 <th className="hand" onClick={sort('shopCategoryId')}>
                   <Translate contentKey="xploraAdminApp.tourExtraCategory.shopCategoryId">Shop Category Id</Translate>{' '}
@@ -167,6 +167,7 @@ export const TourExtraCategory = () => {
                     </Button>
                   </td>
                   <td>{tourExtraCategory.code}</td>
+                  <td>{tourExtraCategory.enabled ? 'true' : 'false'}</td>
                   <td>{tourExtraCategory.icon}</td>
                   <td>{tourExtraCategory.defaultImage}</td>
                   <td>
@@ -187,7 +188,6 @@ export const TourExtraCategory = () => {
                       </div>
                     ) : null}
                   </td>
-                  <td>{tourExtraCategory.enabled ? 'true' : 'false'}</td>
                   <td>{tourExtraCategory.shopCategoryId}</td>
                   <td>{tourExtraCategory.shopUrl}</td>
                   <td>

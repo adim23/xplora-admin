@@ -30,11 +30,12 @@ public class TourCategory implements Serializable {
     @Column(name = "code", nullable = false)
     private String code;
 
+    @NotNull
+    @Column(name = "enabled", nullable = false)
+    private Boolean enabled;
+
     @Column(name = "icon")
     private String icon;
-
-    @Column(name = "enabled")
-    private Boolean enabled;
 
     @Column(name = "created_date")
     private LocalDate createdDate;
@@ -49,9 +50,33 @@ public class TourCategory implements Serializable {
     @Column(name = "default_image_data_content_type")
     private String defaultImageDataContentType;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "defaultCategory")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(
+        value = {
+            "content",
+            "steps",
+            "images",
+            "createdBy",
+            "meetingPoint",
+            "finishPoint",
+            "tourExtras",
+            "tags",
+            "promotions",
+            "categories",
+            "destination",
+            "defaultCategory",
+        },
+        allowSetters = true
+    )
+    private Set<Tour> defaultTours = new HashSet<>();
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "parent")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "children", "images", "menus", "contents", "createdBy", "parent", "tours" }, allowSetters = true)
+    @JsonIgnoreProperties(
+        value = { "defaultTours", "children", "images", "menus", "contents", "createdBy", "parent", "tours" },
+        allowSetters = true
+    )
     private Set<TourCategory> children = new HashSet<>();
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "tourCategory")
@@ -65,10 +90,10 @@ public class TourCategory implements Serializable {
             "tourCategory",
             "place",
             "placeCategory",
+            "tourExtraCategory",
+            "tourExtra",
             "vehicle",
             "driver",
-            "tourExtra",
-            "tourExtraCategory",
         },
         allowSetters = true
     )
@@ -76,7 +101,10 @@ public class TourCategory implements Serializable {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "tourCategory")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "children", "names", "createdBy", "page", "parent", "tourCategory" }, allowSetters = true)
+    @JsonIgnoreProperties(
+        value = { "children", "names", "createdBy", "page", "parent", "tourCategory", "destination" },
+        allowSetters = true
+    )
     private Set<Menu> menus = new HashSet<>();
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "tourCategory")
@@ -86,8 +114,6 @@ public class TourCategory implements Serializable {
             "language",
             "createdBy",
             "destination",
-            "tourExtraInfo",
-            "tour",
             "tourCategory",
             "place",
             "placeCategory",
@@ -108,17 +134,19 @@ public class TourCategory implements Serializable {
     private User createdBy;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "children", "images", "menus", "contents", "createdBy", "parent", "tours" }, allowSetters = true)
+    @JsonIgnoreProperties(
+        value = { "defaultTours", "children", "images", "menus", "contents", "createdBy", "parent", "tours" },
+        allowSetters = true
+    )
     private TourCategory parent;
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "categories")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(
         value = {
+            "content",
             "steps",
             "images",
-            "extraInfos",
-            "contents",
             "createdBy",
             "meetingPoint",
             "finishPoint",
@@ -127,6 +155,7 @@ public class TourCategory implements Serializable {
             "promotions",
             "categories",
             "destination",
+            "defaultCategory",
         },
         allowSetters = true
     )
@@ -160,19 +189,6 @@ public class TourCategory implements Serializable {
         this.code = code;
     }
 
-    public String getIcon() {
-        return this.icon;
-    }
-
-    public TourCategory icon(String icon) {
-        this.setIcon(icon);
-        return this;
-    }
-
-    public void setIcon(String icon) {
-        this.icon = icon;
-    }
-
     public Boolean getEnabled() {
         return this.enabled;
     }
@@ -184,6 +200,19 @@ public class TourCategory implements Serializable {
 
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public String getIcon() {
+        return this.icon;
+    }
+
+    public TourCategory icon(String icon) {
+        this.setIcon(icon);
+        return this;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 
     public LocalDate getCreatedDate() {
@@ -236,6 +265,37 @@ public class TourCategory implements Serializable {
 
     public void setDefaultImageDataContentType(String defaultImageDataContentType) {
         this.defaultImageDataContentType = defaultImageDataContentType;
+    }
+
+    public Set<Tour> getDefaultTours() {
+        return this.defaultTours;
+    }
+
+    public void setDefaultTours(Set<Tour> tours) {
+        if (this.defaultTours != null) {
+            this.defaultTours.forEach(i -> i.setDefaultCategory(null));
+        }
+        if (tours != null) {
+            tours.forEach(i -> i.setDefaultCategory(this));
+        }
+        this.defaultTours = tours;
+    }
+
+    public TourCategory defaultTours(Set<Tour> tours) {
+        this.setDefaultTours(tours);
+        return this;
+    }
+
+    public TourCategory addDefaultTours(Tour tour) {
+        this.defaultTours.add(tour);
+        tour.setDefaultCategory(this);
+        return this;
+    }
+
+    public TourCategory removeDefaultTours(Tour tour) {
+        this.defaultTours.remove(tour);
+        tour.setDefaultCategory(null);
+        return this;
     }
 
     public Set<TourCategory> getChildren() {
@@ -444,8 +504,8 @@ public class TourCategory implements Serializable {
         return "TourCategory{" +
             "id=" + getId() +
             ", code='" + getCode() + "'" +
-            ", icon='" + getIcon() + "'" +
             ", enabled='" + getEnabled() + "'" +
+            ", icon='" + getIcon() + "'" +
             ", createdDate='" + getCreatedDate() + "'" +
             ", defaultImage='" + getDefaultImage() + "'" +
             ", defaultImageData='" + getDefaultImageData() + "'" +

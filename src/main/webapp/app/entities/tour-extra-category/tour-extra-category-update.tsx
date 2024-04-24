@@ -116,6 +116,14 @@ export const TourExtraCategoryUpdate = () => {
                 }}
               />
               <ValidatedField
+                label={translate('xploraAdminApp.tourExtraCategory.enabled')}
+                id="tour-extra-category-enabled"
+                name="enabled"
+                data-cy="enabled"
+                check
+                type="checkbox"
+              />
+              <ValidatedField
                 label={translate('xploraAdminApp.tourExtraCategory.icon')}
                 id="tour-extra-category-icon"
                 name="icon"
@@ -136,14 +144,6 @@ export const TourExtraCategoryUpdate = () => {
                 data-cy="defaultImageData"
                 isImage
                 accept="image/*"
-              />
-              <ValidatedField
-                label={translate('xploraAdminApp.tourExtraCategory.enabled')}
-                id="tour-extra-category-enabled"
-                name="enabled"
-                data-cy="enabled"
-                check
-                type="checkbox"
               />
               <ValidatedField
                 label={translate('xploraAdminApp.tourExtraCategory.shopCategoryId')}

@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import org.hibernate.annotations.Cache;
@@ -31,8 +30,9 @@ public class Destination implements Serializable {
     @Column(name = "code", nullable = false)
     private String code;
 
-    @Column(name = "created_date")
-    private LocalDate createdDate;
+    @NotNull
+    @Column(name = "enabled", nullable = false)
+    private Boolean enabled;
 
     @Column(name = "default_image")
     private String defaultImage;
@@ -48,14 +48,16 @@ public class Destination implements Serializable {
     @Column(name = "css_style")
     private String cssStyle;
 
+    @Column(name = "created_date")
+    private LocalDate createdDate;
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "destination")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(
         value = {
+            "content",
             "steps",
             "images",
-            "extraInfos",
-            "contents",
             "createdBy",
             "meetingPoint",
             "finishPoint",
@@ -64,6 +66,7 @@ public class Destination implements Serializable {
             "promotions",
             "categories",
             "destination",
+            "defaultCategory",
         },
         allowSetters = true
     )
@@ -88,10 +91,10 @@ public class Destination implements Serializable {
             "tourCategory",
             "place",
             "placeCategory",
+            "tourExtraCategory",
+            "tourExtra",
             "vehicle",
             "driver",
-            "tourExtra",
-            "tourExtraCategory",
         },
         allowSetters = true
     )
@@ -100,12 +103,18 @@ public class Destination implements Serializable {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "destination")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(
+        value = { "children", "names", "createdBy", "page", "parent", "tourCategory", "destination" },
+        allowSetters = true
+    )
+    private Set<Menu> menus = new HashSet<>();
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "destination")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(
         value = {
             "language",
             "createdBy",
             "destination",
-            "tourExtraInfo",
-            "tour",
             "tourCategory",
             "place",
             "placeCategory",
@@ -153,17 +162,17 @@ public class Destination implements Serializable {
         this.code = code;
     }
 
-    public LocalDate getCreatedDate() {
-        return this.createdDate;
+    public Boolean getEnabled() {
+        return this.enabled;
     }
 
-    public Destination createdDate(LocalDate createdDate) {
-        this.setCreatedDate(createdDate);
+    public Destination enabled(Boolean enabled) {
+        this.setEnabled(enabled);
         return this;
     }
 
-    public void setCreatedDate(LocalDate createdDate) {
-        this.createdDate = createdDate;
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 
     public String getDefaultImage() {
@@ -203,6 +212,32 @@ public class Destination implements Serializable {
 
     public void setDefaultImageDataContentType(String defaultImageDataContentType) {
         this.defaultImageDataContentType = defaultImageDataContentType;
+    }
+
+    public String getCssStyle() {
+        return this.cssStyle;
+    }
+
+    public Destination cssStyle(String cssStyle) {
+        this.setCssStyle(cssStyle);
+        return this;
+    }
+
+    public void setCssStyle(String cssStyle) {
+        this.cssStyle = cssStyle;
+    }
+
+    public LocalDate getCreatedDate() {
+        return this.createdDate;
+    }
+
+    public Destination createdDate(LocalDate createdDate) {
+        this.setCreatedDate(createdDate);
+        return this;
+    }
+
+    public void setCreatedDate(LocalDate createdDate) {
+        this.createdDate = createdDate;
     }
 
     public Set<Tour> getTours() {
@@ -298,6 +333,37 @@ public class Destination implements Serializable {
         return this;
     }
 
+    public Set<Menu> getMenus() {
+        return this.menus;
+    }
+
+    public void setMenus(Set<Menu> menus) {
+        if (this.menus != null) {
+            this.menus.forEach(i -> i.setDestination(null));
+        }
+        if (menus != null) {
+            menus.forEach(i -> i.setDestination(this));
+        }
+        this.menus = menus;
+    }
+
+    public Destination menus(Set<Menu> menus) {
+        this.setMenus(menus);
+        return this;
+    }
+
+    public Destination addMenus(Menu menu) {
+        this.menus.add(menu);
+        menu.setDestination(this);
+        return this;
+    }
+
+    public Destination removeMenus(Menu menu) {
+        this.menus.remove(menu);
+        menu.setDestination(null);
+        return this;
+    }
+
     public Set<Content> getContents() {
         return this.contents;
     }
@@ -342,14 +408,6 @@ public class Destination implements Serializable {
         return this;
     }
 
-    public String getCssStyle() {
-        return cssStyle;
-    }
-
-    public void setCssStyle(String cssStyle) {
-        this.cssStyle = cssStyle;
-    }
-
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -375,10 +433,12 @@ public class Destination implements Serializable {
         return "Destination{" +
             "id=" + getId() +
             ", code='" + getCode() + "'" +
-            ", createdDate='" + getCreatedDate() + "'" +
+            ", enabled='" + getEnabled() + "'" +
             ", defaultImage='" + getDefaultImage() + "'" +
-            ", defaultImageData='" + Arrays.toString(getDefaultImageData()) + "'" +
+            ", defaultImageData='" + getDefaultImageData() + "'" +
             ", defaultImageDataContentType='" + getDefaultImageDataContentType() + "'" +
+            ", cssStyle='" + getCssStyle() + "'" +
+            ", createdDate='" + getCreatedDate() + "'" +
             "}";
     }
 }

@@ -30,6 +30,10 @@ public class Driver implements Serializable {
     @Column(name = "name", nullable = false)
     private String name;
 
+    @NotNull
+    @Column(name = "enabled", nullable = false)
+    private Boolean enabled;
+
     @Column(name = "hired_at")
     private LocalDate hiredAt;
 
@@ -66,10 +70,10 @@ public class Driver implements Serializable {
             "tourCategory",
             "place",
             "placeCategory",
+            "tourExtraCategory",
+            "tourExtra",
             "vehicle",
             "driver",
-            "tourExtra",
-            "tourExtraCategory",
         },
         allowSetters = true
     )
@@ -101,6 +105,19 @@ public class Driver implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Boolean getEnabled() {
+        return this.enabled;
+    }
+
+    public Driver enabled(Boolean enabled) {
+        this.setEnabled(enabled);
+        return this;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 
     public LocalDate getHiredAt() {
@@ -263,6 +280,7 @@ public class Driver implements Serializable {
         return "Driver{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
+            ", enabled='" + getEnabled() + "'" +
             ", hiredAt='" + getHiredAt() + "'" +
             ", age=" + getAge() +
             ", email='" + getEmail() + "'" +

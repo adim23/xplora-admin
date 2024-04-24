@@ -17,13 +17,25 @@
             <column name="code" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
+            <column name="enabled" type="boolean">
+                <constraints nullable="false" />
+            </column>
+            <column name="icon" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
             <column name="step_order" type="integer">
                 <constraints nullable="false" />
             </column>
             <column name="wait_time" type="integer">
                 <constraints nullable="false" />
             </column>
+            <column name="wait_time_measure" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
             <column name="drive_time" type="integer">
+                <constraints nullable="false" />
+            </column>
+            <column name="drive_time_measure" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
             <column name="created_date" type="date">
@@ -60,9 +72,13 @@
                   usePreparedStatements="true">
             <column name="id" type="numeric"/>
             <column name="code" type="string"/>
+            <column name="enabled" type="boolean"/>
+            <column name="icon" type="string"/>
             <column name="step_order" type="numeric"/>
             <column name="wait_time" type="numeric"/>
+            <column name="wait_time_measure" type="string"/>
             <column name="drive_time" type="numeric"/>
+            <column name="drive_time_measure" type="string"/>
             <column name="created_date" type="date"/>
             <column name="tour_id" type="numeric"/>
             <column name="place_id" type="numeric"/>

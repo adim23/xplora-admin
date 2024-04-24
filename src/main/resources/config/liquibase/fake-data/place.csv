@@ -1,11 +1,11 @@
-id;code;destination_sight;longitude;latitude;created_date;default_image;default_image_data;default_image_data_content_type
-1;at tragic whoa;true;out till;than evenly;2024-04-14;meanwhile gah;../fake-data/blob/hipster.png;image/png
-2;so which;true;agile following smooth;whoever furthermore;2024-04-14;since yum pace;../fake-data/blob/hipster.png;image/png
-3;after small;true;instantly;sweltering instead;2024-04-14;carelessly;../fake-data/blob/hipster.png;image/png
-4;under versus;false;finally impeccable painfully;ack;2024-04-13;worth exempt bathrobe;../fake-data/blob/hipster.png;image/png
-5;lively;false;ancient;beneath at balance;2024-04-14;insignificant against yoga;../fake-data/blob/hipster.png;image/png
-6;tarragon really excitedly;false;from ick frosting;absent;2024-04-14;aw by;../fake-data/blob/hipster.png;image/png
-7;officially warmly seemingly;true;yet through um;now;2024-04-13;convey since jaggedly;../fake-data/blob/hipster.png;image/png
-8;joyfully hastily;true;damp;peer-to-peer defrost;2024-04-13;eventually;../fake-data/blob/hipster.png;image/png
-9;regular;true;whoever delay;because;2024-04-14;silt uh-huh dish;../fake-data/blob/hipster.png;image/png
-10;accidentally confer;true;energy acrobatic pocket-watch;scarily instead poet;2024-04-14;boohoo for once;../fake-data/blob/hipster.png;image/png
+id;code;enabled;icon;destination_sight;longitude;latitude;created_date;default_image;default_image_data;default_image_data_content_type
+1;at tragic whoa;true;out till;true;um;nor meanwhile gah;2024-04-14;zowie oh prudent;../fake-data/blob/hipster.png;image/png
+2;following;true;daily ick;false;since;able;2024-04-14;long adventurously;../fake-data/blob/hipster.png;image/png
+3;to mortally;false;up reflecting alongside;true;drat id;pear;2024-04-13;brr;../fake-data/blob/hipster.png;image/png
+4;near;false;cleric humour;true;scorn;wildcat oh yahoo;2024-04-13;now ogle psst;../fake-data/blob/hipster.png;image/png
+5;meanwhile ugh;true;since plunge;false;consequently;excitedly if;2024-04-13;ick frosting;../fake-data/blob/hipster.png;image/png
+6;absent;true;aw by;false;onto infancy;tightly yet through;2024-04-14;calmly scarcely ouch;../fake-data/blob/hipster.png;image/png
+7;since;true;inasmuch nearly honestly;true;brr;likewise nucleotide abound;2024-04-14;regular;../fake-data/blob/hipster.png;image/png
+8;sternly;false;fondly;true;reissue silt uh-huh;only;2024-04-13;colorfully upwardly energy;../fake-data/blob/hipster.png;image/png
+9;with pro scarily;true;dulcimer row boohoo;false;blench misunderstand klutzy;oof;2024-04-13;germinate gumshoe;../fake-data/blob/hipster.png;image/png
+10;currency except;false;mealy boohoo clumsy;true;lined oh boohoo;prose flamboyant;2024-04-13;known;../fake-data/blob/hipster.png;image/png

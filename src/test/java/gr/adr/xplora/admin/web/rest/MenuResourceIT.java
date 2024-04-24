@@ -48,17 +48,14 @@ class MenuResourceIT {
     private static final String DEFAULT_CODE = "AAAAAAAAAA";
     private static final String UPDATED_CODE = "BBBBBBBBBB";
 
-    private static final String DEFAULT_URI = "AAAAAAAAAA";
-    private static final String UPDATED_URI = "BBBBBBBBBB";
-
-    private static final LocalDate DEFAULT_CREATED_DATE = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_CREATED_DATE = LocalDate.now(ZoneId.systemDefault());
+    private static final Boolean DEFAULT_ENABLED = false;
+    private static final Boolean UPDATED_ENABLED = true;
 
     private static final String DEFAULT_ICON = "AAAAAAAAAA";
     private static final String UPDATED_ICON = "BBBBBBBBBB";
 
-    private static final Boolean DEFAULT_ENABLED = false;
-    private static final Boolean UPDATED_ENABLED = true;
+    private static final String DEFAULT_URI = "AAAAAAAAAA";
+    private static final String UPDATED_URI = "BBBBBBBBBB";
 
     private static final String DEFAULT_DEFAULT_IMAGE = "AAAAAAAAAA";
     private static final String UPDATED_DEFAULT_IMAGE = "BBBBBBBBBB";
@@ -67,6 +64,9 @@ class MenuResourceIT {
     private static final byte[] UPDATED_DEFAULT_IMAGE_DATA = TestUtil.createByteArray(1, "1");
     private static final String DEFAULT_DEFAULT_IMAGE_DATA_CONTENT_TYPE = "image/jpg";
     private static final String UPDATED_DEFAULT_IMAGE_DATA_CONTENT_TYPE = "image/png";
+
+    private static final LocalDate DEFAULT_CREATED_DATE = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_CREATED_DATE = LocalDate.now(ZoneId.systemDefault());
 
     private static final String ENTITY_API_URL = "/api/menus";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -106,13 +106,13 @@ class MenuResourceIT {
     public static Menu createEntity(EntityManager em) {
         Menu menu = new Menu()
             .code(DEFAULT_CODE)
-            .uri(DEFAULT_URI)
-            .createdDate(DEFAULT_CREATED_DATE)
-            .icon(DEFAULT_ICON)
             .enabled(DEFAULT_ENABLED)
+            .icon(DEFAULT_ICON)
+            .uri(DEFAULT_URI)
             .defaultImage(DEFAULT_DEFAULT_IMAGE)
             .defaultImageData(DEFAULT_DEFAULT_IMAGE_DATA)
-            .defaultImageDataContentType(DEFAULT_DEFAULT_IMAGE_DATA_CONTENT_TYPE);
+            .defaultImageDataContentType(DEFAULT_DEFAULT_IMAGE_DATA_CONTENT_TYPE)
+            .createdDate(DEFAULT_CREATED_DATE);
         return menu;
     }
 
@@ -125,13 +125,13 @@ class MenuResourceIT {
     public static Menu createUpdatedEntity(EntityManager em) {
         Menu menu = new Menu()
             .code(UPDATED_CODE)
-            .uri(UPDATED_URI)
-            .createdDate(UPDATED_CREATED_DATE)
-            .icon(UPDATED_ICON)
             .enabled(UPDATED_ENABLED)
+            .icon(UPDATED_ICON)
+            .uri(UPDATED_URI)
             .defaultImage(UPDATED_DEFAULT_IMAGE)
             .defaultImageData(UPDATED_DEFAULT_IMAGE_DATA)
-            .defaultImageDataContentType(UPDATED_DEFAULT_IMAGE_DATA_CONTENT_TYPE);
+            .defaultImageDataContentType(UPDATED_DEFAULT_IMAGE_DATA_CONTENT_TYPE)
+            .createdDate(UPDATED_CREATED_DATE);
         return menu;
     }
 
@@ -199,6 +199,23 @@ class MenuResourceIT {
 
     @Test
     @Transactional
+    void checkEnabledIsRequired() throws Exception {
+        long databaseSizeBeforeTest = getRepositoryCount();
+        // set the field null
+        menu.setEnabled(null);
+
+        // Create the Menu, which fails.
+        MenuDTO menuDTO = menuMapper.toDto(menu);
+
+        restMenuMockMvc
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsBytes(menuDTO)))
+            .andExpect(status().isBadRequest());
+
+        assertSameRepositoryCount(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     void getAllMenus() throws Exception {
         // Initialize the database
         menuRepository.saveAndFlush(menu);
@@ -210,13 +227,13 @@ class MenuResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(menu.getId().intValue())))
             .andExpect(jsonPath("$.[*].code").value(hasItem(DEFAULT_CODE)))
-            .andExpect(jsonPath("$.[*].uri").value(hasItem(DEFAULT_URI)))
-            .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
-            .andExpect(jsonPath("$.[*].icon").value(hasItem(DEFAULT_ICON)))
             .andExpect(jsonPath("$.[*].enabled").value(hasItem(DEFAULT_ENABLED.booleanValue())))
+            .andExpect(jsonPath("$.[*].icon").value(hasItem(DEFAULT_ICON)))
+            .andExpect(jsonPath("$.[*].uri").value(hasItem(DEFAULT_URI)))
             .andExpect(jsonPath("$.[*].defaultImage").value(hasItem(DEFAULT_DEFAULT_IMAGE)))
             .andExpect(jsonPath("$.[*].defaultImageDataContentType").value(hasItem(DEFAULT_DEFAULT_IMAGE_DATA_CONTENT_TYPE)))
-            .andExpect(jsonPath("$.[*].defaultImageData").value(hasItem(Base64.getEncoder().encodeToString(DEFAULT_DEFAULT_IMAGE_DATA))));
+            .andExpect(jsonPath("$.[*].defaultImageData").value(hasItem(Base64.getEncoder().encodeToString(DEFAULT_DEFAULT_IMAGE_DATA))))
+            .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())));
     }
 
     @SuppressWarnings({ "unchecked" })
@@ -249,13 +266,13 @@ class MenuResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(menu.getId().intValue()))
             .andExpect(jsonPath("$.code").value(DEFAULT_CODE))
-            .andExpect(jsonPath("$.uri").value(DEFAULT_URI))
-            .andExpect(jsonPath("$.createdDate").value(DEFAULT_CREATED_DATE.toString()))
-            .andExpect(jsonPath("$.icon").value(DEFAULT_ICON))
             .andExpect(jsonPath("$.enabled").value(DEFAULT_ENABLED.booleanValue()))
+            .andExpect(jsonPath("$.icon").value(DEFAULT_ICON))
+            .andExpect(jsonPath("$.uri").value(DEFAULT_URI))
             .andExpect(jsonPath("$.defaultImage").value(DEFAULT_DEFAULT_IMAGE))
             .andExpect(jsonPath("$.defaultImageDataContentType").value(DEFAULT_DEFAULT_IMAGE_DATA_CONTENT_TYPE))
-            .andExpect(jsonPath("$.defaultImageData").value(Base64.getEncoder().encodeToString(DEFAULT_DEFAULT_IMAGE_DATA)));
+            .andExpect(jsonPath("$.defaultImageData").value(Base64.getEncoder().encodeToString(DEFAULT_DEFAULT_IMAGE_DATA)))
+            .andExpect(jsonPath("$.createdDate").value(DEFAULT_CREATED_DATE.toString()));
     }
 
     @Test
@@ -279,13 +296,13 @@ class MenuResourceIT {
         em.detach(updatedMenu);
         updatedMenu
             .code(UPDATED_CODE)
-            .uri(UPDATED_URI)
-            .createdDate(UPDATED_CREATED_DATE)
-            .icon(UPDATED_ICON)
             .enabled(UPDATED_ENABLED)
+            .icon(UPDATED_ICON)
+            .uri(UPDATED_URI)
             .defaultImage(UPDATED_DEFAULT_IMAGE)
             .defaultImageData(UPDATED_DEFAULT_IMAGE_DATA)
-            .defaultImageDataContentType(UPDATED_DEFAULT_IMAGE_DATA_CONTENT_TYPE);
+            .defaultImageDataContentType(UPDATED_DEFAULT_IMAGE_DATA_CONTENT_TYPE)
+            .createdDate(UPDATED_CREATED_DATE);
         MenuDTO menuDTO = menuMapper.toDto(updatedMenu);
 
         restMenuMockMvc
@@ -367,7 +384,7 @@ class MenuResourceIT {
         Menu partialUpdatedMenu = new Menu();
         partialUpdatedMenu.setId(menu.getId());
 
-        partialUpdatedMenu.createdDate(UPDATED_CREATED_DATE).enabled(UPDATED_ENABLED);
+        partialUpdatedMenu.icon(UPDATED_ICON).createdDate(UPDATED_CREATED_DATE);
 
         restMenuMockMvc
             .perform(
@@ -397,13 +414,13 @@ class MenuResourceIT {
 
         partialUpdatedMenu
             .code(UPDATED_CODE)
-            .uri(UPDATED_URI)
-            .createdDate(UPDATED_CREATED_DATE)
-            .icon(UPDATED_ICON)
             .enabled(UPDATED_ENABLED)
+            .icon(UPDATED_ICON)
+            .uri(UPDATED_URI)
             .defaultImage(UPDATED_DEFAULT_IMAGE)
             .defaultImageData(UPDATED_DEFAULT_IMAGE_DATA)
-            .defaultImageDataContentType(UPDATED_DEFAULT_IMAGE_DATA_CONTENT_TYPE);
+            .defaultImageDataContentType(UPDATED_DEFAULT_IMAGE_DATA_CONTENT_TYPE)
+            .createdDate(UPDATED_CREATED_DATE);
 
         restMenuMockMvc
             .perform(

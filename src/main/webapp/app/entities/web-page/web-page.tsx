@@ -118,13 +118,13 @@ export const WebPage = () => {
                   <Translate contentKey="xploraAdminApp.webPage.code">Code</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('code')} />
                 </th>
-                <th className="hand" onClick={sort('uriPath')}>
-                  <Translate contentKey="xploraAdminApp.webPage.uriPath">Uri Path</Translate>{' '}
-                  <FontAwesomeIcon icon={getSortIconByFieldName('uriPath')} />
-                </th>
                 <th className="hand" onClick={sort('enabled')}>
                   <Translate contentKey="xploraAdminApp.webPage.enabled">Enabled</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('enabled')} />
+                </th>
+                <th className="hand" onClick={sort('uriPath')}>
+                  <Translate contentKey="xploraAdminApp.webPage.uriPath">Uri Path</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('uriPath')} />
                 </th>
                 <th className="hand" onClick={sort('publishDate')}>
                   <Translate contentKey="xploraAdminApp.webPage.publishDate">Publish Date</Translate>{' '}
@@ -149,8 +149,8 @@ export const WebPage = () => {
                     </Button>
                   </td>
                   <td>{webPage.code}</td>
-                  <td>{webPage.uriPath}</td>
                   <td>{webPage.enabled ? 'true' : 'false'}</td>
+                  <td>{webPage.uriPath}</td>
                   <td>
                     {webPage.publishDate ? <TextFormat type="date" value={webPage.publishDate} format={APP_LOCAL_DATE_FORMAT} /> : null}
                   </td>

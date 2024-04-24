@@ -53,6 +53,12 @@
             <column name="place_category_id" type="bigint">
                 <constraints nullable="true" />
             </column>
+            <column name="tour_extra_category_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="tour_extra_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
             <column name="vehicle_id" type="bigint">
                 <constraints nullable="true" />
             </column>

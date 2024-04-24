@@ -17,6 +17,9 @@
             <column name="name" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
+            <column name="enabled" type="boolean">
+                <constraints nullable="false" />
+            </column>
             <column name="hired_at" type="date">
                 <constraints nullable="true" />
             </column>
@@ -63,6 +66,7 @@
                   usePreparedStatements="true">
             <column name="id" type="numeric"/>
             <column name="name" type="string"/>
+            <column name="enabled" type="boolean"/>
             <column name="hired_at" type="date"/>
             <column name="age" type="numeric"/>
             <column name="email" type="string"/>

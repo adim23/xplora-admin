@@ -1,11 +1,11 @@
-id;code;discount;from_date;to_date;enabled
-1;quixotic;26751.81;2024-04-14;2024-04-13;false
-2;tale plus questionably;12586.4;2024-04-13;2024-04-13;false
-3;while apologise;28434.98;2024-04-14;2024-04-13;false
-4;consent;32626.58;2024-04-13;2024-04-14;false
-5;grammar queasily;20956.61;2024-04-14;2024-04-13;false
-6;pause because;4704.44;2024-04-14;2024-04-14;false
-7;pfft;31848.28;2024-04-13;2024-04-14;true
-8;pertain what;26625.16;2024-04-14;2024-04-13;false
-9;woot failing whenever;18940.43;2024-04-13;2024-04-13;false
-10;barring straight;28596.45;2024-04-14;2024-04-13;false
+id;code;enabled;discount;from_date;to_date
+1;quixotic;false;13930.54;2024-04-13;2024-04-13
+2;tale plus questionably;true;28879.36;2024-04-13;2024-04-13
+3;while apologise;false;7871.77;2024-04-13;2024-04-13
+4;consent;false;22688.32;2024-04-14;2024-04-13
+5;grammar queasily;false;5498.74;2024-04-13;2024-04-13
+6;pause because;true;10398.56;2024-04-14;2024-04-13
+7;pfft;false;31456.03;2024-04-14;2024-04-14
+8;pertain what;false;2035.24;2024-04-13;2024-04-13
+9;woot failing whenever;false;16951.9;2024-04-13;2024-04-13
+10;barring straight;false;5726.14;2024-04-13;2024-04-13

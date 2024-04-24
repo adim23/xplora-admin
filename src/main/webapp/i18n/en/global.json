@@ -27,7 +27,9 @@
         "menu": "Menu",
         "language": "Language",
         "content": "Content",
-        "tag": "Tag"
+        "tag": "Tag",
+        "tourContent": "Tour Content",
+        "prompt": "Prompt"
       },
       "account": {
         "main": "Account",

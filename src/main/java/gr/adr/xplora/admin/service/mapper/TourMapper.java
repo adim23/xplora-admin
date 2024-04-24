@@ -6,6 +6,7 @@ import gr.adr.xplora.admin.domain.Promotion;
 import gr.adr.xplora.admin.domain.Tag;
 import gr.adr.xplora.admin.domain.Tour;
 import gr.adr.xplora.admin.domain.TourCategory;
+import gr.adr.xplora.admin.domain.TourContent;
 import gr.adr.xplora.admin.domain.TourExtra;
 import gr.adr.xplora.admin.domain.User;
 import gr.adr.xplora.admin.service.dto.DestinationDTO;
@@ -13,6 +14,7 @@ import gr.adr.xplora.admin.service.dto.PlaceDTO;
 import gr.adr.xplora.admin.service.dto.PromotionDTO;
 import gr.adr.xplora.admin.service.dto.TagDTO;
 import gr.adr.xplora.admin.service.dto.TourCategoryDTO;
+import gr.adr.xplora.admin.service.dto.TourContentDTO;
 import gr.adr.xplora.admin.service.dto.TourDTO;
 import gr.adr.xplora.admin.service.dto.TourExtraDTO;
 import gr.adr.xplora.admin.service.dto.UserDTO;
@@ -25,6 +27,7 @@ import org.mapstruct.*;
  */
 @Mapper(componentModel = "spring")
 public interface TourMapper extends EntityMapper<TourDTO, Tour> {
+    @Mapping(target = "content", source = "content", qualifiedByName = "tourContentCode")
     @Mapping(target = "createdBy", source = "createdBy", qualifiedByName = "userLogin")
     @Mapping(target = "meetingPoint", source = "meetingPoint", qualifiedByName = "placeCode")
     @Mapping(target = "finishPoint", source = "finishPoint", qualifiedByName = "placeCode")
@@ -33,6 +36,7 @@ public interface TourMapper extends EntityMapper<TourDTO, Tour> {
     @Mapping(target = "promotions", source = "promotions", qualifiedByName = "promotionCodeSet")
     @Mapping(target = "categories", source = "categories", qualifiedByName = "tourCategoryCodeSet")
     @Mapping(target = "destination", source = "destination", qualifiedByName = "destinationCode")
+    @Mapping(target = "defaultCategory", source = "defaultCategory", qualifiedByName = "tourCategoryCode")
     TourDTO toDto(Tour s);
 
     @Mapping(target = "removeTourExtra", ignore = true)
@@ -40,6 +44,12 @@ public interface TourMapper extends EntityMapper<TourDTO, Tour> {
     @Mapping(target = "removePromotions", ignore = true)
     @Mapping(target = "removeCategory", ignore = true)
     Tour toEntity(TourDTO tourDTO);
+
+    @Named("tourContentCode")
+    @BeanMapping(ignoreByDefault = true)
+    @Mapping(target = "id", source = "id")
+    @Mapping(target = "code", source = "code")
+    TourContentDTO toDtoTourContentCode(TourContent tourContent);
 
     @Named("userLogin")
     @BeanMapping(ignoreByDefault = true)

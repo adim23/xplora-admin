@@ -17,8 +17,6 @@ public class LanguageDTO implements Serializable {
     @NotNull
     private String code;
 
-    private LocalDate createdDate;
-
     private String icon;
 
     private String defaultImage;
@@ -27,6 +25,8 @@ public class LanguageDTO implements Serializable {
     private byte[] defaultImageData;
 
     private String defaultImageDataContentType;
+
+    private LocalDate createdDate;
 
     private UserDTO createdBy;
 
@@ -44,14 +44,6 @@ public class LanguageDTO implements Serializable {
 
     public void setCode(String code) {
         this.code = code;
-    }
-
-    public LocalDate getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(LocalDate createdDate) {
-        this.createdDate = createdDate;
     }
 
     public String getIcon() {
@@ -84,6 +76,14 @@ public class LanguageDTO implements Serializable {
 
     public void setDefaultImageDataContentType(String defaultImageDataContentType) {
         this.defaultImageDataContentType = defaultImageDataContentType;
+    }
+
+    public LocalDate getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(LocalDate createdDate) {
+        this.createdDate = createdDate;
     }
 
     public UserDTO getCreatedBy() {
@@ -121,10 +121,10 @@ public class LanguageDTO implements Serializable {
         return "LanguageDTO{" +
             "id=" + getId() +
             ", code='" + getCode() + "'" +
-            ", createdDate='" + getCreatedDate() + "'" +
             ", icon='" + getIcon() + "'" +
             ", defaultImage='" + getDefaultImage() + "'" +
             ", defaultImageData='" + getDefaultImageData() + "'" +
+            ", createdDate='" + getCreatedDate() + "'" +
             ", createdBy=" + getCreatedBy() +
             "}";
     }

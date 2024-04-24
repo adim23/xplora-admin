@@ -318,7 +318,7 @@ class PassengerResourceIT {
         Passenger partialUpdatedPassenger = new Passenger();
         partialUpdatedPassenger.setId(passenger.getId());
 
-        partialUpdatedPassenger.name(UPDATED_NAME).nationality(UPDATED_NATIONALITY);
+        partialUpdatedPassenger.email(UPDATED_EMAIL).mobile(UPDATED_MOBILE).nationality(UPDATED_NATIONALITY);
 
         restPassengerMockMvc
             .perform(

@@ -39,6 +39,9 @@ class VehicleResourceIT {
     private static final String DEFAULT_PLATE = "AAAAAAAAAA";
     private static final String UPDATED_PLATE = "BBBBBBBBBB";
 
+    private static final Boolean DEFAULT_ENABLED = false;
+    private static final Boolean UPDATED_ENABLED = true;
+
     private static final String DEFAULT_TYPE = "AAAAAAAAAA";
     private static final String UPDATED_TYPE = "BBBBBBBBBB";
 
@@ -91,6 +94,7 @@ class VehicleResourceIT {
     public static Vehicle createEntity(EntityManager em) {
         Vehicle vehicle = new Vehicle()
             .plate(DEFAULT_PLATE)
+            .enabled(DEFAULT_ENABLED)
             .type(DEFAULT_TYPE)
             .capacity(DEFAULT_CAPACITY)
             .color(DEFAULT_COLOR)
@@ -110,6 +114,7 @@ class VehicleResourceIT {
     public static Vehicle createUpdatedEntity(EntityManager em) {
         Vehicle vehicle = new Vehicle()
             .plate(UPDATED_PLATE)
+            .enabled(UPDATED_ENABLED)
             .type(UPDATED_TYPE)
             .capacity(UPDATED_CAPACITY)
             .color(UPDATED_COLOR)
@@ -184,6 +189,23 @@ class VehicleResourceIT {
 
     @Test
     @Transactional
+    void checkEnabledIsRequired() throws Exception {
+        long databaseSizeBeforeTest = getRepositoryCount();
+        // set the field null
+        vehicle.setEnabled(null);
+
+        // Create the Vehicle, which fails.
+        VehicleDTO vehicleDTO = vehicleMapper.toDto(vehicle);
+
+        restVehicleMockMvc
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsBytes(vehicleDTO)))
+            .andExpect(status().isBadRequest());
+
+        assertSameRepositoryCount(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     void checkTypeIsRequired() throws Exception {
         long databaseSizeBeforeTest = getRepositoryCount();
         // set the field null
@@ -229,6 +251,7 @@ class VehicleResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(vehicle.getId().intValue())))
             .andExpect(jsonPath("$.[*].plate").value(hasItem(DEFAULT_PLATE)))
+            .andExpect(jsonPath("$.[*].enabled").value(hasItem(DEFAULT_ENABLED.booleanValue())))
             .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE)))
             .andExpect(jsonPath("$.[*].capacity").value(hasItem(DEFAULT_CAPACITY)))
             .andExpect(jsonPath("$.[*].color").value(hasItem(DEFAULT_COLOR)))
@@ -251,6 +274,7 @@ class VehicleResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(vehicle.getId().intValue()))
             .andExpect(jsonPath("$.plate").value(DEFAULT_PLATE))
+            .andExpect(jsonPath("$.enabled").value(DEFAULT_ENABLED.booleanValue()))
             .andExpect(jsonPath("$.type").value(DEFAULT_TYPE))
             .andExpect(jsonPath("$.capacity").value(DEFAULT_CAPACITY))
             .andExpect(jsonPath("$.color").value(DEFAULT_COLOR))
@@ -281,6 +305,7 @@ class VehicleResourceIT {
         em.detach(updatedVehicle);
         updatedVehicle
             .plate(UPDATED_PLATE)
+            .enabled(UPDATED_ENABLED)
             .type(UPDATED_TYPE)
             .capacity(UPDATED_CAPACITY)
             .color(UPDATED_COLOR)
@@ -373,7 +398,12 @@ class VehicleResourceIT {
         Vehicle partialUpdatedVehicle = new Vehicle();
         partialUpdatedVehicle.setId(vehicle.getId());
 
-        partialUpdatedVehicle.plate(UPDATED_PLATE).capacity(UPDATED_CAPACITY).color(UPDATED_COLOR);
+        partialUpdatedVehicle
+            .plate(UPDATED_PLATE)
+            .createdDate(UPDATED_CREATED_DATE)
+            .defaultImage(UPDATED_DEFAULT_IMAGE)
+            .defaultImageData(UPDATED_DEFAULT_IMAGE_DATA)
+            .defaultImageDataContentType(UPDATED_DEFAULT_IMAGE_DATA_CONTENT_TYPE);
 
         restVehicleMockMvc
             .perform(
@@ -403,6 +433,7 @@ class VehicleResourceIT {
 
         partialUpdatedVehicle
             .plate(UPDATED_PLATE)
+            .enabled(UPDATED_ENABLED)
             .type(UPDATED_TYPE)
             .capacity(UPDATED_CAPACITY)
             .color(UPDATED_COLOR)

@@ -11,8 +11,9 @@
       "fieldValidateRules": ["required"]
     },
     {
-      "fieldName": "createdDate",
-      "fieldType": "LocalDate"
+      "fieldName": "enabled",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
     },
     {
       "fieldName": "defaultImage",
@@ -22,6 +23,15 @@
       "fieldName": "defaultImageData",
       "fieldType": "byte[]",
       "fieldTypeBlobContent": "image"
+    },
+    {
+      "fieldName": "cssStyle",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    },
+    {
+      "fieldName": "createdDate",
+      "fieldType": "LocalDate"
     }
   ],
   "name": "Destination",
@@ -48,6 +58,14 @@
       "otherEntityName": "imageFile",
       "otherEntityRelationshipName": "destination",
       "relationshipName": "images",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "code",
+      "otherEntityName": "menu",
+      "otherEntityRelationshipName": "destination",
+      "relationshipName": "menus",
       "relationshipSide": "left",
       "relationshipType": "one-to-many"
     },

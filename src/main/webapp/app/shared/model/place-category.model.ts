@@ -5,8 +5,8 @@ import { IPlace } from 'app/shared/model/place.model';
 export interface IPlaceCategory {
   id?: number;
   code?: string;
+  enabled?: boolean;
   icon?: string | null;
-  enabled?: boolean | null;
   createdDate?: dayjs.Dayjs | null;
   defaultImage?: string | null;
   defaultImageDataContentType?: string | null;

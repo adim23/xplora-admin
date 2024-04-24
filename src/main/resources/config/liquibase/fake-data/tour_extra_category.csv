@@ -1,11 +1,11 @@
-id;code;icon;default_image;default_image_data;default_image_data_content_type;enabled;shop_category_id;shop_url;created_date
-1;yet likewise;barbecue minus righteously;hm selfishly depersonalise;../fake-data/blob/hipster.png;image/png;false;alarmed;round;2024-04-14
-2;behind;disorient yearningly;oof blah;../fake-data/blob/hipster.png;image/png;true;successfully attentive;mirror scared about;2024-04-14
-3;sternly aha gee;furthermore;parenthesis duh;../fake-data/blob/hipster.png;image/png;true;medicate zowie;ew so brr;2024-04-14
-4;zing taint till;joke so woot;dispose;../fake-data/blob/hipster.png;image/png;true;noted devote;rightfully;2024-04-13
-5;wherever;whereas shimmering;essential revolving;../fake-data/blob/hipster.png;image/png;false;ignorant;chromakey markup pro;2024-04-13
-6;eddy;drafty;starchy um quaintly;../fake-data/blob/hipster.png;image/png;true;but so parachute;windage;2024-04-14
-7;at incidentally;athwart duh;aha;../fake-data/blob/hipster.png;image/png;true;authorized;grey swiftly since;2024-04-13
-8;like thin;atop;other jubilantly unless;../fake-data/blob/hipster.png;image/png;false;astride;geometry;2024-04-14
-9;vastly while;huzzah when;exotic passivize;../fake-data/blob/hipster.png;image/png;true;until;dismay ouch;2024-04-13
-10;despite alive plate;active frightened meh;appendix down telescope;../fake-data/blob/hipster.png;image/png;false;candid gee;including solidly;2024-04-14
+id;code;enabled;icon;default_image;default_image_data;default_image_data_content_type;shop_category_id;shop_url;created_date
+1;yet likewise;false;of;although;../fake-data/blob/hipster.png;image/png;jovially up;athwart joyously deceivingly;2024-04-14
+2;briskly behind;true;because;trivial shackle;../fake-data/blob/hipster.png;image/png;notwithstanding successfully;upwardly mirror scared;2024-04-14
+3;too;false;shabby although which;ache congeal grade;../fake-data/blob/hipster.png;image/png;medicate zowie;ew so brr;2024-04-14
+4;zing taint till;false;or;cruelty;../fake-data/blob/hipster.png;image/png;closing hourly;fitting broadly rightfully;2024-04-13
+5;wherever;false;excitable linear;fascinate overcooked;../fake-data/blob/hipster.png;image/png;ignorant;chromakey markup pro;2024-04-13
+6;eddy;true;tremendously starchy;phew yahoo until;../fake-data/blob/hipster.png;image/png;so parachute;windage;2024-04-14
+7;at incidentally;false;yearly frank aha;sow;../fake-data/blob/hipster.png;image/png;oh;swiftly since;2024-04-13
+8;like thin;true;unto other jubilantly;uh-huh;../fake-data/blob/hipster.png;image/png;astride;geometry;2024-04-14
+9;vastly while;false;patiently;joyously;../fake-data/blob/hipster.png;image/png;busily declassify until;dismay ouch;2024-04-13
+10;despite alive plate;false;truth;conduct scared;../fake-data/blob/hipster.png;image/png;since anglicise;editing;2024-04-13

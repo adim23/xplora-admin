@@ -18,13 +18,13 @@ public class PromotionDTO implements Serializable {
     @NotNull
     private String code;
 
+    private Boolean enabled;
+
     private Double discount;
 
     private LocalDate fromDate;
 
     private LocalDate toDate;
-
-    private Boolean enabled;
 
     private Set<TourDTO> tours = new HashSet<>();
 
@@ -42,6 +42,14 @@ public class PromotionDTO implements Serializable {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 
     public Double getDiscount() {
@@ -66,14 +74,6 @@ public class PromotionDTO implements Serializable {
 
     public void setToDate(LocalDate toDate) {
         this.toDate = toDate;
-    }
-
-    public Boolean getEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(Boolean enabled) {
-        this.enabled = enabled;
     }
 
     public Set<TourDTO> getTours() {
@@ -111,10 +111,10 @@ public class PromotionDTO implements Serializable {
         return "PromotionDTO{" +
             "id=" + getId() +
             ", code='" + getCode() + "'" +
+            ", enabled='" + getEnabled() + "'" +
             ", discount=" + getDiscount() +
             ", fromDate='" + getFromDate() + "'" +
             ", toDate='" + getToDate() + "'" +
-            ", enabled='" + getEnabled() + "'" +
             ", tours=" + getTours() +
             "}";
     }

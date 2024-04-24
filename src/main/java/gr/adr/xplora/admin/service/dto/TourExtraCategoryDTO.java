@@ -19,6 +19,9 @@ public class TourExtraCategoryDTO implements Serializable {
     @NotNull
     private String code;
 
+    @NotNull
+    private Boolean enabled;
+
     private String icon;
 
     private String defaultImage;
@@ -27,8 +30,6 @@ public class TourExtraCategoryDTO implements Serializable {
     private byte[] defaultImageData;
 
     private String defaultImageDataContentType;
-
-    private Boolean enabled;
 
     private String shopCategoryId;
 
@@ -54,6 +55,14 @@ public class TourExtraCategoryDTO implements Serializable {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 
     public String getIcon() {
@@ -86,14 +95,6 @@ public class TourExtraCategoryDTO implements Serializable {
 
     public void setDefaultImageDataContentType(String defaultImageDataContentType) {
         this.defaultImageDataContentType = defaultImageDataContentType;
-    }
-
-    public Boolean getEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(Boolean enabled) {
-        this.enabled = enabled;
     }
 
     public String getShopCategoryId() {
@@ -163,10 +164,10 @@ public class TourExtraCategoryDTO implements Serializable {
         return "TourExtraCategoryDTO{" +
             "id=" + getId() +
             ", code='" + getCode() + "'" +
+            ", enabled='" + getEnabled() + "'" +
             ", icon='" + getIcon() + "'" +
             ", defaultImage='" + getDefaultImage() + "'" +
             ", defaultImageData='" + getDefaultImageData() + "'" +
-            ", enabled='" + getEnabled() + "'" +
             ", shopCategoryId='" + getShopCategoryId() + "'" +
             ", shopUrl='" + getShopUrl() + "'" +
             ", createdDate='" + getCreatedDate() + "'" +

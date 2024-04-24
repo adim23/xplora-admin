@@ -47,7 +47,19 @@ public interface LanguageService {
      *
      * @return the {@link List} of entities.
      */
-    // List<LanguageDTO> findAllWhereContentIsNull();
+    List<LanguageDTO> findAllWhereContentIsNull();
+    /**
+     * Get all the LanguageDTO where TourContent is {@code null}.
+     *
+     * @return the {@link List} of entities.
+     */
+    List<LanguageDTO> findAllWhereTourContentIsNull();
+    /**
+     * Get all the LanguageDTO where Prompt is {@code null}.
+     *
+     * @return the {@link List} of entities.
+     */
+    List<LanguageDTO> findAllWherePromptIsNull();
 
     /**
      * Get all the languages with eager load of many-to-many relationships.

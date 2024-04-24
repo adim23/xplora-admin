@@ -31,6 +31,10 @@ public class Vehicle implements Serializable {
     private String plate;
 
     @NotNull
+    @Column(name = "enabled", nullable = false)
+    private Boolean enabled;
+
+    @NotNull
     @Column(name = "type", nullable = false)
     private String type;
 
@@ -65,10 +69,10 @@ public class Vehicle implements Serializable {
             "tourCategory",
             "place",
             "placeCategory",
+            "tourExtraCategory",
+            "tourExtra",
             "vehicle",
             "driver",
-            "tourExtra",
-            "tourExtraCategory",
         },
         allowSetters = true
     )
@@ -100,6 +104,19 @@ public class Vehicle implements Serializable {
 
     public void setPlate(String plate) {
         this.plate = plate;
+    }
+
+    public Boolean getEnabled() {
+        return this.enabled;
+    }
+
+    public Vehicle enabled(Boolean enabled) {
+        this.setEnabled(enabled);
+        return this;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 
     public String getType() {
@@ -249,6 +266,7 @@ public class Vehicle implements Serializable {
         return "Vehicle{" +
             "id=" + getId() +
             ", plate='" + getPlate() + "'" +
+            ", enabled='" + getEnabled() + "'" +
             ", type='" + getType() + "'" +
             ", capacity=" + getCapacity() +
             ", color='" + getColor() + "'" +

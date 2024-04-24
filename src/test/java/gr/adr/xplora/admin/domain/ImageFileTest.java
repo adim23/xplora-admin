@@ -7,6 +7,8 @@ import static gr.adr.xplora.admin.domain.ImageFileTestSamples.*;
 import static gr.adr.xplora.admin.domain.PlaceCategoryTestSamples.*;
 import static gr.adr.xplora.admin.domain.PlaceTestSamples.*;
 import static gr.adr.xplora.admin.domain.TourCategoryTestSamples.*;
+import static gr.adr.xplora.admin.domain.TourExtraCategoryTestSamples.*;
+import static gr.adr.xplora.admin.domain.TourExtraTestSamples.*;
 import static gr.adr.xplora.admin.domain.TourTestSamples.*;
 import static gr.adr.xplora.admin.domain.VehicleTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -112,6 +114,30 @@ class ImageFileTest {
 
         imageFile.placeCategory(null);
         assertThat(imageFile.getPlaceCategory()).isNull();
+    }
+
+    @Test
+    void tourExtraCategoryTest() throws Exception {
+        ImageFile imageFile = getImageFileRandomSampleGenerator();
+        TourExtraCategory tourExtraCategoryBack = getTourExtraCategoryRandomSampleGenerator();
+
+        imageFile.setTourExtraCategory(tourExtraCategoryBack);
+        assertThat(imageFile.getTourExtraCategory()).isEqualTo(tourExtraCategoryBack);
+
+        imageFile.tourExtraCategory(null);
+        assertThat(imageFile.getTourExtraCategory()).isNull();
+    }
+
+    @Test
+    void tourExtraTest() throws Exception {
+        ImageFile imageFile = getImageFileRandomSampleGenerator();
+        TourExtra tourExtraBack = getTourExtraRandomSampleGenerator();
+
+        imageFile.setTourExtra(tourExtraBack);
+        assertThat(imageFile.getTourExtra()).isEqualTo(tourExtraBack);
+
+        imageFile.tourExtra(null);
+        assertThat(imageFile.getTourExtra()).isNull();
     }
 
     @Test

@@ -7,6 +7,8 @@ import { IDestination } from 'app/shared/model/destination.model';
 export interface IPlace {
   id?: number;
   code?: string;
+  enabled?: boolean;
+  icon?: string | null;
   destinationSight?: boolean;
   longitude?: string | null;
   latitude?: string | null;
@@ -21,5 +23,6 @@ export interface IPlace {
 }
 
 export const defaultValue: Readonly<IPlace> = {
+  enabled: false,
   destinationSight: false,
 };

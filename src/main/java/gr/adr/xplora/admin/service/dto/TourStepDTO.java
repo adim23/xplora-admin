@@ -1,5 +1,6 @@
 package gr.adr.xplora.admin.service.dto;
 
+import gr.adr.xplora.admin.domain.enumeration.DurationMeasure;
 import jakarta.validation.constraints.*;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -17,13 +18,24 @@ public class TourStepDTO implements Serializable {
     private String code;
 
     @NotNull
+    private Boolean enabled;
+
+    private String icon;
+
+    @NotNull
     private Integer stepOrder;
 
     @NotNull
     private Integer waitTime;
 
     @NotNull
+    private DurationMeasure waitTimeMeasure;
+
+    @NotNull
     private Integer driveTime;
+
+    @NotNull
+    private DurationMeasure driveTimeMeasure;
 
     private LocalDate createdDate;
 
@@ -51,6 +63,22 @@ public class TourStepDTO implements Serializable {
         this.code = code;
     }
 
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
     public Integer getStepOrder() {
         return stepOrder;
     }
@@ -67,12 +95,28 @@ public class TourStepDTO implements Serializable {
         this.waitTime = waitTime;
     }
 
+    public DurationMeasure getWaitTimeMeasure() {
+        return waitTimeMeasure;
+    }
+
+    public void setWaitTimeMeasure(DurationMeasure waitTimeMeasure) {
+        this.waitTimeMeasure = waitTimeMeasure;
+    }
+
     public Integer getDriveTime() {
         return driveTime;
     }
 
     public void setDriveTime(Integer driveTime) {
         this.driveTime = driveTime;
+    }
+
+    public DurationMeasure getDriveTimeMeasure() {
+        return driveTimeMeasure;
+    }
+
+    public void setDriveTimeMeasure(DurationMeasure driveTimeMeasure) {
+        this.driveTimeMeasure = driveTimeMeasure;
     }
 
     public LocalDate getCreatedDate() {
@@ -134,9 +178,13 @@ public class TourStepDTO implements Serializable {
         return "TourStepDTO{" +
             "id=" + getId() +
             ", code='" + getCode() + "'" +
+            ", enabled='" + getEnabled() + "'" +
+            ", icon='" + getIcon() + "'" +
             ", stepOrder=" + getStepOrder() +
             ", waitTime=" + getWaitTime() +
+            ", waitTimeMeasure='" + getWaitTimeMeasure() + "'" +
             ", driveTime=" + getDriveTime() +
+            ", driveTimeMeasure='" + getDriveTimeMeasure() + "'" +
             ", createdDate='" + getCreatedDate() + "'" +
             ", createdBy=" + getCreatedBy() +
             ", tour=" + getTour() +

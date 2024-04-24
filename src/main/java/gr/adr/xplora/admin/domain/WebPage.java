@@ -30,11 +30,12 @@ public class WebPage implements Serializable {
     @Column(name = "code", nullable = false)
     private String code;
 
+    @NotNull
+    @Column(name = "enabled", nullable = false)
+    private Boolean enabled;
+
     @Column(name = "uri_path")
     private String uriPath;
-
-    @Column(name = "enabled")
-    private Boolean enabled;
 
     @Column(name = "publish_date")
     private LocalDate publishDate;
@@ -44,7 +45,10 @@ public class WebPage implements Serializable {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "page")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "children", "names", "createdBy", "page", "parent", "tourCategory" }, allowSetters = true)
+    @JsonIgnoreProperties(
+        value = { "children", "names", "createdBy", "page", "parent", "tourCategory", "destination" },
+        allowSetters = true
+    )
     private Set<Menu> menus = new HashSet<>();
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "webPage")
@@ -54,8 +58,6 @@ public class WebPage implements Serializable {
             "language",
             "createdBy",
             "destination",
-            "tourExtraInfo",
-            "tour",
             "tourCategory",
             "place",
             "placeCategory",
@@ -113,19 +115,6 @@ public class WebPage implements Serializable {
         this.code = code;
     }
 
-    public String getUriPath() {
-        return this.uriPath;
-    }
-
-    public WebPage uriPath(String uriPath) {
-        this.setUriPath(uriPath);
-        return this;
-    }
-
-    public void setUriPath(String uriPath) {
-        this.uriPath = uriPath;
-    }
-
     public Boolean getEnabled() {
         return this.enabled;
     }
@@ -137,6 +126,19 @@ public class WebPage implements Serializable {
 
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public String getUriPath() {
+        return this.uriPath;
+    }
+
+    public WebPage uriPath(String uriPath) {
+        this.setUriPath(uriPath);
+        return this;
+    }
+
+    public void setUriPath(String uriPath) {
+        this.uriPath = uriPath;
     }
 
     public LocalDate getPublishDate() {
@@ -288,8 +290,8 @@ public class WebPage implements Serializable {
         return "WebPage{" +
             "id=" + getId() +
             ", code='" + getCode() + "'" +
-            ", uriPath='" + getUriPath() + "'" +
             ", enabled='" + getEnabled() + "'" +
+            ", uriPath='" + getUriPath() + "'" +
             ", publishDate='" + getPublishDate() + "'" +
             ", createdDate='" + getCreatedDate() + "'" +
             "}";

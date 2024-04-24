@@ -118,20 +118,16 @@ export const Menu = () => {
                   <Translate contentKey="xploraAdminApp.menu.code">Code</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('code')} />
                 </th>
-                <th className="hand" onClick={sort('uri')}>
-                  <Translate contentKey="xploraAdminApp.menu.uri">Uri</Translate> <FontAwesomeIcon icon={getSortIconByFieldName('uri')} />
-                </th>
-                <th className="hand" onClick={sort('createdDate')}>
-                  <Translate contentKey="xploraAdminApp.menu.createdDate">Created Date</Translate>{' '}
-                  <FontAwesomeIcon icon={getSortIconByFieldName('createdDate')} />
+                <th className="hand" onClick={sort('enabled')}>
+                  <Translate contentKey="xploraAdminApp.menu.enabled">Enabled</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('enabled')} />
                 </th>
                 <th className="hand" onClick={sort('icon')}>
                   <Translate contentKey="xploraAdminApp.menu.icon">Icon</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('icon')} />
                 </th>
-                <th className="hand" onClick={sort('enabled')}>
-                  <Translate contentKey="xploraAdminApp.menu.enabled">Enabled</Translate>{' '}
-                  <FontAwesomeIcon icon={getSortIconByFieldName('enabled')} />
+                <th className="hand" onClick={sort('uri')}>
+                  <Translate contentKey="xploraAdminApp.menu.uri">Uri</Translate> <FontAwesomeIcon icon={getSortIconByFieldName('uri')} />
                 </th>
                 <th className="hand" onClick={sort('defaultImage')}>
                   <Translate contentKey="xploraAdminApp.menu.defaultImage">Default Image</Translate>{' '}
@@ -140,6 +136,10 @@ export const Menu = () => {
                 <th className="hand" onClick={sort('defaultImageData')}>
                   <Translate contentKey="xploraAdminApp.menu.defaultImageData">Default Image Data</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('defaultImageData')} />
+                </th>
+                <th className="hand" onClick={sort('createdDate')}>
+                  <Translate contentKey="xploraAdminApp.menu.createdDate">Created Date</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('createdDate')} />
                 </th>
                 <th>
                   <Translate contentKey="xploraAdminApp.menu.createdBy">Created By</Translate> <FontAwesomeIcon icon="sort" />
@@ -153,6 +153,9 @@ export const Menu = () => {
                 <th>
                   <Translate contentKey="xploraAdminApp.menu.tourCategory">Tour Category</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
+                <th>
+                  <Translate contentKey="xploraAdminApp.menu.destination">Destination</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
                 <th />
               </tr>
             </thead>
@@ -165,10 +168,9 @@ export const Menu = () => {
                     </Button>
                   </td>
                   <td>{menu.code}</td>
-                  <td>{menu.uri}</td>
-                  <td>{menu.createdDate ? <TextFormat type="date" value={menu.createdDate} format={APP_LOCAL_DATE_FORMAT} /> : null}</td>
-                  <td>{menu.icon}</td>
                   <td>{menu.enabled ? 'true' : 'false'}</td>
+                  <td>{menu.icon}</td>
+                  <td>{menu.uri}</td>
                   <td>{menu.defaultImage}</td>
                   <td>
                     {menu.defaultImageData ? (
@@ -188,10 +190,12 @@ export const Menu = () => {
                       </div>
                     ) : null}
                   </td>
+                  <td>{menu.createdDate ? <TextFormat type="date" value={menu.createdDate} format={APP_LOCAL_DATE_FORMAT} /> : null}</td>
                   <td>{menu.createdBy ? menu.createdBy.login : ''}</td>
                   <td>{menu.page ? <Link to={`/web-page/${menu.page.id}`}>{menu.page.code}</Link> : ''}</td>
                   <td>{menu.parent ? <Link to={`/menu/${menu.parent.id}`}>{menu.parent.code}</Link> : ''}</td>
                   <td>{menu.tourCategory ? <Link to={`/tour-category/${menu.tourCategory.id}`}>{menu.tourCategory.code}</Link> : ''}</td>
+                  <td>{menu.destination ? <Link to={`/destination/${menu.destination.id}`}>{menu.destination.code}</Link> : ''}</td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`/menu/${menu.id}`} color="info" size="sm" data-cy="entityDetailsButton">

@@ -1,6 +1,7 @@
 package gr.adr.xplora.admin.domain;
 
 import static gr.adr.xplora.admin.domain.ContentTestSamples.*;
+import static gr.adr.xplora.admin.domain.ImageFileTestSamples.*;
 import static gr.adr.xplora.admin.domain.TourExtraCategoryTestSamples.*;
 import static gr.adr.xplora.admin.domain.TourExtraTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -24,6 +25,28 @@ class TourExtraCategoryTest {
 
         tourExtraCategory2 = getTourExtraCategorySample2();
         assertThat(tourExtraCategory1).isNotEqualTo(tourExtraCategory2);
+    }
+
+    @Test
+    void imagesTest() throws Exception {
+        TourExtraCategory tourExtraCategory = getTourExtraCategoryRandomSampleGenerator();
+        ImageFile imageFileBack = getImageFileRandomSampleGenerator();
+
+        tourExtraCategory.addImages(imageFileBack);
+        assertThat(tourExtraCategory.getImages()).containsOnly(imageFileBack);
+        assertThat(imageFileBack.getTourExtraCategory()).isEqualTo(tourExtraCategory);
+
+        tourExtraCategory.removeImages(imageFileBack);
+        assertThat(tourExtraCategory.getImages()).doesNotContain(imageFileBack);
+        assertThat(imageFileBack.getTourExtraCategory()).isNull();
+
+        tourExtraCategory.images(new HashSet<>(Set.of(imageFileBack)));
+        assertThat(tourExtraCategory.getImages()).containsOnly(imageFileBack);
+        assertThat(imageFileBack.getTourExtraCategory()).isEqualTo(tourExtraCategory);
+
+        tourExtraCategory.setImages(new HashSet<>());
+        assertThat(tourExtraCategory.getImages()).doesNotContain(imageFileBack);
+        assertThat(imageFileBack.getTourExtraCategory()).isNull();
     }
 
     @Test

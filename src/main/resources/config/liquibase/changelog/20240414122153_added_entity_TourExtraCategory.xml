@@ -17,6 +17,9 @@
             <column name="code" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
+            <column name="enabled" type="boolean">
+                <constraints nullable="false" />
+            </column>
             <column name="icon" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
@@ -27,9 +30,6 @@
                 <constraints nullable="true" />
             </column>
             <column name="default_image_data_content_type" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-            <column name="enabled" type="boolean">
                 <constraints nullable="true" />
             </column>
             <column name="shop_category_id" type="varchar(255)">
@@ -66,11 +66,11 @@
                   usePreparedStatements="true">
             <column name="id" type="numeric"/>
             <column name="code" type="string"/>
+            <column name="enabled" type="boolean"/>
             <column name="icon" type="string"/>
             <column name="default_image" type="string"/>
             <column name="default_image_data" type="blob"/>
             <column name="default_image_data_content_type" type="string"/>
-            <column name="enabled" type="boolean"/>
             <column name="shop_category_id" type="string"/>
             <column name="shop_url" type="string"/>
             <column name="created_date" type="date"/>

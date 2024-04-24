@@ -48,8 +48,8 @@ class DestinationResourceIT {
     private static final String DEFAULT_CODE = "AAAAAAAAAA";
     private static final String UPDATED_CODE = "BBBBBBBBBB";
 
-    private static final LocalDate DEFAULT_CREATED_DATE = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_CREATED_DATE = LocalDate.now(ZoneId.systemDefault());
+    private static final Boolean DEFAULT_ENABLED = false;
+    private static final Boolean UPDATED_ENABLED = true;
 
     private static final String DEFAULT_DEFAULT_IMAGE = "AAAAAAAAAA";
     private static final String UPDATED_DEFAULT_IMAGE = "BBBBBBBBBB";
@@ -58,6 +58,12 @@ class DestinationResourceIT {
     private static final byte[] UPDATED_DEFAULT_IMAGE_DATA = TestUtil.createByteArray(1, "1");
     private static final String DEFAULT_DEFAULT_IMAGE_DATA_CONTENT_TYPE = "image/jpg";
     private static final String UPDATED_DEFAULT_IMAGE_DATA_CONTENT_TYPE = "image/png";
+
+    private static final String DEFAULT_CSS_STYLE = "AAAAAAAAAA";
+    private static final String UPDATED_CSS_STYLE = "BBBBBBBBBB";
+
+    private static final LocalDate DEFAULT_CREATED_DATE = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_CREATED_DATE = LocalDate.now(ZoneId.systemDefault());
 
     private static final String ENTITY_API_URL = "/api/destinations";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -97,10 +103,12 @@ class DestinationResourceIT {
     public static Destination createEntity(EntityManager em) {
         Destination destination = new Destination()
             .code(DEFAULT_CODE)
-            .createdDate(DEFAULT_CREATED_DATE)
+            .enabled(DEFAULT_ENABLED)
             .defaultImage(DEFAULT_DEFAULT_IMAGE)
             .defaultImageData(DEFAULT_DEFAULT_IMAGE_DATA)
-            .defaultImageDataContentType(DEFAULT_DEFAULT_IMAGE_DATA_CONTENT_TYPE);
+            .defaultImageDataContentType(DEFAULT_DEFAULT_IMAGE_DATA_CONTENT_TYPE)
+            .cssStyle(DEFAULT_CSS_STYLE)
+            .createdDate(DEFAULT_CREATED_DATE);
         return destination;
     }
 
@@ -113,10 +121,12 @@ class DestinationResourceIT {
     public static Destination createUpdatedEntity(EntityManager em) {
         Destination destination = new Destination()
             .code(UPDATED_CODE)
-            .createdDate(UPDATED_CREATED_DATE)
+            .enabled(UPDATED_ENABLED)
             .defaultImage(UPDATED_DEFAULT_IMAGE)
             .defaultImageData(UPDATED_DEFAULT_IMAGE_DATA)
-            .defaultImageDataContentType(UPDATED_DEFAULT_IMAGE_DATA_CONTENT_TYPE);
+            .defaultImageDataContentType(UPDATED_DEFAULT_IMAGE_DATA_CONTENT_TYPE)
+            .cssStyle(UPDATED_CSS_STYLE)
+            .createdDate(UPDATED_CREATED_DATE);
         return destination;
     }
 
@@ -184,6 +194,23 @@ class DestinationResourceIT {
 
     @Test
     @Transactional
+    void checkEnabledIsRequired() throws Exception {
+        long databaseSizeBeforeTest = getRepositoryCount();
+        // set the field null
+        destination.setEnabled(null);
+
+        // Create the Destination, which fails.
+        DestinationDTO destinationDTO = destinationMapper.toDto(destination);
+
+        restDestinationMockMvc
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsBytes(destinationDTO)))
+            .andExpect(status().isBadRequest());
+
+        assertSameRepositoryCount(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     void getAllDestinations() throws Exception {
         // Initialize the database
         destinationRepository.saveAndFlush(destination);
@@ -195,10 +222,12 @@ class DestinationResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(destination.getId().intValue())))
             .andExpect(jsonPath("$.[*].code").value(hasItem(DEFAULT_CODE)))
-            .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
+            .andExpect(jsonPath("$.[*].enabled").value(hasItem(DEFAULT_ENABLED.booleanValue())))
             .andExpect(jsonPath("$.[*].defaultImage").value(hasItem(DEFAULT_DEFAULT_IMAGE)))
             .andExpect(jsonPath("$.[*].defaultImageDataContentType").value(hasItem(DEFAULT_DEFAULT_IMAGE_DATA_CONTENT_TYPE)))
-            .andExpect(jsonPath("$.[*].defaultImageData").value(hasItem(Base64.getEncoder().encodeToString(DEFAULT_DEFAULT_IMAGE_DATA))));
+            .andExpect(jsonPath("$.[*].defaultImageData").value(hasItem(Base64.getEncoder().encodeToString(DEFAULT_DEFAULT_IMAGE_DATA))))
+            .andExpect(jsonPath("$.[*].cssStyle").value(hasItem(DEFAULT_CSS_STYLE.toString())))
+            .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())));
     }
 
     @SuppressWarnings({ "unchecked" })
@@ -231,10 +260,12 @@ class DestinationResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(destination.getId().intValue()))
             .andExpect(jsonPath("$.code").value(DEFAULT_CODE))
-            .andExpect(jsonPath("$.createdDate").value(DEFAULT_CREATED_DATE.toString()))
+            .andExpect(jsonPath("$.enabled").value(DEFAULT_ENABLED.booleanValue()))
             .andExpect(jsonPath("$.defaultImage").value(DEFAULT_DEFAULT_IMAGE))
             .andExpect(jsonPath("$.defaultImageDataContentType").value(DEFAULT_DEFAULT_IMAGE_DATA_CONTENT_TYPE))
-            .andExpect(jsonPath("$.defaultImageData").value(Base64.getEncoder().encodeToString(DEFAULT_DEFAULT_IMAGE_DATA)));
+            .andExpect(jsonPath("$.defaultImageData").value(Base64.getEncoder().encodeToString(DEFAULT_DEFAULT_IMAGE_DATA)))
+            .andExpect(jsonPath("$.cssStyle").value(DEFAULT_CSS_STYLE.toString()))
+            .andExpect(jsonPath("$.createdDate").value(DEFAULT_CREATED_DATE.toString()));
     }
 
     @Test
@@ -258,10 +289,12 @@ class DestinationResourceIT {
         em.detach(updatedDestination);
         updatedDestination
             .code(UPDATED_CODE)
-            .createdDate(UPDATED_CREATED_DATE)
+            .enabled(UPDATED_ENABLED)
             .defaultImage(UPDATED_DEFAULT_IMAGE)
             .defaultImageData(UPDATED_DEFAULT_IMAGE_DATA)
-            .defaultImageDataContentType(UPDATED_DEFAULT_IMAGE_DATA_CONTENT_TYPE);
+            .defaultImageDataContentType(UPDATED_DEFAULT_IMAGE_DATA_CONTENT_TYPE)
+            .cssStyle(UPDATED_CSS_STYLE)
+            .createdDate(UPDATED_CREATED_DATE);
         DestinationDTO destinationDTO = destinationMapper.toDto(updatedDestination);
 
         restDestinationMockMvc
@@ -351,11 +384,7 @@ class DestinationResourceIT {
         Destination partialUpdatedDestination = new Destination();
         partialUpdatedDestination.setId(destination.getId());
 
-        partialUpdatedDestination
-            .createdDate(UPDATED_CREATED_DATE)
-            .defaultImage(UPDATED_DEFAULT_IMAGE)
-            .defaultImageData(UPDATED_DEFAULT_IMAGE_DATA)
-            .defaultImageDataContentType(UPDATED_DEFAULT_IMAGE_DATA_CONTENT_TYPE);
+        partialUpdatedDestination.defaultImage(UPDATED_DEFAULT_IMAGE);
 
         restDestinationMockMvc
             .perform(
@@ -388,10 +417,12 @@ class DestinationResourceIT {
 
         partialUpdatedDestination
             .code(UPDATED_CODE)
-            .createdDate(UPDATED_CREATED_DATE)
+            .enabled(UPDATED_ENABLED)
             .defaultImage(UPDATED_DEFAULT_IMAGE)
             .defaultImageData(UPDATED_DEFAULT_IMAGE_DATA)
-            .defaultImageDataContentType(UPDATED_DEFAULT_IMAGE_DATA_CONTENT_TYPE);
+            .defaultImageDataContentType(UPDATED_DEFAULT_IMAGE_DATA_CONTENT_TYPE)
+            .cssStyle(UPDATED_CSS_STYLE)
+            .createdDate(UPDATED_CREATED_DATE);
 
         restDestinationMockMvc
             .perform(

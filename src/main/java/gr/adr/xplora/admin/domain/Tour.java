@@ -1,11 +1,16 @@
 package gr.adr.xplora.admin.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import gr.adr.xplora.admin.domain.enumeration.DurationMeasure;
+import gr.adr.xplora.admin.domain.enumeration.TourKind;
 import gr.adr.xplora.admin.domain.enumeration.TourMode;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import java.io.Serializable;
+import java.time.Duration;
+import java.time.Instant;
 import java.time.LocalDate;
+import java.time.ZonedDateTime;
 import java.util.HashSet;
 import java.util.Set;
 import org.hibernate.annotations.Cache;
@@ -32,13 +37,29 @@ public class Tour implements Serializable {
     private String code;
 
     @NotNull
+    @Column(name = "enabled", nullable = false)
+    private Boolean enabled;
+
+    @NotNull
     @Enumerated(EnumType.STRING)
-    @Column(name = "mode", nullable = false)
+    @Column(name = "kind", nullable = false)
+    private TourKind kind;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "mode")
     private TourMode mode;
+
+    @Column(name = "icon")
+    private String icon;
 
     @NotNull
     @Column(name = "duration", nullable = false)
     private Integer duration;
+
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(name = "duration_measure", nullable = false)
+    private DurationMeasure durationMeasure;
 
     @NotNull
     @Column(name = "pet_friendly", nullable = false)
@@ -48,15 +69,15 @@ public class Tour implements Serializable {
     @Column(name = "kids_allowed", nullable = false)
     private Boolean kidsAllowed;
 
+    @NotNull
+    @Column(name = "smoking", nullable = false)
+    private Boolean smoking;
+
     @Column(name = "available_from_date")
     private LocalDate availableFromDate;
 
     @Column(name = "available_to_date")
     private LocalDate availableToDate;
-
-    @NotNull
-    @Column(name = "enabled", nullable = false)
-    private Boolean enabled;
 
     @Column(name = "initial_price")
     private Double initialPrice;
@@ -86,27 +107,41 @@ public class Tour implements Serializable {
     @Column(name = "default_image_data")
     private byte[] defaultImageData;
 
+    @Column(name = "default_image_data_content_type")
+    private String defaultImageDataContentType;
+
+    @Column(name = "accessibility")
+    private Boolean accessibility;
+
+    @Column(name = "audio_guide")
+    private Boolean audioGuide;
+
+    @Column(name = "tour_guide")
+    private Boolean tourGuide;
+
     @Lob
     @Column(name = "css_style")
     private String cssStyle;
 
-    @Column(name = "default_image_data_content_type")
-    private String defaultImageDataContentType;
+    @Column(name = "departure")
+    private LocalDate departure;
 
-    @NotNull
-    @Column(name = "audio_guide", nullable = false)
-    private Boolean audioGuide;
+    @Column(name = "return_time")
+    private LocalDate returnTime;
 
-    @NotNull
-    @Column(name = "tour_guide", nullable = false)
-    private Boolean tourGuide;
+    @Column(name = "test_in")
+    private Instant testIn;
 
-    @NotNull
-    @Column(name = "accessibility", nullable = false)
-    private Boolean accessibility;
+    @Column(name = "test_z")
+    private ZonedDateTime testZ;
 
-    @Column(name = "icon")
-    private String icon;
+    @Column(name = "dur")
+    private Duration dur;
+
+    @JsonIgnoreProperties(value = { "language", "tour" }, allowSetters = true)
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(unique = true)
+    private TourContent content;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "tour")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -124,64 +159,14 @@ public class Tour implements Serializable {
             "tourCategory",
             "place",
             "placeCategory",
+            "tourExtraCategory",
+            "tourExtra",
             "vehicle",
             "driver",
-            "tourExtra",
-            "tourExtraCategory",
         },
         allowSetters = true
     )
     private Set<ImageFile> images = new HashSet<>();
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tourExtraInfo")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(
-        value = {
-            "language",
-            "createdBy",
-            "destination",
-            "tourExtraInfo",
-            "tour",
-            "tourCategory",
-            "place",
-            "placeCategory",
-            "tourExtraCategory",
-            "tourExtra",
-            "menu",
-            "webPage",
-            "tag",
-            "tourStep",
-            "promotion",
-            "imageFile",
-        },
-        allowSetters = true
-    )
-    private Set<Content> extraInfos = new HashSet<>();
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tour")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(
-        value = {
-            "language",
-            "createdBy",
-            "destination",
-            "tourExtraInfo",
-            "tour",
-            "tourCategory",
-            "place",
-            "placeCategory",
-            "tourExtraCategory",
-            "tourExtra",
-            "menu",
-            "webPage",
-            "tag",
-            "tourStep",
-            "promotion",
-            "imageFile",
-        },
-        allowSetters = true
-    )
-    private Set<Content> contents = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     private User createdBy;
@@ -207,7 +192,7 @@ public class Tour implements Serializable {
         inverseJoinColumns = @JoinColumn(name = "tour_extra_id")
     )
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "contents", "createdBy", "tags", "categories", "tours" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "images", "contents", "createdBy", "tags", "categories", "tours" }, allowSetters = true)
     private Set<TourExtra> tourExtras = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -233,14 +218,25 @@ public class Tour implements Serializable {
         inverseJoinColumns = @JoinColumn(name = "category_id")
     )
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "children", "images", "menus", "contents", "createdBy", "parent", "tours" }, allowSetters = true)
+    @JsonIgnoreProperties(
+        value = { "defaultTours", "children", "images", "menus", "contents", "createdBy", "parent", "tours" },
+        allowSetters = true
+    )
     private Set<TourCategory> categories = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "tours", "places", "images", "contents", "createdBy" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "tours", "places", "images", "menus", "contents", "createdBy" }, allowSetters = true)
     private Destination destination;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(
+        value = { "defaultTours", "children", "images", "menus", "contents", "createdBy", "parent", "tours" },
+        allowSetters = true
+    )
+    private TourCategory defaultCategory;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
+
     public Long getId() {
         return this.id;
     }
@@ -267,6 +263,32 @@ public class Tour implements Serializable {
         this.code = code;
     }
 
+    public Boolean getEnabled() {
+        return this.enabled;
+    }
+
+    public Tour enabled(Boolean enabled) {
+        this.setEnabled(enabled);
+        return this;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public TourKind getKind() {
+        return this.kind;
+    }
+
+    public Tour kind(TourKind kind) {
+        this.setKind(kind);
+        return this;
+    }
+
+    public void setKind(TourKind kind) {
+        this.kind = kind;
+    }
+
     public TourMode getMode() {
         return this.mode;
     }
@@ -280,6 +302,19 @@ public class Tour implements Serializable {
         this.mode = mode;
     }
 
+    public String getIcon() {
+        return this.icon;
+    }
+
+    public Tour icon(String icon) {
+        this.setIcon(icon);
+        return this;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
     public Integer getDuration() {
         return this.duration;
     }
@@ -291,6 +326,19 @@ public class Tour implements Serializable {
 
     public void setDuration(Integer duration) {
         this.duration = duration;
+    }
+
+    public DurationMeasure getDurationMeasure() {
+        return this.durationMeasure;
+    }
+
+    public Tour durationMeasure(DurationMeasure durationMeasure) {
+        this.setDurationMeasure(durationMeasure);
+        return this;
+    }
+
+    public void setDurationMeasure(DurationMeasure durationMeasure) {
+        this.durationMeasure = durationMeasure;
     }
 
     public Boolean getPetFriendly() {
@@ -319,6 +367,19 @@ public class Tour implements Serializable {
         this.kidsAllowed = kidsAllowed;
     }
 
+    public Boolean getSmoking() {
+        return this.smoking;
+    }
+
+    public Tour smoking(Boolean smoking) {
+        this.setSmoking(smoking);
+        return this;
+    }
+
+    public void setSmoking(Boolean smoking) {
+        this.smoking = smoking;
+    }
+
     public LocalDate getAvailableFromDate() {
         return this.availableFromDate;
     }
@@ -343,19 +404,6 @@ public class Tour implements Serializable {
 
     public void setAvailableToDate(LocalDate availableToDate) {
         this.availableToDate = availableToDate;
-    }
-
-    public Boolean getEnabled() {
-        return this.enabled;
-    }
-
-    public Tour enabled(Boolean enabled) {
-        this.setEnabled(enabled);
-        return this;
-    }
-
-    public void setEnabled(Boolean enabled) {
-        this.enabled = enabled;
     }
 
     public Double getInitialPrice() {
@@ -488,12 +536,134 @@ public class Tour implements Serializable {
         this.defaultImageDataContentType = defaultImageDataContentType;
     }
 
+    public Boolean getAccessibility() {
+        return this.accessibility;
+    }
+
+    public Tour accessibility(Boolean accessibility) {
+        this.setAccessibility(accessibility);
+        return this;
+    }
+
+    public void setAccessibility(Boolean accessibility) {
+        this.accessibility = accessibility;
+    }
+
+    public Boolean getAudioGuide() {
+        return this.audioGuide;
+    }
+
+    public Tour audioGuide(Boolean audioGuide) {
+        this.setAudioGuide(audioGuide);
+        return this;
+    }
+
+    public void setAudioGuide(Boolean audioGuide) {
+        this.audioGuide = audioGuide;
+    }
+
+    public Boolean getTourGuide() {
+        return this.tourGuide;
+    }
+
+    public Tour tourGuide(Boolean tourGuide) {
+        this.setTourGuide(tourGuide);
+        return this;
+    }
+
+    public void setTourGuide(Boolean tourGuide) {
+        this.tourGuide = tourGuide;
+    }
+
     public String getCssStyle() {
-        return cssStyle;
+        return this.cssStyle;
+    }
+
+    public Tour cssStyle(String cssStyle) {
+        this.setCssStyle(cssStyle);
+        return this;
     }
 
     public void setCssStyle(String cssStyle) {
         this.cssStyle = cssStyle;
+    }
+
+    public LocalDate getDeparture() {
+        return this.departure;
+    }
+
+    public Tour departure(LocalDate departure) {
+        this.setDeparture(departure);
+        return this;
+    }
+
+    public void setDeparture(LocalDate departure) {
+        this.departure = departure;
+    }
+
+    public LocalDate getReturnTime() {
+        return this.returnTime;
+    }
+
+    public Tour returnTime(LocalDate returnTime) {
+        this.setReturnTime(returnTime);
+        return this;
+    }
+
+    public void setReturnTime(LocalDate returnTime) {
+        this.returnTime = returnTime;
+    }
+
+    public Instant getTestIn() {
+        return this.testIn;
+    }
+
+    public Tour testIn(Instant testIn) {
+        this.setTestIn(testIn);
+        return this;
+    }
+
+    public void setTestIn(Instant testIn) {
+        this.testIn = testIn;
+    }
+
+    public ZonedDateTime getTestZ() {
+        return this.testZ;
+    }
+
+    public Tour testZ(ZonedDateTime testZ) {
+        this.setTestZ(testZ);
+        return this;
+    }
+
+    public void setTestZ(ZonedDateTime testZ) {
+        this.testZ = testZ;
+    }
+
+    public Duration getDur() {
+        return this.dur;
+    }
+
+    public Tour dur(Duration dur) {
+        this.setDur(dur);
+        return this;
+    }
+
+    public void setDur(Duration dur) {
+        this.dur = dur;
+    }
+
+    public TourContent getContent() {
+        return this.content;
+    }
+
+    public void setContent(TourContent tourContent) {
+        this.content = tourContent;
+    }
+
+    public Tour content(TourContent tourContent) {
+        this.setContent(tourContent);
+        return this;
     }
 
     public Set<TourStep> getSteps() {
@@ -555,68 +725,6 @@ public class Tour implements Serializable {
     public Tour removeImages(ImageFile imageFile) {
         this.images.remove(imageFile);
         imageFile.setTour(null);
-        return this;
-    }
-
-    public Set<Content> getExtraInfos() {
-        return this.extraInfos;
-    }
-
-    public void setExtraInfos(Set<Content> contents) {
-        if (this.extraInfos != null) {
-            this.extraInfos.forEach(i -> i.setTourExtraInfo(null));
-        }
-        if (contents != null) {
-            contents.forEach(i -> i.setTourExtraInfo(this));
-        }
-        this.extraInfos = contents;
-    }
-
-    public Tour extraInfos(Set<Content> contents) {
-        this.setExtraInfos(contents);
-        return this;
-    }
-
-    public Tour addExtraInfo(Content content) {
-        this.extraInfos.add(content);
-        content.setTourExtraInfo(this);
-        return this;
-    }
-
-    public Tour removeExtraInfo(Content content) {
-        this.extraInfos.remove(content);
-        content.setTourExtraInfo(null);
-        return this;
-    }
-
-    public Set<Content> getContents() {
-        return this.contents;
-    }
-
-    public void setContents(Set<Content> contents) {
-        if (this.contents != null) {
-            this.contents.forEach(i -> i.setTour(null));
-        }
-        if (contents != null) {
-            contents.forEach(i -> i.setTour(this));
-        }
-        this.contents = contents;
-    }
-
-    public Tour contents(Set<Content> contents) {
-        this.setContents(contents);
-        return this;
-    }
-
-    public Tour addContents(Content content) {
-        this.contents.add(content);
-        content.setTour(this);
-        return this;
-    }
-
-    public Tour removeContents(Content content) {
-        this.contents.remove(content);
-        content.setTour(null);
         return this;
     }
 
@@ -764,39 +872,21 @@ public class Tour implements Serializable {
         return this;
     }
 
-    public Boolean getAudioGuide() {
-        return audioGuide;
+    public TourCategory getDefaultCategory() {
+        return this.defaultCategory;
     }
 
-    public void setAudioGuide(Boolean audioGuide) {
-        this.audioGuide = audioGuide;
+    public void setDefaultCategory(TourCategory tourCategory) {
+        this.defaultCategory = tourCategory;
     }
 
-    public Boolean getTourGuide() {
-        return tourGuide;
-    }
-
-    public void setTourGuide(Boolean tourGuide) {
-        this.tourGuide = tourGuide;
-    }
-
-    public Boolean getAccessibility() {
-        return accessibility;
-    }
-
-    public void setAccessibility(Boolean accessibility) {
-        this.accessibility = accessibility;
-    }
-
-    public String getIcon() {
-        return icon;
-    }
-
-    public void setIcon(String icon) {
-        this.icon = icon;
+    public Tour defaultCategory(TourCategory tourCategory) {
+        this.setDefaultCategory(tourCategory);
+        return this;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -817,29 +907,39 @@ public class Tour implements Serializable {
     // prettier-ignore
     @Override
     public String toString() {
-        return "Tour{"
-                + "id=" + getId()
-                + ", code='" + getCode() + "'"
-                + ", mode='" + getMode() + "'"
-                + ", duration=" + getDuration()
-                + ", petFriendly='" + getPetFriendly() + "'"
-                + ", kidsAllowed='" + getKidsAllowed() + "'"
-                + ", availableFromDate='" + getAvailableFromDate() + "'"
-                + ", availableToDate='" + getAvailableToDate() + "'"
-                + ", enabled='" + getEnabled() + "'"
-                + ", initialPrice=" + getInitialPrice()
-                + ", price=" + getPrice()
-                + ", badge='" + getBadge() + "'"
-                + ", rating=" + getRating()
-                + ", widgetId='" + getWidgetId() + "'"
-                + ", externalId='" + getExternalId() + "'"
-                + ", createdDate='" + getCreatedDate() + "'"
-                + ", defaultImage='" + getDefaultImage() + "'"
-                + ", defaultImageDataContentType='" + getDefaultImageDataContentType() + "'"
-                + ", accessibility='" + getAccessibility() + "'"
-                + ", audioGuide='" + getAudioGuide() + "'"
-                + ", tourGuide='" + getTourGuide() + "'"
-                + ", icon='" + getIcon() + "'"
-                + "}";
+        return "Tour{" +
+            "id=" + getId() +
+            ", code='" + getCode() + "'" +
+            ", enabled='" + getEnabled() + "'" +
+            ", kind='" + getKind() + "'" +
+            ", mode='" + getMode() + "'" +
+            ", icon='" + getIcon() + "'" +
+            ", duration=" + getDuration() +
+            ", durationMeasure='" + getDurationMeasure() + "'" +
+            ", petFriendly='" + getPetFriendly() + "'" +
+            ", kidsAllowed='" + getKidsAllowed() + "'" +
+            ", smoking='" + getSmoking() + "'" +
+            ", availableFromDate='" + getAvailableFromDate() + "'" +
+            ", availableToDate='" + getAvailableToDate() + "'" +
+            ", initialPrice=" + getInitialPrice() +
+            ", price=" + getPrice() +
+            ", badge='" + getBadge() + "'" +
+            ", rating=" + getRating() +
+            ", widgetId='" + getWidgetId() + "'" +
+            ", externalId='" + getExternalId() + "'" +
+            ", createdDate='" + getCreatedDate() + "'" +
+            ", defaultImage='" + getDefaultImage() + "'" +
+            ", defaultImageData='" + getDefaultImageData() + "'" +
+            ", defaultImageDataContentType='" + getDefaultImageDataContentType() + "'" +
+            ", accessibility='" + getAccessibility() + "'" +
+            ", audioGuide='" + getAudioGuide() + "'" +
+            ", tourGuide='" + getTourGuide() + "'" +
+            ", cssStyle='" + getCssStyle() + "'" +
+            ", departure='" + getDeparture() + "'" +
+            ", returnTime='" + getReturnTime() + "'" +
+            ", testIn='" + getTestIn() + "'" +
+            ", testZ='" + getTestZ() + "'" +
+            ", dur='" + getDur() + "'" +
+            "}";
     }
 }

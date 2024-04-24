@@ -37,10 +37,6 @@ public class ContentDTO implements Serializable {
 
     private DestinationDTO destination;
 
-    private TourDTO tourExtraInfo;
-
-    private TourDTO tour;
-
     private TourCategoryDTO tourCategory;
 
     private PlaceDTO place;
@@ -141,22 +137,6 @@ public class ContentDTO implements Serializable {
 
     public void setDestination(DestinationDTO destination) {
         this.destination = destination;
-    }
-
-    public TourDTO getTourExtraInfo() {
-        return tourExtraInfo;
-    }
-
-    public void setTourExtraInfo(TourDTO tourExtraInfo) {
-        this.tourExtraInfo = tourExtraInfo;
-    }
-
-    public TourDTO getTour() {
-        return tour;
-    }
-
-    public void setTour(TourDTO tour) {
-        this.tour = tour;
     }
 
     public TourCategoryDTO getTourCategory() {
@@ -282,8 +262,6 @@ public class ContentDTO implements Serializable {
             ", language=" + getLanguage() +
             ", createdBy=" + getCreatedBy() +
             ", destination=" + getDestination() +
-            ", tourExtraInfo=" + getTourExtraInfo() +
-            ", tour=" + getTour() +
             ", tourCategory=" + getTourCategory() +
             ", place=" + getPlace() +
             ", placeCategory=" + getPlaceCategory() +

@@ -15,6 +15,8 @@ import { getEntities as getWebPages } from 'app/entities/web-page/web-page.reduc
 import { getEntities as getMenus } from 'app/entities/menu/menu.reducer';
 import { ITourCategory } from 'app/shared/model/tour-category.model';
 import { getEntities as getTourCategories } from 'app/entities/tour-category/tour-category.reducer';
+import { IDestination } from 'app/shared/model/destination.model';
+import { getEntities as getDestinations } from 'app/entities/destination/destination.reducer';
 import { IMenu } from 'app/shared/model/menu.model';
 import { getEntity, updateEntity, createEntity, reset } from './menu.reducer';
 
@@ -30,6 +32,7 @@ export const MenuUpdate = () => {
   const webPages = useAppSelector(state => state.webPage.entities);
   const menus = useAppSelector(state => state.menu.entities);
   const tourCategories = useAppSelector(state => state.tourCategory.entities);
+  const destinations = useAppSelector(state => state.destination.entities);
   const menuEntity = useAppSelector(state => state.menu.entity);
   const loading = useAppSelector(state => state.menu.loading);
   const updating = useAppSelector(state => state.menu.updating);
@@ -50,6 +53,7 @@ export const MenuUpdate = () => {
     dispatch(getWebPages({}));
     dispatch(getMenus({}));
     dispatch(getTourCategories({}));
+    dispatch(getDestinations({}));
   }, []);
 
   useEffect(() => {
@@ -71,6 +75,7 @@ export const MenuUpdate = () => {
       page: webPages.find(it => it.id.toString() === values.page?.toString()),
       parent: menus.find(it => it.id.toString() === values.parent?.toString()),
       tourCategory: tourCategories.find(it => it.id.toString() === values.tourCategory?.toString()),
+      destination: destinations.find(it => it.id.toString() === values.destination?.toString()),
     };
 
     if (isNew) {
@@ -89,6 +94,7 @@ export const MenuUpdate = () => {
           page: menuEntity?.page?.id,
           parent: menuEntity?.parent?.id,
           tourCategory: menuEntity?.tourCategory?.id,
+          destination: menuEntity?.destination?.id,
         };
 
   return (
@@ -126,15 +132,6 @@ export const MenuUpdate = () => {
                   required: { value: true, message: translate('entity.validation.required') },
                 }}
               />
-              <ValidatedField label={translate('xploraAdminApp.menu.uri')} id="menu-uri" name="uri" data-cy="uri" type="text" />
-              <ValidatedField
-                label={translate('xploraAdminApp.menu.createdDate')}
-                id="menu-createdDate"
-                name="createdDate"
-                data-cy="createdDate"
-                type="date"
-              />
-              <ValidatedField label={translate('xploraAdminApp.menu.icon')} id="menu-icon" name="icon" data-cy="icon" type="text" />
               <ValidatedField
                 label={translate('xploraAdminApp.menu.enabled')}
                 id="menu-enabled"
@@ -143,6 +140,8 @@ export const MenuUpdate = () => {
                 check
                 type="checkbox"
               />
+              <ValidatedField label={translate('xploraAdminApp.menu.icon')} id="menu-icon" name="icon" data-cy="icon" type="text" />
+              <ValidatedField label={translate('xploraAdminApp.menu.uri')} id="menu-uri" name="uri" data-cy="uri" type="text" />
               <ValidatedField
                 label={translate('xploraAdminApp.menu.defaultImage')}
                 id="menu-defaultImage"
@@ -157,6 +156,13 @@ export const MenuUpdate = () => {
                 data-cy="defaultImageData"
                 isImage
                 accept="image/*"
+              />
+              <ValidatedField
+                label={translate('xploraAdminApp.menu.createdDate')}
+                id="menu-createdDate"
+                name="createdDate"
+                data-cy="createdDate"
+                type="date"
               />
               <ValidatedField
                 id="menu-createdBy"
@@ -204,6 +210,22 @@ export const MenuUpdate = () => {
                 <option value="" key="0" />
                 {tourCategories
                   ? tourCategories.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.code}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="menu-destination"
+                name="destination"
+                data-cy="destination"
+                label={translate('xploraAdminApp.menu.destination')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {destinations
+                  ? destinations.map(otherEntity => (
                       <option value={otherEntity.id} key={otherEntity.id}>
                         {otherEntity.code}
                       </option>

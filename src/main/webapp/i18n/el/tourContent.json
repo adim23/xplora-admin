@@ -1,0 +1,39 @@
+{
+  "xploraAdminApp": {
+    "tourContent": {
+      "home": {
+        "title": "Tour Contents",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Δημιουργήστε ένα νέο Tour Content",
+        "createOrEditLabel": "Δημιουργήστε η επεξεργαστείτε ένα Tour Content",
+        "notFound": "No Tour Contents found"
+      },
+      "created": "Ένα νέο Tour Content έχει δημιουργηθεί με αναγνωριστικό {{ param }}",
+      "updated": "Ένα Tour Content έχει ενημερωθεί με αναγνωριστικό {{ param }}",
+      "deleted": "Ένα Tour Content έχει διαγραφτεί με αναγνωριστικό {{ param }}",
+      "delete": {
+        "question": "Είστε βέβαιοι όταν θέλετε να διαγράψετε το ακόλουθο Tour Content {{ id }};"
+      },
+      "detail": {
+        "title": "Tour Content"
+      },
+      "id": "ID",
+      "code": "Code",
+      "title": "Title",
+      "shortDescription": "Short Description",
+      "data": "Data",
+      "meta": "Meta",
+      "cancellation": "Cancellation",
+      "activityPath": "Activity Path",
+      "atAGlance": "At A Glance",
+      "inDetail": "In Detail",
+      "whatIsIncluded": "What Is Included",
+      "youCanAdd": "You Can Add",
+      "importantInformation": "Important Information",
+      "extraInfo": "Extra Info",
+      "createdDate": "Created Date",
+      "language": "Language",
+      "tour": "Tour"
+    }
+  }
+}

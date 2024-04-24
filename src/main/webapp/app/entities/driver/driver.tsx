@@ -118,6 +118,10 @@ export const Driver = () => {
                   <Translate contentKey="xploraAdminApp.driver.name">Name</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('name')} />
                 </th>
+                <th className="hand" onClick={sort('enabled')}>
+                  <Translate contentKey="xploraAdminApp.driver.enabled">Enabled</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('enabled')} />
+                </th>
                 <th className="hand" onClick={sort('hiredAt')}>
                   <Translate contentKey="xploraAdminApp.driver.hiredAt">Hired At</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('hiredAt')} />
@@ -157,6 +161,7 @@ export const Driver = () => {
                     </Button>
                   </td>
                   <td>{driver.name}</td>
+                  <td>{driver.enabled ? 'true' : 'false'}</td>
                   <td>{driver.hiredAt ? <TextFormat type="date" value={driver.hiredAt} format={APP_LOCAL_DATE_FORMAT} /> : null}</td>
                   <td>{driver.age}</td>
                   <td>{driver.email}</td>

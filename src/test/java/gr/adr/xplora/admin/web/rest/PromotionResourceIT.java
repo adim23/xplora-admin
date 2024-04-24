@@ -38,6 +38,9 @@ class PromotionResourceIT {
     private static final String DEFAULT_CODE = "AAAAAAAAAA";
     private static final String UPDATED_CODE = "BBBBBBBBBB";
 
+    private static final Boolean DEFAULT_ENABLED = false;
+    private static final Boolean UPDATED_ENABLED = true;
+
     private static final Double DEFAULT_DISCOUNT = 1D;
     private static final Double UPDATED_DISCOUNT = 2D;
 
@@ -46,9 +49,6 @@ class PromotionResourceIT {
 
     private static final LocalDate DEFAULT_TO_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_TO_DATE = LocalDate.now(ZoneId.systemDefault());
-
-    private static final Boolean DEFAULT_ENABLED = false;
-    private static final Boolean UPDATED_ENABLED = true;
 
     private static final String ENTITY_API_URL = "/api/promotions";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -82,10 +82,10 @@ class PromotionResourceIT {
     public static Promotion createEntity(EntityManager em) {
         Promotion promotion = new Promotion()
             .code(DEFAULT_CODE)
+            .enabled(DEFAULT_ENABLED)
             .discount(DEFAULT_DISCOUNT)
             .fromDate(DEFAULT_FROM_DATE)
-            .toDate(DEFAULT_TO_DATE)
-            .enabled(DEFAULT_ENABLED);
+            .toDate(DEFAULT_TO_DATE);
         return promotion;
     }
 
@@ -98,10 +98,10 @@ class PromotionResourceIT {
     public static Promotion createUpdatedEntity(EntityManager em) {
         Promotion promotion = new Promotion()
             .code(UPDATED_CODE)
+            .enabled(UPDATED_ENABLED)
             .discount(UPDATED_DISCOUNT)
             .fromDate(UPDATED_FROM_DATE)
-            .toDate(UPDATED_TO_DATE)
-            .enabled(UPDATED_ENABLED);
+            .toDate(UPDATED_TO_DATE);
         return promotion;
     }
 
@@ -180,10 +180,10 @@ class PromotionResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(promotion.getId().intValue())))
             .andExpect(jsonPath("$.[*].code").value(hasItem(DEFAULT_CODE)))
+            .andExpect(jsonPath("$.[*].enabled").value(hasItem(DEFAULT_ENABLED.booleanValue())))
             .andExpect(jsonPath("$.[*].discount").value(hasItem(DEFAULT_DISCOUNT.doubleValue())))
             .andExpect(jsonPath("$.[*].fromDate").value(hasItem(DEFAULT_FROM_DATE.toString())))
-            .andExpect(jsonPath("$.[*].toDate").value(hasItem(DEFAULT_TO_DATE.toString())))
-            .andExpect(jsonPath("$.[*].enabled").value(hasItem(DEFAULT_ENABLED.booleanValue())));
+            .andExpect(jsonPath("$.[*].toDate").value(hasItem(DEFAULT_TO_DATE.toString())));
     }
 
     @Test
@@ -199,10 +199,10 @@ class PromotionResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(promotion.getId().intValue()))
             .andExpect(jsonPath("$.code").value(DEFAULT_CODE))
+            .andExpect(jsonPath("$.enabled").value(DEFAULT_ENABLED.booleanValue()))
             .andExpect(jsonPath("$.discount").value(DEFAULT_DISCOUNT.doubleValue()))
             .andExpect(jsonPath("$.fromDate").value(DEFAULT_FROM_DATE.toString()))
-            .andExpect(jsonPath("$.toDate").value(DEFAULT_TO_DATE.toString()))
-            .andExpect(jsonPath("$.enabled").value(DEFAULT_ENABLED.booleanValue()));
+            .andExpect(jsonPath("$.toDate").value(DEFAULT_TO_DATE.toString()));
     }
 
     @Test
@@ -226,10 +226,10 @@ class PromotionResourceIT {
         em.detach(updatedPromotion);
         updatedPromotion
             .code(UPDATED_CODE)
+            .enabled(UPDATED_ENABLED)
             .discount(UPDATED_DISCOUNT)
             .fromDate(UPDATED_FROM_DATE)
-            .toDate(UPDATED_TO_DATE)
-            .enabled(UPDATED_ENABLED);
+            .toDate(UPDATED_TO_DATE);
         PromotionDTO promotionDTO = promotionMapper.toDto(updatedPromotion);
 
         restPromotionMockMvc
@@ -319,7 +319,7 @@ class PromotionResourceIT {
         Promotion partialUpdatedPromotion = new Promotion();
         partialUpdatedPromotion.setId(promotion.getId());
 
-        partialUpdatedPromotion.code(UPDATED_CODE).discount(UPDATED_DISCOUNT).fromDate(UPDATED_FROM_DATE);
+        partialUpdatedPromotion.code(UPDATED_CODE).enabled(UPDATED_ENABLED).fromDate(UPDATED_FROM_DATE);
 
         restPromotionMockMvc
             .perform(
@@ -352,10 +352,10 @@ class PromotionResourceIT {
 
         partialUpdatedPromotion
             .code(UPDATED_CODE)
+            .enabled(UPDATED_ENABLED)
             .discount(UPDATED_DISCOUNT)
             .fromDate(UPDATED_FROM_DATE)
-            .toDate(UPDATED_TO_DATE)
-            .enabled(UPDATED_ENABLED);
+            .toDate(UPDATED_TO_DATE);
 
         restPromotionMockMvc
             .perform(

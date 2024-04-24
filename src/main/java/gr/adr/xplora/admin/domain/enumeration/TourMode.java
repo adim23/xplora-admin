@@ -4,9 +4,13 @@ package gr.adr.xplora.admin.domain.enumeration;
  * The TourMode enumeration.
  */
 public enum TourMode {
-    TOUR("Tour"),
-    ACTIVITY("Activity"),
-    EVENT("Event"),
+    BUS("Bus"),
+    BOAT("Boat"),
+    FEET("Feet"),
+    CAR("Car"),
+    MOTO("Moto"),
+    MOTOBUS("Motobus"),
+    BICYCLE("Bicycle"),
     OTHER("Other");
 
     private final String value;

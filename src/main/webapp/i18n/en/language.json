@@ -19,12 +19,14 @@
       },
       "id": "ID",
       "code": "Code",
-      "createdDate": "Created Date",
       "icon": "Icon",
       "defaultImage": "Default Image",
       "defaultImageData": "Default Image Data",
+      "createdDate": "Created Date",
       "createdBy": "Created By",
-      "content": "Content"
+      "content": "Content",
+      "tourContent": "Tour Content",
+      "prompt": "Prompt"
     }
   }
 }

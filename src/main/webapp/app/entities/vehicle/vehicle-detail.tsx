@@ -39,6 +39,12 @@ export const VehicleDetail = () => {
           </dt>
           <dd>{vehicleEntity.plate}</dd>
           <dt>
+            <span id="enabled">
+              <Translate contentKey="xploraAdminApp.vehicle.enabled">Enabled</Translate>
+            </span>
+          </dt>
+          <dd>{vehicleEntity.enabled ? 'true' : 'false'}</dd>
+          <dt>
             <span id="type">
               <Translate contentKey="xploraAdminApp.vehicle.type">Type</Translate>
             </span>

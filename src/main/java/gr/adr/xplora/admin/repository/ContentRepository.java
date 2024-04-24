@@ -30,18 +30,18 @@ public interface ContentRepository extends JpaRepository<Content, Long> {
     }
 
     @Query(
-        value = "select content from Content content left join fetch content.language left join fetch content.createdBy left join fetch content.destination left join fetch content.tourExtraInfo left join fetch content.tour left join fetch content.tourCategory left join fetch content.place left join fetch content.placeCategory left join fetch content.tourExtraCategory left join fetch content.tourExtra left join fetch content.menu left join fetch content.webPage left join fetch content.tag left join fetch content.tourStep left join fetch content.promotion left join fetch content.imageFile",
+        value = "select content from Content content left join fetch content.language left join fetch content.createdBy left join fetch content.destination left join fetch content.tourCategory left join fetch content.place left join fetch content.placeCategory left join fetch content.tourExtraCategory left join fetch content.tourExtra left join fetch content.menu left join fetch content.webPage left join fetch content.tag left join fetch content.tourStep left join fetch content.promotion left join fetch content.imageFile",
         countQuery = "select count(content) from Content content"
     )
     Page<Content> findAllWithToOneRelationships(Pageable pageable);
 
     @Query(
-        "select content from Content content left join fetch content.language left join fetch content.createdBy left join fetch content.destination left join fetch content.tourExtraInfo left join fetch content.tour left join fetch content.tourCategory left join fetch content.place left join fetch content.placeCategory left join fetch content.tourExtraCategory left join fetch content.tourExtra left join fetch content.menu left join fetch content.webPage left join fetch content.tag left join fetch content.tourStep left join fetch content.promotion left join fetch content.imageFile"
+        "select content from Content content left join fetch content.language left join fetch content.createdBy left join fetch content.destination left join fetch content.tourCategory left join fetch content.place left join fetch content.placeCategory left join fetch content.tourExtraCategory left join fetch content.tourExtra left join fetch content.menu left join fetch content.webPage left join fetch content.tag left join fetch content.tourStep left join fetch content.promotion left join fetch content.imageFile"
     )
     List<Content> findAllWithToOneRelationships();
 
     @Query(
-        "select content from Content content left join fetch content.language left join fetch content.createdBy left join fetch content.destination left join fetch content.tourExtraInfo left join fetch content.tour left join fetch content.tourCategory left join fetch content.place left join fetch content.placeCategory left join fetch content.tourExtraCategory left join fetch content.tourExtra left join fetch content.menu left join fetch content.webPage left join fetch content.tag left join fetch content.tourStep left join fetch content.promotion left join fetch content.imageFile where content.id =:id"
+        "select content from Content content left join fetch content.language left join fetch content.createdBy left join fetch content.destination left join fetch content.tourCategory left join fetch content.place left join fetch content.placeCategory left join fetch content.tourExtraCategory left join fetch content.tourExtra left join fetch content.menu left join fetch content.webPage left join fetch content.tag left join fetch content.tourStep left join fetch content.promotion left join fetch content.imageFile where content.id =:id"
     )
     Optional<Content> findOneWithToOneRelationships(@Param("id") Long id);
 }

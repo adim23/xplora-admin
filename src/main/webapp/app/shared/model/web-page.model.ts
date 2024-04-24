@@ -5,8 +5,8 @@ import { ITag } from 'app/shared/model/tag.model';
 export interface IWebPage {
   id?: number;
   code?: string;
+  enabled?: boolean;
   uriPath?: string | null;
-  enabled?: boolean | null;
   publishDate?: dayjs.Dayjs | null;
   createdDate?: dayjs.Dayjs | null;
   createdBy?: IUser | null;

@@ -11,12 +11,13 @@
       "fieldValidateRules": ["required"]
     },
     {
-      "fieldName": "icon",
-      "fieldType": "String"
+      "fieldName": "enabled",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
     },
     {
-      "fieldName": "enabled",
-      "fieldType": "Boolean"
+      "fieldName": "icon",
+      "fieldType": "String"
     },
     {
       "fieldName": "createdDate",

@@ -14,8 +14,6 @@ import { IUser } from 'app/shared/model/user.model';
 import { getUsers } from 'app/modules/administration/user-management/user-management.reducer';
 import { IDestination } from 'app/shared/model/destination.model';
 import { getEntities as getDestinations } from 'app/entities/destination/destination.reducer';
-import { ITour } from 'app/shared/model/tour.model';
-import { getEntities as getTours } from 'app/entities/tour/tour.reducer';
 import { ITourCategory } from 'app/shared/model/tour-category.model';
 import { getEntities as getTourCategories } from 'app/entities/tour-category/tour-category.reducer';
 import { IPlace } from 'app/shared/model/place.model';
@@ -52,7 +50,6 @@ export const ContentUpdate = () => {
   const languages = useAppSelector(state => state.language.entities);
   const users = useAppSelector(state => state.userManagement.users);
   const destinations = useAppSelector(state => state.destination.entities);
-  const tours = useAppSelector(state => state.tour.entities);
   const tourCategories = useAppSelector(state => state.tourCategory.entities);
   const places = useAppSelector(state => state.place.entities);
   const placeCategories = useAppSelector(state => state.placeCategory.entities);
@@ -83,7 +80,6 @@ export const ContentUpdate = () => {
     dispatch(getLanguages({}));
     dispatch(getUsers({}));
     dispatch(getDestinations({}));
-    dispatch(getTours({}));
     dispatch(getTourCategories({}));
     dispatch(getPlaces({}));
     dispatch(getPlaceCategories({}));
@@ -115,8 +111,6 @@ export const ContentUpdate = () => {
       language: languages.find(it => it.id.toString() === values.language?.toString()),
       createdBy: users.find(it => it.id.toString() === values.createdBy?.toString()),
       destination: destinations.find(it => it.id.toString() === values.destination?.toString()),
-      tourExtraInfo: tours.find(it => it.id.toString() === values.tourExtraInfo?.toString()),
-      tour: tours.find(it => it.id.toString() === values.tour?.toString()),
       tourCategory: tourCategories.find(it => it.id.toString() === values.tourCategory?.toString()),
       place: places.find(it => it.id.toString() === values.place?.toString()),
       placeCategory: placeCategories.find(it => it.id.toString() === values.placeCategory?.toString()),
@@ -145,8 +139,6 @@ export const ContentUpdate = () => {
           language: contentEntity?.language?.id,
           createdBy: contentEntity?.createdBy?.id,
           destination: contentEntity?.destination?.id,
-          tourExtraInfo: contentEntity?.tourExtraInfo?.id,
-          tour: contentEntity?.tour?.id,
           tourCategory: contentEntity?.tourCategory?.id,
           place: contentEntity?.place?.id,
           placeCategory: contentEntity?.placeCategory?.id,
@@ -276,32 +268,6 @@ export const ContentUpdate = () => {
                 <option value="" key="0" />
                 {destinations
                   ? destinations.map(otherEntity => (
-                      <option value={otherEntity.id} key={otherEntity.id}>
-                        {otherEntity.code}
-                      </option>
-                    ))
-                  : null}
-              </ValidatedField>
-              <ValidatedField
-                id="content-tourExtraInfo"
-                name="tourExtraInfo"
-                data-cy="tourExtraInfo"
-                label={translate('xploraAdminApp.content.tourExtraInfo')}
-                type="select"
-              >
-                <option value="" key="0" />
-                {tours
-                  ? tours.map(otherEntity => (
-                      <option value={otherEntity.id} key={otherEntity.id}>
-                        {otherEntity.code}
-                      </option>
-                    ))
-                  : null}
-              </ValidatedField>
-              <ValidatedField id="content-tour" name="tour" data-cy="tour" label={translate('xploraAdminApp.content.tour')} type="select">
-                <option value="" key="0" />
-                {tours
-                  ? tours.map(otherEntity => (
                       <option value={otherEntity.id} key={otherEntity.id}>
                         {otherEntity.code}
                       </option>

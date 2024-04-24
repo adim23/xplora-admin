@@ -118,6 +118,14 @@ export const TourStep = () => {
                   <Translate contentKey="xploraAdminApp.tourStep.code">Code</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('code')} />
                 </th>
+                <th className="hand" onClick={sort('enabled')}>
+                  <Translate contentKey="xploraAdminApp.tourStep.enabled">Enabled</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('enabled')} />
+                </th>
+                <th className="hand" onClick={sort('icon')}>
+                  <Translate contentKey="xploraAdminApp.tourStep.icon">Icon</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('icon')} />
+                </th>
                 <th className="hand" onClick={sort('stepOrder')}>
                   <Translate contentKey="xploraAdminApp.tourStep.stepOrder">Step Order</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('stepOrder')} />
@@ -126,9 +134,17 @@ export const TourStep = () => {
                   <Translate contentKey="xploraAdminApp.tourStep.waitTime">Wait Time</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('waitTime')} />
                 </th>
+                <th className="hand" onClick={sort('waitTimeMeasure')}>
+                  <Translate contentKey="xploraAdminApp.tourStep.waitTimeMeasure">Wait Time Measure</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('waitTimeMeasure')} />
+                </th>
                 <th className="hand" onClick={sort('driveTime')}>
                   <Translate contentKey="xploraAdminApp.tourStep.driveTime">Drive Time</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('driveTime')} />
+                </th>
+                <th className="hand" onClick={sort('driveTimeMeasure')}>
+                  <Translate contentKey="xploraAdminApp.tourStep.driveTimeMeasure">Drive Time Measure</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('driveTimeMeasure')} />
                 </th>
                 <th className="hand" onClick={sort('createdDate')}>
                   <Translate contentKey="xploraAdminApp.tourStep.createdDate">Created Date</Translate>{' '}
@@ -155,9 +171,17 @@ export const TourStep = () => {
                     </Button>
                   </td>
                   <td>{tourStep.code}</td>
+                  <td>{tourStep.enabled ? 'true' : 'false'}</td>
+                  <td>{tourStep.icon}</td>
                   <td>{tourStep.stepOrder}</td>
                   <td>{tourStep.waitTime}</td>
+                  <td>
+                    <Translate contentKey={`xploraAdminApp.DurationMeasure.${tourStep.waitTimeMeasure}`} />
+                  </td>
                   <td>{tourStep.driveTime}</td>
+                  <td>
+                    <Translate contentKey={`xploraAdminApp.DurationMeasure.${tourStep.driveTimeMeasure}`} />
+                  </td>
                   <td>
                     {tourStep.createdDate ? <TextFormat type="date" value={tourStep.createdDate} format={APP_LOCAL_DATE_FORMAT} /> : null}
                   </td>

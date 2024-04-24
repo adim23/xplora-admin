@@ -5,8 +5,8 @@ import { ITour } from 'app/shared/model/tour.model';
 export interface ITourCategory {
   id?: number;
   code?: string;
+  enabled?: boolean;
   icon?: string | null;
-  enabled?: boolean | null;
   createdDate?: dayjs.Dayjs | null;
   defaultImage?: string | null;
   defaultImageDataContentType?: string | null;

@@ -30,6 +30,10 @@ public class TourExtraCategory implements Serializable {
     @Column(name = "code", nullable = false)
     private String code;
 
+    @NotNull
+    @Column(name = "enabled", nullable = false)
+    private Boolean enabled;
+
     @Column(name = "icon")
     private String icon;
 
@@ -42,9 +46,6 @@ public class TourExtraCategory implements Serializable {
 
     @Column(name = "default_image_data_content_type")
     private String defaultImageDataContentType;
-
-    @Column(name = "enabled")
-    private Boolean enabled;
 
     @Column(name = "shop_category_id")
     private String shopCategoryId;
@@ -59,11 +60,29 @@ public class TourExtraCategory implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(
         value = {
+            "captions",
+            "createdBy",
+            "destination",
+            "tour",
+            "tourCategory",
+            "place",
+            "placeCategory",
+            "tourExtraCategory",
+            "tourExtra",
+            "vehicle",
+            "driver",
+        },
+        allowSetters = true
+    )
+    private Set<ImageFile> images = new HashSet<>();
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tourExtraCategory")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(
+        value = {
             "language",
             "createdBy",
             "destination",
-            "tourExtraInfo",
-            "tour",
             "tourCategory",
             "place",
             "placeCategory",
@@ -80,32 +99,12 @@ public class TourExtraCategory implements Serializable {
     )
     private Set<Content> contents = new HashSet<>();
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "tourExtraCategory")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(
-        value = {
-            "captions",
-            "createdBy",
-            "destination",
-            "tour",
-            "tourCategory",
-            "place",
-            "placeCategory",
-            "vehicle",
-            "driver",
-            "tourExtra",
-            "tourExtraCategory",
-        },
-        allowSetters = true
-    )
-    private Set<ImageFile> images = new HashSet<>();
-
     @ManyToOne(fetch = FetchType.LAZY)
     private User createdBy;
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "categories")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "contents", "createdBy", "tags", "categories", "tours" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "images", "contents", "createdBy", "tags", "categories", "tours" }, allowSetters = true)
     private Set<TourExtra> extras = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
@@ -134,6 +133,19 @@ public class TourExtraCategory implements Serializable {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public Boolean getEnabled() {
+        return this.enabled;
+    }
+
+    public TourExtraCategory enabled(Boolean enabled) {
+        this.setEnabled(enabled);
+        return this;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 
     public String getIcon() {
@@ -188,19 +200,6 @@ public class TourExtraCategory implements Serializable {
         this.defaultImageDataContentType = defaultImageDataContentType;
     }
 
-    public Boolean getEnabled() {
-        return this.enabled;
-    }
-
-    public TourExtraCategory enabled(Boolean enabled) {
-        this.setEnabled(enabled);
-        return this;
-    }
-
-    public void setEnabled(Boolean enabled) {
-        this.enabled = enabled;
-    }
-
     public String getShopCategoryId() {
         return this.shopCategoryId;
     }
@@ -238,6 +237,37 @@ public class TourExtraCategory implements Serializable {
 
     public void setCreatedDate(LocalDate createdDate) {
         this.createdDate = createdDate;
+    }
+
+    public Set<ImageFile> getImages() {
+        return this.images;
+    }
+
+    public void setImages(Set<ImageFile> imageFiles) {
+        if (this.images != null) {
+            this.images.forEach(i -> i.setTourExtraCategory(null));
+        }
+        if (imageFiles != null) {
+            imageFiles.forEach(i -> i.setTourExtraCategory(this));
+        }
+        this.images = imageFiles;
+    }
+
+    public TourExtraCategory images(Set<ImageFile> imageFiles) {
+        this.setImages(imageFiles);
+        return this;
+    }
+
+    public TourExtraCategory addImages(ImageFile imageFile) {
+        this.images.add(imageFile);
+        imageFile.setTourExtraCategory(this);
+        return this;
+    }
+
+    public TourExtraCategory removeImages(ImageFile imageFile) {
+        this.images.remove(imageFile);
+        imageFile.setTourExtraCategory(null);
+        return this;
     }
 
     public Set<Content> getContents() {
@@ -340,11 +370,11 @@ public class TourExtraCategory implements Serializable {
         return "TourExtraCategory{" +
             "id=" + getId() +
             ", code='" + getCode() + "'" +
+            ", enabled='" + getEnabled() + "'" +
             ", icon='" + getIcon() + "'" +
             ", defaultImage='" + getDefaultImage() + "'" +
             ", defaultImageData='" + getDefaultImageData() + "'" +
             ", defaultImageDataContentType='" + getDefaultImageDataContentType() + "'" +
-            ", enabled='" + getEnabled() + "'" +
             ", shopCategoryId='" + getShopCategoryId() + "'" +
             ", shopUrl='" + getShopUrl() + "'" +
             ", createdDate='" + getCreatedDate() + "'" +

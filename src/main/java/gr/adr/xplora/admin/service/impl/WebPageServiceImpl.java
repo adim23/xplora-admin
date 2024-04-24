@@ -1,14 +1,10 @@
 package gr.adr.xplora.admin.service.impl;
 
-import gr.adr.xplora.admin.domain.User;
 import gr.adr.xplora.admin.domain.WebPage;
-import gr.adr.xplora.admin.repository.UserRepository;
 import gr.adr.xplora.admin.repository.WebPageRepository;
-import gr.adr.xplora.admin.security.SecurityUtils;
 import gr.adr.xplora.admin.service.WebPageService;
 import gr.adr.xplora.admin.service.dto.WebPageDTO;
 import gr.adr.xplora.admin.service.mapper.WebPageMapper;
-import java.time.LocalDate;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,12 +23,11 @@ public class WebPageServiceImpl implements WebPageService {
     private final Logger log = LoggerFactory.getLogger(WebPageServiceImpl.class);
 
     private final WebPageRepository webPageRepository;
-    private final UserRepository userRepository;
+
     private final WebPageMapper webPageMapper;
 
-    public WebPageServiceImpl(WebPageRepository webPageRepository, WebPageMapper webPageMapper, UserRepository userRepository) {
+    public WebPageServiceImpl(WebPageRepository webPageRepository, WebPageMapper webPageMapper) {
         this.webPageRepository = webPageRepository;
-        this.userRepository = userRepository;
         this.webPageMapper = webPageMapper;
     }
 
@@ -40,15 +35,6 @@ public class WebPageServiceImpl implements WebPageService {
     public WebPageDTO save(WebPageDTO webPageDTO) {
         log.debug("Request to save WebPage : {}", webPageDTO);
         WebPage webPage = webPageMapper.toEntity(webPageDTO);
-        if (webPage.getCreatedDate() == null) {
-            webPage.setCreatedDate(LocalDate.now());
-        }
-        if (webPage.getCreatedBy() == null) {
-            Optional<User> user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin().orElse(""));
-            if (user.isPresent()) {
-                webPage.setCreatedBy(user.orElse(null));
-            }
-        }
         webPage = webPageRepository.save(webPage);
         return webPageMapper.toDto(webPage);
     }

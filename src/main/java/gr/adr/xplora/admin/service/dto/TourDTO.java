@@ -1,10 +1,15 @@
 package gr.adr.xplora.admin.service.dto;
 
+import gr.adr.xplora.admin.domain.enumeration.DurationMeasure;
+import gr.adr.xplora.admin.domain.enumeration.TourKind;
 import gr.adr.xplora.admin.domain.enumeration.TourMode;
 import jakarta.persistence.Lob;
 import jakarta.validation.constraints.*;
 import java.io.Serializable;
+import java.time.Duration;
+import java.time.Instant;
 import java.time.LocalDate;
+import java.time.ZonedDateTime;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -21,10 +26,20 @@ public class TourDTO implements Serializable {
     private String code;
 
     @NotNull
+    private Boolean enabled;
+
+    @NotNull
+    private TourKind kind;
+
     private TourMode mode;
+
+    private String icon;
 
     @NotNull
     private Integer duration;
+
+    @NotNull
+    private DurationMeasure durationMeasure;
 
     @NotNull
     private Boolean petFriendly;
@@ -32,12 +47,12 @@ public class TourDTO implements Serializable {
     @NotNull
     private Boolean kidsAllowed;
 
+    @NotNull
+    private Boolean smoking;
+
     private LocalDate availableFromDate;
 
     private LocalDate availableToDate;
-
-    @NotNull
-    private Boolean enabled;
 
     private Double initialPrice;
 
@@ -60,13 +75,26 @@ public class TourDTO implements Serializable {
 
     private String defaultImageDataContentType;
 
+    private Boolean accessibility;
+
     private Boolean audioGuide;
 
     private Boolean tourGuide;
 
-    private Boolean accessibility;
+    @Lob
+    private String cssStyle;
 
-    private String icon;
+    private LocalDate departure;
+
+    private LocalDate returnTime;
+
+    private Instant testIn;
+
+    private ZonedDateTime testZ;
+
+    private Duration dur;
+
+    private TourContentDTO content;
 
     private UserDTO createdBy;
 
@@ -84,6 +112,8 @@ public class TourDTO implements Serializable {
 
     private DestinationDTO destination;
 
+    private TourCategoryDTO defaultCategory;
+
     public Long getId() {
         return id;
     }
@@ -100,6 +130,22 @@ public class TourDTO implements Serializable {
         this.code = code;
     }
 
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public TourKind getKind() {
+        return kind;
+    }
+
+    public void setKind(TourKind kind) {
+        this.kind = kind;
+    }
+
     public TourMode getMode() {
         return mode;
     }
@@ -108,12 +154,28 @@ public class TourDTO implements Serializable {
         this.mode = mode;
     }
 
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
     public Integer getDuration() {
         return duration;
     }
 
     public void setDuration(Integer duration) {
         this.duration = duration;
+    }
+
+    public DurationMeasure getDurationMeasure() {
+        return durationMeasure;
+    }
+
+    public void setDurationMeasure(DurationMeasure durationMeasure) {
+        this.durationMeasure = durationMeasure;
     }
 
     public Boolean getPetFriendly() {
@@ -132,6 +194,14 @@ public class TourDTO implements Serializable {
         this.kidsAllowed = kidsAllowed;
     }
 
+    public Boolean getSmoking() {
+        return smoking;
+    }
+
+    public void setSmoking(Boolean smoking) {
+        this.smoking = smoking;
+    }
+
     public LocalDate getAvailableFromDate() {
         return availableFromDate;
     }
@@ -146,14 +216,6 @@ public class TourDTO implements Serializable {
 
     public void setAvailableToDate(LocalDate availableToDate) {
         this.availableToDate = availableToDate;
-    }
-
-    public Boolean getEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(Boolean enabled) {
-        this.enabled = enabled;
     }
 
     public Double getInitialPrice() {
@@ -236,6 +298,86 @@ public class TourDTO implements Serializable {
         this.defaultImageDataContentType = defaultImageDataContentType;
     }
 
+    public Boolean getAccessibility() {
+        return accessibility;
+    }
+
+    public void setAccessibility(Boolean accessibility) {
+        this.accessibility = accessibility;
+    }
+
+    public Boolean getAudioGuide() {
+        return audioGuide;
+    }
+
+    public void setAudioGuide(Boolean audioGuide) {
+        this.audioGuide = audioGuide;
+    }
+
+    public Boolean getTourGuide() {
+        return tourGuide;
+    }
+
+    public void setTourGuide(Boolean tourGuide) {
+        this.tourGuide = tourGuide;
+    }
+
+    public String getCssStyle() {
+        return cssStyle;
+    }
+
+    public void setCssStyle(String cssStyle) {
+        this.cssStyle = cssStyle;
+    }
+
+    public LocalDate getDeparture() {
+        return departure;
+    }
+
+    public void setDeparture(LocalDate departure) {
+        this.departure = departure;
+    }
+
+    public LocalDate getReturnTime() {
+        return returnTime;
+    }
+
+    public void setReturnTime(LocalDate returnTime) {
+        this.returnTime = returnTime;
+    }
+
+    public Instant getTestIn() {
+        return testIn;
+    }
+
+    public void setTestIn(Instant testIn) {
+        this.testIn = testIn;
+    }
+
+    public ZonedDateTime getTestZ() {
+        return testZ;
+    }
+
+    public void setTestZ(ZonedDateTime testZ) {
+        this.testZ = testZ;
+    }
+
+    public Duration getDur() {
+        return dur;
+    }
+
+    public void setDur(Duration dur) {
+        this.dur = dur;
+    }
+
+    public TourContentDTO getContent() {
+        return content;
+    }
+
+    public void setContent(TourContentDTO content) {
+        this.content = content;
+    }
+
     public UserDTO getCreatedBy() {
         return createdBy;
     }
@@ -300,36 +442,12 @@ public class TourDTO implements Serializable {
         this.destination = destination;
     }
 
-    public Boolean getAudioGuide() {
-        return audioGuide;
+    public TourCategoryDTO getDefaultCategory() {
+        return defaultCategory;
     }
 
-    public void setAudioGuide(Boolean audioGuide) {
-        this.audioGuide = audioGuide;
-    }
-
-    public Boolean getTourGuide() {
-        return tourGuide;
-    }
-
-    public void setTourGuide(Boolean tourGuide) {
-        this.tourGuide = tourGuide;
-    }
-
-    public Boolean getAccessibility() {
-        return accessibility;
-    }
-
-    public void setAccessibility(Boolean accessibility) {
-        this.accessibility = accessibility;
-    }
-
-    public String getIcon() {
-        return icon;
-    }
-
-    public void setIcon(String icon) {
-        this.icon = icon;
+    public void setDefaultCategory(TourCategoryDTO defaultCategory) {
+        this.defaultCategory = defaultCategory;
     }
 
     @Override
@@ -356,36 +474,48 @@ public class TourDTO implements Serializable {
     // prettier-ignore
     @Override
     public String toString() {
-        return "TourDTO{"
-                + "id=" + getId()
-                + ", code='" + getCode() + "'"
-                + ", mode='" + getMode() + "'"
-                + ", duration=" + getDuration()
-                + ", petFriendly='" + getPetFriendly() + "'"
-                + ", kidsAllowed='" + getKidsAllowed() + "'"
-                + ", availableFromDate='" + getAvailableFromDate() + "'"
-                + ", availableToDate='" + getAvailableToDate() + "'"
-                + ", enabled='" + getEnabled() + "'"
-                + ", initialPrice=" + getInitialPrice()
-                + ", price=" + getPrice()
-                + ", badge='" + getBadge() + "'"
-                + ", rating=" + getRating()
-                + ", widgetId='" + getWidgetId() + "'"
-                + ", externalId='" + getExternalId() + "'"
-                + ", createdDate='" + getCreatedDate() + "'"
-                + ", defaultImage='" + getDefaultImage() + "'"
-                + ", accessibility='" + getAccessibility() + "'"
-                + ", audioGuide='" + getAudioGuide() + "'"
-                + ", tourGuide='" + getTourGuide() + "'"
-                + ", icon='" + getIcon() + "'"
-                + ", createdBy=" + getCreatedBy()
-                + ", meetingPoint=" + getMeetingPoint()
-                + ", finishPoint=" + getFinishPoint()
-                + ", tourExtras=" + getTourExtras()
-                + ", tags=" + getTags()
-                + ", promotions=" + getPromotions()
-                + ", categories=" + getCategories()
-                + ", destination=" + getDestination()
-                + "}";
+        return "TourDTO{" +
+            "id=" + getId() +
+            ", code='" + getCode() + "'" +
+            ", enabled='" + getEnabled() + "'" +
+            ", kind='" + getKind() + "'" +
+            ", mode='" + getMode() + "'" +
+            ", icon='" + getIcon() + "'" +
+            ", duration=" + getDuration() +
+            ", durationMeasure='" + getDurationMeasure() + "'" +
+            ", petFriendly='" + getPetFriendly() + "'" +
+            ", kidsAllowed='" + getKidsAllowed() + "'" +
+            ", smoking='" + getSmoking() + "'" +
+            ", availableFromDate='" + getAvailableFromDate() + "'" +
+            ", availableToDate='" + getAvailableToDate() + "'" +
+            ", initialPrice=" + getInitialPrice() +
+            ", price=" + getPrice() +
+            ", badge='" + getBadge() + "'" +
+            ", rating=" + getRating() +
+            ", widgetId='" + getWidgetId() + "'" +
+            ", externalId='" + getExternalId() + "'" +
+            ", createdDate='" + getCreatedDate() + "'" +
+            ", defaultImage='" + getDefaultImage() + "'" +
+            ", defaultImageData='" + getDefaultImageData() + "'" +
+            ", accessibility='" + getAccessibility() + "'" +
+            ", audioGuide='" + getAudioGuide() + "'" +
+            ", tourGuide='" + getTourGuide() + "'" +
+            ", cssStyle='" + getCssStyle() + "'" +
+            ", departure='" + getDeparture() + "'" +
+            ", returnTime='" + getReturnTime() + "'" +
+            ", testIn='" + getTestIn() + "'" +
+            ", testZ='" + getTestZ() + "'" +
+            ", dur='" + getDur() + "'" +
+            ", content=" + getContent() +
+            ", createdBy=" + getCreatedBy() +
+            ", meetingPoint=" + getMeetingPoint() +
+            ", finishPoint=" + getFinishPoint() +
+            ", tourExtras=" + getTourExtras() +
+            ", tags=" + getTags() +
+            ", promotions=" + getPromotions() +
+            ", categories=" + getCategories() +
+            ", destination=" + getDestination() +
+            ", defaultCategory=" + getDefaultCategory() +
+            "}";
     }
 }

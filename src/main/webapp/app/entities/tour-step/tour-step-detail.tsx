@@ -39,6 +39,18 @@ export const TourStepDetail = () => {
           </dt>
           <dd>{tourStepEntity.code}</dd>
           <dt>
+            <span id="enabled">
+              <Translate contentKey="xploraAdminApp.tourStep.enabled">Enabled</Translate>
+            </span>
+          </dt>
+          <dd>{tourStepEntity.enabled ? 'true' : 'false'}</dd>
+          <dt>
+            <span id="icon">
+              <Translate contentKey="xploraAdminApp.tourStep.icon">Icon</Translate>
+            </span>
+          </dt>
+          <dd>{tourStepEntity.icon}</dd>
+          <dt>
             <span id="stepOrder">
               <Translate contentKey="xploraAdminApp.tourStep.stepOrder">Step Order</Translate>
             </span>
@@ -51,11 +63,23 @@ export const TourStepDetail = () => {
           </dt>
           <dd>{tourStepEntity.waitTime}</dd>
           <dt>
+            <span id="waitTimeMeasure">
+              <Translate contentKey="xploraAdminApp.tourStep.waitTimeMeasure">Wait Time Measure</Translate>
+            </span>
+          </dt>
+          <dd>{tourStepEntity.waitTimeMeasure}</dd>
+          <dt>
             <span id="driveTime">
               <Translate contentKey="xploraAdminApp.tourStep.driveTime">Drive Time</Translate>
             </span>
           </dt>
           <dd>{tourStepEntity.driveTime}</dd>
+          <dt>
+            <span id="driveTimeMeasure">
+              <Translate contentKey="xploraAdminApp.tourStep.driveTimeMeasure">Drive Time Measure</Translate>
+            </span>
+          </dt>
+          <dd>{tourStepEntity.driveTimeMeasure}</dd>
           <dt>
             <span id="createdDate">
               <Translate contentKey="xploraAdminApp.tourStep.createdDate">Created Date</Translate>

@@ -7,8 +7,10 @@ import { ITour } from 'app/shared/model/tour.model';
 export interface ITourExtra {
   id?: number;
   code?: string;
-  enabled?: boolean | null;
+  enabled?: boolean;
+  icon?: string | null;
   price?: number | null;
+  offer?: number | null;
   shopProductId?: string | null;
   shopUrl?: string | null;
   createdDate?: dayjs.Dayjs | null;

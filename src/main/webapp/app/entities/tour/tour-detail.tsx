@@ -5,6 +5,7 @@ import { Translate, openFile, byteSize, TextFormat } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
+import { DurationFormat } from 'app/shared/DurationFormat';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
 import { getEntity } from './tour.reducer';
@@ -39,17 +40,41 @@ export const TourDetail = () => {
           </dt>
           <dd>{tourEntity.code}</dd>
           <dt>
+            <span id="enabled">
+              <Translate contentKey="xploraAdminApp.tour.enabled">Enabled</Translate>
+            </span>
+          </dt>
+          <dd>{tourEntity.enabled ? 'true' : 'false'}</dd>
+          <dt>
+            <span id="kind">
+              <Translate contentKey="xploraAdminApp.tour.kind">Kind</Translate>
+            </span>
+          </dt>
+          <dd>{tourEntity.kind}</dd>
+          <dt>
             <span id="mode">
               <Translate contentKey="xploraAdminApp.tour.mode">Mode</Translate>
             </span>
           </dt>
           <dd>{tourEntity.mode}</dd>
           <dt>
+            <span id="icon">
+              <Translate contentKey="xploraAdminApp.tour.icon">Icon</Translate>
+            </span>
+          </dt>
+          <dd>{tourEntity.icon}</dd>
+          <dt>
             <span id="duration">
               <Translate contentKey="xploraAdminApp.tour.duration">Duration</Translate>
             </span>
           </dt>
           <dd>{tourEntity.duration}</dd>
+          <dt>
+            <span id="durationMeasure">
+              <Translate contentKey="xploraAdminApp.tour.durationMeasure">Duration Measure</Translate>
+            </span>
+          </dt>
+          <dd>{tourEntity.durationMeasure}</dd>
           <dt>
             <span id="petFriendly">
               <Translate contentKey="xploraAdminApp.tour.petFriendly">Pet Friendly</Translate>
@@ -63,23 +88,11 @@ export const TourDetail = () => {
           </dt>
           <dd>{tourEntity.kidsAllowed ? 'true' : 'false'}</dd>
           <dt>
-            <span id="accessibility">
-              <Translate contentKey="xploraAdminApp.tour.accessibility">Accessibility</Translate>
+            <span id="smoking">
+              <Translate contentKey="xploraAdminApp.tour.smoking">Smoking</Translate>
             </span>
           </dt>
-          <dd>{tourEntity.accessibility ? 'true' : 'false'}</dd>
-          <dt>
-            <span id="audioGuide">
-              <Translate contentKey="xploraAdminApp.tour.audioGuide">Audio Guide</Translate>
-            </span>
-          </dt>
-          <dd>{tourEntity.audioGuide ? 'true' : 'false'}</dd>
-          <dt>
-            <span id="tourGuide">
-              <Translate contentKey="xploraAdminApp.tour.tourGuide">Tour Guide</Translate>
-            </span>
-          </dt>
-          <dd>{tourEntity.tourGuide ? 'true' : 'false'}</dd>
+          <dd>{tourEntity.smoking ? 'true' : 'false'}</dd>
           <dt>
             <span id="availableFromDate">
               <Translate contentKey="xploraAdminApp.tour.availableFromDate">Available From Date</Translate>
@@ -101,12 +114,6 @@ export const TourDetail = () => {
             ) : null}
           </dd>
           <dt>
-            <span id="enabled">
-              <Translate contentKey="xploraAdminApp.tour.enabled">Enabled</Translate>
-            </span>
-          </dt>
-          <dd>{tourEntity.enabled ? 'true' : 'false'}</dd>
-          <dt>
             <span id="initialPrice">
               <Translate contentKey="xploraAdminApp.tour.initialPrice">Initial Price</Translate>
             </span>
@@ -124,12 +131,6 @@ export const TourDetail = () => {
             </span>
           </dt>
           <dd>{tourEntity.badge}</dd>
-          <dt>
-            <span id="icon">
-              <Translate contentKey="xploraAdminApp.tour.icon">Icon</Translate>
-            </span>
-          </dt>
-          <dd>{tourEntity.icon}</dd>
           <dt>
             <span id="rating">
               <Translate contentKey="xploraAdminApp.tour.rating">Rating</Translate>
@@ -184,6 +185,66 @@ export const TourDetail = () => {
               </div>
             ) : null}
           </dd>
+          <dt>
+            <span id="accessibility">
+              <Translate contentKey="xploraAdminApp.tour.accessibility">Accessibility</Translate>
+            </span>
+          </dt>
+          <dd>{tourEntity.accessibility ? 'true' : 'false'}</dd>
+          <dt>
+            <span id="audioGuide">
+              <Translate contentKey="xploraAdminApp.tour.audioGuide">Audio Guide</Translate>
+            </span>
+          </dt>
+          <dd>{tourEntity.audioGuide ? 'true' : 'false'}</dd>
+          <dt>
+            <span id="tourGuide">
+              <Translate contentKey="xploraAdminApp.tour.tourGuide">Tour Guide</Translate>
+            </span>
+          </dt>
+          <dd>{tourEntity.tourGuide ? 'true' : 'false'}</dd>
+          <dt>
+            <span id="cssStyle">
+              <Translate contentKey="xploraAdminApp.tour.cssStyle">Css Style</Translate>
+            </span>
+          </dt>
+          <dd>{tourEntity.cssStyle}</dd>
+          <dt>
+            <span id="departure">
+              <Translate contentKey="xploraAdminApp.tour.departure">Departure</Translate>
+            </span>
+          </dt>
+          <dd>{tourEntity.departure ? <TextFormat value={tourEntity.departure} type="date" format={APP_LOCAL_DATE_FORMAT} /> : null}</dd>
+          <dt>
+            <span id="returnTime">
+              <Translate contentKey="xploraAdminApp.tour.returnTime">Return Time</Translate>
+            </span>
+          </dt>
+          <dd>{tourEntity.returnTime ? <TextFormat value={tourEntity.returnTime} type="date" format={APP_LOCAL_DATE_FORMAT} /> : null}</dd>
+          <dt>
+            <span id="testIn">
+              <Translate contentKey="xploraAdminApp.tour.testIn">Test In</Translate>
+            </span>
+          </dt>
+          <dd>{tourEntity.testIn ? <TextFormat value={tourEntity.testIn} type="date" format={APP_DATE_FORMAT} /> : null}</dd>
+          <dt>
+            <span id="testZ">
+              <Translate contentKey="xploraAdminApp.tour.testZ">Test Z</Translate>
+            </span>
+          </dt>
+          <dd>{tourEntity.testZ ? <TextFormat value={tourEntity.testZ} type="date" format={APP_DATE_FORMAT} /> : null}</dd>
+          <dt>
+            <span id="dur">
+              <Translate contentKey="xploraAdminApp.tour.dur">Dur</Translate>
+            </span>
+          </dt>
+          <dd>
+            {tourEntity.dur ? <DurationFormat value={tourEntity.dur} /> : null} ({tourEntity.dur})
+          </dd>
+          <dt>
+            <Translate contentKey="xploraAdminApp.tour.content">Content</Translate>
+          </dt>
+          <dd>{tourEntity.content ? tourEntity.content.code : ''}</dd>
           <dt>
             <Translate contentKey="xploraAdminApp.tour.createdBy">Created By</Translate>
           </dt>
@@ -252,6 +313,10 @@ export const TourDetail = () => {
             <Translate contentKey="xploraAdminApp.tour.destination">Destination</Translate>
           </dt>
           <dd>{tourEntity.destination ? tourEntity.destination.code : ''}</dd>
+          <dt>
+            <Translate contentKey="xploraAdminApp.tour.defaultCategory">Default Category</Translate>
+          </dt>
+          <dd>{tourEntity.defaultCategory ? tourEntity.defaultCategory.code : ''}</dd>
         </dl>
         <Button tag={Link} to="/tour" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" />{' '}

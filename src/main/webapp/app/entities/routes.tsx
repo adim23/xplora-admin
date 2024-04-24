@@ -23,6 +23,8 @@ import Menu from './menu';
 import Language from './language';
 import Content from './content';
 import Tag from './tag';
+import TourContent from './tour-content';
+import Prompt from './prompt';
 /* jhipster-needle-add-route-import - JHipster will add routes here */
 
 export default () => {
@@ -50,6 +52,8 @@ export default () => {
         <Route path="language/*" element={<Language />} />
         <Route path="content/*" element={<Content />} />
         <Route path="tag/*" element={<Tag />} />
+        <Route path="tour-content/*" element={<TourContent />} />
+        <Route path="prompt/*" element={<Prompt />} />
         {/* jhipster-needle-add-route-path - JHipster will add routes here */}
       </ErrorBoundaryRoutes>
     </div>

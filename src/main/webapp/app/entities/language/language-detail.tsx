@@ -39,16 +39,6 @@ export const LanguageDetail = () => {
           </dt>
           <dd>{languageEntity.code}</dd>
           <dt>
-            <span id="createdDate">
-              <Translate contentKey="xploraAdminApp.language.createdDate">Created Date</Translate>
-            </span>
-          </dt>
-          <dd>
-            {languageEntity.createdDate ? (
-              <TextFormat value={languageEntity.createdDate} type="date" format={APP_LOCAL_DATE_FORMAT} />
-            ) : null}
-          </dd>
-          <dt>
             <span id="icon">
               <Translate contentKey="xploraAdminApp.language.icon">Icon</Translate>
             </span>
@@ -80,6 +70,16 @@ export const LanguageDetail = () => {
                   {languageEntity.defaultImageDataContentType}, {byteSize(languageEntity.defaultImageData)}
                 </span>
               </div>
+            ) : null}
+          </dd>
+          <dt>
+            <span id="createdDate">
+              <Translate contentKey="xploraAdminApp.language.createdDate">Created Date</Translate>
+            </span>
+          </dt>
+          <dd>
+            {languageEntity.createdDate ? (
+              <TextFormat value={languageEntity.createdDate} type="date" format={APP_LOCAL_DATE_FORMAT} />
             ) : null}
           </dd>
           <dt>

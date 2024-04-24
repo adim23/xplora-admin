@@ -39,6 +39,12 @@ export const DriverDetail = () => {
           </dt>
           <dd>{driverEntity.name}</dd>
           <dt>
+            <span id="enabled">
+              <Translate contentKey="xploraAdminApp.driver.enabled">Enabled</Translate>
+            </span>
+          </dt>
+          <dd>{driverEntity.enabled ? 'true' : 'false'}</dd>
+          <dt>
             <span id="hiredAt">
               <Translate contentKey="xploraAdminApp.driver.hiredAt">Hired At</Translate>
             </span>

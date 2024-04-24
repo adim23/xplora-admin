@@ -19,18 +19,19 @@
       },
       "id": "ID",
       "code": "Code",
-      "uri": "Uri",
-      "createdDate": "Created Date",
-      "icon": "Icon",
       "enabled": "Enabled",
+      "icon": "Icon",
+      "uri": "Uri",
       "defaultImage": "Default Image",
       "defaultImageData": "Default Image Data",
+      "createdDate": "Created Date",
       "children": "Children",
       "names": "Names",
       "createdBy": "Created By",
       "page": "Page",
       "parent": "Parent",
-      "tourCategory": "Tour Category"
+      "tourCategory": "Tour Category",
+      "destination": "Destination"
     }
   }
 }

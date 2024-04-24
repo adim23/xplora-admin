@@ -48,9 +48,13 @@ public class TourStepAsserts {
         assertThat(expected)
             .as("Verify TourStep relevant properties")
             .satisfies(e -> assertThat(e.getCode()).as("check code").isEqualTo(actual.getCode()))
+            .satisfies(e -> assertThat(e.getEnabled()).as("check enabled").isEqualTo(actual.getEnabled()))
+            .satisfies(e -> assertThat(e.getIcon()).as("check icon").isEqualTo(actual.getIcon()))
             .satisfies(e -> assertThat(e.getStepOrder()).as("check stepOrder").isEqualTo(actual.getStepOrder()))
             .satisfies(e -> assertThat(e.getWaitTime()).as("check waitTime").isEqualTo(actual.getWaitTime()))
+            .satisfies(e -> assertThat(e.getWaitTimeMeasure()).as("check waitTimeMeasure").isEqualTo(actual.getWaitTimeMeasure()))
             .satisfies(e -> assertThat(e.getDriveTime()).as("check driveTime").isEqualTo(actual.getDriveTime()))
+            .satisfies(e -> assertThat(e.getDriveTimeMeasure()).as("check driveTimeMeasure").isEqualTo(actual.getDriveTimeMeasure()))
             .satisfies(e -> assertThat(e.getCreatedDate()).as("check createdDate").isEqualTo(actual.getCreatedDate()));
     }
 

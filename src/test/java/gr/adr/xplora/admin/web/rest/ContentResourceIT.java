@@ -376,7 +376,7 @@ class ContentResourceIT {
         Content partialUpdatedContent = new Content();
         partialUpdatedContent.setId(content.getId());
 
-        partialUpdatedContent.title(UPDATED_TITLE).shortDescription(UPDATED_SHORT_DESCRIPTION).createdDate(UPDATED_CREATED_DATE);
+        partialUpdatedContent.data(UPDATED_DATA).createdDate(UPDATED_CREATED_DATE);
 
         restContentMockMvc
             .perform(

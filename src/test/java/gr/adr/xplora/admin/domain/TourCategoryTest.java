@@ -30,6 +30,28 @@ class TourCategoryTest {
     }
 
     @Test
+    void defaultToursTest() throws Exception {
+        TourCategory tourCategory = getTourCategoryRandomSampleGenerator();
+        Tour tourBack = getTourRandomSampleGenerator();
+
+        tourCategory.addDefaultTours(tourBack);
+        assertThat(tourCategory.getDefaultTours()).containsOnly(tourBack);
+        assertThat(tourBack.getDefaultCategory()).isEqualTo(tourCategory);
+
+        tourCategory.removeDefaultTours(tourBack);
+        assertThat(tourCategory.getDefaultTours()).doesNotContain(tourBack);
+        assertThat(tourBack.getDefaultCategory()).isNull();
+
+        tourCategory.defaultTours(new HashSet<>(Set.of(tourBack)));
+        assertThat(tourCategory.getDefaultTours()).containsOnly(tourBack);
+        assertThat(tourBack.getDefaultCategory()).isEqualTo(tourCategory);
+
+        tourCategory.setDefaultTours(new HashSet<>());
+        assertThat(tourCategory.getDefaultTours()).doesNotContain(tourBack);
+        assertThat(tourBack.getDefaultCategory()).isNull();
+    }
+
+    @Test
     void childrenTest() throws Exception {
         TourCategory tourCategory = getTourCategoryRandomSampleGenerator();
         TourCategory tourCategoryBack = getTourCategoryRandomSampleGenerator();

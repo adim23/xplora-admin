@@ -51,8 +51,14 @@ class TourExtraResourceIT {
     private static final Boolean DEFAULT_ENABLED = false;
     private static final Boolean UPDATED_ENABLED = true;
 
+    private static final String DEFAULT_ICON = "AAAAAAAAAA";
+    private static final String UPDATED_ICON = "BBBBBBBBBB";
+
     private static final Double DEFAULT_PRICE = 1D;
     private static final Double UPDATED_PRICE = 2D;
+
+    private static final Double DEFAULT_OFFER = 1D;
+    private static final Double UPDATED_OFFER = 2D;
 
     private static final String DEFAULT_SHOP_PRODUCT_ID = "AAAAAAAAAA";
     private static final String UPDATED_SHOP_PRODUCT_ID = "BBBBBBBBBB";
@@ -110,7 +116,9 @@ class TourExtraResourceIT {
         TourExtra tourExtra = new TourExtra()
             .code(DEFAULT_CODE)
             .enabled(DEFAULT_ENABLED)
+            .icon(DEFAULT_ICON)
             .price(DEFAULT_PRICE)
+            .offer(DEFAULT_OFFER)
             .shopProductId(DEFAULT_SHOP_PRODUCT_ID)
             .shopUrl(DEFAULT_SHOP_URL)
             .createdDate(DEFAULT_CREATED_DATE)
@@ -130,7 +138,9 @@ class TourExtraResourceIT {
         TourExtra tourExtra = new TourExtra()
             .code(UPDATED_CODE)
             .enabled(UPDATED_ENABLED)
+            .icon(UPDATED_ICON)
             .price(UPDATED_PRICE)
+            .offer(UPDATED_OFFER)
             .shopProductId(UPDATED_SHOP_PRODUCT_ID)
             .shopUrl(UPDATED_SHOP_URL)
             .createdDate(UPDATED_CREATED_DATE)
@@ -204,6 +214,23 @@ class TourExtraResourceIT {
 
     @Test
     @Transactional
+    void checkEnabledIsRequired() throws Exception {
+        long databaseSizeBeforeTest = getRepositoryCount();
+        // set the field null
+        tourExtra.setEnabled(null);
+
+        // Create the TourExtra, which fails.
+        TourExtraDTO tourExtraDTO = tourExtraMapper.toDto(tourExtra);
+
+        restTourExtraMockMvc
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsBytes(tourExtraDTO)))
+            .andExpect(status().isBadRequest());
+
+        assertSameRepositoryCount(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     void getAllTourExtras() throws Exception {
         // Initialize the database
         tourExtraRepository.saveAndFlush(tourExtra);
@@ -216,7 +243,9 @@ class TourExtraResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(tourExtra.getId().intValue())))
             .andExpect(jsonPath("$.[*].code").value(hasItem(DEFAULT_CODE)))
             .andExpect(jsonPath("$.[*].enabled").value(hasItem(DEFAULT_ENABLED.booleanValue())))
+            .andExpect(jsonPath("$.[*].icon").value(hasItem(DEFAULT_ICON)))
             .andExpect(jsonPath("$.[*].price").value(hasItem(DEFAULT_PRICE.doubleValue())))
+            .andExpect(jsonPath("$.[*].offer").value(hasItem(DEFAULT_OFFER.doubleValue())))
             .andExpect(jsonPath("$.[*].shopProductId").value(hasItem(DEFAULT_SHOP_PRODUCT_ID)))
             .andExpect(jsonPath("$.[*].shopUrl").value(hasItem(DEFAULT_SHOP_URL)))
             .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
@@ -256,7 +285,9 @@ class TourExtraResourceIT {
             .andExpect(jsonPath("$.id").value(tourExtra.getId().intValue()))
             .andExpect(jsonPath("$.code").value(DEFAULT_CODE))
             .andExpect(jsonPath("$.enabled").value(DEFAULT_ENABLED.booleanValue()))
+            .andExpect(jsonPath("$.icon").value(DEFAULT_ICON))
             .andExpect(jsonPath("$.price").value(DEFAULT_PRICE.doubleValue()))
+            .andExpect(jsonPath("$.offer").value(DEFAULT_OFFER.doubleValue()))
             .andExpect(jsonPath("$.shopProductId").value(DEFAULT_SHOP_PRODUCT_ID))
             .andExpect(jsonPath("$.shopUrl").value(DEFAULT_SHOP_URL))
             .andExpect(jsonPath("$.createdDate").value(DEFAULT_CREATED_DATE.toString()))
@@ -287,7 +318,9 @@ class TourExtraResourceIT {
         updatedTourExtra
             .code(UPDATED_CODE)
             .enabled(UPDATED_ENABLED)
+            .icon(UPDATED_ICON)
             .price(UPDATED_PRICE)
+            .offer(UPDATED_OFFER)
             .shopProductId(UPDATED_SHOP_PRODUCT_ID)
             .shopUrl(UPDATED_SHOP_URL)
             .createdDate(UPDATED_CREATED_DATE)
@@ -383,7 +416,13 @@ class TourExtraResourceIT {
         TourExtra partialUpdatedTourExtra = new TourExtra();
         partialUpdatedTourExtra.setId(tourExtra.getId());
 
-        partialUpdatedTourExtra.price(UPDATED_PRICE).shopProductId(UPDATED_SHOP_PRODUCT_ID).shopUrl(UPDATED_SHOP_URL);
+        partialUpdatedTourExtra
+            .price(UPDATED_PRICE)
+            .shopProductId(UPDATED_SHOP_PRODUCT_ID)
+            .shopUrl(UPDATED_SHOP_URL)
+            .createdDate(UPDATED_CREATED_DATE)
+            .defaultImageData(UPDATED_DEFAULT_IMAGE_DATA)
+            .defaultImageDataContentType(UPDATED_DEFAULT_IMAGE_DATA_CONTENT_TYPE);
 
         restTourExtraMockMvc
             .perform(
@@ -417,7 +456,9 @@ class TourExtraResourceIT {
         partialUpdatedTourExtra
             .code(UPDATED_CODE)
             .enabled(UPDATED_ENABLED)
+            .icon(UPDATED_ICON)
             .price(UPDATED_PRICE)
+            .offer(UPDATED_OFFER)
             .shopProductId(UPDATED_SHOP_PRODUCT_ID)
             .shopUrl(UPDATED_SHOP_URL)
             .createdDate(UPDATED_CREATED_DATE)

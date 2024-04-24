@@ -116,19 +116,19 @@ export const PlaceCategoryUpdate = () => {
                 }}
               />
               <ValidatedField
-                label={translate('xploraAdminApp.placeCategory.icon')}
-                id="place-category-icon"
-                name="icon"
-                data-cy="icon"
-                type="text"
-              />
-              <ValidatedField
                 label={translate('xploraAdminApp.placeCategory.enabled')}
                 id="place-category-enabled"
                 name="enabled"
                 data-cy="enabled"
                 check
                 type="checkbox"
+              />
+              <ValidatedField
+                label={translate('xploraAdminApp.placeCategory.icon')}
+                id="place-category-icon"
+                name="icon"
+                data-cy="icon"
+                type="text"
               />
               <ValidatedField
                 label={translate('xploraAdminApp.placeCategory.createdDate')}

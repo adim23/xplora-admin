@@ -19,9 +19,10 @@ public class TourCategoryDTO implements Serializable {
     @NotNull
     private String code;
 
-    private String icon;
-
+    @NotNull
     private Boolean enabled;
+
+    private String icon;
 
     private LocalDate createdDate;
 
@@ -54,20 +55,20 @@ public class TourCategoryDTO implements Serializable {
         this.code = code;
     }
 
-    public String getIcon() {
-        return icon;
-    }
-
-    public void setIcon(String icon) {
-        this.icon = icon;
-    }
-
     public Boolean getEnabled() {
         return enabled;
     }
 
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 
     public LocalDate getCreatedDate() {
@@ -153,8 +154,8 @@ public class TourCategoryDTO implements Serializable {
         return "TourCategoryDTO{" +
             "id=" + getId() +
             ", code='" + getCode() + "'" +
-            ", icon='" + getIcon() + "'" +
             ", enabled='" + getEnabled() + "'" +
+            ", icon='" + getIcon() + "'" +
             ", createdDate='" + getCreatedDate() + "'" +
             ", defaultImage='" + getDefaultImage() + "'" +
             ", defaultImageData='" + getDefaultImageData() + "'" +

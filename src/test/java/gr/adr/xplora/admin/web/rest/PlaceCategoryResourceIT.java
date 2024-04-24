@@ -48,11 +48,11 @@ class PlaceCategoryResourceIT {
     private static final String DEFAULT_CODE = "AAAAAAAAAA";
     private static final String UPDATED_CODE = "BBBBBBBBBB";
 
-    private static final String DEFAULT_ICON = "AAAAAAAAAA";
-    private static final String UPDATED_ICON = "BBBBBBBBBB";
-
     private static final Boolean DEFAULT_ENABLED = false;
     private static final Boolean UPDATED_ENABLED = true;
+
+    private static final String DEFAULT_ICON = "AAAAAAAAAA";
+    private static final String UPDATED_ICON = "BBBBBBBBBB";
 
     private static final LocalDate DEFAULT_CREATED_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_CREATED_DATE = LocalDate.now(ZoneId.systemDefault());
@@ -103,8 +103,8 @@ class PlaceCategoryResourceIT {
     public static PlaceCategory createEntity(EntityManager em) {
         PlaceCategory placeCategory = new PlaceCategory()
             .code(DEFAULT_CODE)
-            .icon(DEFAULT_ICON)
             .enabled(DEFAULT_ENABLED)
+            .icon(DEFAULT_ICON)
             .createdDate(DEFAULT_CREATED_DATE)
             .defaultImage(DEFAULT_DEFAULT_IMAGE)
             .defaultImageData(DEFAULT_DEFAULT_IMAGE_DATA)
@@ -121,8 +121,8 @@ class PlaceCategoryResourceIT {
     public static PlaceCategory createUpdatedEntity(EntityManager em) {
         PlaceCategory placeCategory = new PlaceCategory()
             .code(UPDATED_CODE)
-            .icon(UPDATED_ICON)
             .enabled(UPDATED_ENABLED)
+            .icon(UPDATED_ICON)
             .createdDate(UPDATED_CREATED_DATE)
             .defaultImage(UPDATED_DEFAULT_IMAGE)
             .defaultImageData(UPDATED_DEFAULT_IMAGE_DATA)
@@ -194,6 +194,23 @@ class PlaceCategoryResourceIT {
 
     @Test
     @Transactional
+    void checkEnabledIsRequired() throws Exception {
+        long databaseSizeBeforeTest = getRepositoryCount();
+        // set the field null
+        placeCategory.setEnabled(null);
+
+        // Create the PlaceCategory, which fails.
+        PlaceCategoryDTO placeCategoryDTO = placeCategoryMapper.toDto(placeCategory);
+
+        restPlaceCategoryMockMvc
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsBytes(placeCategoryDTO)))
+            .andExpect(status().isBadRequest());
+
+        assertSameRepositoryCount(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     void getAllPlaceCategories() throws Exception {
         // Initialize the database
         placeCategoryRepository.saveAndFlush(placeCategory);
@@ -205,8 +222,8 @@ class PlaceCategoryResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(placeCategory.getId().intValue())))
             .andExpect(jsonPath("$.[*].code").value(hasItem(DEFAULT_CODE)))
-            .andExpect(jsonPath("$.[*].icon").value(hasItem(DEFAULT_ICON)))
             .andExpect(jsonPath("$.[*].enabled").value(hasItem(DEFAULT_ENABLED.booleanValue())))
+            .andExpect(jsonPath("$.[*].icon").value(hasItem(DEFAULT_ICON)))
             .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
             .andExpect(jsonPath("$.[*].defaultImage").value(hasItem(DEFAULT_DEFAULT_IMAGE)))
             .andExpect(jsonPath("$.[*].defaultImageDataContentType").value(hasItem(DEFAULT_DEFAULT_IMAGE_DATA_CONTENT_TYPE)))
@@ -243,8 +260,8 @@ class PlaceCategoryResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(placeCategory.getId().intValue()))
             .andExpect(jsonPath("$.code").value(DEFAULT_CODE))
-            .andExpect(jsonPath("$.icon").value(DEFAULT_ICON))
             .andExpect(jsonPath("$.enabled").value(DEFAULT_ENABLED.booleanValue()))
+            .andExpect(jsonPath("$.icon").value(DEFAULT_ICON))
             .andExpect(jsonPath("$.createdDate").value(DEFAULT_CREATED_DATE.toString()))
             .andExpect(jsonPath("$.defaultImage").value(DEFAULT_DEFAULT_IMAGE))
             .andExpect(jsonPath("$.defaultImageDataContentType").value(DEFAULT_DEFAULT_IMAGE_DATA_CONTENT_TYPE))
@@ -272,8 +289,8 @@ class PlaceCategoryResourceIT {
         em.detach(updatedPlaceCategory);
         updatedPlaceCategory
             .code(UPDATED_CODE)
-            .icon(UPDATED_ICON)
             .enabled(UPDATED_ENABLED)
+            .icon(UPDATED_ICON)
             .createdDate(UPDATED_CREATED_DATE)
             .defaultImage(UPDATED_DEFAULT_IMAGE)
             .defaultImageData(UPDATED_DEFAULT_IMAGE_DATA)
@@ -367,7 +384,12 @@ class PlaceCategoryResourceIT {
         PlaceCategory partialUpdatedPlaceCategory = new PlaceCategory();
         partialUpdatedPlaceCategory.setId(placeCategory.getId());
 
-        partialUpdatedPlaceCategory.icon(UPDATED_ICON).enabled(UPDATED_ENABLED).createdDate(UPDATED_CREATED_DATE);
+        partialUpdatedPlaceCategory
+            .icon(UPDATED_ICON)
+            .createdDate(UPDATED_CREATED_DATE)
+            .defaultImage(UPDATED_DEFAULT_IMAGE)
+            .defaultImageData(UPDATED_DEFAULT_IMAGE_DATA)
+            .defaultImageDataContentType(UPDATED_DEFAULT_IMAGE_DATA_CONTENT_TYPE);
 
         restPlaceCategoryMockMvc
             .perform(
@@ -400,8 +422,8 @@ class PlaceCategoryResourceIT {
 
         partialUpdatedPlaceCategory
             .code(UPDATED_CODE)
-            .icon(UPDATED_ICON)
             .enabled(UPDATED_ENABLED)
+            .icon(UPDATED_ICON)
             .createdDate(UPDATED_CREATED_DATE)
             .defaultImage(UPDATED_DEFAULT_IMAGE)
             .defaultImageData(UPDATED_DEFAULT_IMAGE_DATA)

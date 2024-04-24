@@ -31,6 +31,8 @@
       "tourCategory": "Tour Category",
       "place": "Place",
       "placeCategory": "Place Category",
+      "tourExtraCategory": "Tour Extra Category",
+      "tourExtra": "Tour Extra",
       "vehicle": "Vehicle",
       "driver": "Driver"
     }

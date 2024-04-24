@@ -19,6 +19,7 @@
       },
       "id": "ID",
       "name": "Name",
+      "enabled": "Enabled",
       "hiredAt": "Hired At",
       "age": "Age",
       "email": "Email",

@@ -37,5 +37,12 @@
                                  referencedColumnNames="id"
                                  referencedTableName="tour_category"
                                  />
+
+        <addForeignKeyConstraint baseColumnNames="destination_id"
+                                 baseTableName="menu"
+                                 constraintName="fk_menu__destination_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="destination"
+                                 />
     </changeSet>
 </databaseChangeLog>

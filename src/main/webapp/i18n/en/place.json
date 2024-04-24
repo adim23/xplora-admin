@@ -19,6 +19,8 @@
       },
       "id": "ID",
       "code": "Code",
+      "enabled": "Enabled",
+      "icon": "Icon",
       "destinationSight": "Destination Sight",
       "longitude": "Longitude",
       "latitude": "Latitude",

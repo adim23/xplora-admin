@@ -48,10 +48,9 @@ public class MenuAsserts {
         assertThat(expected)
             .as("Verify Menu relevant properties")
             .satisfies(e -> assertThat(e.getCode()).as("check code").isEqualTo(actual.getCode()))
-            .satisfies(e -> assertThat(e.getUri()).as("check uri").isEqualTo(actual.getUri()))
-            .satisfies(e -> assertThat(e.getCreatedDate()).as("check createdDate").isEqualTo(actual.getCreatedDate()))
-            .satisfies(e -> assertThat(e.getIcon()).as("check icon").isEqualTo(actual.getIcon()))
             .satisfies(e -> assertThat(e.getEnabled()).as("check enabled").isEqualTo(actual.getEnabled()))
+            .satisfies(e -> assertThat(e.getIcon()).as("check icon").isEqualTo(actual.getIcon()))
+            .satisfies(e -> assertThat(e.getUri()).as("check uri").isEqualTo(actual.getUri()))
             .satisfies(e -> assertThat(e.getDefaultImage()).as("check defaultImage").isEqualTo(actual.getDefaultImage()))
             .satisfies(e -> assertThat(e.getDefaultImageData()).as("check defaultImageData").isEqualTo(actual.getDefaultImageData()))
             .satisfies(
@@ -59,7 +58,8 @@ public class MenuAsserts {
                     assertThat(e.getDefaultImageDataContentType())
                         .as("check defaultImageData contenty type")
                         .isEqualTo(actual.getDefaultImageDataContentType())
-            );
+            )
+            .satisfies(e -> assertThat(e.getCreatedDate()).as("check createdDate").isEqualTo(actual.getCreatedDate()));
     }
 
     /**
@@ -73,6 +73,7 @@ public class MenuAsserts {
             .as("Verify Menu relationships")
             .satisfies(e -> assertThat(e.getPage()).as("check page").isEqualTo(actual.getPage()))
             .satisfies(e -> assertThat(e.getParent()).as("check parent").isEqualTo(actual.getParent()))
-            .satisfies(e -> assertThat(e.getTourCategory()).as("check tourCategory").isEqualTo(actual.getTourCategory()));
+            .satisfies(e -> assertThat(e.getTourCategory()).as("check tourCategory").isEqualTo(actual.getTourCategory()))
+            .satisfies(e -> assertThat(e.getDestination()).as("check destination").isEqualTo(actual.getDestination()));
     }
 }

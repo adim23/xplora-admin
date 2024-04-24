@@ -19,6 +19,7 @@
       },
       "id": "ID",
       "plate": "Plate",
+      "enabled": "Enabled",
       "type": "Type",
       "capacity": "Capacity",
       "color": "Color",

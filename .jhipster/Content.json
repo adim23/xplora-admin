@@ -63,22 +63,6 @@
     },
     {
       "otherEntityField": "code",
-      "otherEntityName": "tour",
-      "otherEntityRelationshipName": "extraInfo",
-      "relationshipName": "tourExtraInfo",
-      "relationshipSide": "right",
-      "relationshipType": "many-to-one"
-    },
-    {
-      "otherEntityField": "code",
-      "otherEntityName": "tour",
-      "otherEntityRelationshipName": "contents",
-      "relationshipName": "tour",
-      "relationshipSide": "right",
-      "relationshipType": "many-to-one"
-    },
-    {
-      "otherEntityField": "code",
       "otherEntityName": "tourCategory",
       "otherEntityRelationshipName": "contents",
       "relationshipName": "tourCategory",

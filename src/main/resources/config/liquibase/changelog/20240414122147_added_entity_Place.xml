@@ -17,6 +17,12 @@
             <column name="code" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
+            <column name="enabled" type="boolean">
+                <constraints nullable="false" />
+            </column>
+            <column name="icon" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
             <column name="destination_sight" type="boolean">
                 <constraints nullable="false" />
             </column>
@@ -91,6 +97,8 @@
                   usePreparedStatements="true">
             <column name="id" type="numeric"/>
             <column name="code" type="string"/>
+            <column name="enabled" type="boolean"/>
+            <column name="icon" type="string"/>
             <column name="destination_sight" type="boolean"/>
             <column name="longitude" type="string"/>
             <column name="latitude" type="string"/>

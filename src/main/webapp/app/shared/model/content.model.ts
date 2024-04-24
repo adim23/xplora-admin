@@ -2,7 +2,6 @@ import dayjs from 'dayjs';
 import { ILanguage } from 'app/shared/model/language.model';
 import { IUser } from 'app/shared/model/user.model';
 import { IDestination } from 'app/shared/model/destination.model';
-import { ITour } from 'app/shared/model/tour.model';
 import { ITourCategory } from 'app/shared/model/tour-category.model';
 import { IPlace } from 'app/shared/model/place.model';
 import { IPlaceCategory } from 'app/shared/model/place-category.model';
@@ -26,8 +25,6 @@ export interface IContent {
   language?: ILanguage;
   createdBy?: IUser | null;
   destination?: IDestination | null;
-  tourExtraInfo?: ITour | null;
-  tour?: ITour | null;
   tourCategory?: ITourCategory | null;
   place?: IPlace | null;
   placeCategory?: IPlaceCategory | null;

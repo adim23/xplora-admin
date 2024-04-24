@@ -18,6 +18,8 @@ import menu from 'app/entities/menu/menu.reducer';
 import language from 'app/entities/language/language.reducer';
 import content from 'app/entities/content/content.reducer';
 import tag from 'app/entities/tag/tag.reducer';
+import tourContent from 'app/entities/tour-content/tour-content.reducer';
+import prompt from 'app/entities/prompt/prompt.reducer';
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 
 const entitiesReducers = {
@@ -41,6 +43,8 @@ const entitiesReducers = {
   language,
   content,
   tag,
+  tourContent,
+  prompt,
   /* jhipster-needle-add-reducer-combine - JHipster will add reducer here */
 };
 

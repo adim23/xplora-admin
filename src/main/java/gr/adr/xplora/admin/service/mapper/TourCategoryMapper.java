@@ -24,6 +24,17 @@ public interface TourCategoryMapper extends EntityMapper<TourCategoryDTO, TourCa
     @Mapping(target = "removeTour", ignore = true)
     TourCategory toEntity(TourCategoryDTO tourCategoryDTO);
 
+    @Named("tourCode")
+    @BeanMapping(ignoreByDefault = true)
+    @Mapping(target = "id", source = "id")
+    @Mapping(target = "code", source = "code")
+    TourDTO toDtoTourCode(Tour tour);
+
+    @Named("tourCodeSet")
+    default Set<TourDTO> toDtoTourCodeSet(Set<Tour> tour) {
+        return tour.stream().map(this::toDtoTourCode).collect(Collectors.toSet());
+    }
+
     @Named("tourCategoryCode")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "id", source = "id")
@@ -35,15 +46,4 @@ public interface TourCategoryMapper extends EntityMapper<TourCategoryDTO, TourCa
     @Mapping(target = "id", source = "id")
     @Mapping(target = "login", source = "login")
     UserDTO toDtoUserLogin(User user);
-
-    @Named("tourCode")
-    @BeanMapping(ignoreByDefault = true)
-    @Mapping(target = "id", source = "id")
-    @Mapping(target = "code", source = "code")
-    TourDTO toDtoTourCode(Tour tour);
-
-    @Named("tourCodeSet")
-    default Set<TourDTO> toDtoTourCodeSet(Set<Tour> tour) {
-        return tour.stream().map(this::toDtoTourCode).collect(Collectors.toSet());
-    }
 }

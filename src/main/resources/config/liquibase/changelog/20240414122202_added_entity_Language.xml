@@ -17,9 +17,6 @@
             <column name="code" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
-            <column name="created_date" type="date">
-                <constraints nullable="true" />
-            </column>
             <column name="icon" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
@@ -30,6 +27,9 @@
                 <constraints nullable="true" />
             </column>
             <column name="default_image_data_content_type" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="created_date" type="date">
                 <constraints nullable="true" />
             </column>
             <column name="created_by_id" type="bigint">
@@ -57,11 +57,11 @@
                   usePreparedStatements="true">
             <column name="id" type="numeric"/>
             <column name="code" type="string"/>
-            <column name="created_date" type="date"/>
             <column name="icon" type="string"/>
             <column name="default_image" type="string"/>
             <column name="default_image_data" type="blob"/>
             <column name="default_image_data_content_type" type="string"/>
+            <column name="created_date" type="date"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

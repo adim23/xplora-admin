@@ -19,12 +19,15 @@
       },
       "id": "ID",
       "code": "Code",
-      "createdDate": "Created Date",
+      "enabled": "Enabled",
       "defaultImage": "Default Image",
       "defaultImageData": "Default Image Data",
+      "cssStyle": "Css Style",
+      "createdDate": "Created Date",
       "tours": "Tours",
       "places": "Places",
       "images": "Images",
+      "menus": "Menus",
       "contents": "Contents",
       "createdBy": "Created By"
     }

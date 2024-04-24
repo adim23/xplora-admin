@@ -39,6 +39,12 @@ export const PromotionDetail = () => {
           </dt>
           <dd>{promotionEntity.code}</dd>
           <dt>
+            <span id="enabled">
+              <Translate contentKey="xploraAdminApp.promotion.enabled">Enabled</Translate>
+            </span>
+          </dt>
+          <dd>{promotionEntity.enabled ? 'true' : 'false'}</dd>
+          <dt>
             <span id="discount">
               <Translate contentKey="xploraAdminApp.promotion.discount">Discount</Translate>
             </span>
@@ -60,12 +66,6 @@ export const PromotionDetail = () => {
           <dd>
             {promotionEntity.toDate ? <TextFormat value={promotionEntity.toDate} type="date" format={APP_LOCAL_DATE_FORMAT} /> : null}
           </dd>
-          <dt>
-            <span id="enabled">
-              <Translate contentKey="xploraAdminApp.promotion.enabled">Enabled</Translate>
-            </span>
-          </dt>
-          <dd>{promotionEntity.enabled ? 'true' : 'false'}</dd>
           <dt>
             <Translate contentKey="xploraAdminApp.promotion.tour">Tour</Translate>
           </dt>

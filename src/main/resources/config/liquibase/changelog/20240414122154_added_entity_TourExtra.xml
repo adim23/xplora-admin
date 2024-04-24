@@ -18,9 +18,15 @@
                 <constraints nullable="false" />
             </column>
             <column name="enabled" type="boolean">
+                <constraints nullable="false" />
+            </column>
+            <column name="icon" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="price" type="double">
+                <constraints nullable="true" />
+            </column>
+            <column name="offer" type="double">
                 <constraints nullable="true" />
             </column>
             <column name="shop_product_id" type="varchar(255)">
@@ -92,7 +98,9 @@
             <column name="id" type="numeric"/>
             <column name="code" type="string"/>
             <column name="enabled" type="boolean"/>
+            <column name="icon" type="string"/>
             <column name="price" type="numeric"/>
+            <column name="offer" type="numeric"/>
             <column name="shop_product_id" type="string"/>
             <column name="shop_url" type="string"/>
             <column name="created_date" type="date"/>

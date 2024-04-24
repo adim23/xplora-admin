@@ -4,10 +4,10 @@ import { ITour } from 'app/shared/model/tour.model';
 export interface IPromotion {
   id?: number;
   code?: string;
+  enabled?: boolean | null;
   discount?: number | null;
   fromDate?: dayjs.Dayjs | null;
   toDate?: dayjs.Dayjs | null;
-  enabled?: boolean | null;
   tours?: ITour[] | null;
 }
 

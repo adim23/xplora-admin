@@ -39,17 +39,17 @@ export const PlaceCategoryDetail = () => {
           </dt>
           <dd>{placeCategoryEntity.code}</dd>
           <dt>
-            <span id="icon">
-              <Translate contentKey="xploraAdminApp.placeCategory.icon">Icon</Translate>
-            </span>
-          </dt>
-          <dd>{placeCategoryEntity.icon}</dd>
-          <dt>
             <span id="enabled">
               <Translate contentKey="xploraAdminApp.placeCategory.enabled">Enabled</Translate>
             </span>
           </dt>
           <dd>{placeCategoryEntity.enabled ? 'true' : 'false'}</dd>
+          <dt>
+            <span id="icon">
+              <Translate contentKey="xploraAdminApp.placeCategory.icon">Icon</Translate>
+            </span>
+          </dt>
+          <dd>{placeCategoryEntity.icon}</dd>
           <dt>
             <span id="createdDate">
               <Translate contentKey="xploraAdminApp.placeCategory.createdDate">Created Date</Translate>

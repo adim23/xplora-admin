@@ -102,14 +102,6 @@ export const ImageFileDetail = () => {
           </dt>
           <dd>{imageFileEntity.tourCategory ? imageFileEntity.tourCategory.code : ''}</dd>
           <dt>
-            <Translate contentKey="xploraAdminApp.imageFile.tourExtra">TourExtra</Translate>
-          </dt>
-          <dd>{imageFileEntity.tourExtra ? imageFileEntity.tourExtra.code : ''}</dd>
-          <dt>
-            <Translate contentKey="xploraAdminApp.imageFile.tourExtraCategory">Tour Extra Category</Translate>
-          </dt>
-          <dd>{imageFileEntity.tourCategoryExtra ? imageFileEntity.tourExtraCategory.code : ''}</dd>
-          <dt>
             <Translate contentKey="xploraAdminApp.imageFile.place">Place</Translate>
           </dt>
           <dd>{imageFileEntity.place ? imageFileEntity.place.code : ''}</dd>
@@ -117,6 +109,14 @@ export const ImageFileDetail = () => {
             <Translate contentKey="xploraAdminApp.imageFile.placeCategory">Place Category</Translate>
           </dt>
           <dd>{imageFileEntity.placeCategory ? imageFileEntity.placeCategory.code : ''}</dd>
+          <dt>
+            <Translate contentKey="xploraAdminApp.imageFile.tourExtraCategory">Tour Extra Category</Translate>
+          </dt>
+          <dd>{imageFileEntity.tourExtraCategory ? imageFileEntity.tourExtraCategory.code : ''}</dd>
+          <dt>
+            <Translate contentKey="xploraAdminApp.imageFile.tourExtra">Tour Extra</Translate>
+          </dt>
+          <dd>{imageFileEntity.tourExtra ? imageFileEntity.tourExtra.code : ''}</dd>
           <dt>
             <Translate contentKey="xploraAdminApp.imageFile.vehicle">Vehicle</Translate>
           </dt>

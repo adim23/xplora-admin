@@ -41,12 +41,6 @@
             <column name="destination_id" type="bigint">
                 <constraints nullable="true" />
             </column>
-            <column name="tour_extra_info_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
-            <column name="tour_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
             <column name="tour_category_id" type="bigint">
                 <constraints nullable="true" />
             </column>

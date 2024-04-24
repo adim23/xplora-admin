@@ -113,6 +113,14 @@ export const PromotionUpdate = () => {
                 }}
               />
               <ValidatedField
+                label={translate('xploraAdminApp.promotion.enabled')}
+                id="promotion-enabled"
+                name="enabled"
+                data-cy="enabled"
+                check
+                type="checkbox"
+              />
+              <ValidatedField
                 label={translate('xploraAdminApp.promotion.discount')}
                 id="promotion-discount"
                 name="discount"
@@ -132,14 +140,6 @@ export const PromotionUpdate = () => {
                 name="toDate"
                 data-cy="toDate"
                 type="date"
-              />
-              <ValidatedField
-                label={translate('xploraAdminApp.promotion.enabled')}
-                id="promotion-enabled"
-                name="enabled"
-                data-cy="enabled"
-                check
-                type="checkbox"
               />
               <ValidatedField
                 label={translate('xploraAdminApp.promotion.tour')}

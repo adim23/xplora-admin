@@ -56,8 +56,6 @@ public class ImageFile implements Serializable {
             "language",
             "createdBy",
             "destination",
-            "tourExtraInfo",
-            "tour",
             "tourCategory",
             "place",
             "placeCategory",
@@ -78,16 +76,15 @@ public class ImageFile implements Serializable {
     private User createdBy;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "tours", "places", "images", "contents", "createdBy" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "tours", "places", "images", "menus", "contents", "createdBy" }, allowSetters = true)
     private Destination destination;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(
         value = {
+            "content",
             "steps",
             "images",
-            "extraInfos",
-            "contents",
             "createdBy",
             "meetingPoint",
             "finishPoint",
@@ -96,22 +93,18 @@ public class ImageFile implements Serializable {
             "promotions",
             "categories",
             "destination",
+            "defaultCategory",
         },
         allowSetters = true
     )
     private Tour tour;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "children", "images", "menus", "contents", "createdBy", "parent", "tours" }, allowSetters = true)
+    @JsonIgnoreProperties(
+        value = { "defaultTours", "children", "images", "menus", "contents", "createdBy", "parent", "tours" },
+        allowSetters = true
+    )
     private TourCategory tourCategory;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "contents", "createdBy", "tags", "categories", "tours" }, allowSetters = true)
-    private TourExtra tourExtra;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "extras", "images", "contents", "createdBy" }, allowSetters = true)
-    private TourExtraCategory tourExtraCategory;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(
@@ -125,6 +118,14 @@ public class ImageFile implements Serializable {
     private PlaceCategory placeCategory;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "images", "contents", "createdBy", "extras" }, allowSetters = true)
+    private TourExtraCategory tourExtraCategory;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "images", "contents", "createdBy", "tags", "categories", "tours" }, allowSetters = true)
+    private TourExtra tourExtra;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(value = { "images" }, allowSetters = true)
     private Vehicle vehicle;
 
@@ -133,6 +134,7 @@ public class ImageFile implements Serializable {
     private Driver driver;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
+
     public Long getId() {
         return this.id;
     }
@@ -320,32 +322,6 @@ public class ImageFile implements Serializable {
         return this;
     }
 
-    public TourExtraCategory getTourExtraCategory() {
-        return this.tourExtraCategory;
-    }
-
-    public void setTourExtraCategory(TourExtraCategory tourExtraCategory) {
-        this.tourExtraCategory = tourExtraCategory;
-    }
-
-    public ImageFile tourExtraCategory(TourExtraCategory tourExtraCategory) {
-        this.setTourExtraCategory(tourExtraCategory);
-        return this;
-    }
-
-    public TourExtra getTourExtra() {
-        return this.tourExtra;
-    }
-
-    public void setTourExtra(TourExtra tourExtra) {
-        this.tourExtra = tourExtra;
-    }
-
-    public ImageFile tourExtra(TourExtra tourExtra) {
-        this.setTourExtra(tourExtra);
-        return this;
-    }
-
     public Place getPlace() {
         return this.place;
     }
@@ -369,6 +345,32 @@ public class ImageFile implements Serializable {
 
     public ImageFile placeCategory(PlaceCategory placeCategory) {
         this.setPlaceCategory(placeCategory);
+        return this;
+    }
+
+    public TourExtraCategory getTourExtraCategory() {
+        return this.tourExtraCategory;
+    }
+
+    public void setTourExtraCategory(TourExtraCategory tourExtraCategory) {
+        this.tourExtraCategory = tourExtraCategory;
+    }
+
+    public ImageFile tourExtraCategory(TourExtraCategory tourExtraCategory) {
+        this.setTourExtraCategory(tourExtraCategory);
+        return this;
+    }
+
+    public TourExtra getTourExtra() {
+        return this.tourExtra;
+    }
+
+    public void setTourExtra(TourExtra tourExtra) {
+        this.tourExtra = tourExtra;
+    }
+
+    public ImageFile tourExtra(TourExtra tourExtra) {
+        this.setTourExtra(tourExtra);
         return this;
     }
 
@@ -399,6 +401,7 @@ public class ImageFile implements Serializable {
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -419,15 +422,15 @@ public class ImageFile implements Serializable {
     // prettier-ignore
     @Override
     public String toString() {
-        return "ImageFile{"
-                + "id=" + getId()
-                + ", code='" + getCode() + "'"
-                + ", title='" + getTitle() + "'"
-                + ", alt='" + getAlt() + "'"
-                + ", filename='" + getFilename() + "'"
-                + ", data='" + getData() + "'"
-                + ", dataContentType='" + getDataContentType() + "'"
-                + ", createdDate='" + getCreatedDate() + "'"
-                + "}";
+        return "ImageFile{" +
+            "id=" + getId() +
+            ", code='" + getCode() + "'" +
+            ", title='" + getTitle() + "'" +
+            ", alt='" + getAlt() + "'" +
+            ", filename='" + getFilename() + "'" +
+            ", data='" + getData() + "'" +
+            ", dataContentType='" + getDataContentType() + "'" +
+            ", createdDate='" + getCreatedDate() + "'" +
+            "}";
     }
 }

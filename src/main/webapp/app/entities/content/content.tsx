@@ -126,6 +126,14 @@ export const Content = () => {
                   <Translate contentKey="xploraAdminApp.content.shortDescription">Short Description</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('shortDescription')} />
                 </th>
+                <th className="hand" onClick={sort('data')}>
+                  <Translate contentKey="xploraAdminApp.content.data">Data</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('data')} />
+                </th>
+                <th className="hand" onClick={sort('meta')}>
+                  <Translate contentKey="xploraAdminApp.content.meta">Meta</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('meta')} />
+                </th>
                 <th className="hand" onClick={sort('createdDate')}>
                   <Translate contentKey="xploraAdminApp.content.createdDate">Created Date</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('createdDate')} />
@@ -138,12 +146,6 @@ export const Content = () => {
                 </th>
                 <th>
                   <Translate contentKey="xploraAdminApp.content.destination">Destination</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
-                <th>
-                  <Translate contentKey="xploraAdminApp.content.tourExtraInfo">Tour Extra Info</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
-                <th>
-                  <Translate contentKey="xploraAdminApp.content.tour">Tour</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th>
                   <Translate contentKey="xploraAdminApp.content.tourCategory">Tour Category</Translate> <FontAwesomeIcon icon="sort" />
@@ -193,6 +195,8 @@ export const Content = () => {
                   <td>{content.code}</td>
                   <td>{content.title}</td>
                   <td>{content.shortDescription}</td>
+                  <td>{content.data}</td>
+                  <td>{content.meta}</td>
                   <td>
                     {content.createdDate ? <TextFormat type="date" value={content.createdDate} format={APP_LOCAL_DATE_FORMAT} /> : null}
                   </td>
@@ -201,8 +205,6 @@ export const Content = () => {
                   <td>
                     {content.destination ? <Link to={`/destination/${content.destination.id}`}>{content.destination.code}</Link> : ''}
                   </td>
-                  <td>{content.tourExtraInfo ? <Link to={`/tour/${content.tourExtraInfo.id}`}>{content.tourExtraInfo.code}</Link> : ''}</td>
-                  <td>{content.tour ? <Link to={`/tour/${content.tour.id}`}>{content.tour.code}</Link> : ''}</td>
                   <td>
                     {content.tourCategory ? <Link to={`/tour-category/${content.tourCategory.id}`}>{content.tourCategory.code}</Link> : ''}
                   </td>

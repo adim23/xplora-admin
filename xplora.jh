@@ -1,15 +1,17 @@
 
 entity Destination { 
 	code String required
-    createdDate LocalDate
+    enabled Boolean required
     defaultImage String
     defaultImageData ImageBlob
+    cssStyle TextBlob
+    createdDate LocalDate
 }
 
 entity PlaceCategory {
 	code String required
+    enabled Boolean required
     icon String
-    enabled Boolean
     createdDate LocalDate
     defaultImage String
     defaultImageData ImageBlob
@@ -17,6 +19,8 @@ entity PlaceCategory {
 
 entity Place {
 	code String required
+    enabled Boolean required
+    icon String
     destinationSight Boolean required
     longitude String
     latitude String
@@ -27,29 +31,50 @@ entity Place {
 
 entity TourCategory {
 	code String required
+    enabled Boolean required
     icon String
-    enabled Boolean
     createdDate LocalDate
     defaultImage String
     defaultImageData ImageBlob
 }
 
-enum TourMode {
+enum TourKind {
   TOUR (Tour), 
   ACTIVITY(Activity), 
   EVENT (Event),
   OTHER (Other)
 }
 
+enum TourMode {
+  BUS (Bus), 
+  BOAT (Boat), 
+  FEET (Feet),
+  CAR (Car),
+  MOTO (Moto),
+  MOTOBUS (Motobus),
+  BICYCLE (Bicycle),
+  OTHER (Other)
+}
+
+enum DurationMeasure {
+  MINUTES (Minutes), 
+  HOURS (Hours), 
+  DAYS (Days)
+}
+
 entity Tour {
 	code String required
-    mode TourMode required
+    enabled Boolean required 
+    kind TourKind required
+    mode TourMode 
+    icon String
     duration Integer required
+    durationMeasure DurationMeasure required
     petFriendly Boolean required 
     kidsAllowed Boolean required
+    smoking Boolean required
     availableFromDate LocalDate
     availableToDate LocalDate
-    enabled Boolean required 
     initialPrice Double
     price Double
     badge String
@@ -59,18 +84,32 @@ entity Tour {
     createdDate LocalDate
     defaultImage String
     defaultImageData ImageBlob
+    accessibility Boolean
+    audioGuide Boolean
+    tourGuide Boolean
+    cssStyle TextBlob
+    departure LocalDate
+    returnTime LocalDate
+    testIn Instant
+    testZ ZonedDateTime
+    dur Duration
 }
 
 entity TourStep {
 	code String required
+    enabled Boolean required
+    icon String
     stepOrder Integer required
-    waitTime Integer  required // minutes
+    waitTime Integer  required 
+    waitTimeMeasure DurationMeasure required
     driveTime Integer  required // minutes
+    driveTimeMeasure DurationMeasure required
     createdDate LocalDate
 }
 
 entity Promotion {
 	code String required
+    enabled Boolean required
     discount Double
     fromDate LocalDate
     toDate LocalDate
@@ -88,10 +127,10 @@ entity TourSchedule {
 
 entity TourExtraCategory {
 	code String required
+    enabled Boolean required
     icon String
     defaultImage String
     defaultImageData ImageBlob
-    enabled Boolean
     shopCategoryId String
     shopUrl String
     createdDate LocalDate
@@ -99,8 +138,10 @@ entity TourExtraCategory {
 
 entity TourExtra {
 	code String required
-    enabled Boolean
+    enabled Boolean required
+    icon String
     price Double
+    offer Double
     shopProductId String
     shopUrl String
     createdDate LocalDate
@@ -110,6 +151,7 @@ entity TourExtra {
 
 entity Driver {
 	name String required
+    enabled Boolean required
     hiredAt LocalDate
     age Integer
 	email String
@@ -121,6 +163,7 @@ entity Driver {
 
 entity Vehicle {
 	plate String required
+    enabled Boolean required
     type String required
     capacity Integer required
     color String
@@ -164,28 +207,28 @@ entity ImageFile {
 
 entity WebPage {
 	code String required
+    enabled Boolean required
     uriPath String
-    enabled Boolean
     publishDate LocalDate
     createdDate LocalDate
 }
 
 entity Menu {
 	code String required
-    uri String
-    createdDate LocalDate
+    enabled Boolean required
     icon String
-    enabled Boolean
+    uri String
     defaultImage String
     defaultImageData ImageBlob
+    createdDate LocalDate
 }
 
 entity Language {
 	code String required
-    createdDate LocalDate
     icon String
     defaultImage String
     defaultImageData ImageBlob
+    createdDate LocalDate
 }
 
 entity Content {
@@ -195,6 +238,28 @@ entity Content {
     data TextBlob
     meta TextBlob
     createdDate LocalDate
+}
+
+entity TourContent {
+	code String required
+    title String 
+    shortDescription TextBlob
+    data TextBlob
+    meta TextBlob
+    cancellation String
+    activityPath TextBlob
+    atAGlance TextBlob
+    inDetail TextBlob
+    whatIsIncluded TextBlob
+    youCanAdd TextBlob
+    importantInformation TextBlob
+    extraInfo TextBlob
+    createdDate LocalDate
+}
+
+entity Prompt {
+    key String 
+    value String
 }
 
 entity Tag {
@@ -208,21 +273,27 @@ relationship OneToMany {
     Destination{images(code)} to ImageFile{destination(code)}
     Tour{steps(code)} to TourStep{tour(code) required}
     Tour{images(code)} to ImageFile{tour(code)}
+    TourCategory{defaultTours(code)} to Tour{defaultCategory(code)}
     TourCategory{children(code)} to TourCategory{parent(code)}
-    TourCategory{images(code)} to ImageFile{tourCategory(code)}
     Place to TourStep{place(code) required}
+    
+    TourCategory{images(code)} to ImageFile{tourCategory(code)}
     Place{images(code)} to ImageFile{place(code)}
     PlaceCategory{images(code)} to ImageFile{placeCategory(code)}
+    TourExtraCategory{images(code)} to ImageFile{tourExtraCategory(code)}
+    TourExtra{images(code)} to ImageFile{tourExtra(code)}
     Vehicle{images(code)} to ImageFile{vehicle(plate)}
     Driver{images(code)} to ImageFile{driver(name)}
+    
     TourSchedule{bookings} to Booking{schedule(code)}
     Passenger{bookings} to Booking{passenger(name)}
+    
     WebPage{menus(code)} to Menu{page(code)}
     Menu{children(code)} to Menu{parent(code)}
     TourCategory{menus(code)} to Menu{tourCategory(code)}
+    Destination{menus(code)} to Menu{destination(code)}
+    
     Destination{contents(code)} to Content{destination(code)}
-    Tour{extraInfo(code)} to Content{tourExtraInfo(code)}
-    Tour{contents(code)} to Content{tour(code)}
     TourCategory{contents(code)} to Content{tourCategory(code)}
     Place{contents(code)} to Content{place(code)}
     PlaceCategory{contents(code)} to Content{placeCategory(code)}
@@ -238,6 +309,9 @@ relationship OneToMany {
 
 relationship OneToOne {
     Content{language(code) required} to Language 
+    Prompt{language(code) required} to Language 
+    TourContent{language(code) required} to Language 
+    Tour{content(code)} to TourContent
 }
 
 relationship ManyToMany {
